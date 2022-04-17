@@ -1,0 +1,82 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Landing Backend REST Api"
+host: "backend-service"
+schemes:
+- "http"
+paths:
+  /login:
+    post:
+      summary: "authentication route"
+      parameters:
+        - in: body
+          name: params
+          schema:
+              $ref: '#/definitions/AuthenticateRequest'
+      responses:
+        '200':
+          description: 'регистрация успешна'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '403':
+          description: 'Authentication Fail'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /users:
+    put:
+      summary: "create user"
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/UserCreateRequest'
+      responses:
+        '200':
+          description: 'пользователь успешно создан'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+definitions:
+  AuthenticateRequest:
+    type: object
+    properties:
+      login:
+        type: string
+        example: login
+      pass:
+        type: string
+        example: password
+  UserCreateRequest:
+    type: object
+    properties:
+      name:
+        type: string
+        example: пользователь
+      login:
+        type: string
+        example: login
+      pass:
+        type: string
+        example: password
+      role:
+        type: string
+        example: роль
+  ResultResponse:
+    type: object
+    properties:
+      msg:
+        type: string
+        example: пользователь успешно создан
+      

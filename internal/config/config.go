@@ -8,7 +8,7 @@ import (
 )
 
 type Config struct {
-	Port            string
+	Port            int
 	DSN             string
 	ServiceName     string
 	LogLevel        uint32

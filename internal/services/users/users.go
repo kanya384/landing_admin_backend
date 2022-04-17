@@ -1,6 +1,7 @@
 package users
 
 import (
+	"context"
 	"landing_admin_backend/internal/domain"
 	"landing_admin_backend/internal/repository"
 
@@ -8,10 +9,10 @@ import (
 )
 
 type Service interface {
-	Get() (users []*domain.UserInfo, err error)
-	Create(user domain.User) (err error)
-	Update(user domain.User) (err error)
-	Delete(userID primitive.ObjectID) (err error)
+	Get(ctx context.Context) (users []*domain.UserInfo, err error)
+	Create(ctx context.Context, user domain.User) (err error)
+	Update(ctx context.Context, user domain.User) (err error)
+	Delete(ctx context.Context, userID primitive.ObjectID) (err error)
 }
 
 type service struct {
@@ -24,18 +25,18 @@ func NewService(repository *repository.Repository) Service {
 	}
 }
 
-func (s *service) Get() (users []*domain.UserInfo, err error) {
+func (s *service) Get(ctx context.Context) (users []*domain.UserInfo, err error) {
 	return nil, nil
 }
 
-func (s *service) Create(user domain.User) (err error) {
+func (s *service) Create(ctx context.Context, user domain.User) (err error) {
+	return s.repository.Users.Create(ctx, user)
+}
+
+func (s *service) Update(ctx context.Context, user domain.User) (err error) {
 	return nil
 }
 
-func (s *service) Update(user domain.User) (err error) {
-	return nil
-}
-
-func (s *service) Delete(userID primitive.ObjectID) (err error) {
+func (s *service) Delete(ctx context.Context, userID primitive.ObjectID) (err error) {
 	return nil
 }
