@@ -18,7 +18,7 @@ paths:
         '200':
           description: 'регистрация успешна'
           schema:
-            $ref: '#/definitions/ResultResponse'
+            $ref: '#/definitions/AuthenticateResponse'
         '403':
           description: 'Authentication Fail'
           schema:
@@ -58,6 +58,15 @@ definitions:
       pass:
         type: string
         example: password
+  AuthenticateResponse:
+    type: object
+    properties:
+      token:
+        type: string
+        example: asdkjkzxcqw1290090
+      refresh_token:
+        type: string
+        example: fewerHHsasqw122231
   UserCreateRequest:
     type: object
     properties:

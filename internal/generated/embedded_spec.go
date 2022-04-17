@@ -23,14 +23,14 @@ func init() {
   ],
   "swagger": "2.0",
   "info": {
-    "title": "Landing Backend REST Api",
+    "title": "Landing Backend REST",
     "version": "1.0.0"
   },
   "host": "backend-service",
   "paths": {
     "/login": {
       "post": {
-        "summary": "authentication route",
+        "summary": "authentication path",
         "parameters": [
           {
             "name": "params",
@@ -44,7 +44,7 @@ func init() {
           "200": {
             "description": "регистрация успешна",
             "schema": {
-              "$ref": "#/definitions/ResultResponse"
+              "$ref": "#/definitions/AuthenticateResponse"
             }
           },
           "400": {
@@ -108,6 +108,19 @@ func init() {
         "pass": {
           "type": "string",
           "example": "password"
+        }
+      }
+    },
+    "AuthenticateResponse": {
+      "type": "object",
+      "properties": {
+        "refresh_token": {
+          "type": "string",
+          "example": "fewerHHsasqw122231"
+        },
+        "token": {
+          "type": "string",
+          "example": "asdkjkzxcqw1290090"
         }
       }
     },
@@ -149,14 +162,14 @@ func init() {
   ],
   "swagger": "2.0",
   "info": {
-    "title": "Landing Backend REST Api",
+    "title": "Landing Backend REST",
     "version": "1.0.0"
   },
   "host": "backend-service",
   "paths": {
     "/login": {
       "post": {
-        "summary": "authentication route",
+        "summary": "authentication path",
         "parameters": [
           {
             "name": "params",
@@ -170,7 +183,7 @@ func init() {
           "200": {
             "description": "регистрация успешна",
             "schema": {
-              "$ref": "#/definitions/ResultResponse"
+              "$ref": "#/definitions/AuthenticateResponse"
             }
           },
           "400": {
@@ -234,6 +247,19 @@ func init() {
         "pass": {
           "type": "string",
           "example": "password"
+        }
+      }
+    },
+    "AuthenticateResponse": {
+      "type": "object",
+      "properties": {
+        "refresh_token": {
+          "type": "string",
+          "example": "fewerHHsasqw122231"
+        },
+        "token": {
+          "type": "string",
+          "example": "asdkjkzxcqw1290090"
         }
       }
     },

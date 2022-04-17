@@ -25,7 +25,7 @@ type PostLoginOK struct {
 	/*
 	  In: Body
 	*/
-	Payload *models.ResultResponse `json:"body,omitempty"`
+	Payload *models.AuthenticateResponse `json:"body,omitempty"`
 }
 
 // NewPostLoginOK creates PostLoginOK with default headers values
@@ -35,13 +35,13 @@ func NewPostLoginOK() *PostLoginOK {
 }
 
 // WithPayload adds the payload to the post login o k response
-func (o *PostLoginOK) WithPayload(payload *models.ResultResponse) *PostLoginOK {
+func (o *PostLoginOK) WithPayload(payload *models.AuthenticateResponse) *PostLoginOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the post login o k response
-func (o *PostLoginOK) SetPayload(payload *models.ResultResponse) {
+func (o *PostLoginOK) SetPayload(payload *models.AuthenticateResponse) {
 	o.Payload = payload
 }
 

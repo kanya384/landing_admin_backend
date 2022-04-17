@@ -17,6 +17,22 @@ type User struct {
 	ModifiedBy primitive.ObjectID `bson:"modified_by" json:"modified_by"`
 }
 
+func NewUser(id string, name string, login string, pass string, Role string) (user User, err error) {
+	if id == "" {
+		user.ID = primitive.NewObjectID()
+	} else {
+		user.ID, err = primitive.ObjectIDFromHex(id)
+		if err != nil {
+			return
+		}
+	}
+	user.Name = name
+	user.Login = login
+	user.Pass = pass
+	user.Role = Role
+	return
+}
+
 type UserInfo struct {
 	ID         primitive.ObjectID `bson:"_id"`
 	Name       string             `bson:"name" json:"name"`

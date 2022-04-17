@@ -31,7 +31,7 @@ func NewPostLogin(ctx *middleware.Context, handler PostLoginHandler) *PostLogin 
 
 /* PostLogin swagger:route POST /login postLogin
 
-authentication route
+authentication path
 
 */
 type PostLogin struct {

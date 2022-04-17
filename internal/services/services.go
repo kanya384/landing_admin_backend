@@ -13,7 +13,7 @@ type Services struct {
 	Users users.Service
 }
 
-func Setup(cfg config.Config, repository *repository.Repository) *Services {
+func Setup(cfg *config.Config, repository *repository.Repository) *Services {
 	tokenManager := token_manager.NewTokenManager(cfg.TokenSecret, cfg.TokenTTL, cfg.RefreshTokenTTL)
 	return &Services{
 		Auth:  auth.NewService(repository, tokenManager),

@@ -3,6 +3,7 @@
 package generated
 
 import (
+	"context"
 	"crypto/tls"
 	"fmt"
 	"net/http"
@@ -10,10 +11,14 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
-	"github.com/go-openapi/runtime/middleware"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/generated/operations"
+	"landing_admin_backend/internal/handlers"
+	mng "landing_admin_backend/internal/repository/mongo"
+	"landing_admin_backend/internal/services"
 	"landing_admin_backend/pkg/logger"
 )
 
@@ -47,7 +52,6 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	if err != nil {
 		panic(fmt.Sprintf("error initializing logger %s", err))
 	}
-
 	api.Logger = logger.Printf
 
 	api.UseSwaggerUI()
@@ -58,16 +62,18 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.PostLoginHandler == nil {
-		api.PostLoginHandler = operations.PostLoginHandlerFunc(func(params operations.PostLoginParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.PostLogin has not yet been implemented")
-		})
+	clientOptions := options.Client().ApplyURI(cfg.DSN)
+	client, err := mongo.Connect(context.TODO(), clientOptions)
+	if err != nil {
+		logger.Panic("error connection to mongo", err, nil)
 	}
-	if api.PutUsersHandler == nil {
-		api.PutUsersHandler = operations.PutUsersHandlerFunc(func(params operations.PutUsersParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.PutUsers has not yet been implemented")
-		})
-	}
+
+	repository := mng.Setup(client.Database("public"))
+	services := services.Setup(cfg, repository)
+	handlers := handlers.NewHandlers(services)
+
+	api.PostLoginHandler = operations.PostLoginHandlerFunc(handlers.Auth.Authenticate)
+	api.PutUsersHandler = operations.PutUsersHandlerFunc(handlers.Users.Create)
 
 	api.PreServerShutdown = func() {
 	}
