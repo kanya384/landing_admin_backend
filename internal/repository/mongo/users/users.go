@@ -60,8 +60,11 @@ func (r *repository) Get(ctx context.Context) (users []*domain.UserInfo, err err
 	return
 }
 
-func (r *repository) GetUserByCredetinals(ctx context.Context, login string, pass string) (user *domain.UserInfo, err error) {
+func (r *repository) GetUserByCredetinals(ctx context.Context, login string, pass string) (user domain.UserInfo, err error) {
 	err = r.collection.FindOne(ctx, primitive.M{"login": login, "pass": pass}).Decode(&user)
+	if err != nil && err.Error() == "mongo: no documents in result" {
+		return user, errors.New(domain.ErrCheckUserAndPass)
+	}
 	return
 }
 func (r *repository) Create(ctx context.Context, user domain.User) (err error) {

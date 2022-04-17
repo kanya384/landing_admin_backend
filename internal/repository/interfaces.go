@@ -9,7 +9,7 @@ import (
 
 type Users interface {
 	Get(ctx context.Context) (users []*domain.UserInfo, err error)
-	GetUserByCredetinals(ctx context.Context, login string, pass string) (user *domain.UserInfo, err error)
+	GetUserByCredetinals(ctx context.Context, login string, pass string) (user domain.UserInfo, err error)
 	Create(ctx context.Context, user domain.User) (err error)
 	Update(ctx context.Context, user domain.User) (err error)
 	Delete(ctx context.Context, userID primitive.ObjectID) (err error)
