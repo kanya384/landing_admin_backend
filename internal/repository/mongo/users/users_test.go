@@ -37,14 +37,40 @@ func (s *UsersTestSuite) SetupSuite() {
 }
 
 func (s *UsersTestSuite) TestGet() {
-	//ctx := context.Background()
+	ctx := context.Background()
+	user := domain.User{ID: primitive.NewObjectID(), Name: "Name", Login: "login_for_get_test", Pass: "password", Role: 0, CreatedAt: time.Now(), UpdateAt: time.Now(), ModifiedBy: primitive.NewObjectID()}
+	err := s.repository.Users.Create(ctx, user)
+	if err != nil {
+		s.FailNow("error creating user for get users list tests", err)
+		return
+	}
+
+	cases := map[string]struct {
+		empty bool
+		err   interface{}
+	}{
+		"get users list": {
+			empty: false,
+			err:   nil,
+		},
+	}
+
+	for name, cs := range cases {
+		s.Run(name, func() {
+			users, err := s.repository.Users.Get(ctx)
+			s.NotEmpty(users)
+			if !cs.empty {
+				s.Equal(err, cs.err)
+			}
+		})
+	}
 }
 
 func (s *UsersTestSuite) TestCreate() {
 	ctx := context.Background()
 	user := domain.User{ID: primitive.NewObjectID(), Name: "Name", Login: "login", Pass: "password", Role: 0, CreatedAt: time.Now(), UpdateAt: time.Now(), ModifiedBy: primitive.NewObjectID()}
 
-	//for diplicate test
+	//for duplicate test
 	userCreated := domain.User{ID: primitive.NewObjectID(), Name: "Name", Login: "login2", Pass: "password", Role: 0, CreatedAt: time.Now(), UpdateAt: time.Now(), ModifiedBy: primitive.NewObjectID()}
 	s.repository.Users.Create(ctx, userCreated)
 	//
@@ -71,6 +97,78 @@ func (s *UsersTestSuite) TestCreate() {
 				s.ErrorContains(err, cs.err.(string))
 			} else {
 				s.Equal(err, nil)
+			}
+		})
+	}
+}
+
+func (s *UsersTestSuite) TestUpdate() {
+	ctx := context.Background()
+
+	user := domain.User{ID: primitive.NewObjectID(), Name: "Name", Login: "login_update", Pass: "password", Role: 0, CreatedAt: time.Now(), UpdateAt: time.Now(), ModifiedBy: primitive.NewObjectID()}
+	err := s.repository.Users.Create(ctx, user)
+	if err != nil {
+		s.FailNow("error creating user for update tests", err)
+		return
+	}
+	cases := map[string]struct {
+		input domain.User
+		want  string
+		err   interface{}
+	}{
+		"update user success": {
+			input: domain.User{ID: user.ID, Name: "New name", Login: "new login", Pass: "pass new", Role: 0, CreatedAt: user.CreatedAt, UpdateAt: user.UpdateAt, ModifiedBy: user.ModifiedBy},
+			err:   nil,
+		},
+		"update err not founded": {
+			input: domain.User{ID: primitive.NewObjectID(), Name: "Name", Login: "login_upd2", Pass: "Passs", Role: 0, CreatedAt: time.Now(), UpdateAt: time.Now(), ModifiedBy: primitive.NewObjectID()},
+			err:   domain.ErrNoFieldWithID,
+		},
+	}
+
+	for name, cs := range cases {
+		s.Run(name, func() {
+			err := s.repository.Users.Update(ctx, cs.input)
+			if cs.err != nil {
+				s.ErrorContains(err, cs.err.(string))
+			} else {
+				s.Equal(nil, err)
+			}
+		})
+	}
+}
+
+func (s *UsersTestSuite) TestDelete() {
+	ctx := context.Background()
+
+	user := domain.User{ID: primitive.NewObjectID(), Name: "Name", Login: "login_update", Pass: "password", Role: 0, CreatedAt: time.Now(), UpdateAt: time.Now(), ModifiedBy: primitive.NewObjectID()}
+	err := s.repository.Users.Create(ctx, user)
+	if err != nil {
+		s.FailNow("error creating user for delete tests", err)
+		return
+	}
+	cases := map[string]struct {
+		input primitive.ObjectID
+		want  string
+		err   interface{}
+	}{
+		"delete user success": {
+			input: user.ID,
+			err:   nil,
+		},
+		"delete not founded": {
+			input: primitive.NewObjectID(),
+			err:   domain.ErrNoFieldWithID,
+		},
+	}
+
+	for name, cs := range cases {
+		s.Run(name, func() {
+			err := s.repository.Users.Delete(ctx, cs.input)
+			if cs.err != nil {
+				s.ErrorContains(err, cs.err.(string))
+			} else {
+				s.Equal(nil, err)
 			}
 		})
 	}

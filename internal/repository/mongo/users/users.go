@@ -2,7 +2,7 @@ package users
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"landing_admin_backend/internal/domain"
 	repos "landing_admin_backend/internal/repository"
 
@@ -69,11 +69,20 @@ func (r *repository) Create(ctx context.Context, user domain.User) (err error) {
 	return
 }
 func (r *repository) Update(ctx context.Context, user domain.User) (err error) {
-	_, err = r.collection.UpdateOne(ctx, primitive.M{"_id": user.ID}, user)
-	fmt.Println(err)
+	result, err := r.collection.UpdateOne(ctx, primitive.M{"_id": user.ID}, primitive.D{{Key: "$set", Value: user}})
+	switch true {
+	case result.MatchedCount == 0:
+		return errors.New(domain.ErrNoFieldWithID)
+	case result.MatchedCount > 0 && result.ModifiedCount == 0:
+		return errors.New(domain.ErrNoModificationsForEntity)
+	}
 	return
 }
+
 func (r *repository) Delete(ctx context.Context, userID primitive.ObjectID) (err error) {
-	_, err = r.collection.DeleteOne(ctx, primitive.M{"_id": userID})
+	result, err := r.collection.DeleteOne(ctx, primitive.M{"_id": userID})
+	if result.DeletedCount == 0 {
+		return errors.New(domain.ErrNoFieldWithID)
+	}
 	return
 }
