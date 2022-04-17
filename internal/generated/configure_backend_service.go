@@ -4,13 +4,17 @@ package generated
 
 import (
 	"crypto/tls"
+	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
+	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/generated/operations"
+	"landing_admin_backend/pkg/logger"
 )
 
 //go:generate swagger generate server --target ../../../landing_admin_backend --name BackendService --spec ../../api/openapi/openapi.yml --server-package ./internal/generated --principal interface{}
@@ -28,6 +32,23 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	//
 	// Example:
 	// api.Logger = log.Printf
+
+	cfg, err := config.InitConfig("APP")
+	if err != nil {
+		panic(fmt.Sprintf("error initializing config %s", err))
+	}
+
+	file, err := os.OpenFile(cfg.LogFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		panic(fmt.Sprintf("error opening log file config %s", err))
+	}
+
+	logger, err := logger.NewLogger(cfg.ServiceName, cfg.LogLevel, file)
+	if err != nil {
+		panic(fmt.Sprintf("error initializing logger %s", err))
+	}
+
+	api.Logger = logger.Printf
 
 	api.UseSwaggerUI()
 	// To continue using redoc as your UI, uncomment the following line
@@ -48,9 +69,13 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 		})
 	}
 
-	api.PreServerShutdown = func() {}
+	api.PreServerShutdown = func() {
+	}
 
-	api.ServerShutdown = func() {}
+	api.ServerShutdown = func() {
+		fmt.Print("gracefull shutdown\n")
+		file.Close()
+	}
 
 	return setupGlobalMiddleware(api.Serve(setupMiddlewares))
 }

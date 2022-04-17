@@ -17,6 +17,7 @@ type Config struct {
 	RefreshTokenTTL time.Duration
 	TokenSecret     string
 	RedisURL        string
+	LogFile         string `envconfig:"default=./vars/logs/main.log"`
 }
 
 func InitConfig(prefix string) (*Config, error) {

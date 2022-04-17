@@ -1,14 +1,14 @@
 swagger: "2.0"
 info:
   version: "1.0.0"
-  title: "Landing Backend REST Api"
+  title: "Landing Backend REST"
 host: "backend-service"
 schemes:
 - "http"
 paths:
   /login:
     post:
-      summary: "authentication route"
+      summary: "authentication path"
       parameters:
         - in: body
           name: params

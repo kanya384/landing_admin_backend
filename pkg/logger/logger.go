@@ -15,6 +15,7 @@ type Logger interface {
 	Warn(msg string, params interface{})
 	Error(msg string, err error, params interface{})
 	Panic(msg string, err error, params interface{})
+	Printf(format string, v ...interface{})
 }
 
 type logger struct {
@@ -22,21 +23,16 @@ type logger struct {
 	serviceName string
 }
 
-func NewLogger(serviceName string, logLevel uint32, logFile string) (Logger, error) {
+func NewLogger(serviceName string, logLevel uint32, file *os.File) (Logger, error) {
 	log := logrus.New()
 	log.SetLevel(logrus.Level(logLevel))
 	gelFmt := formatter.NewGelf(serviceName)
 	runtimeFormatter := &runtime.Formatter{ChildFormatter: gelFmt}
 	log.SetFormatter(runtimeFormatter)
-	file, err := os.OpenFile(logFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		return nil, err
-	}
 
 	log.SetOutput(file)
 	//hook := graylog.NewGraylogHook(greyLogHost, map[string]interface{}{})
 	//log.AddHook(hook)
-	defer file.Close()
 
 	return &logger{
 		log: log,
@@ -94,4 +90,9 @@ func (lg *logger) Panic(msg string, err error, params interface{}) {
 		}
 	}
 	logger.WithError(errors.WithStack(err)).Panic(err)
+}
+
+func (lg *logger) Printf(format string, v ...interface{}) {
+	logger := lg.log
+	logger.Printf(format, v...)
 }

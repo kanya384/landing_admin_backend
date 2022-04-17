@@ -13,22 +13,23 @@ import (
 	"github.com/jessevdk/go-flags"
 )
 
-const (
-	LOG_FILE = "./var/log/main.log"
-)
-
 func main() {
 	cfg, err := config.InitConfig("APP")
 	if err != nil {
 		panic(fmt.Sprintf("error initializing config %s", err))
 	}
-	fileLog, err := os.OpenFile("./vars/logs/main.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("error opening file: %v", err)
-	}
-	defer fileLog.Close()
 
-	logger, err := logger.NewLogger(cfg.ServiceName, cfg.LogLevel, LOG_FILE)
+	file, err := os.OpenFile(cfg.LogFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		panic(fmt.Sprintf("error opening log file config %s", err))
+	}
+	defer file.Close()
+
+	logger, err := logger.NewLogger(cfg.ServiceName, cfg.LogLevel, file)
+	if err != nil {
+		panic(fmt.Sprintf("error initializing logger %s", err))
+	}
+
 	swaggerSpec, err := loads.Embedded(generated.SwaggerJSON, generated.FlatSwaggerJSON)
 	if err != nil {
 		logger.Panic("error load swagger spec", err, nil)
