@@ -22,11 +22,11 @@ paths:
         '403':
           description: 'Authentication Fail'
           schema:
-            $ref: '#/definitions/ResultResponse'
+            $ref: '#/definitions/AuthenticateResponse'
         '400':
           description: 'Bad request'
           schema:
-            $ref: '#/definitions/ResultResponse'
+            $ref: '#/definitions/AuthenticateResponse'
         '500':
           description: 'Internal Server Error'
   /users:
@@ -67,6 +67,9 @@ definitions:
       refresh_token:
         type: string
         example: fewerHHsasqw122231
+      error:
+        type: string
+        example: error
   UserCreateRequest:
     type: object
     properties:

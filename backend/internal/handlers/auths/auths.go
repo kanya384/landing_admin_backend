@@ -29,8 +29,8 @@ func (h *handlers) Authenticate(params operations.PostLoginParams) middleware.Re
 	defer cancel()
 	tokens, err := h.services.Auth.Authenticate(ctx, params.Params.Login, params.Params.Pass)
 	if err != nil {
-		return operations.NewPostLoginBadRequest().WithPayload(&models.ResultResponse{Msg: "invalid params"})
+		return operations.NewPostLoginBadRequest().WithPayload(&models.AuthenticateResponse{Error: "invalid params"})
 	}
 
-	return operations.NewPostLoginOK().WithPayload(&models.AuthenticateResponse{Token: tokens.GetToken(), RefreshToken: tokens.GetRefreshToken()})
+	return operations.NewPostLoginOK().WithPayload(&models.AuthenticateResponse{Token: tokens.GetToken(), RefreshToken: tokens.GetRefreshToken(), Error: ""})
 }

@@ -50,13 +50,13 @@ func init() {
           "400": {
             "description": "Bad request",
             "schema": {
-              "$ref": "#/definitions/ResultResponse"
+              "$ref": "#/definitions/AuthenticateResponse"
             }
           },
           "403": {
             "description": "Authentication Fail",
             "schema": {
-              "$ref": "#/definitions/ResultResponse"
+              "$ref": "#/definitions/AuthenticateResponse"
             }
           },
           "500": {
@@ -114,6 +114,10 @@ func init() {
     "AuthenticateResponse": {
       "type": "object",
       "properties": {
+        "error": {
+          "type": "string",
+          "example": "error"
+        },
         "refresh_token": {
           "type": "string",
           "example": "fewerHHsasqw122231"
@@ -189,13 +193,13 @@ func init() {
           "400": {
             "description": "Bad request",
             "schema": {
-              "$ref": "#/definitions/ResultResponse"
+              "$ref": "#/definitions/AuthenticateResponse"
             }
           },
           "403": {
             "description": "Authentication Fail",
             "schema": {
-              "$ref": "#/definitions/ResultResponse"
+              "$ref": "#/definitions/AuthenticateResponse"
             }
           },
           "500": {
@@ -253,6 +257,10 @@ func init() {
     "AuthenticateResponse": {
       "type": "object",
       "properties": {
+        "error": {
+          "type": "string",
+          "example": "error"
+        },
         "refresh_token": {
           "type": "string",
           "example": "fewerHHsasqw122231"

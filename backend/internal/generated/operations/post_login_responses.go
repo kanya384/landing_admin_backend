@@ -69,7 +69,7 @@ type PostLoginBadRequest struct {
 	/*
 	  In: Body
 	*/
-	Payload *models.ResultResponse `json:"body,omitempty"`
+	Payload *models.AuthenticateResponse `json:"body,omitempty"`
 }
 
 // NewPostLoginBadRequest creates PostLoginBadRequest with default headers values
@@ -79,13 +79,13 @@ func NewPostLoginBadRequest() *PostLoginBadRequest {
 }
 
 // WithPayload adds the payload to the post login bad request response
-func (o *PostLoginBadRequest) WithPayload(payload *models.ResultResponse) *PostLoginBadRequest {
+func (o *PostLoginBadRequest) WithPayload(payload *models.AuthenticateResponse) *PostLoginBadRequest {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the post login bad request response
-func (o *PostLoginBadRequest) SetPayload(payload *models.ResultResponse) {
+func (o *PostLoginBadRequest) SetPayload(payload *models.AuthenticateResponse) {
 	o.Payload = payload
 }
 
@@ -113,7 +113,7 @@ type PostLoginForbidden struct {
 	/*
 	  In: Body
 	*/
-	Payload *models.ResultResponse `json:"body,omitempty"`
+	Payload *models.AuthenticateResponse `json:"body,omitempty"`
 }
 
 // NewPostLoginForbidden creates PostLoginForbidden with default headers values
@@ -123,13 +123,13 @@ func NewPostLoginForbidden() *PostLoginForbidden {
 }
 
 // WithPayload adds the payload to the post login forbidden response
-func (o *PostLoginForbidden) WithPayload(payload *models.ResultResponse) *PostLoginForbidden {
+func (o *PostLoginForbidden) WithPayload(payload *models.AuthenticateResponse) *PostLoginForbidden {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the post login forbidden response
-func (o *PostLoginForbidden) SetPayload(payload *models.ResultResponse) {
+func (o *PostLoginForbidden) SetPayload(payload *models.AuthenticateResponse) {
 	o.Payload = payload
 }
 

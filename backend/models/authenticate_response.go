@@ -17,6 +17,10 @@ import (
 // swagger:model AuthenticateResponse
 type AuthenticateResponse struct {
 
+	// error
+	// Example: error
+	Error string `json:"error,omitempty"`
+
 	// refresh token
 	// Example: fewerHHsasqw122231
 	RefreshToken string `json:"refresh_token,omitempty"`
