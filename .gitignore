@@ -2,3 +2,5 @@
 data
 vars
 .vscode
+node_modules
+build

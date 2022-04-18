@@ -17,9 +17,12 @@ type User struct {
 	ModifiedBy primitive.ObjectID `bson:"modified_by" json:"modified_by"`
 }
 
-func NewUser(id string, name string, login string, pass string, Role string) (user User, err error) {
+func NewUser(id string, name string, login string, pass string, role string) (user User, err error) {
 	if id == "" {
 		user.ID = primitive.NewObjectID()
+		user.CreatedAt = time.Now()
+		user.UpdateAt = time.Now()
+		//user.ModifiedBy =
 	} else {
 		user.ID, err = primitive.ObjectIDFromHex(id)
 		if err != nil {
@@ -29,7 +32,7 @@ func NewUser(id string, name string, login string, pass string, Role string) (us
 	user.Name = name
 	user.Login = login
 	user.Pass = pass
-	user.Role = Role
+	user.Role = role
 	return
 }
 

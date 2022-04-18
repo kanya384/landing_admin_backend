@@ -25,7 +25,8 @@ func NewHandlers(services *services.Services) Handlers {
 }
 
 func (h *handlers) Authenticate(params operations.PostLoginParams) middleware.Responder {
-	ctx, _ := context.WithTimeout(context.Background(), time.Minute)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
 	tokens, err := h.services.Auth.Authenticate(ctx, params.Params.Login, params.Params.Pass)
 	if err != nil {
 		return operations.NewPostLoginBadRequest().WithPayload(&models.ResultResponse{Msg: "invalid params"})
