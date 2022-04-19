@@ -48,6 +48,14 @@ paths:
             $ref: '#/definitions/ResultResponse'
         '500':
           description: 'Internal Server Error'
+  /ping:
+    get:
+      summary: "authorization check"
+      responses:
+        '200':
+          description: 'пользователь авторизован'
+        '401':
+          description: 'необходимо авторизоваться'
 definitions:
   AuthenticateRequest:
     type: object

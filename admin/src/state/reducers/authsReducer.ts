@@ -10,7 +10,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-    loading: false,
+    loading: true,
     auth: false,
     error: null,
     token: null,
@@ -26,10 +26,12 @@ const reducer = produce((state: AuthState = initialState, action: Authorize) =>{
             const {token} = action.payload
             state.token = token
             state.auth = true
+            state.loading = false
             return state
         case AuthActionTypes.AUTHENTICATE_ERROR:
             state.error = action.payload
             state.auth = false
+            state.loading = false
             return state
         default:
             return state;

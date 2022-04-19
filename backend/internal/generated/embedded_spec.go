@@ -65,6 +65,19 @@ func init() {
         }
       }
     },
+    "/ping": {
+      "get": {
+        "summary": "authorization check",
+        "responses": {
+          "200": {
+            "description": "пользователь авторизован"
+          },
+          "401": {
+            "description": "необходимо авторизоваться"
+          }
+        }
+      }
+    },
     "/users": {
       "put": {
         "summary": "create user",
@@ -204,6 +217,19 @@ func init() {
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ping": {
+      "get": {
+        "summary": "authorization check",
+        "responses": {
+          "200": {
+            "description": "пользователь авторизован"
+          },
+          "401": {
+            "description": "необходимо авторизоваться"
           }
         }
       }

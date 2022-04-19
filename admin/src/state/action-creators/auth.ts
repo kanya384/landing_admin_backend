@@ -12,7 +12,7 @@ export const sendAuth = (login: string, pass: string) => {
         });
 
         const result = await apiSerivice.loginPost({login, pass})
-        if (result.status == 200) {
+        if (result.status === 200) {
             dispatch({
                 type: AuthActionTypes.AUTHENTICATE_SUCCESS,
                 payload: {
@@ -25,5 +25,13 @@ export const sendAuth = (login: string, pass: string) => {
                 payload: result.data.error!
             });
         }
+    }
+}
+
+export const checkAuth = () => {
+    return async (dispatch: Dispatch<Authorize>) => {
+        dispatch({
+            type: AuthActionTypes.AUTHENTICATE_REQUEST_SEND,
+        });
     }
 }

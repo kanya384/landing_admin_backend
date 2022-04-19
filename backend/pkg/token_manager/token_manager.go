@@ -2,6 +2,7 @@ package token_manager
 
 import (
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -47,7 +48,7 @@ func (t *tokenManager) GenerateAuthTokens(id string, name string, role string) (
 
 func (t *tokenManager) ParseAuthTokens(token string, refreshToken string) (authTokens AuthTokens, tokenExpired bool, err error) {
 	// check token
-	payload, err := checkToken(token, t.secret)
+	payload, err := CheckToken(token, t.secret)
 	if err != nil && err.Error() != ErrTokenIsExpired {
 		return nil, false, errors.New(ErrNotValidToken)
 	}
@@ -57,7 +58,7 @@ func (t *tokenManager) ParseAuthTokens(token string, refreshToken string) (authT
 	if err != nil && err.Error() == ErrTokenIsExpired {
 		err = nil
 		tokenExpired = true
-		_, err := checkToken(refreshToken, t.secret)
+		_, err := CheckToken(refreshToken, t.secret)
 		if err != nil {
 			return nil, true, errors.New(ErrNotValidRefreshToken)
 		}
@@ -84,7 +85,7 @@ func (t *tokenManager) RefreshTokens(authTokens AuthTokens) (authTokensRes AuthT
 	return
 }
 
-func checkToken(token string, secret string) (payload map[string]interface{}, err error) {
+func CheckToken(token string, secret string) (payload map[string]interface{}, err error) {
 	//проверям шифрование
 	parsedToken, err := jwt.ParseWithClaims(token, &TokenClaims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -92,8 +93,10 @@ func checkToken(token string, secret string) (payload map[string]interface{}, er
 		}
 		return []byte(secret), nil
 	})
+	fmt.Println(err)
+	fmt.Println("parsed")
 
-	if err != nil && err.Error() == ErrWrongSingingMethod {
+	if err != nil && (err.Error() == ErrWrongSingingMethod || err.Error() == ErrInvalidNumberOfSegments) {
 		return nil, err
 	}
 	claims, ok := parsedToken.Claims.(*TokenClaims)

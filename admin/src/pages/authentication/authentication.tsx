@@ -27,7 +27,7 @@ export const Authentication: React.FC = () => {
             <div className="container">
               <div className="row flex-center min-vh-100 py-5">
                 <div className="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3">
-                  <a className="d-flex flex-center text-decoration-none mb-4" href="#" onClick={(e)=>{e.preventDefault()}}>
+                  <a className="d-flex flex-center text-decoration-none mb-4" href="/" onClick={(e)=>{e.preventDefault()}}>
                     <div className="d-flex align-items-center">
                       <img src="../../../assets/img/icons/logo.png" alt="phoenix" width="58" />
                     </div>
