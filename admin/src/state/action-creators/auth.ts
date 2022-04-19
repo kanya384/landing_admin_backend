@@ -1,9 +1,9 @@
 import { Dispatch } from 'redux';
 import { AuthActionTypes } from '../action-types/auth';
 import { Authorize } from '../actions/auth';
-import {DefaultApi} from "../../api";
+import {Configuration, DefaultApi} from "../../api";
 
-const apiSerivice = new DefaultApi();
+const apiSerivice = new DefaultApi(new Configuration(), "http://localhost:3000/");
 
 export const sendAuth = (login: string, pass: string) => {
     return async (dispatch: Dispatch<Authorize>) => {
