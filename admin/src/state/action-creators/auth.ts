@@ -33,5 +33,6 @@ export const checkAuth = () => {
         dispatch({
             type: AuthActionTypes.AUTHENTICATE_REQUEST_SEND,
         });
+        apiSerivice.pingGet()
     }
 }

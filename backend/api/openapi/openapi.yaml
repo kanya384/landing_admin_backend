@@ -54,8 +54,12 @@ paths:
       responses:
         '200':
           description: 'пользователь авторизован'
+          schema:
+            $ref: '#/definitions/ResultResponse'
         '401':
           description: 'необходимо авторизоваться'
+          schema:
+            $ref: '#/definitions/ResultResponse'
 definitions:
   AuthenticateRequest:
     type: object
