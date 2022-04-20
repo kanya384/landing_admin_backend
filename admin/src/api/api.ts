@@ -152,6 +152,36 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary authorization check
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pingGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/ping`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary create user
          * @param {UserCreateRequest} [params] 
          * @param {*} [options] Override http request option.
@@ -207,6 +237,16 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary authorization check
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pingGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pingGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary create user
          * @param {UserCreateRequest} [params] 
          * @param {*} [options] Override http request option.
@@ -238,6 +278,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary authorization check
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pingGet(options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.pingGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary create user
          * @param {UserCreateRequest} [params] 
          * @param {*} [options] Override http request option.
@@ -266,6 +315,17 @@ export class DefaultApi extends BaseAPI {
      */
     public loginPost(params?: AuthenticateRequest, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).loginPost(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary authorization check
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public pingGet(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).pingGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
