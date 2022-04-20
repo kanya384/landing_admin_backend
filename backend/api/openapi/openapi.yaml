@@ -60,6 +60,23 @@ paths:
           description: 'необходимо авторизоваться'
           schema:
             $ref: '#/definitions/ResultResponse'
+  /posters:
+    get:
+      summary: "gets filtered posters list"
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/GetPostersRequest'
+      responses:
+        '200':
+          description: 'returns filtered posters'
+          schema:
+            $ref: '#/definitions/GetPostersResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object
@@ -103,4 +120,41 @@ definitions:
       msg:
         type: string
         example: пользователь успешно создан
+  GetPostersRequest:
+    type: object
+    properties:
+      active:
+        type: boolean
+        example: false
+        description: if active true, returns only active posters, else returns all
+      name:
+        type: string
+        example: Акция
+        description: title filter
+  GetPostersResponse:
+    type: array
+    items:
+      $ref: '#/definitions/Poster'
+  Poster:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      photo:
+        type: string
+      active:
+        type: boolean
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      modifiedBy:
+        type: string
+      
       

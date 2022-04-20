@@ -68,6 +68,80 @@ export interface AuthenticateResponse {
 /**
  * 
  * @export
+ * @interface GetPostersRequest
+ */
+export interface GetPostersRequest {
+    /**
+     * if active true, returns only active posters, else returns all
+     * @type {boolean}
+     * @memberof GetPostersRequest
+     */
+    'active'?: boolean;
+    /**
+     * title filter
+     * @type {string}
+     * @memberof GetPostersRequest
+     */
+    'name'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface Poster
+ */
+export interface Poster {
+    /**
+     * 
+     * @type {string}
+     * @memberof Poster
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Poster
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Poster
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Poster
+     */
+    'photo'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Poster
+     */
+    'active'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Poster
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Poster
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Poster
+     */
+    'modifiedBy'?: string;
+}
+/**
+ * 
+ * @export
  * @interface ResultResponse
  */
 export interface ResultResponse {
@@ -182,6 +256,40 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary gets filtered posters list
+         * @param {GetPostersRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersGet: async (params?: GetPostersRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/posters`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary create user
          * @param {UserCreateRequest} [params] 
          * @param {*} [options] Override http request option.
@@ -247,6 +355,17 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary gets filtered posters list
+         * @param {GetPostersRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postersGet(params?: GetPostersRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Poster>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postersGet(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary create user
          * @param {UserCreateRequest} [params] 
          * @param {*} [options] Override http request option.
@@ -284,6 +403,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         pingGet(options?: any): AxiosPromise<ResultResponse> {
             return localVarFp.pingGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary gets filtered posters list
+         * @param {GetPostersRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersGet(params?: GetPostersRequest, options?: any): AxiosPromise<Array<Poster>> {
+            return localVarFp.postersGet(params, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -326,6 +455,18 @@ export class DefaultApi extends BaseAPI {
      */
     public pingGet(options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).pingGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary gets filtered posters list
+     * @param {GetPostersRequest} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public postersGet(params?: GetPostersRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).postersGet(params, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

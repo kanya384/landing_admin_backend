@@ -45,6 +45,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		GetPingHandler: GetPingHandlerFunc(func(params GetPingParams) middleware.Responder {
 			return middleware.NotImplemented("operation GetPing has not yet been implemented")
 		}),
+		GetPostersHandler: GetPostersHandlerFunc(func(params GetPostersParams) middleware.Responder {
+			return middleware.NotImplemented("operation GetPosters has not yet been implemented")
+		}),
 		PostLoginHandler: PostLoginHandlerFunc(func(params PostLoginParams) middleware.Responder {
 			return middleware.NotImplemented("operation PostLogin has not yet been implemented")
 		}),
@@ -89,6 +92,8 @@ type BackendServiceAPI struct {
 
 	// GetPingHandler sets the operation handler for the get ping operation
 	GetPingHandler GetPingHandler
+	// GetPostersHandler sets the operation handler for the get posters operation
+	GetPostersHandler GetPostersHandler
 	// PostLoginHandler sets the operation handler for the post login operation
 	PostLoginHandler PostLoginHandler
 	// PutUsersHandler sets the operation handler for the put users operation
@@ -172,6 +177,9 @@ func (o *BackendServiceAPI) Validate() error {
 
 	if o.GetPingHandler == nil {
 		unregistered = append(unregistered, "GetPingHandler")
+	}
+	if o.GetPostersHandler == nil {
+		unregistered = append(unregistered, "GetPostersHandler")
 	}
 	if o.PostLoginHandler == nil {
 		unregistered = append(unregistered, "PostLoginHandler")
@@ -271,6 +279,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/ping"] = NewGetPing(o.context, o.GetPingHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/posters"] = NewGetPosters(o.context, o.GetPostersHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

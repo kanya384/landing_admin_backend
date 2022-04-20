@@ -2,7 +2,6 @@ package token_manager
 
 import (
 	"errors"
-	"fmt"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -93,8 +92,6 @@ func CheckToken(token string, secret string) (payload map[string]interface{}, er
 		}
 		return []byte(secret), nil
 	})
-	fmt.Println(err)
-	fmt.Println("parsed")
 
 	if err != nil && (err.Error() == ErrWrongSingingMethod || err.Error() == ErrInvalidNumberOfSegments) {
 		return nil, err

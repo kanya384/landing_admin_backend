@@ -70,10 +70,44 @@ func init() {
         "summary": "authorization check",
         "responses": {
           "200": {
-            "description": "пользователь авторизован"
+            "description": "пользователь авторизован",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
           },
           "401": {
-            "description": "необходимо авторизоваться"
+            "description": "необходимо авторизоваться",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          }
+        }
+      }
+    },
+    "/posters": {
+      "get": {
+        "summary": "gets filtered posters list",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/GetPostersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns filtered posters",
+            "schema": {
+              "$ref": "#/definitions/GetPostersResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -138,6 +172,58 @@ func init() {
         "token": {
           "type": "string",
           "example": "asdkjkzxcqw1290090"
+        }
+      }
+    },
+    "GetPostersRequest": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "description": "if active true, returns only active posters, else returns all",
+          "type": "boolean",
+          "example": false
+        },
+        "name": {
+          "description": "title filter",
+          "type": "string",
+          "example": "Акция"
+        }
+      }
+    },
+    "GetPostersResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Poster"
+      }
+    },
+    "Poster": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -226,10 +312,44 @@ func init() {
         "summary": "authorization check",
         "responses": {
           "200": {
-            "description": "пользователь авторизован"
+            "description": "пользователь авторизован",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
           },
           "401": {
-            "description": "необходимо авторизоваться"
+            "description": "необходимо авторизоваться",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          }
+        }
+      }
+    },
+    "/posters": {
+      "get": {
+        "summary": "gets filtered posters list",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/GetPostersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns filtered posters",
+            "schema": {
+              "$ref": "#/definitions/GetPostersResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -294,6 +414,58 @@ func init() {
         "token": {
           "type": "string",
           "example": "asdkjkzxcqw1290090"
+        }
+      }
+    },
+    "GetPostersRequest": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "description": "if active true, returns only active posters, else returns all",
+          "type": "boolean",
+          "example": false
+        },
+        "name": {
+          "description": "title filter",
+          "type": "string",
+          "example": "Акция"
+        }
+      }
+    },
+    "GetPostersResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Poster"
+      }
+    },
+    "Poster": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },

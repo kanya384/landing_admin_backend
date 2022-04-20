@@ -9,6 +9,8 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+
+	"landing_admin_backend/models"
 )
 
 // GetPingOKCode is the HTTP code returned for type GetPingOK
@@ -19,6 +21,11 @@ const GetPingOKCode int = 200
 swagger:response getPingOK
 */
 type GetPingOK struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *models.ResultResponse `json:"body,omitempty"`
 }
 
 // NewGetPingOK creates GetPingOK with default headers values
@@ -27,12 +34,27 @@ func NewGetPingOK() *GetPingOK {
 	return &GetPingOK{}
 }
 
+// WithPayload adds the payload to the get ping o k response
+func (o *GetPingOK) WithPayload(payload *models.ResultResponse) *GetPingOK {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get ping o k response
+func (o *GetPingOK) SetPayload(payload *models.ResultResponse) {
+	o.Payload = payload
+}
+
 // WriteResponse to the client
 func (o *GetPingOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
-	rw.Header().Del(runtime.HeaderContentType) //Remove Content-Type on empty responses
-
 	rw.WriteHeader(200)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
 }
 
 // GetPingUnauthorizedCode is the HTTP code returned for type GetPingUnauthorized
@@ -43,6 +65,11 @@ const GetPingUnauthorizedCode int = 401
 swagger:response getPingUnauthorized
 */
 type GetPingUnauthorized struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *models.ResultResponse `json:"body,omitempty"`
 }
 
 // NewGetPingUnauthorized creates GetPingUnauthorized with default headers values
@@ -51,10 +78,25 @@ func NewGetPingUnauthorized() *GetPingUnauthorized {
 	return &GetPingUnauthorized{}
 }
 
+// WithPayload adds the payload to the get ping unauthorized response
+func (o *GetPingUnauthorized) WithPayload(payload *models.ResultResponse) *GetPingUnauthorized {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the get ping unauthorized response
+func (o *GetPingUnauthorized) SetPayload(payload *models.ResultResponse) {
+	o.Payload = payload
+}
+
 // WriteResponse to the client
 func (o *GetPingUnauthorized) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
-	rw.Header().Del(runtime.HeaderContentType) //Remove Content-Type on empty responses
-
 	rw.WriteHeader(401)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
 }
