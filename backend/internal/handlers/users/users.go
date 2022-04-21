@@ -13,7 +13,7 @@ import (
 )
 
 type Handlers interface {
-	Create(params operations.PutUsersParams) middleware.Responder
+	Create(params operations.PutUsersParams, claims interface{}) middleware.Responder
 }
 
 type handlers struct {
@@ -26,7 +26,7 @@ func NewHandlers(services *services.Services) Handlers {
 	}
 }
 
-func (h *handlers) Create(params operations.PutUsersParams) middleware.Responder {
+func (h *handlers) Create(params operations.PutUsersParams, claims interface{}) middleware.Responder {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
 	user, err := domain.NewUser("", params.Params.Name, params.Params.Login, params.Params.Pass, params.Params.Role)

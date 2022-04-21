@@ -5,7 +5,6 @@ package generated
 import (
 	"context"
 	"crypto/tls"
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -75,9 +74,13 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	handlers := handlers.NewHandlers(services, cfg)
 	api.PostLoginHandler = operations.PostLoginHandlerFunc(handlers.Auth.Authenticate)
 	api.GetPingHandler = operations.GetPingHandlerFunc(handlers.Auth.Ping)
-	api.AddMiddlewareFor("GET", "/ping", authenticationMiddleware)
+	api.TokenAuth = func(token string) (claims interface{}, err error) {
+		claims, err = token_manager.CheckToken(token, cfg.TokenSecret)
+		return
+	}
+	//api.AddMiddlewareFor("GET", "/ping", authenticationMiddleware)
 	api.PutUsersHandler = operations.PutUsersHandlerFunc(handlers.Users.Create)
-	api.AddMiddlewareFor("PUT", "/users", authenticationMiddleware)
+	//api.AddMiddlewareFor("PUT", "/users", authenticationMiddleware)
 
 	api.PreServerShutdown = func() {
 	}
@@ -112,38 +115,4 @@ func setupMiddlewares(handler http.Handler) http.Handler {
 // So this is a good place to plug in a panic handling middleware, logging and metrics.
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
 	return handler
-}
-
-func authenticationMiddleware(handler http.Handler) http.Handler {
-
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		//http.SetCookie(w, &http.Cookie{})
-		token, err := r.Cookie("token")
-		if err != nil {
-			writeNotAuthorized(w)
-			return
-		}
-		cfg, err := config.InitConfig("APP")
-		if err != nil {
-			panic(fmt.Sprintf("error initializing config %s", err))
-		}
-		_, err = token_manager.CheckToken(token.Value, cfg.TokenSecret)
-		if err != nil {
-			writeNotAuthorized(w)
-			return
-		}
-
-		handler.ServeHTTP(w, r)
-	})
-}
-
-func writeNotAuthorized(w http.ResponseWriter) {
-	w.WriteHeader(401)
-	js, err := json.Marshal(map[string]string{"payload": "please authorize"})
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(js)
 }

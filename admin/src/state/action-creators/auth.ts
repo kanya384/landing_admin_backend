@@ -3,7 +3,8 @@ import { AuthActionTypes } from '../action-types/auth';
 import { Authorize } from '../actions/auth';
 import {Configuration, DefaultApi} from "../../api";
 import { AxiosResponse } from 'axios';
-import Cookies from 'js-cookie';
+import { GetTokenFromCookies } from '../../utils';
+
 
 const AUTH_ERROR = "Проверьте логин или пароль"
 const ERR_FIELD_EMPTY = "Заполните необходимые поля"
@@ -52,28 +53,22 @@ export const checkAuth = () => {
         dispatch({
             type: AuthActionTypes.AUTHENTICATE_REQUEST_SEND,
         });
-        
-        apiSerivice.pingGet().then((resp:AxiosResponse)=>{
+
+        let token = GetTokenFromCookies()
+        apiSerivice.pingGet({headers: {"Authorization": token}}).then((resp:AxiosResponse)=>{
             if (resp.status!==200){
                 dispatch({
                     type: AuthActionTypes.AUTHENTICATE_ERROR,
                     payload: AUTH_ERROR,
                 });
+                return
             }
-            let token = Cookies.get("token")
-            if (token) {
-                dispatch({
-                    type: AuthActionTypes.AUTHENTICATE_SUCCESS,
-                    payload: {
-                        token: token,
-                    }
-                });
-            } else {
-                dispatch({
-                    type: AuthActionTypes.AUTHENTICATE_ERROR,
-                    payload: "",
-                });
-            }
+            dispatch({
+                type: AuthActionTypes.AUTHENTICATE_SUCCESS,
+                payload: {
+                    token: token,
+                }
+            });
         }).catch((e) => {
             dispatch({
                 type: AuthActionTypes.AUTHENTICATE_ERROR,

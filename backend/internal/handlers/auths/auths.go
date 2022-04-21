@@ -17,7 +17,7 @@ import (
 
 type Handlers interface {
 	Authenticate(params operations.PostLoginParams) middleware.Responder
-	Ping(params operations.GetPingParams) middleware.Responder
+	Ping(params operations.GetPingParams, claims interface{}) middleware.Responder
 }
 
 type handlers struct {
@@ -53,6 +53,6 @@ func (h *handlers) Authenticate(params operations.PostLoginParams) middleware.Re
 	})
 }
 
-func (h *handlers) Ping(params operations.GetPingParams) middleware.Responder {
+func (h *handlers) Ping(params operations.GetPingParams, claims interface{}) middleware.Responder {
 	return operations.NewGetPingOK()
 }
