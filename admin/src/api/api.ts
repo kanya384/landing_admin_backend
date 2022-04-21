@@ -68,6 +68,31 @@ export interface AuthenticateResponse {
 /**
  * 
  * @export
+ * @interface CreatePosterRequest
+ */
+export interface CreatePosterRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePosterRequest
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePosterRequest
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePosterRequest
+     */
+    'photo'?: string;
+}
+/**
+ * 
+ * @export
  * @interface GetPostersRequest
  */
 export interface GetPostersRequest {
@@ -151,6 +176,43 @@ export interface ResultResponse {
      * @memberof ResultResponse
      */
     'msg'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdatePosterRequest
+ */
+export interface UpdatePosterRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePosterRequest
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePosterRequest
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePosterRequest
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePosterRequest
+     */
+    'photo'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdatePosterRequest
+     */
+    'active'?: boolean;
 }
 /**
  * 
@@ -243,45 +305,14 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary gets filtered posters list
-         * @param {GetPostersRequest} [params] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postersGet: async (params?: GetPostersRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/posters`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -307,6 +338,9 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
 
     
@@ -355,17 +389,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary gets filtered posters list
-         * @param {GetPostersRequest} [params] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async postersGet(params?: GetPostersRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Poster>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postersGet(params, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary create user
          * @param {UserCreateRequest} [params] 
          * @param {*} [options] Override http request option.
@@ -403,16 +426,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         pingGet(options?: any): AxiosPromise<ResultResponse> {
             return localVarFp.pingGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary gets filtered posters list
-         * @param {GetPostersRequest} [params] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postersGet(params?: GetPostersRequest, options?: any): AxiosPromise<Array<Poster>> {
-            return localVarFp.postersGet(params, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -459,18 +472,6 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
-     * @summary gets filtered posters list
-     * @param {GetPostersRequest} [params] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public postersGet(params?: GetPostersRequest, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).postersGet(params, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary create user
      * @param {UserCreateRequest} [params] 
      * @param {*} [options] Override http request option.
@@ -479,6 +480,391 @@ export class DefaultApi extends BaseAPI {
      */
     public usersPut(params?: UserCreateRequest, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).usersPut(params, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PostersApi - axios parameter creator
+ * @export
+ */
+export const PostersApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary gets filtered posters list
+         * @param {GetPostersRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersGet: async (params?: GetPostersRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/posters`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary update poster
+         * @param {UpdatePosterRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersPost: async (params?: UpdatePosterRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/posters`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary delete poster by id
+         * @param {string} posterID String ID of the poster to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersPosterIDDelete: async (posterID: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'posterID' is not null or undefined
+            assertParamExists('postersPosterIDDelete', 'posterID', posterID)
+            const localVarPath = `/posters/{posterID}`
+                .replace(`{${"posterID"}}`, encodeURIComponent(String(posterID)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get poster by id
+         * @param {string} posterID String ID of the poster to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersPosterIDGet: async (posterID: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'posterID' is not null or undefined
+            assertParamExists('postersPosterIDGet', 'posterID', posterID)
+            const localVarPath = `/posters/{posterID}`
+                .replace(`{${"posterID"}}`, encodeURIComponent(String(posterID)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create poster
+         * @param {CreatePosterRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersPut: async (params?: CreatePosterRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/posters`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PostersApi - functional programming interface
+ * @export
+ */
+export const PostersApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PostersApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary gets filtered posters list
+         * @param {GetPostersRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postersGet(params?: GetPostersRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Poster>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postersGet(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary update poster
+         * @param {UpdatePosterRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postersPost(params?: UpdatePosterRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postersPost(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary delete poster by id
+         * @param {string} posterID String ID of the poster to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postersPosterIDDelete(posterID: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Poster>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postersPosterIDDelete(posterID, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary get poster by id
+         * @param {string} posterID String ID of the poster to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postersPosterIDGet(posterID: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Poster>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postersPosterIDGet(posterID, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create poster
+         * @param {CreatePosterRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postersPut(params?: CreatePosterRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postersPut(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PostersApi - factory interface
+ * @export
+ */
+export const PostersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PostersApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary gets filtered posters list
+         * @param {GetPostersRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersGet(params?: GetPostersRequest, options?: any): AxiosPromise<Array<Poster>> {
+            return localVarFp.postersGet(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary update poster
+         * @param {UpdatePosterRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersPost(params?: UpdatePosterRequest, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.postersPost(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary delete poster by id
+         * @param {string} posterID String ID of the poster to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersPosterIDDelete(posterID: string, options?: any): AxiosPromise<Poster> {
+            return localVarFp.postersPosterIDDelete(posterID, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get poster by id
+         * @param {string} posterID String ID of the poster to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersPosterIDGet(posterID: string, options?: any): AxiosPromise<Poster> {
+            return localVarFp.postersPosterIDGet(posterID, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create poster
+         * @param {CreatePosterRequest} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersPut(params?: CreatePosterRequest, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.postersPut(params, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PostersApi - object-oriented interface
+ * @export
+ * @class PostersApi
+ * @extends {BaseAPI}
+ */
+export class PostersApi extends BaseAPI {
+    /**
+     * 
+     * @summary gets filtered posters list
+     * @param {GetPostersRequest} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostersApi
+     */
+    public postersGet(params?: GetPostersRequest, options?: AxiosRequestConfig) {
+        return PostersApiFp(this.configuration).postersGet(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update poster
+     * @param {UpdatePosterRequest} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostersApi
+     */
+    public postersPost(params?: UpdatePosterRequest, options?: AxiosRequestConfig) {
+        return PostersApiFp(this.configuration).postersPost(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary delete poster by id
+     * @param {string} posterID String ID of the poster to get
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostersApi
+     */
+    public postersPosterIDDelete(posterID: string, options?: AxiosRequestConfig) {
+        return PostersApiFp(this.configuration).postersPosterIDDelete(posterID, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get poster by id
+     * @param {string} posterID String ID of the poster to get
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostersApi
+     */
+    public postersPosterIDGet(posterID: string, options?: AxiosRequestConfig) {
+        return PostersApiFp(this.configuration).postersPosterIDGet(posterID, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create poster
+     * @param {CreatePosterRequest} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostersApi
+     */
+    public postersPut(params?: CreatePosterRequest, options?: AxiosRequestConfig) {
+        return PostersApiFp(this.configuration).postersPut(params, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -67,6 +67,11 @@ func init() {
     },
     "/ping": {
       "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
         "summary": "authorization check",
         "responses": {
           "200": {
@@ -86,6 +91,9 @@ func init() {
     },
     "/posters": {
       "get": {
+        "tags": [
+          "posters"
+        ],
         "summary": "gets filtered posters list",
         "parameters": [
           {
@@ -110,10 +118,159 @@ func init() {
             "description": "Internal Server Error"
           }
         }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "tags": [
+          "posters"
+        ],
+        "summary": "create poster",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreatePosterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно создан",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "tags": [
+          "posters"
+        ],
+        "summary": "update poster",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdatePosterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно создан",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/posters/{posterID}": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "tags": [
+          "posters"
+        ],
+        "summary": "get poster by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the poster to get",
+            "name": "posterID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested poster",
+            "schema": {
+              "$ref": "#/definitions/Poster"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "tags": [
+          "posters"
+        ],
+        "summary": "delete poster by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the poster to get",
+            "name": "posterID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested poster",
+            "schema": {
+              "$ref": "#/definitions/Poster"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/users": {
       "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
         "summary": "create user",
         "parameters": [
           {
@@ -172,6 +329,20 @@ func init() {
         "token": {
           "type": "string",
           "example": "asdkjkzxcqw1290090"
+        }
+      }
+    },
+    "CreatePosterRequest": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
         }
       }
     },
@@ -236,6 +407,26 @@ func init() {
         }
       }
     },
+    "UpdatePosterRequest": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "UserCreateRequest": {
       "type": "object",
       "properties": {
@@ -256,6 +447,13 @@ func init() {
           "example": "роль"
         }
       }
+    }
+  },
+  "securityDefinitions": {
+    "Token": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   }
 }`))
@@ -309,6 +507,11 @@ func init() {
     },
     "/ping": {
       "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
         "summary": "authorization check",
         "responses": {
           "200": {
@@ -328,6 +531,9 @@ func init() {
     },
     "/posters": {
       "get": {
+        "tags": [
+          "posters"
+        ],
         "summary": "gets filtered posters list",
         "parameters": [
           {
@@ -352,10 +558,159 @@ func init() {
             "description": "Internal Server Error"
           }
         }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "tags": [
+          "posters"
+        ],
+        "summary": "create poster",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreatePosterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно создан",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "tags": [
+          "posters"
+        ],
+        "summary": "update poster",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdatePosterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно создан",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/posters/{posterID}": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "tags": [
+          "posters"
+        ],
+        "summary": "get poster by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the poster to get",
+            "name": "posterID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested poster",
+            "schema": {
+              "$ref": "#/definitions/Poster"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "tags": [
+          "posters"
+        ],
+        "summary": "delete poster by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the poster to get",
+            "name": "posterID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested poster",
+            "schema": {
+              "$ref": "#/definitions/Poster"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/users": {
       "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
         "summary": "create user",
         "parameters": [
           {
@@ -414,6 +769,20 @@ func init() {
         "token": {
           "type": "string",
           "example": "asdkjkzxcqw1290090"
+        }
+      }
+    },
+    "CreatePosterRequest": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
         }
       }
     },
@@ -478,6 +847,26 @@ func init() {
         }
       }
     },
+    "UpdatePosterRequest": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "UserCreateRequest": {
       "type": "object",
       "properties": {
@@ -498,6 +887,13 @@ func init() {
           "example": "роль"
         }
       }
+    }
+  },
+  "securityDefinitions": {
+    "Token": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   }
 }`))

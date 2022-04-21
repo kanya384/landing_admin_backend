@@ -5,6 +5,11 @@ info:
 host: "backend-service"
 schemes:
 - "http"
+securityDefinitions:
+  Token:
+    type: apiKey
+    name: Authorization
+    in: header
 paths:
   /login:
     post:
@@ -32,6 +37,8 @@ paths:
   /users:
     put:
       summary: "create user"
+      security:
+        - Token: []
       parameters:
         - in: body
           name: params
@@ -51,6 +58,8 @@ paths:
   /ping:
     get:
       summary: "authorization check"
+      security:
+        - Token: []
       responses:
         '200':
           description: 'пользователь авторизован'
@@ -60,9 +69,12 @@ paths:
           description: 'необходимо авторизоваться'
           schema:
             $ref: '#/definitions/ResultResponse'
+  #posters
   /posters:
     get:
       summary: "gets filtered posters list"
+      tags:
+        - posters
       parameters:
         - in: body
           name: params
@@ -73,6 +85,93 @@ paths:
           description: 'returns filtered posters'
           schema:
             $ref: '#/definitions/GetPostersResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    put:
+      summary: "create poster"
+      security:
+        - Token: []
+      tags:
+        - posters
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/CreatePosterRequest'
+      responses:
+        '200':
+          description: 'постер успешно создан'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    post:
+      summary: "update poster"
+      security:
+        - Token: []
+      tags:
+        - posters
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/UpdatePosterRequest'
+      responses:
+        '200':
+          description: 'постер успешно создан'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /posters/{posterID}: 
+    get:
+      summary: "get poster by id"
+      security:
+        - Token: []
+      tags:
+        - posters
+      parameters:
+        - in: path
+          name: posterID
+          type: string
+          required: true
+          description: String ID of the poster to get
+      responses:
+        '200':
+          description: 'returns requested poster'
+          schema:
+            $ref: '#/definitions/Poster'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    delete:
+      summary: "delete poster by id"
+      security:
+        - Token: []
+      tags:
+        - posters
+      parameters:
+        - in: path
+          name: posterID
+          type: string
+          required: true
+          description: String ID of the poster to get
+      responses:
+        '200':
+          description: 'returns requested poster'
+          schema:
+            $ref: '#/definitions/Poster'
         '400':
           description: 'Bad request'
         '500':
@@ -156,5 +255,25 @@ definitions:
         format: date-time
       modifiedBy:
         type: string
-      
-      
+  CreatePosterRequest:
+    type: object
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+      photo:
+        type: string
+  UpdatePosterRequest:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      photo:
+        type: string
+      active:
+        type: boolean

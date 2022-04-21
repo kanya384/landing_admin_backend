@@ -18,6 +18,8 @@ import (
 	"github.com/go-openapi/spec"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+
+	"landing_admin_backend/internal/generated/operations/posters"
 )
 
 // NewBackendServiceAPI creates a new BackendService instance
@@ -42,18 +44,37 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 
 		JSONProducer: runtime.JSONProducer(),
 
-		GetPingHandler: GetPingHandlerFunc(func(params GetPingParams) middleware.Responder {
+		PostersDeletePostersPosterIDHandler: posters.DeletePostersPosterIDHandlerFunc(func(params posters.DeletePostersPosterIDParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation posters.DeletePostersPosterID has not yet been implemented")
+		}),
+		GetPingHandler: GetPingHandlerFunc(func(params GetPingParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation GetPing has not yet been implemented")
 		}),
-		GetPostersHandler: GetPostersHandlerFunc(func(params GetPostersParams) middleware.Responder {
-			return middleware.NotImplemented("operation GetPosters has not yet been implemented")
+		PostersGetPostersHandler: posters.GetPostersHandlerFunc(func(params posters.GetPostersParams) middleware.Responder {
+			return middleware.NotImplemented("operation posters.GetPosters has not yet been implemented")
+		}),
+		PostersGetPostersPosterIDHandler: posters.GetPostersPosterIDHandlerFunc(func(params posters.GetPostersPosterIDParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation posters.GetPostersPosterID has not yet been implemented")
 		}),
 		PostLoginHandler: PostLoginHandlerFunc(func(params PostLoginParams) middleware.Responder {
 			return middleware.NotImplemented("operation PostLogin has not yet been implemented")
 		}),
-		PutUsersHandler: PutUsersHandlerFunc(func(params PutUsersParams) middleware.Responder {
+		PostersPostPostersHandler: posters.PostPostersHandlerFunc(func(params posters.PostPostersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation posters.PostPosters has not yet been implemented")
+		}),
+		PostersPutPostersHandler: posters.PutPostersHandlerFunc(func(params posters.PutPostersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation posters.PutPosters has not yet been implemented")
+		}),
+		PutUsersHandler: PutUsersHandlerFunc(func(params PutUsersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation PutUsers has not yet been implemented")
 		}),
+
+		// Applies when the "Authorization" header is set
+		TokenAuth: func(token string) (interface{}, error) {
+			return nil, errors.NotImplemented("api key auth (Token) Authorization from header param [Authorization] has not yet been implemented")
+		},
+		// default authorizer is authorized meaning no requests are blocked
+		APIAuthorizer: security.Authorized(),
 	}
 }
 
@@ -90,12 +111,27 @@ type BackendServiceAPI struct {
 	//   - application/json
 	JSONProducer runtime.Producer
 
+	// TokenAuth registers a function that takes a token and returns a principal
+	// it performs authentication based on an api key Authorization provided in the header
+	TokenAuth func(string) (interface{}, error)
+
+	// APIAuthorizer provides access control (ACL/RBAC/ABAC) by providing access to the request and authenticated principal
+	APIAuthorizer runtime.Authorizer
+
+	// PostersDeletePostersPosterIDHandler sets the operation handler for the delete posters poster ID operation
+	PostersDeletePostersPosterIDHandler posters.DeletePostersPosterIDHandler
 	// GetPingHandler sets the operation handler for the get ping operation
 	GetPingHandler GetPingHandler
-	// GetPostersHandler sets the operation handler for the get posters operation
-	GetPostersHandler GetPostersHandler
+	// PostersGetPostersHandler sets the operation handler for the get posters operation
+	PostersGetPostersHandler posters.GetPostersHandler
+	// PostersGetPostersPosterIDHandler sets the operation handler for the get posters poster ID operation
+	PostersGetPostersPosterIDHandler posters.GetPostersPosterIDHandler
 	// PostLoginHandler sets the operation handler for the post login operation
 	PostLoginHandler PostLoginHandler
+	// PostersPostPostersHandler sets the operation handler for the post posters operation
+	PostersPostPostersHandler posters.PostPostersHandler
+	// PostersPutPostersHandler sets the operation handler for the put posters operation
+	PostersPutPostersHandler posters.PutPostersHandler
 	// PutUsersHandler sets the operation handler for the put users operation
 	PutUsersHandler PutUsersHandler
 
@@ -175,14 +211,30 @@ func (o *BackendServiceAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
+	if o.TokenAuth == nil {
+		unregistered = append(unregistered, "AuthorizationAuth")
+	}
+
+	if o.PostersDeletePostersPosterIDHandler == nil {
+		unregistered = append(unregistered, "posters.DeletePostersPosterIDHandler")
+	}
 	if o.GetPingHandler == nil {
 		unregistered = append(unregistered, "GetPingHandler")
 	}
-	if o.GetPostersHandler == nil {
-		unregistered = append(unregistered, "GetPostersHandler")
+	if o.PostersGetPostersHandler == nil {
+		unregistered = append(unregistered, "posters.GetPostersHandler")
+	}
+	if o.PostersGetPostersPosterIDHandler == nil {
+		unregistered = append(unregistered, "posters.GetPostersPosterIDHandler")
 	}
 	if o.PostLoginHandler == nil {
 		unregistered = append(unregistered, "PostLoginHandler")
+	}
+	if o.PostersPostPostersHandler == nil {
+		unregistered = append(unregistered, "posters.PostPostersHandler")
+	}
+	if o.PostersPutPostersHandler == nil {
+		unregistered = append(unregistered, "posters.PutPostersHandler")
 	}
 	if o.PutUsersHandler == nil {
 		unregistered = append(unregistered, "PutUsersHandler")
@@ -202,12 +254,21 @@ func (o *BackendServiceAPI) ServeErrorFor(operationID string) func(http.Response
 
 // AuthenticatorsFor gets the authenticators for the specified security schemes
 func (o *BackendServiceAPI) AuthenticatorsFor(schemes map[string]spec.SecurityScheme) map[string]runtime.Authenticator {
-	return nil
+	result := make(map[string]runtime.Authenticator)
+	for name := range schemes {
+		switch name {
+		case "Token":
+			scheme := schemes[name]
+			result[name] = o.APIKeyAuthenticator(scheme.Name, scheme.In, o.TokenAuth)
+
+		}
+	}
+	return result
 }
 
 // Authorizer returns the registered authorizer
 func (o *BackendServiceAPI) Authorizer() runtime.Authorizer {
-	return nil
+	return o.APIAuthorizer
 }
 
 // ConsumersFor gets the consumers for the specified media types.
@@ -275,6 +336,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers = make(map[string]map[string]http.Handler)
 	}
 
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/posters/{posterID}"] = posters.NewDeletePostersPosterID(o.context, o.PostersDeletePostersPosterIDHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -282,11 +347,23 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/posters"] = NewGetPosters(o.context, o.GetPostersHandler)
+	o.handlers["GET"]["/posters"] = posters.NewGetPosters(o.context, o.PostersGetPostersHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/posters/{posterID}"] = posters.NewGetPostersPosterID(o.context, o.PostersGetPostersPosterIDHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/login"] = NewPostLogin(o.context, o.PostLoginHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/posters"] = posters.NewPostPosters(o.context, o.PostersPostPostersHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/posters"] = posters.NewPutPosters(o.context, o.PostersPutPostersHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
