@@ -88,7 +88,7 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	api.PostersPostPostersHandler = posters.PostPostersHandlerFunc(handlers.Poster.Update)
 	api.PostersGetPostersPosterIDHandler = posters.GetPostersPosterIDHandlerFunc(handlers.Poster.GetPosterById)
 	api.PostersDeletePostersPosterIDHandler = posters.DeletePostersPosterIDHandlerFunc(handlers.Poster.Delete)
-	http.StripPrefix("/spec", http.FileServer(http.Dir("api/openapi")))
+	http.FileServer(http.Dir("file_store"))
 
 	api.PreServerShutdown = func() {
 	}
@@ -122,25 +122,15 @@ func setupMiddlewares(handler http.Handler) http.Handler {
 // The middleware configuration happens before anything, this middleware also applies to serving the swagger.json document.
 // So this is a good place to plug in a panic handling middleware, logging and metrics.
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
-	return uiMiddleware(handler)
+	return FileServerMiddleware(handler)
 }
 
-func uiMiddleware(handler http.Handler) http.Handler {
+func FileServerMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Shortcut helpers for swagger-ui
-		if r.URL.Path == "/swagger-ui" || r.URL.Path == "/api/help" {
-			http.Redirect(w, r, "/swagger-ui/", http.StatusFound)
+		if strings.Index(r.URL.Path, "/store/") == 0 {
+			http.StripPrefix("/store/", http.FileServer(http.Dir("file_store"))).ServeHTTP(w, r)
 			return
 		}
-		// Serving ./swagger-ui/
-		if strings.Index(r.URL.Path, "/swagger-ui/") == 0 {
-			http.StripPrefix("/swagger-ui/", http.FileServer(http.Dir("swaggerui"))).ServeHTTP(w, r)
-			return
-		}
-		if strings.Index(r.URL.Path, "/spec/") == 0 {
-			w.Header().Set("Access-Control-Allow-Origin", "*")
-			http.StripPrefix("/spec/", http.FileServer(http.Dir("api/openapi"))).ServeHTTP(w, r)
-		}
-		handler.ServeHTTP(w, r)
+		next.ServeHTTP(w, r)
 	})
 }

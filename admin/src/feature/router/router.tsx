@@ -3,9 +3,10 @@ import { Authentication } from "../../pages/authentication"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Spinner from "../../components/spinner/spinner"
 import { useActions } from "../../hooks/use-actions"
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import MenuComponent from "../../components/menu-component"
 import NavbarComponent from "../../components/navbar-component"
+import { Posters } from "../../pages/posters"
 
 const Router: React.FC = () => {
   const auths = useTypedSelector(({ auths }) => {
@@ -28,6 +29,7 @@ const Router: React.FC = () => {
           <NavbarComponent />
             <div className="content pt-5">
               <Routes>
+                <Route path="/posters" element={<Posters />} />
                 <Route path="*" element={"good"} />
               </Routes>
             </div>

@@ -4,13 +4,13 @@ import { Authorize } from '../actions/auth';
 import { AxiosResponse } from 'axios';
 import { GetTokenFromCookies } from '../../utils';
 import { Configuration, DefaultApi } from '../../api';
+import { useApi } from '../../hooks/use-api';
 
 
 const AUTH_ERROR = "Проверьте логин или пароль"
 const ERR_FIELD_EMPTY = "Заполните необходимые поля"
-
-const apiSerivice = new DefaultApi(new Configuration(), "http://localhost:3000/");
-
+const url = "http://localhost:3000"
+const authService = new DefaultApi(new Configuration(), url);
 export const sendAuth = (login: string, pass: string) => {
     return async (dispatch: Dispatch<Authorize>) => {
         if (login === "" || pass === "") {
@@ -24,7 +24,7 @@ export const sendAuth = (login: string, pass: string) => {
             type: AuthActionTypes.AUTHENTICATE_REQUEST_SEND,
         });
 
-        apiSerivice.loginPost({login, pass}).then((resp)=>{
+        authService.loginPost({login, pass}).then((resp)=>{
             if (resp.status === 200) {
                 dispatch({
                     type: AuthActionTypes.AUTHENTICATE_SUCCESS,
@@ -55,7 +55,7 @@ export const checkAuth = () => {
         });
 
         let token = GetTokenFromCookies()
-        apiSerivice.pingGet({headers: {"Authorization": token}}).then((resp:AxiosResponse)=>{
+        authService.pingGet({headers: {"Authorization": token}}).then((resp:AxiosResponse)=>{
             if (resp.status!==200){
                 dispatch({
                     type: AuthActionTypes.AUTHENTICATE_ERROR,
