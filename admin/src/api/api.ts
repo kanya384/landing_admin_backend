@@ -526,17 +526,24 @@ export const PostersApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} id 
          * @param {string} title 
          * @param {string} description 
+         * @param {boolean} active 
+         * @param {number} order 
          * @param {any} [file] The file to upload
+         * @param {string} [photo] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postersPost: async (id: string, title: string, description: string, file?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postersPost: async (id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('postersPost', 'id', id)
             // verify required parameter 'title' is not null or undefined
             assertParamExists('postersPost', 'title', title)
             // verify required parameter 'description' is not null or undefined
             assertParamExists('postersPost', 'description', description)
+            // verify required parameter 'active' is not null or undefined
+            assertParamExists('postersPost', 'active', active)
+            // verify required parameter 'order' is not null or undefined
+            assertParamExists('postersPost', 'order', order)
             const localVarPath = `/posters`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -568,6 +575,18 @@ export const PostersApiAxiosParamCreator = function (configuration?: Configurati
     
             if (description !== undefined) { 
                 localVarFormParams.append('description', description as any);
+            }
+    
+            if (active !== undefined) { 
+                localVarFormParams.append('active', active as any);
+            }
+    
+            if (photo !== undefined) { 
+                localVarFormParams.append('photo', photo as any);
+            }
+    
+            if (order !== undefined) { 
+                localVarFormParams.append('order', order as any);
             }
     
     
@@ -741,12 +760,15 @@ export const PostersApiFp = function(configuration?: Configuration) {
          * @param {string} id 
          * @param {string} title 
          * @param {string} description 
+         * @param {boolean} active 
+         * @param {number} order 
          * @param {any} [file] The file to upload
+         * @param {string} [photo] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postersPost(id: string, title: string, description: string, file?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postersPost(id, title, description, file, options);
+        async postersPost(id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postersPost(id, title, description, active, order, file, photo, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -756,7 +778,7 @@ export const PostersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postersPosterIDDelete(posterID: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Poster>> {
+        async postersPosterIDDelete(posterID: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.postersPosterIDDelete(posterID, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -809,12 +831,15 @@ export const PostersApiFactory = function (configuration?: Configuration, basePa
          * @param {string} id 
          * @param {string} title 
          * @param {string} description 
+         * @param {boolean} active 
+         * @param {number} order 
          * @param {any} [file] The file to upload
+         * @param {string} [photo] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postersPost(id: string, title: string, description: string, file?: any, options?: any): AxiosPromise<ResultResponse> {
-            return localVarFp.postersPost(id, title, description, file, options).then((request) => request(axios, basePath));
+        postersPost(id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.postersPost(id, title, description, active, order, file, photo, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -823,7 +848,7 @@ export const PostersApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postersPosterIDDelete(posterID: string, options?: any): AxiosPromise<Poster> {
+        postersPosterIDDelete(posterID: string, options?: any): AxiosPromise<ResultResponse> {
             return localVarFp.postersPosterIDDelete(posterID, options).then((request) => request(axios, basePath));
         },
         /**
@@ -875,13 +900,16 @@ export class PostersApi extends BaseAPI {
      * @param {string} id 
      * @param {string} title 
      * @param {string} description 
+     * @param {boolean} active 
+     * @param {number} order 
      * @param {any} [file] The file to upload
+     * @param {string} [photo] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostersApi
      */
-    public postersPost(id: string, title: string, description: string, file?: any, options?: AxiosRequestConfig) {
-        return PostersApiFp(this.configuration).postersPost(id, title, description, file, options).then((request) => request(this.axios, this.basePath));
+    public postersPost(id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options?: AxiosRequestConfig) {
+        return PostersApiFp(this.configuration).postersPost(id, title, description, active, order, file, photo, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

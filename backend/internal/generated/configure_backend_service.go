@@ -86,6 +86,8 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	api.PostersPutPostersHandler = posters.PutPostersHandlerFunc(handlers.Poster.Create)
 	api.PostersGetPostersHandler = posters.GetPostersHandlerFunc(handlers.Poster.Get)
 	api.PostersPostPostersHandler = posters.PostPostersHandlerFunc(handlers.Poster.Update)
+	api.PostersGetPostersPosterIDHandler = posters.GetPostersPosterIDHandlerFunc(handlers.Poster.GetPosterById)
+	api.PostersDeletePostersPosterIDHandler = posters.DeletePostersPosterIDHandlerFunc(handlers.Poster.Delete)
 	http.StripPrefix("/spec", http.FileServer(http.Dir("api/openapi")))
 
 	api.PreServerShutdown = func() {

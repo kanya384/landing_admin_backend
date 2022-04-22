@@ -39,6 +39,24 @@ func SetValueToCookies(w http.ResponseWriter, name string, value string, ttl tim
 	})
 }
 
+//check if interface is image and saves image (for create and update handlers)
+func ProcessImage(file interface{}, fileStorePath string, IMAGE_WIDTH int, IMAGE_HEIGHT int) (filename string, err error) {
+	fileIn, ok := file.(io.ReadCloser)
+	if !ok {
+		return "", errors.New("no file")
+	}
+	defer fileIn.Close()
+	image, err := ResizeImage(fileIn, IMAGE_WIDTH, IMAGE_HEIGHT)
+	if err != nil {
+		return "", err
+	}
+	filename, err = SaveImageFile(image, "tmg.jpg", fileStorePath)
+	if err != nil {
+		return
+	}
+	return
+}
+
 func ResizeImage(file io.ReadCloser, width int, height int) (image image.Image, err error) {
 	imageIn, err := imaging.Decode(file)
 	if err != nil {

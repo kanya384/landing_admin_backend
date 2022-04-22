@@ -25,7 +25,7 @@ type DeletePostersPosterIDOK struct {
 	/*
 	  In: Body
 	*/
-	Payload *models.Poster `json:"body,omitempty"`
+	Payload *models.ResultResponse `json:"body,omitempty"`
 }
 
 // NewDeletePostersPosterIDOK creates DeletePostersPosterIDOK with default headers values
@@ -35,13 +35,13 @@ func NewDeletePostersPosterIDOK() *DeletePostersPosterIDOK {
 }
 
 // WithPayload adds the payload to the delete posters poster Id o k response
-func (o *DeletePostersPosterIDOK) WithPayload(payload *models.Poster) *DeletePostersPosterIDOK {
+func (o *DeletePostersPosterIDOK) WithPayload(payload *models.ResultResponse) *DeletePostersPosterIDOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the delete posters poster Id o k response
-func (o *DeletePostersPosterIDOK) SetPayload(payload *models.Poster) {
+func (o *DeletePostersPosterIDOK) SetPayload(payload *models.ResultResponse) {
 	o.Payload = payload
 }
 

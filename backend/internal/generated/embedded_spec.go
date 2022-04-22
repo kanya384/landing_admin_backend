@@ -332,7 +332,7 @@ func init() {
           "200": {
             "description": "returns requested poster",
             "schema": {
-              "$ref": "#/definitions/Poster"
+              "$ref": "#/definitions/ResultResponse"
             }
           },
           "400": {
@@ -858,7 +858,7 @@ func init() {
           "200": {
             "description": "returns requested poster",
             "schema": {
-              "$ref": "#/definitions/Poster"
+              "$ref": "#/definitions/ResultResponse"
             }
           },
           "400": {

@@ -11,10 +11,12 @@ import (
 
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Handlers interface {
 	Get(params posters.GetPostersParams) middleware.Responder
+	GetPosterById(params posters.GetPostersPosterIDParams, input interface{}) middleware.Responder
 	Create(params posters.PutPostersParams, input interface{}) middleware.Responder
 	Update(params posters.PostPostersParams, input interface{}) middleware.Responder
 	Delete(params posters.DeletePostersPosterIDParams, input interface{}) middleware.Responder
@@ -72,11 +74,21 @@ func (h *handlers) Update(params posters.PostPostersParams, input interface{}) m
 		return posters.NewPostPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error updating poster"})
 	}
 
-	return posters.NewPutPostersOK().WithPayload(&models.ResultResponse{Msg: "poster created"})
+	return posters.NewPostPostersOK().WithPayload(&models.ResultResponse{Msg: "poster created"})
 }
 
 func (h *handlers) Delete(params posters.DeletePostersPosterIDParams, input interface{}) middleware.Responder {
-	return posters.NewDeletePostersPosterIDOK()
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancel()
+	posterID, err := primitive.ObjectIDFromHex(params.PosterID)
+	if err != nil {
+		return posters.NewDeletePostersPosterIDBadRequest()
+	}
+	err = h.services.Posters.Delete(ctx, posterID)
+	if err != nil {
+		return posters.NewDeletePostersPosterIDBadRequest()
+	}
+	return posters.NewDeletePostersPosterIDOK().WithPayload(&models.ResultResponse{Msg: "poster deleted"})
 }
 
 func (h *handlers) Get(params posters.GetPostersParams) middleware.Responder {
@@ -102,4 +114,28 @@ func (h *handlers) Get(params posters.GetPostersParams) middleware.Responder {
 		return posters.NewGetPostersBadRequest()
 	}
 	return posters.NewGetPostersOK().WithPayload(postersListResponse)
+}
+
+func (h *handlers) GetPosterById(params posters.GetPostersPosterIDParams, input interface{}) middleware.Responder {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancel()
+	posterID, err := primitive.ObjectIDFromHex(params.PosterID)
+	if err != nil {
+		return posters.NewDeletePostersPosterIDBadRequest()
+	}
+	poster, err := h.services.Posters.GetByID(ctx, posterID)
+	if err != nil {
+		return posters.NewDeletePostersPosterIDBadRequest()
+	}
+	res := models.Poster{
+		ID:          poster.ID.Hex(),
+		Title:       poster.Title,
+		Description: poster.Description,
+		Photo:       poster.Photo,
+		Active:      poster.Active,
+		CreatedAt:   strfmt.DateTime(poster.CreatedAt),
+		UpdatedAt:   strfmt.DateTime(poster.UpdateAt),
+		ModifiedBy:  poster.ModifiedBy.Hex(),
+	}
+	return posters.NewGetPostersPosterIDOK().WithPayload(&res)
 }

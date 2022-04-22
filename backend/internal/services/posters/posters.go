@@ -2,7 +2,6 @@ package posters
 
 import (
 	"context"
-	"errors"
 	"io"
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/domain"
@@ -42,11 +41,11 @@ func (s *service) Get(ctx context.Context, filter map[string]interface{}) (poste
 }
 
 func (s *service) GetByID(ctx context.Context, id primitive.ObjectID) (poster domain.Poster, err error) {
-	return
+	return s.repository.Poster.GetByID(ctx, id)
 }
 
 func (s *service) Create(ctx context.Context, poster domain.Poster, file io.ReadCloser) (err error) {
-	filename, err := processImage(file, s.cfg.FileStore)
+	filename, err := helpers.ProcessImage(file, s.cfg.FileStore, IMAGE_WIDTH, IMAGE_HEIGHT)
 	if err != nil {
 		return
 	}
@@ -56,7 +55,7 @@ func (s *service) Create(ctx context.Context, poster domain.Poster, file io.Read
 }
 
 func (s *service) Update(ctx context.Context, poster domain.Poster, file interface{}) (err error) {
-	filename, errIm := processImage(file, s.cfg.FileStore)
+	filename, errIm := helpers.ProcessImage(file, s.cfg.FileStore, IMAGE_WIDTH, IMAGE_HEIGHT)
 	if errIm == nil {
 		//need to delete old file
 		poster.Photo = filename
@@ -65,22 +64,5 @@ func (s *service) Update(ctx context.Context, poster domain.Poster, file interfa
 }
 
 func (s *service) Delete(ctx context.Context, posterID primitive.ObjectID) (err error) {
-	return
-}
-
-func processImage(file interface{}, fileStorePath string) (filename string, err error) {
-	fileIn, ok := file.(io.ReadCloser)
-	if !ok {
-		return "", errors.New("no file")
-	}
-	defer fileIn.Close()
-	image, err := helpers.ResizeImage(fileIn, IMAGE_WIDTH, IMAGE_HEIGHT)
-	if err != nil {
-		return "", err
-	}
-	filename, err = helpers.SaveImageFile(image, "tmg.jpg", fileStorePath)
-	if err != nil {
-		return
-	}
-	return
+	return s.repository.Poster.Delete(ctx, posterID)
 }
