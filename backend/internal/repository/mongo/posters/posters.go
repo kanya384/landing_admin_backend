@@ -64,7 +64,7 @@ func (r *repository) Create(ctx context.Context, poster domain.Poster) (err erro
 	return
 }
 func (r *repository) Update(ctx context.Context, poster domain.Poster) (err error) {
-	result, err := r.collection.UpdateOne(ctx, primitive.M{"_id": poster.ID}, primitive.D{{Key: "$set", Value: poster}})
+	result, err := r.collection.UpdateOne(ctx, primitive.M{"_id": poster.ID}, primitive.D{{Key: "$set", Value: primitive.M{"title": poster.Title, "description": poster.Description, "photo": poster.Photo, "active": poster.Active, "order": poster.Order, "updated_at": poster.UpdateAt, "modified_by": poster.ModifiedBy}}})
 	switch true {
 	case result.MatchedCount == 0:
 		return errors.New(domain.ErrNoFieldWithID)

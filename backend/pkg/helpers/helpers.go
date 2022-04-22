@@ -9,6 +9,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -72,4 +73,8 @@ func SaveFile(fileContent []byte, fileNameIn string, path string) (string, error
 		return "", err
 	}
 	return fileName, nil
+}
+
+func DeleteFile(filename string, path string) (err error) {
+	return os.Remove(fmt.Sprintf("%s/%s", path, filename))
 }

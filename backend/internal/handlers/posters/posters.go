@@ -2,7 +2,6 @@ package posters
 
 import (
 	"context"
-	"fmt"
 	"landing_admin_backend/internal/domain"
 	"landing_admin_backend/internal/generated/operations/posters"
 	"landing_admin_backend/internal/services"
@@ -47,7 +46,6 @@ func (h *handlers) Create(params posters.PutPostersParams, input interface{}) mi
 
 	err = h.services.Posters.Create(ctx, poster, params.File)
 	if err != nil {
-		fmt.Println(err)
 		return posters.NewPutPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating poster"})
 	}
 
@@ -55,36 +53,25 @@ func (h *handlers) Create(params posters.PutPostersParams, input interface{}) mi
 }
 
 func (h *handlers) Update(params posters.PostPostersParams, input interface{}) middleware.Responder {
-	/*poster := domain.Poster{
-		ID:          params.ID,
-		Title:       params.Title,
-		Description: params.Description,
-		Active:      true,
-		CreatedAt:   time.Now(),
-		UpdateAt:    time.Now(),
-	}
-
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*30)
+	defer cancel()
 	userID, err := helpers.GetUserIdFromHandler(input)
 	if err != nil {
-		return posters.NewPutPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
+		return posters.NewPostPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
 	}
-	poster.ModifiedBy = userID
+	photo := ""
+	if params.Photo != nil {
+		photo = *params.Photo
+	}
+	poster, err := domain.NewPoster(params.ID, params.Title, params.Description, photo, params.Active, int(params.Order), time.Now(), time.Now(), userID)
+	if err != nil {
+		return posters.NewPostPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error updating poster"})
+	}
+	err = h.services.Posters.Update(ctx, poster, params.File)
+	if err != nil {
+		return posters.NewPostPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error updating poster"})
+	}
 
-	image, err := helpers.ResizeImage(params.File, IMAGE_WIDTH, IMAGE_HEIGHT)
-	if err != nil {
-		return posters.NewPutPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error converting image"})
-	}
-
-	defer params.File.Close()
-	filename, err := helpers.SaveImageFile(image, "tmg.jpg", h.storePath)
-	if err != nil {
-		return posters.NewPutPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error saving image"})
-	}
-	poster.Photo = filename
-	err = h.services.Posters.Create(context.Background(), poster)
-	if err != nil {
-		return posters.NewPutPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating poster"})
-	}*/
 	return posters.NewPutPostersOK().WithPayload(&models.ResultResponse{Msg: "poster created"})
 }
 

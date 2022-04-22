@@ -226,6 +226,17 @@ func init() {
             "required": true
           },
           {
+            "type": "boolean",
+            "name": "active",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "photo",
+            "in": "formData"
+          },
+          {
             "type": "integer",
             "name": "order",
             "in": "formData",
@@ -739,6 +750,17 @@ func init() {
             "name": "description",
             "in": "formData",
             "required": true
+          },
+          {
+            "type": "boolean",
+            "name": "active",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "photo",
+            "in": "formData"
           },
           {
             "type": "integer",

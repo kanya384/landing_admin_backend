@@ -46,6 +46,11 @@ type PostPostersParams struct {
 	  Required: true
 	  In: formData
 	*/
+	Active bool
+	/*
+	  Required: true
+	  In: formData
+	*/
 	Description string
 	/*The file to upload
 	  In: formData
@@ -61,6 +66,10 @@ type PostPostersParams struct {
 	  In: formData
 	*/
 	Order int64
+	/*
+	  In: formData
+	*/
+	Photo *string
 	/*
 	  Required: true
 	  In: formData
@@ -85,6 +94,11 @@ func (o *PostPostersParams) BindRequest(r *http.Request, route *middleware.Match
 		}
 	}
 	fds := runtime.Values(r.Form)
+
+	fdActive, fdhkActive, _ := fds.GetOK("active")
+	if err := o.bindActive(fdActive, fdhkActive, route.Formats); err != nil {
+		res = append(res, err)
+	}
 
 	fdDescription, fdhkDescription, _ := fds.GetOK("description")
 	if err := o.bindDescription(fdDescription, fdhkDescription, route.Formats); err != nil {
@@ -112,6 +126,11 @@ func (o *PostPostersParams) BindRequest(r *http.Request, route *middleware.Match
 		res = append(res, err)
 	}
 
+	fdPhoto, fdhkPhoto, _ := fds.GetOK("photo")
+	if err := o.bindPhoto(fdPhoto, fdhkPhoto, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	fdTitle, fdhkTitle, _ := fds.GetOK("title")
 	if err := o.bindTitle(fdTitle, fdhkTitle, route.Formats); err != nil {
 		res = append(res, err)
@@ -119,6 +138,31 @@ func (o *PostPostersParams) BindRequest(r *http.Request, route *middleware.Match
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindActive binds and validates parameter Active from formData.
+func (o *PostPostersParams) bindActive(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	if !hasKey {
+		return errors.Required("active", "formData", rawData)
+	}
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: true
+
+	if err := validate.RequiredString("active", "formData", raw); err != nil {
+		return err
+	}
+
+	value, err := swag.ConvertBool(raw)
+	if err != nil {
+		return errors.InvalidType("active", "formData", "bool", raw)
+	}
+	o.Active = value
+
 	return nil
 }
 
@@ -190,6 +234,23 @@ func (o *PostPostersParams) bindOrder(rawData []string, hasKey bool, formats str
 		return errors.InvalidType("order", "formData", "int64", raw)
 	}
 	o.Order = value
+
+	return nil
+}
+
+// bindPhoto binds and validates parameter Photo from formData.
+func (o *PostPostersParams) bindPhoto(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+	o.Photo = &raw
 
 	return nil
 }

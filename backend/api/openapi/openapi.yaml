@@ -165,6 +165,14 @@ paths:
           type: string
           required: true
         - in: formData
+          name: active
+          type: boolean
+          required: true
+        - in: formData
+          name: photo
+          type: string
+          required: false
+        - in: formData
           name: order
           type: integer
           required: true
