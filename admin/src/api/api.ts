@@ -493,11 +493,10 @@ export const PostersApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary gets filtered posters list
-         * @param {GetPostersRequest} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postersGet: async (params?: GetPostersRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postersGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/posters`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -512,12 +511,9 @@ export const PostersApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -527,13 +523,16 @@ export const PostersApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary update poster
+         * @param {string} id 
          * @param {string} title 
          * @param {string} description 
          * @param {any} [file] The file to upload
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postersPost: async (title: string, description: string, file?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postersPost: async (id: string, title: string, description: string, file?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('postersPost', 'id', id)
             // verify required parameter 'title' is not null or undefined
             assertParamExists('postersPost', 'title', title)
             // verify required parameter 'description' is not null or undefined
@@ -557,6 +556,10 @@ export const PostersApiAxiosParamCreator = function (configuration?: Configurati
 
             if (file !== undefined) { 
                 localVarFormParams.append('file', file as any);
+            }
+    
+            if (id !== undefined) { 
+                localVarFormParams.append('id', id as any);
             }
     
             if (title !== undefined) { 
@@ -725,25 +728,25 @@ export const PostersApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary gets filtered posters list
-         * @param {GetPostersRequest} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postersGet(params?: GetPostersRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Poster>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postersGet(params, options);
+        async postersGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Poster>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postersGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @summary update poster
+         * @param {string} id 
          * @param {string} title 
          * @param {string} description 
          * @param {any} [file] The file to upload
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postersPost(title: string, description: string, file?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postersPost(title, description, file, options);
+        async postersPost(id: string, title: string, description: string, file?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postersPost(id, title, description, file, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -794,24 +797,24 @@ export const PostersApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary gets filtered posters list
-         * @param {GetPostersRequest} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postersGet(params?: GetPostersRequest, options?: any): AxiosPromise<Array<Poster>> {
-            return localVarFp.postersGet(params, options).then((request) => request(axios, basePath));
+        postersGet(options?: any): AxiosPromise<Array<Poster>> {
+            return localVarFp.postersGet(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary update poster
+         * @param {string} id 
          * @param {string} title 
          * @param {string} description 
          * @param {any} [file] The file to upload
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postersPost(title: string, description: string, file?: any, options?: any): AxiosPromise<ResultResponse> {
-            return localVarFp.postersPost(title, description, file, options).then((request) => request(axios, basePath));
+        postersPost(id: string, title: string, description: string, file?: any, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.postersPost(id, title, description, file, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -858,18 +861,18 @@ export class PostersApi extends BaseAPI {
     /**
      * 
      * @summary gets filtered posters list
-     * @param {GetPostersRequest} [params] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostersApi
      */
-    public postersGet(params?: GetPostersRequest, options?: AxiosRequestConfig) {
-        return PostersApiFp(this.configuration).postersGet(params, options).then((request) => request(this.axios, this.basePath));
+    public postersGet(options?: AxiosRequestConfig) {
+        return PostersApiFp(this.configuration).postersGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary update poster
+     * @param {string} id 
      * @param {string} title 
      * @param {string} description 
      * @param {any} [file] The file to upload
@@ -877,8 +880,8 @@ export class PostersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PostersApi
      */
-    public postersPost(title: string, description: string, file?: any, options?: AxiosRequestConfig) {
-        return PostersApiFp(this.configuration).postersPost(title, description, file, options).then((request) => request(this.axios, this.basePath));
+    public postersPost(id: string, title: string, description: string, file?: any, options?: AxiosRequestConfig) {
+        return PostersApiFp(this.configuration).postersPost(id, title, description, file, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

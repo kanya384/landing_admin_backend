@@ -8,16 +8,18 @@ import (
 )
 
 type Config struct {
-	Port            int
-	DSN             string
-	ServiceName     string
-	LogLevel        uint32
-	Salt            string
-	TokenTTL        time.Duration
-	RefreshTokenTTL time.Duration
-	TokenSecret     string
-	RedisURL        string
-	LogFile         string `envconfig:"default=./vars/logs/main.log"`
+	Port               int
+	DSN                string
+	ServiceName        string
+	LogLevel           uint32
+	Salt               string
+	TokenTTL           time.Duration
+	RefreshTokenTTL    time.Duration
+	TokenSecret        string
+	RedisURL           string
+	LogFile            string        `envconfig:"default=./vars/logs/main.log"`
+	FileStore          string        `envconfig:"default=./file_store"`
+	RequestMaxDuration time.Duration `envconfig:"default=30s"`
 }
 
 func InitConfig(prefix string) (*Config, error) {

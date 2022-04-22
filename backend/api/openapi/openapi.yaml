@@ -153,12 +153,20 @@ paths:
           required: false
           description: The file to upload
         - in: formData
+          name: id
+          type: string
+          required: true
+        - in: formData
           name: title
           type: string
           required: true
         - in: formData
           name: description
           type: string
+          required: true
+        - in: formData
+          name: order
+          type: integer
           required: true
       responses:
         '200':

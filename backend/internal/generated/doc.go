@@ -4,7 +4,7 @@
 //
 //  Schemes:
 //    http
-//  Host: backend-service
+//  Host: localhost:8080
 //  BasePath: /
 //  Version: 1.0.0
 //

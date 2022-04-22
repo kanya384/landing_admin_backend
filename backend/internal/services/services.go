@@ -20,6 +20,6 @@ func Setup(cfg *config.Config, repository *repository.Repository) *Services {
 	return &Services{
 		Auth:    auth.NewService(repository, tokenManager),
 		Users:   users.NewService(repository),
-		Posters: posters.NewService(repository),
+		Posters: posters.NewService(repository, cfg),
 	}
 }

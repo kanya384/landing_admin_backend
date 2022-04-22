@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
@@ -50,6 +51,16 @@ type PostPostersParams struct {
 	  In: formData
 	*/
 	File io.ReadCloser
+	/*
+	  Required: true
+	  In: formData
+	*/
+	ID string
+	/*
+	  Required: true
+	  In: formData
+	*/
+	Order int64
 	/*
 	  Required: true
 	  In: formData
@@ -91,6 +102,16 @@ func (o *PostPostersParams) BindRequest(r *http.Request, route *middleware.Match
 		o.File = &runtime.File{Data: file, Header: fileHeader}
 	}
 
+	fdID, fdhkID, _ := fds.GetOK("id")
+	if err := o.bindID(fdID, fdhkID, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	fdOrder, fdhkOrder, _ := fds.GetOK("order")
+	if err := o.bindOrder(fdOrder, fdhkOrder, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	fdTitle, fdhkTitle, _ := fds.GetOK("title")
 	if err := o.bindTitle(fdTitle, fdhkTitle, route.Formats); err != nil {
 		res = append(res, err)
@@ -125,6 +146,51 @@ func (o *PostPostersParams) bindDescription(rawData []string, hasKey bool, forma
 //
 // The only supported validations on files are MinLength and MaxLength
 func (o *PostPostersParams) bindFile(file multipart.File, header *multipart.FileHeader) error {
+	return nil
+}
+
+// bindID binds and validates parameter ID from formData.
+func (o *PostPostersParams) bindID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	if !hasKey {
+		return errors.Required("id", "formData", rawData)
+	}
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: true
+
+	if err := validate.RequiredString("id", "formData", raw); err != nil {
+		return err
+	}
+	o.ID = raw
+
+	return nil
+}
+
+// bindOrder binds and validates parameter Order from formData.
+func (o *PostPostersParams) bindOrder(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	if !hasKey {
+		return errors.Required("order", "formData", rawData)
+	}
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: true
+
+	if err := validate.RequiredString("order", "formData", raw); err != nil {
+		return err
+	}
+
+	value, err := swag.ConvertInt64(raw)
+	if err != nil {
+		return errors.InvalidType("order", "formData", "int64", raw)
+	}
+	o.Order = value
+
 	return nil
 }
 

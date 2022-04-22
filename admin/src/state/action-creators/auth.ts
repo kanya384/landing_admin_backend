@@ -1,9 +1,9 @@
 import { Dispatch } from 'redux';
 import { AuthActionTypes } from '../action-types/auth';
 import { Authorize } from '../actions/auth';
-import {Configuration, DefaultApi} from "../../api";
 import { AxiosResponse } from 'axios';
 import { GetTokenFromCookies } from '../../utils';
+import { Configuration, DefaultApi } from '../../api';
 
 
 const AUTH_ERROR = "Проверьте логин или пароль"

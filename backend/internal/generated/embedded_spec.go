@@ -26,7 +26,8 @@ func init() {
     "title": "Landing Backend REST",
     "version": "1.0.0"
   },
-  "host": "backend-service",
+  "host": "localhost:8080",
+  "basePath": "/",
   "paths": {
     "/login": {
       "post": {
@@ -113,15 +114,6 @@ func init() {
           "posters"
         ],
         "summary": "gets filtered posters list",
-        "parameters": [
-          {
-            "name": "params",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/GetPostersRequest"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "returns filtered posters",
@@ -217,6 +209,12 @@ func init() {
           },
           {
             "type": "string",
+            "name": "id",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
             "name": "title",
             "in": "formData",
             "required": true
@@ -224,6 +222,12 @@ func init() {
           {
             "type": "string",
             "name": "description",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "name": "order",
             "in": "formData",
             "required": true
           }
@@ -537,7 +541,8 @@ func init() {
     "title": "Landing Backend REST",
     "version": "1.0.0"
   },
-  "host": "backend-service",
+  "host": "localhost:8080",
+  "basePath": "/",
   "paths": {
     "/login": {
       "post": {
@@ -624,15 +629,6 @@ func init() {
           "posters"
         ],
         "summary": "gets filtered posters list",
-        "parameters": [
-          {
-            "name": "params",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/GetPostersRequest"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "returns filtered posters",
@@ -728,6 +724,12 @@ func init() {
           },
           {
             "type": "string",
+            "name": "id",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
             "name": "title",
             "in": "formData",
             "required": true
@@ -735,6 +737,12 @@ func init() {
           {
             "type": "string",
             "name": "description",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "name": "order",
             "in": "formData",
             "required": true
           }
