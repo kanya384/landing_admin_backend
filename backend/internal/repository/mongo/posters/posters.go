@@ -7,7 +7,6 @@ import (
 	repos "landing_admin_backend/internal/repository"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo/options"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -20,25 +19,18 @@ type repository struct {
 
 func NewRepository(db *mongo.Database) repos.Poster {
 	collection := db.Collection(COLLECTION)
-	collection.Indexes().CreateOne(
-		context.Background(),
-		mongo.IndexModel{
-			Keys:    primitive.D{{Key: "login", Value: 1}},
-			Options: options.Index().SetUnique(true),
-		},
-	)
 	return &repository{
 		collection: collection,
 	}
 }
 
-func (r *repository) Get(ctx context.Context, filter map[string]interface{}) (posters []domain.Poster, err error) {
+func (r *repository) Get(ctx context.Context, filter map[string]interface{}) (posters []*domain.Poster, err error) {
 	cur, err := r.collection.Find(ctx, primitive.M{})
 	if err != nil {
 		return
 	}
 	for cur.Next(ctx) {
-		var poster domain.Poster
+		var poster *domain.Poster
 		err = cur.Decode(&poster)
 		if err != nil {
 			return

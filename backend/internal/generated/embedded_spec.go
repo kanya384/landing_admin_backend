@@ -30,6 +30,12 @@ func init() {
   "paths": {
     "/login": {
       "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "summary": "authentication path",
         "parameters": [
           {
@@ -72,6 +78,12 @@ func init() {
             "Token": []
           }
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "summary": "authorization check",
         "responses": {
           "200": {
@@ -91,6 +103,12 @@ func init() {
     },
     "/posters": {
       "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "tags": [
           "posters"
         ],
@@ -125,17 +143,35 @@ func init() {
             "Token": []
           }
         ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "tags": [
           "posters"
         ],
         "summary": "create poster",
         "parameters": [
           {
-            "name": "params",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/CreatePosterRequest"
-            }
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
           }
         ],
         "responses": {
@@ -162,17 +198,34 @@ func init() {
             "Token": []
           }
         ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "tags": [
           "posters"
         ],
         "summary": "update poster",
         "parameters": [
           {
-            "name": "params",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/UpdatePosterRequest"
-            }
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData"
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
           }
         ],
         "responses": {
@@ -200,6 +253,12 @@ func init() {
           {
             "Token": []
           }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "tags": [
           "posters"
@@ -234,6 +293,12 @@ func init() {
           {
             "Token": []
           }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "tags": [
           "posters"
@@ -270,6 +335,12 @@ func init() {
           {
             "Token": []
           }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "summary": "create user",
         "parameters": [
@@ -470,6 +541,12 @@ func init() {
   "paths": {
     "/login": {
       "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "summary": "authentication path",
         "parameters": [
           {
@@ -512,6 +589,12 @@ func init() {
             "Token": []
           }
         ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "summary": "authorization check",
         "responses": {
           "200": {
@@ -531,6 +614,12 @@ func init() {
     },
     "/posters": {
       "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "tags": [
           "posters"
         ],
@@ -565,17 +654,35 @@ func init() {
             "Token": []
           }
         ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "tags": [
           "posters"
         ],
         "summary": "create poster",
         "parameters": [
           {
-            "name": "params",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/CreatePosterRequest"
-            }
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
           }
         ],
         "responses": {
@@ -602,17 +709,34 @@ func init() {
             "Token": []
           }
         ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "tags": [
           "posters"
         ],
         "summary": "update poster",
         "parameters": [
           {
-            "name": "params",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/UpdatePosterRequest"
-            }
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData"
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
           }
         ],
         "responses": {
@@ -640,6 +764,12 @@ func init() {
           {
             "Token": []
           }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "tags": [
           "posters"
@@ -674,6 +804,12 @@ func init() {
           {
             "Token": []
           }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "tags": [
           "posters"
@@ -710,6 +846,12 @@ func init() {
           {
             "Token": []
           }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
         ],
         "summary": "create user",
         "parameters": [

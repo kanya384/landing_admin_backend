@@ -9,7 +9,7 @@ import (
 )
 
 type Service interface {
-	Get(ctx context.Context, filter map[string]interface{}) (posters []domain.Poster, err error)
+	Get(ctx context.Context, filter map[string]interface{}) (posters []*domain.Poster, err error)
 	GetByID(ctx context.Context, id primitive.ObjectID) (poster domain.Poster, err error)
 	Create(ctx context.Context, poster domain.Poster) (err error)
 	Update(ctx context.Context, poster domain.Poster) (err error)
@@ -26,8 +26,8 @@ func NewService(repository *repository.Repository) Service {
 	}
 }
 
-func (s *service) Get(ctx context.Context, filter map[string]interface{}) (posters []domain.Poster, err error) {
-	return
+func (s *service) Get(ctx context.Context, filter map[string]interface{}) (posters []*domain.Poster, err error) {
+	return s.repository.Poster.Get(ctx, filter)
 }
 
 func (s *service) GetByID(ctx context.Context, id primitive.ObjectID) (poster domain.Poster, err error) {
@@ -35,7 +35,7 @@ func (s *service) GetByID(ctx context.Context, id primitive.ObjectID) (poster do
 }
 
 func (s *service) Create(ctx context.Context, poster domain.Poster) (err error) {
-	return
+	return s.repository.Poster.Create(ctx, poster)
 }
 
 func (s *service) Update(ctx context.Context, poster domain.Poster) (err error) {

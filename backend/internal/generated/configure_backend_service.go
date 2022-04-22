@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -16,6 +17,7 @@ import (
 
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/generated/operations"
+	"landing_admin_backend/internal/generated/operations/posters"
 	"landing_admin_backend/internal/handlers"
 	mng "landing_admin_backend/internal/repository/mongo"
 	"landing_admin_backend/internal/services"
@@ -60,6 +62,7 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	// api.UseRedoc()
 
 	api.JSONConsumer = runtime.JSONConsumer()
+	api.MultipartformConsumer = runtime.DiscardConsumer
 
 	api.JSONProducer = runtime.JSONProducer()
 
@@ -78,9 +81,12 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 		claims, err = token_manager.CheckToken(token, cfg.TokenSecret)
 		return
 	}
-	//api.AddMiddlewareFor("GET", "/ping", authenticationMiddleware)
+
 	api.PutUsersHandler = operations.PutUsersHandlerFunc(handlers.Users.Create)
-	//api.AddMiddlewareFor("PUT", "/users", authenticationMiddleware)
+	api.PostersPutPostersHandler = posters.PutPostersHandlerFunc(handlers.Poster.Create)
+	api.PostersGetPostersHandler = posters.GetPostersHandlerFunc(handlers.Poster.Get)
+	api.PostersPostPostersHandler = posters.PostPostersHandlerFunc(handlers.Poster.Update)
+	http.StripPrefix("/spec", http.FileServer(http.Dir("api/openapi")))
 
 	api.PreServerShutdown = func() {
 	}
@@ -114,5 +120,25 @@ func setupMiddlewares(handler http.Handler) http.Handler {
 // The middleware configuration happens before anything, this middleware also applies to serving the swagger.json document.
 // So this is a good place to plug in a panic handling middleware, logging and metrics.
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
-	return handler
+	return uiMiddleware(handler)
+}
+
+func uiMiddleware(handler http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Shortcut helpers for swagger-ui
+		if r.URL.Path == "/swagger-ui" || r.URL.Path == "/api/help" {
+			http.Redirect(w, r, "/swagger-ui/", http.StatusFound)
+			return
+		}
+		// Serving ./swagger-ui/
+		if strings.Index(r.URL.Path, "/swagger-ui/") == 0 {
+			http.StripPrefix("/swagger-ui/", http.FileServer(http.Dir("swaggerui"))).ServeHTTP(w, r)
+			return
+		}
+		if strings.Index(r.URL.Path, "/spec/") == 0 {
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			http.StripPrefix("/spec/", http.FileServer(http.Dir("api/openapi"))).ServeHTTP(w, r)
+		}
+		handler.ServeHTTP(w, r)
+	})
 }

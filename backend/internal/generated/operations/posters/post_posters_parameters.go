@@ -6,16 +6,23 @@ package posters
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
+	"io"
+	"mime/multipart"
 	"net/http"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
-
-	"landing_admin_backend/models"
 )
+
+// PostPostersMaxParseMemory sets the maximum size in bytes for
+// the multipart form parser for this operation.
+//
+// The default value is 32 MB.
+// The multipart parser stores up to this + 10MB.
+var PostPostersMaxParseMemory int64 = 32 << 20
 
 // NewPostPostersParams creates a new PostPostersParams object
 //
@@ -35,9 +42,19 @@ type PostPostersParams struct {
 	HTTPRequest *http.Request `json:"-"`
 
 	/*
-	  In: body
+	  Required: true
+	  In: formData
 	*/
-	Params *models.UpdatePosterRequest
+	Description string
+	/*The file to upload
+	  In: formData
+	*/
+	File io.ReadCloser
+	/*
+	  Required: true
+	  In: formData
+	*/
+	Title string
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -49,29 +66,84 @@ func (o *PostPostersParams) BindRequest(r *http.Request, route *middleware.Match
 
 	o.HTTPRequest = r
 
-	if runtime.HasBody(r) {
-		defer r.Body.Close()
-		var body models.UpdatePosterRequest
-		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			res = append(res, errors.NewParseError("params", "body", "", err))
-		} else {
-			// validate body object
-			if err := body.Validate(route.Formats); err != nil {
-				res = append(res, err)
-			}
-
-			ctx := validate.WithOperationRequest(context.Background())
-			if err := body.ContextValidate(ctx, route.Formats); err != nil {
-				res = append(res, err)
-			}
-
-			if len(res) == 0 {
-				o.Params = &body
-			}
+	if err := r.ParseMultipartForm(PostPostersMaxParseMemory); err != nil {
+		if err != http.ErrNotMultipart {
+			return errors.New(400, "%v", err)
+		} else if err := r.ParseForm(); err != nil {
+			return errors.New(400, "%v", err)
 		}
+	}
+	fds := runtime.Values(r.Form)
+
+	fdDescription, fdhkDescription, _ := fds.GetOK("description")
+	if err := o.bindDescription(fdDescription, fdhkDescription, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	file, fileHeader, err := r.FormFile("file")
+	if err != nil && err != http.ErrMissingFile {
+		res = append(res, errors.New(400, "reading file %q failed: %v", "file", err))
+	} else if err == http.ErrMissingFile {
+		// no-op for missing but optional file parameter
+	} else if err := o.bindFile(file, fileHeader); err != nil {
+		res = append(res, err)
+	} else {
+		o.File = &runtime.File{Data: file, Header: fileHeader}
+	}
+
+	fdTitle, fdhkTitle, _ := fds.GetOK("title")
+	if err := o.bindTitle(fdTitle, fdhkTitle, route.Formats); err != nil {
+		res = append(res, err)
 	}
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindDescription binds and validates parameter Description from formData.
+func (o *PostPostersParams) bindDescription(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	if !hasKey {
+		return errors.Required("description", "formData", rawData)
+	}
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: true
+
+	if err := validate.RequiredString("description", "formData", raw); err != nil {
+		return err
+	}
+	o.Description = raw
+
+	return nil
+}
+
+// bindFile binds file parameter File.
+//
+// The only supported validations on files are MinLength and MaxLength
+func (o *PostPostersParams) bindFile(file multipart.File, header *multipart.FileHeader) error {
+	return nil
+}
+
+// bindTitle binds and validates parameter Title from formData.
+func (o *PostPostersParams) bindTitle(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	if !hasKey {
+		return errors.Required("title", "formData", rawData)
+	}
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: true
+
+	if err := validate.RequiredString("title", "formData", raw); err != nil {
+		return err
+	}
+	o.Title = raw
+
 	return nil
 }

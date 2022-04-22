@@ -2,7 +2,8 @@ swagger: "2.0"
 info:
   version: "1.0.0"
   title: "Landing Backend REST"
-host: "backend-service"
+host: "localhost:8080"
+basePath: /
 schemes:
 - "http"
 securityDefinitions:
@@ -19,6 +20,10 @@ paths:
           name: params
           schema:
               $ref: '#/definitions/AuthenticateRequest'
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
         '200':
           description: 'регистрация успешна'
@@ -39,6 +44,10 @@ paths:
       summary: "create user"
       security:
         - Token: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
         - in: body
           name: params
@@ -60,6 +69,10 @@ paths:
       summary: "authorization check"
       security:
         - Token: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
         '200':
           description: 'пользователь авторизован'
@@ -75,11 +88,10 @@ paths:
       summary: "gets filtered posters list"
       tags:
         - posters
-      parameters:
-        - in: body
-          name: params
-          schema:
-            $ref: '#/definitions/GetPostersRequest'
+      consumes:
+        - application/json
+      produces:
+        - application/json
       responses:
         '200':
           description: 'returns filtered posters'
@@ -93,13 +105,26 @@ paths:
       summary: "create poster"
       security:
         - Token: []
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
       tags:
         - posters
       parameters:
-        - in: body
-          name: params
-          schema:
-            $ref: '#/definitions/CreatePosterRequest'
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload
+        - in: formData
+          name: title
+          type: string
+          required: true
+        - in: formData
+          name: description
+          type: string
+          required: true
       responses:
         '200':
           description: 'постер успешно создан'
@@ -117,11 +142,24 @@ paths:
         - Token: []
       tags:
         - posters
+      consumes:
+         - multipart/form-data
+      produces:
+        - application/json
       parameters:
-        - in: body
-          name: params
-          schema:
-            $ref: '#/definitions/UpdatePosterRequest'
+        - in: formData
+          name: file
+          type: file
+          required: false
+          description: The file to upload
+        - in: formData
+          name: title
+          type: string
+          required: true
+        - in: formData
+          name: description
+          type: string
+          required: true
       responses:
         '200':
           description: 'постер успешно создан'
@@ -140,6 +178,10 @@ paths:
         - Token: []
       tags:
         - posters
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
         - in: path
           name: posterID
@@ -161,6 +203,10 @@ paths:
         - Token: []
       tags:
         - posters
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
         - in: path
           name: posterID
