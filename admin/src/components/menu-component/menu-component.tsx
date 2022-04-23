@@ -31,7 +31,7 @@ const MenuComponent = () => {
                   return <p key={element.name} className="navbar-vertical-label">{element.name}</p>
                 }
                 return  <li key={element.url} className="nav-item">
-                          <a className={location == element.url?"nav-link active":"nav-link"} onClick={(e)=>{e.preventDefault(); pushHistory(element.url!)}} href={element.url!}>
+                          <a className={location === element.url?"nav-link active":"nav-link"} onClick={(e)=>{e.preventDefault(); pushHistory(element.url!)}} href={element.url!}>
                             <div className="d-flex align-items-center">
                               <span className="nav-link-icon">{element.icon}</span>
                               <span className="nav-link-text">{element.name}</span>

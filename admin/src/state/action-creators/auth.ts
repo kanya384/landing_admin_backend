@@ -4,7 +4,6 @@ import { Authorize } from '../actions/auth';
 import { AxiosResponse } from 'axios';
 import { GetTokenFromCookies } from '../../utils';
 import { Configuration, DefaultApi } from '../../api';
-import { useApi } from '../../hooks/use-api';
 
 
 const AUTH_ERROR = "Проверьте логин или пароль"

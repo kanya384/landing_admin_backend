@@ -15,7 +15,16 @@ export interface PostersError {
     payload: string,
 }
 
+export interface PostersSort {
+    type: PostersActionTypes.POSTERS_SORT,
+    payload: {
+        dragIndex: number,
+        hoverIndex: number
+    },
+}
+
 export type Posters = 
  | PostersRequestSend
  | PostersSuccess
  | PostersError
+ |PostersSort

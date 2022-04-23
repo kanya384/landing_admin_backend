@@ -57,11 +57,14 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		PostersGetPostersPosterIDHandler: posters.GetPostersPosterIDHandlerFunc(func(params posters.GetPostersPosterIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.GetPostersPosterID has not yet been implemented")
 		}),
+		PostersPatchPostersHandler: posters.PatchPostersHandlerFunc(func(params posters.PatchPostersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation posters.PatchPosters has not yet been implemented")
+		}),
 		PostLoginHandler: PostLoginHandlerFunc(func(params PostLoginParams) middleware.Responder {
 			return middleware.NotImplemented("operation PostLogin has not yet been implemented")
 		}),
-		PostersPostPostersHandler: posters.PostPostersHandlerFunc(func(params posters.PostPostersParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation posters.PostPosters has not yet been implemented")
+		PostersPostPostersOrdersHandler: posters.PostPostersOrdersHandlerFunc(func(params posters.PostPostersOrdersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation posters.PostPostersOrders has not yet been implemented")
 		}),
 		PostersPutPostersHandler: posters.PutPostersHandlerFunc(func(params posters.PutPostersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.PutPosters has not yet been implemented")
@@ -130,10 +133,12 @@ type BackendServiceAPI struct {
 	PostersGetPostersHandler posters.GetPostersHandler
 	// PostersGetPostersPosterIDHandler sets the operation handler for the get posters poster ID operation
 	PostersGetPostersPosterIDHandler posters.GetPostersPosterIDHandler
+	// PostersPatchPostersHandler sets the operation handler for the patch posters operation
+	PostersPatchPostersHandler posters.PatchPostersHandler
 	// PostLoginHandler sets the operation handler for the post login operation
 	PostLoginHandler PostLoginHandler
-	// PostersPostPostersHandler sets the operation handler for the post posters operation
-	PostersPostPostersHandler posters.PostPostersHandler
+	// PostersPostPostersOrdersHandler sets the operation handler for the post posters orders operation
+	PostersPostPostersOrdersHandler posters.PostPostersOrdersHandler
 	// PostersPutPostersHandler sets the operation handler for the put posters operation
 	PostersPutPostersHandler posters.PutPostersHandler
 	// PutUsersHandler sets the operation handler for the put users operation
@@ -234,11 +239,14 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.PostersGetPostersPosterIDHandler == nil {
 		unregistered = append(unregistered, "posters.GetPostersPosterIDHandler")
 	}
+	if o.PostersPatchPostersHandler == nil {
+		unregistered = append(unregistered, "posters.PatchPostersHandler")
+	}
 	if o.PostLoginHandler == nil {
 		unregistered = append(unregistered, "PostLoginHandler")
 	}
-	if o.PostersPostPostersHandler == nil {
-		unregistered = append(unregistered, "posters.PostPostersHandler")
+	if o.PostersPostPostersOrdersHandler == nil {
+		unregistered = append(unregistered, "posters.PostPostersOrdersHandler")
 	}
 	if o.PostersPutPostersHandler == nil {
 		unregistered = append(unregistered, "posters.PutPostersHandler")
@@ -361,6 +369,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/posters/{posterID}"] = posters.NewGetPostersPosterID(o.context, o.PostersGetPostersPosterIDHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/posters"] = posters.NewPatchPosters(o.context, o.PostersPatchPostersHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
@@ -368,7 +380,7 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/posters"] = posters.NewPostPosters(o.context, o.PostersPostPostersHandler)
+	o.handlers["POST"]["/posters/orders"] = posters.NewPostPostersOrders(o.context, o.PostersPostPostersOrdersHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

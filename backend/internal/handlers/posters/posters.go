@@ -18,8 +18,9 @@ type Handlers interface {
 	Get(params posters.GetPostersParams) middleware.Responder
 	GetPosterById(params posters.GetPostersPosterIDParams, input interface{}) middleware.Responder
 	Create(params posters.PutPostersParams, input interface{}) middleware.Responder
-	Update(params posters.PostPostersParams, input interface{}) middleware.Responder
+	Update(params posters.PatchPostersParams, input interface{}) middleware.Responder
 	Delete(params posters.DeletePostersPosterIDParams, input interface{}) middleware.Responder
+	PostersOrdersChange(params posters.PostPostersOrdersParams, input interface{}) middleware.Responder
 }
 
 type handlers struct {
@@ -54,7 +55,7 @@ func (h *handlers) Create(params posters.PutPostersParams, input interface{}) mi
 	return posters.NewPutPostersOK().WithPayload(&models.ResultResponse{Msg: "poster created"})
 }
 
-func (h *handlers) Update(params posters.PostPostersParams, input interface{}) middleware.Responder {
+func (h *handlers) Update(params posters.PatchPostersParams, input interface{}) middleware.Responder {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*30)
 	defer cancel()
 	userID, err := helpers.GetUserIdFromHandler(input)
@@ -105,6 +106,7 @@ func (h *handlers) Get(params posters.GetPostersParams) middleware.Responder {
 			Description: pst.Description,
 			Photo:       pst.Photo,
 			ModifiedBy:  pst.ModifiedBy.Hex(),
+			Order:       int64(pst.Order),
 			UpdatedAt:   strfmt.DateTime(pst.UpdateAt),
 			CreatedAt:   strfmt.DateTime(pst.CreatedAt),
 		}
@@ -133,9 +135,28 @@ func (h *handlers) GetPosterById(params posters.GetPostersPosterIDParams, input 
 		Description: poster.Description,
 		Photo:       poster.Photo,
 		Active:      poster.Active,
+		Order:       int64(poster.Order),
 		CreatedAt:   strfmt.DateTime(poster.CreatedAt),
 		UpdatedAt:   strfmt.DateTime(poster.UpdateAt),
 		ModifiedBy:  poster.ModifiedBy.Hex(),
 	}
 	return posters.NewGetPostersPosterIDOK().WithPayload(&res)
+}
+
+func (h *handlers) PostersOrdersChange(params posters.PostPostersOrdersParams, input interface{}) middleware.Responder {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancel()
+	first, err := domain.NewUpdateOrderStruct(params.Params.First.ID, int(params.Params.First.Order))
+	if err != nil {
+		return posters.NewPostPostersBadRequest()
+	}
+	second, err := domain.NewUpdateOrderStruct(params.Params.Second.ID, int(params.Params.Second.Order))
+	if err != nil {
+		return posters.NewPostPostersBadRequest()
+	}
+	err = h.services.Posters.PostersOrdersChange(ctx, first, second)
+	if err != nil {
+		return posters.NewPostPostersInternalServerError()
+	}
+	return posters.NewPostPostersOrdersOK()
 }

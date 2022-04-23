@@ -40,7 +40,7 @@ export const Authentication: React.FC = () => {
                     <h3>Аутентификация</h3>
                     <p className="text-700">Панель управления сайтом</p>
                   </div>
-                  {auths?.error!=""?<div className="alert alert-soft-danger">{auths?.error}</div>:<div></div>}
+                  {auths?.error!==""?<div className="alert alert-soft-danger">{auths?.error}</div>:<div></div>}
                   <div className="mb-3 text-start">
                       <label className="form-label" htmlFor="email">Логин</label>
                       <div className="form-icon-container">

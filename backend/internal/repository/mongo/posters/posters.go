@@ -6,7 +6,9 @@ import (
 	"landing_admin_backend/internal/domain"
 	repos "landing_admin_backend/internal/repository"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo/options"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -25,7 +27,7 @@ func NewRepository(db *mongo.Database) repos.Poster {
 }
 
 func (r *repository) Get(ctx context.Context, filter map[string]interface{}) (posters []*domain.Poster, err error) {
-	cur, err := r.collection.Find(ctx, primitive.M{})
+	cur, err := r.collection.Find(ctx, primitive.M{}, options.Find().SetSort(bson.D{{"order", 1}}))
 	if err != nil {
 		return
 	}
@@ -70,6 +72,17 @@ func (r *repository) Update(ctx context.Context, poster domain.Poster) (err erro
 		return errors.New(domain.ErrNoFieldWithID)
 	case result.MatchedCount > 0 && result.ModifiedCount == 0:
 		return errors.New(domain.ErrNoModificationsForEntity)
+	}
+	return
+}
+
+func (r *repository) UpdateOrder(ctx context.Context, id primitive.ObjectID, order int) (err error) {
+	result, err := r.collection.UpdateOne(ctx, primitive.M{"_id": id}, primitive.D{{Key: "$set", Value: primitive.M{"order": order}}})
+	switch true {
+	case result.MatchedCount == 0:
+		return errors.New(domain.ErrNoFieldWithID)
+		/*case result.MatchedCount > 0 && result.ModifiedCount == 0:
+		return errors.New(domain.ErrNoModificationsForEntity)*/
 	}
 	return
 }

@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
-import { Configuration, PostersApi } from "../../api";
-import { useApi } from "../../hooks/use-api";
+import { Configuration, PostersApi, Poster } from "../../api";
+import { GetTokenFromCookies } from "../../utils";
 import { PostersActionTypes } from "../action-types";
 import { Posters } from "../actions";
 
@@ -30,5 +30,31 @@ export const getPosters = () => {
         payload: POSTERS_ERROR
       });
     })
+  }
+}
+
+export const sortPosters = (posters: Poster[], dragIndex: number, hoverIndex: number) => {
+  return async (dispatch: Dispatch<Posters>) => {
+    let first  = {
+      id: posters[dragIndex].id,
+      order: hoverIndex,
+    }
+    let second = {
+      id: posters[hoverIndex].id,
+      order: dragIndex,
+    }
+    let token = GetTokenFromCookies()
+    postersService.postersOrdersPost({first: first, second: second}, {headers: {"Authorization": token}}).then((resp)=>{
+      if (resp.status === 200) {
+        dispatch({
+          type: PostersActionTypes.POSTERS_SORT,
+          payload: {
+            dragIndex: dragIndex,
+            hoverIndex: hoverIndex
+          },
+        });
+      }
+    })
+    
   }
 }

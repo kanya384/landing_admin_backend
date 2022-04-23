@@ -68,31 +68,6 @@ export interface AuthenticateResponse {
 /**
  * 
  * @export
- * @interface CreatePosterRequest
- */
-export interface CreatePosterRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePosterRequest
-     */
-    'title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePosterRequest
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreatePosterRequest
-     */
-    'photo'?: string;
-}
-/**
- * 
- * @export
  * @interface GetPostersRequest
  */
 export interface GetPostersRequest {
@@ -147,6 +122,12 @@ export interface Poster {
     'active'?: boolean;
     /**
      * 
+     * @type {number}
+     * @memberof Poster
+     */
+    'order'?: number;
+    /**
+     * 
      * @type {string}
      * @memberof Poster
      */
@@ -180,39 +161,40 @@ export interface ResultResponse {
 /**
  * 
  * @export
- * @interface UpdatePosterRequest
+ * @interface SwapItem
  */
-export interface UpdatePosterRequest {
+export interface SwapItem {
     /**
      * 
      * @type {string}
-     * @memberof UpdatePosterRequest
+     * @memberof SwapItem
      */
     'id'?: string;
     /**
      * 
-     * @type {string}
-     * @memberof UpdatePosterRequest
+     * @type {number}
+     * @memberof SwapItem
      */
-    'title'?: string;
+    'order'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface SwapStruct
+ */
+export interface SwapStruct {
     /**
      * 
-     * @type {string}
-     * @memberof UpdatePosterRequest
+     * @type {SwapItem}
+     * @memberof SwapStruct
      */
-    'description'?: string;
+    'first'?: SwapItem;
     /**
      * 
-     * @type {string}
-     * @memberof UpdatePosterRequest
+     * @type {SwapItem}
+     * @memberof SwapStruct
      */
-    'photo'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdatePosterRequest
-     */
-    'active'?: boolean;
+    'second'?: SwapItem;
 }
 /**
  * 
@@ -522,6 +504,43 @@ export const PostersApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary updates posters oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersOrdersPost: async (params?: SwapStruct, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/posters/orders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary update poster
          * @param {string} id 
          * @param {string} title 
@@ -533,17 +552,17 @@ export const PostersApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postersPost: async (id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postersPatch: async (id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('postersPost', 'id', id)
+            assertParamExists('postersPatch', 'id', id)
             // verify required parameter 'title' is not null or undefined
-            assertParamExists('postersPost', 'title', title)
+            assertParamExists('postersPatch', 'title', title)
             // verify required parameter 'description' is not null or undefined
-            assertParamExists('postersPost', 'description', description)
+            assertParamExists('postersPatch', 'description', description)
             // verify required parameter 'active' is not null or undefined
-            assertParamExists('postersPost', 'active', active)
+            assertParamExists('postersPatch', 'active', active)
             // verify required parameter 'order' is not null or undefined
-            assertParamExists('postersPost', 'order', order)
+            assertParamExists('postersPatch', 'order', order)
             const localVarPath = `/posters`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -552,7 +571,7 @@ export const PostersApiAxiosParamCreator = function (configuration?: Configurati
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
@@ -756,6 +775,17 @@ export const PostersApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary updates posters oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postersOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postersOrdersPost(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary update poster
          * @param {string} id 
          * @param {string} title 
@@ -767,8 +797,8 @@ export const PostersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postersPost(id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postersPost(id, title, description, active, order, file, photo, options);
+        async postersPatch(id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postersPatch(id, title, description, active, order, file, photo, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -827,6 +857,16 @@ export const PostersApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary updates posters oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postersOrdersPost(params?: SwapStruct, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.postersOrdersPost(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary update poster
          * @param {string} id 
          * @param {string} title 
@@ -838,8 +878,8 @@ export const PostersApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postersPost(id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options?: any): AxiosPromise<ResultResponse> {
-            return localVarFp.postersPost(id, title, description, active, order, file, photo, options).then((request) => request(axios, basePath));
+        postersPatch(id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.postersPatch(id, title, description, active, order, file, photo, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -896,6 +936,18 @@ export class PostersApi extends BaseAPI {
 
     /**
      * 
+     * @summary updates posters oders
+     * @param {SwapStruct} [params] swap item orders
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostersApi
+     */
+    public postersOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig) {
+        return PostersApiFp(this.configuration).postersOrdersPost(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary update poster
      * @param {string} id 
      * @param {string} title 
@@ -908,8 +960,8 @@ export class PostersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PostersApi
      */
-    public postersPost(id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options?: AxiosRequestConfig) {
-        return PostersApiFp(this.configuration).postersPost(id, title, description, active, order, file, photo, options).then((request) => request(this.axios, this.basePath));
+    public postersPatch(id: string, title: string, description: string, active: boolean, order: number, file?: any, photo?: string, options?: AxiosRequestConfig) {
+        return PostersApiFp(this.configuration).postersPatch(id, title, description, active, order, file, photo, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

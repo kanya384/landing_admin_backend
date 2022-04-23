@@ -35,6 +35,9 @@ type Poster struct {
 	// modified by
 	ModifiedBy string `json:"modifiedBy,omitempty"`
 
+	// order
+	Order int64 `json:"order,omitempty"`
+
 	// photo
 	Photo string `json:"photo,omitempty"`
 

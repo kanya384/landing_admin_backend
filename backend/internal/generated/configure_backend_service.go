@@ -82,12 +82,15 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 		return
 	}
 
+	/* Posters handlers */
 	api.PutUsersHandler = operations.PutUsersHandlerFunc(handlers.Users.Create)
 	api.PostersPutPostersHandler = posters.PutPostersHandlerFunc(handlers.Poster.Create)
 	api.PostersGetPostersHandler = posters.GetPostersHandlerFunc(handlers.Poster.Get)
-	api.PostersPostPostersHandler = posters.PostPostersHandlerFunc(handlers.Poster.Update)
+	api.PostersPatchPostersHandler = posters.PatchPostersHandlerFunc(handlers.Poster.Update)
 	api.PostersGetPostersPosterIDHandler = posters.GetPostersPosterIDHandlerFunc(handlers.Poster.GetPosterById)
 	api.PostersDeletePostersPosterIDHandler = posters.DeletePostersPosterIDHandlerFunc(handlers.Poster.Delete)
+	api.PostersPostPostersOrdersHandler = posters.PostPostersOrdersHandlerFunc(handlers.Poster.PostersOrdersChange)
+
 	http.FileServer(http.Dir("file_store"))
 
 	api.PreServerShutdown = func() {

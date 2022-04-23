@@ -64,6 +64,7 @@ type Poster interface {
 	GetByID(ctx context.Context, id primitive.ObjectID) (poster domain.Poster, err error)
 	Create(ctx context.Context, poster domain.Poster) (err error)
 	Update(ctx context.Context, poster domain.Poster) (err error)
+	UpdateOrder(ctx context.Context, id primitive.ObjectID, order int) (err error)
 	Delete(ctx context.Context, posterID primitive.ObjectID) (err error)
 }
 

@@ -136,7 +136,7 @@ paths:
             $ref: '#/definitions/ResultResponse'
         '500':
           description: 'Internal Server Error'
-    post:
+    patch:
       summary: "update poster"
       security:
         - Token: []
@@ -179,6 +179,34 @@ paths:
       responses:
         '200':
           description: 'постер успешно создан'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /posters/orders:
+    post:
+      summary: "updates posters oders"
+      security:
+        - Token: []
+      tags:
+        - posters
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/SwapStruct'
+          description: swap item orders
+      responses:
+        '200':
+          description: 'положения успешно обновленны'
           schema:
             $ref: '#/definitions/ResultResponse'
         '400':
@@ -309,6 +337,8 @@ definitions:
         type: string
       active:
         type: boolean
+      order:
+        type: integer
       createdAt:
         type: string
         format: date-time
@@ -317,25 +347,17 @@ definitions:
         format: date-time
       modifiedBy:
         type: string
-  CreatePosterRequest:
+  SwapStruct:
     type: object
     properties:
-      title:
-        type: string
-      description:
-        type: string
-      photo:
-        type: string
-  UpdatePosterRequest:
+      first:
+        $ref: '#/definitions/SwapItem'
+      second:
+        $ref: '#/definitions/SwapItem'
+  SwapItem:
     type: object
     properties:
       id:
         type: string
-      title:
-        type: string
-      description:
-        type: string
-      photo:
-        type: string
-      active:
-        type: boolean
+      order:
+        type: integer

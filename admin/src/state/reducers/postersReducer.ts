@@ -16,6 +16,13 @@ const initialState: PostersState = {
   error: null,
 }
 
+const sortPosters = (postersList: Poster[], dragIndex: number, hoverIndex: number):Poster[]  => {
+  let tmpPoster =  postersList[dragIndex]
+  postersList[dragIndex] = postersList[hoverIndex]
+  postersList[hoverIndex] = tmpPoster
+  return postersList
+}
+
 const reducer = produce((state: PostersState = initialState, action: Posters ) => {
   switch (action.type) {
     case PostersActionTypes.POSTERS_REQUEST_SEND:
@@ -28,6 +35,9 @@ const reducer = produce((state: PostersState = initialState, action: Posters ) =
     case PostersActionTypes.POSTERS_ERROR:
       state.loading = false;
       state.error = action.payload;
+      return state;
+    case PostersActionTypes.POSTERS_SORT:
+      state.postersList = sortPosters(state.postersList, action.payload.dragIndex, action.payload.hoverIndex);
       return state;
     default:
       return state;

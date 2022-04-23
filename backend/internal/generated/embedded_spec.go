@@ -184,7 +184,7 @@ func init() {
           }
         }
       },
-      "post": {
+      "patch": {
         "security": [
           {
             "Token": []
@@ -241,6 +241,52 @@ func init() {
             "name": "order",
             "in": "formData",
             "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно создан",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/posters/orders": {
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "posters"
+        ],
+        "summary": "updates posters oders",
+        "parameters": [
+          {
+            "description": "swap item orders",
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SwapStruct"
+            }
           }
         ],
         "responses": {
@@ -418,20 +464,6 @@ func init() {
         }
       }
     },
-    "CreatePosterRequest": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "photo": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
-    },
     "GetPostersRequest": {
       "type": "object",
       "properties": {
@@ -472,6 +504,9 @@ func init() {
         "modifiedBy": {
           "type": "string"
         },
+        "order": {
+          "type": "integer"
+        },
         "photo": {
           "type": "string"
         },
@@ -493,23 +528,25 @@ func init() {
         }
       }
     },
-    "UpdatePosterRequest": {
+    "SwapItem": {
       "type": "object",
       "properties": {
-        "active": {
-          "type": "boolean"
-        },
-        "description": {
-          "type": "string"
-        },
         "id": {
           "type": "string"
         },
-        "photo": {
-          "type": "string"
+        "order": {
+          "type": "integer"
+        }
+      }
+    },
+    "SwapStruct": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "$ref": "#/definitions/SwapItem"
         },
-        "title": {
-          "type": "string"
+        "second": {
+          "$ref": "#/definitions/SwapItem"
         }
       }
     },
@@ -710,7 +747,7 @@ func init() {
           }
         }
       },
-      "post": {
+      "patch": {
         "security": [
           {
             "Token": []
@@ -767,6 +804,52 @@ func init() {
             "name": "order",
             "in": "formData",
             "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно создан",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/posters/orders": {
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "posters"
+        ],
+        "summary": "updates posters oders",
+        "parameters": [
+          {
+            "description": "swap item orders",
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SwapStruct"
+            }
           }
         ],
         "responses": {
@@ -944,20 +1027,6 @@ func init() {
         }
       }
     },
-    "CreatePosterRequest": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "photo": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
-    },
     "GetPostersRequest": {
       "type": "object",
       "properties": {
@@ -998,6 +1067,9 @@ func init() {
         "modifiedBy": {
           "type": "string"
         },
+        "order": {
+          "type": "integer"
+        },
         "photo": {
           "type": "string"
         },
@@ -1019,23 +1091,25 @@ func init() {
         }
       }
     },
-    "UpdatePosterRequest": {
+    "SwapItem": {
       "type": "object",
       "properties": {
-        "active": {
-          "type": "boolean"
-        },
-        "description": {
-          "type": "string"
-        },
         "id": {
           "type": "string"
         },
-        "photo": {
-          "type": "string"
+        "order": {
+          "type": "integer"
+        }
+      }
+    },
+    "SwapStruct": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "$ref": "#/definitions/SwapItem"
         },
-        "title": {
-          "type": "string"
+        "second": {
+          "$ref": "#/definitions/SwapItem"
         }
       }
     },
