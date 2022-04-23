@@ -16,7 +16,7 @@ import (
 // PostPostersOrdersOKCode is the HTTP code returned for type PostPostersOrdersOK
 const PostPostersOrdersOKCode int = 200
 
-/*PostPostersOrdersOK постер успешно создан
+/*PostPostersOrdersOK положения успешно обновленны
 
 swagger:response postPostersOrdersOK
 */

@@ -22,9 +22,26 @@ export interface PostersSort {
         hoverIndex: number
     },
 }
+export interface PostersNew {
+    type: PostersActionTypes.POSTERS_NEW,
+    payload: Poster,
+}
+
+export interface PostersUpdate {
+    type: PostersActionTypes.POSTERS_UPDATE,
+    payload: Poster,
+}
+
+export interface PostersDelete {
+    type: PostersActionTypes.POSTERS_DELETE,
+    payload: string,
+}
 
 export type Posters = 
  | PostersRequestSend
  | PostersSuccess
  | PostersError
- |PostersSort
+ | PostersSort
+ | PostersNew
+ | PostersUpdate
+ | PostersDelete

@@ -129,7 +129,7 @@ paths:
         '200':
           description: 'постер успешно создан'
           schema:
-            $ref: '#/definitions/ResultResponse'
+            $ref: '#/definitions/Poster'
         '400':
           description: 'Bad request'
           schema:

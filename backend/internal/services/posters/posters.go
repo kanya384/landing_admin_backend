@@ -19,7 +19,7 @@ const (
 type Service interface {
 	Get(ctx context.Context, filter map[string]interface{}) (posters []*domain.Poster, err error)
 	GetByID(ctx context.Context, id primitive.ObjectID) (poster domain.Poster, err error)
-	Create(ctx context.Context, poster domain.Poster, file io.ReadCloser) (err error)
+	Create(ctx context.Context, poster domain.Poster, file io.ReadCloser) (posterRes domain.Poster, err error)
 	Update(ctx context.Context, poster domain.Poster, file interface{}) (err error)
 	Delete(ctx context.Context, posterID primitive.ObjectID) (err error)
 	PostersOrdersChange(ctx context.Context, first domain.UpdateOrder, second domain.UpdateOrder) (err error)
@@ -45,14 +45,15 @@ func (s *service) GetByID(ctx context.Context, id primitive.ObjectID) (poster do
 	return s.repository.Poster.GetByID(ctx, id)
 }
 
-func (s *service) Create(ctx context.Context, poster domain.Poster, file io.ReadCloser) (err error) {
+func (s *service) Create(ctx context.Context, poster domain.Poster, file io.ReadCloser) (posterRes domain.Poster, err error) {
 	filename, err := helpers.ProcessImage(file, s.cfg.FileStore, IMAGE_WIDTH, IMAGE_HEIGHT)
 	if err != nil {
 		return
 	}
 	poster.Photo = filename
-
-	return s.repository.Poster.Create(context.Background(), poster)
+	posterRes = poster
+	err = s.repository.Poster.Create(context.Background(), poster)
+	return
 }
 
 func (s *service) Update(ctx context.Context, poster domain.Poster, file interface{}) (err error) {

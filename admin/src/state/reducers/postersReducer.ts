@@ -23,6 +23,8 @@ const sortPosters = (postersList: Poster[], dragIndex: number, hoverIndex: numbe
   return postersList
 }
 
+
+
 const reducer = produce((state: PostersState = initialState, action: Posters ) => {
   switch (action.type) {
     case PostersActionTypes.POSTERS_REQUEST_SEND:
@@ -35,6 +37,19 @@ const reducer = produce((state: PostersState = initialState, action: Posters ) =
     case PostersActionTypes.POSTERS_ERROR:
       state.loading = false;
       state.error = action.payload;
+      return state;
+    case PostersActionTypes.POSTERS_NEW:
+      state.postersList.unshift(action.payload)
+      return state;
+    case PostersActionTypes.POSTERS_UPDATE:
+      for (let i=0; i<state.postersList.length; i++) {
+        if (state.postersList[i].id == action.payload.id) {
+          state.postersList[i] = action.payload
+        }
+      }
+      return state;
+    case PostersActionTypes.POSTERS_DELETE:
+      state.postersList = state.postersList.filter((value) => value.id != action.payload)
       return state;
     case PostersActionTypes.POSTERS_SORT:
       state.postersList = sortPosters(state.postersList, action.payload.dragIndex, action.payload.hoverIndex);

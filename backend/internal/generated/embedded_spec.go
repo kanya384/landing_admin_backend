@@ -170,7 +170,7 @@ func init() {
           "200": {
             "description": "постер успешно создан",
             "schema": {
-              "$ref": "#/definitions/ResultResponse"
+              "$ref": "#/definitions/Poster"
             }
           },
           "400": {
@@ -291,7 +291,7 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "постер успешно создан",
+            "description": "положения успешно обновленны",
             "schema": {
               "$ref": "#/definitions/ResultResponse"
             }
@@ -733,7 +733,7 @@ func init() {
           "200": {
             "description": "постер успешно создан",
             "schema": {
-              "$ref": "#/definitions/ResultResponse"
+              "$ref": "#/definitions/Poster"
             }
           },
           "400": {
@@ -854,7 +854,7 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "постер успешно создан",
+            "description": "положения успешно обновленны",
             "schema": {
               "$ref": "#/definitions/ResultResponse"
             }

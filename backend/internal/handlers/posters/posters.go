@@ -47,12 +47,21 @@ func (h *handlers) Create(params posters.PutPostersParams, input interface{}) mi
 		return posters.NewPutPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating poster"})
 	}
 
-	err = h.services.Posters.Create(ctx, poster, params.File)
+	posterRes, err := h.services.Posters.Create(ctx, poster, params.File)
 	if err != nil {
 		return posters.NewPutPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating poster"})
 	}
-
-	return posters.NewPutPostersOK().WithPayload(&models.ResultResponse{Msg: "poster created"})
+	resPoster := models.Poster{
+		ID:          posterRes.ID.Hex(),
+		Title:       posterRes.Title,
+		Description: posterRes.Description,
+		CreatedAt:   strfmt.DateTime(posterRes.CreatedAt),
+		UpdatedAt:   strfmt.DateTime(posterRes.UpdateAt),
+		Order:       int64(posterRes.Order),
+		Photo:       posterRes.Photo,
+		ModifiedBy:  posterRes.ModifiedBy.Hex(),
+	}
+	return posters.NewPutPostersOK().WithPayload(&resPoster)
 }
 
 func (h *handlers) Update(params posters.PatchPostersParams, input interface{}) middleware.Responder {
@@ -106,6 +115,7 @@ func (h *handlers) Get(params posters.GetPostersParams) middleware.Responder {
 			Description: pst.Description,
 			Photo:       pst.Photo,
 			ModifiedBy:  pst.ModifiedBy.Hex(),
+			Active:      pst.Active,
 			Order:       int64(pst.Order),
 			UpdatedAt:   strfmt.DateTime(pst.UpdateAt),
 			CreatedAt:   strfmt.DateTime(pst.CreatedAt),

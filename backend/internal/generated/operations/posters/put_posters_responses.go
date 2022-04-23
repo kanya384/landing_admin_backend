@@ -25,7 +25,7 @@ type PutPostersOK struct {
 	/*
 	  In: Body
 	*/
-	Payload *models.ResultResponse `json:"body,omitempty"`
+	Payload *models.Poster `json:"body,omitempty"`
 }
 
 // NewPutPostersOK creates PutPostersOK with default headers values
@@ -35,13 +35,13 @@ func NewPutPostersOK() *PutPostersOK {
 }
 
 // WithPayload adds the payload to the put posters o k response
-func (o *PutPostersOK) WithPayload(payload *models.ResultResponse) *PutPostersOK {
+func (o *PutPostersOK) WithPayload(payload *models.Poster) *PutPostersOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the put posters o k response
-func (o *PutPostersOK) SetPayload(payload *models.ResultResponse) {
+func (o *PutPostersOK) SetPayload(payload *models.Poster) {
 	o.Payload = payload
 }
 

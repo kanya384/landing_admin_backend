@@ -832,7 +832,7 @@ export const PostersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postersPut(file: any, title: string, description: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+        async postersPut(file: any, title: string, description: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Poster>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.postersPut(file, title, description, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -910,7 +910,7 @@ export const PostersApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postersPut(file: any, title: string, description: string, options?: any): AxiosPromise<ResultResponse> {
+        postersPut(file: any, title: string, description: string, options?: any): AxiosPromise<Poster> {
             return localVarFp.postersPut(file, title, description, options).then((request) => request(axios, basePath));
         },
     };

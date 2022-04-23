@@ -25,6 +25,7 @@ func NewPoster(id string, title string, description string, photo string, active
 		Description: description,
 		Photo:       photo,
 		Active:      active,
+		Order:       order,
 		CreatedAt:   CreatedAt,
 		UpdateAt:    UpdateAt,
 		ModifiedBy:  ModifiedBy,

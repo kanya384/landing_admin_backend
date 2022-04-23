@@ -27,7 +27,7 @@ func NewRepository(db *mongo.Database) repos.Poster {
 }
 
 func (r *repository) Get(ctx context.Context, filter map[string]interface{}) (posters []*domain.Poster, err error) {
-	cur, err := r.collection.Find(ctx, primitive.M{}, options.Find().SetSort(bson.D{{"order", 1}}))
+	cur, err := r.collection.Find(ctx, primitive.M{}, options.Find().SetSort(bson.D{{"order", 1}, {"updated_at", -1}}))
 	if err != nil {
 		return
 	}

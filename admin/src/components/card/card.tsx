@@ -11,8 +11,9 @@ interface CardProps {
   Text: string,
   Image: string,
   Index: number,
-  Button: string,
-  moveCard: (dragIndex: number, hoverIndex: number) => void
+  moveCard: (dragIndex: number, hoverIndex: number) => void,
+  editClick?:any,
+  deleteClick?:any, 
 }
 
 interface DragItem {
@@ -107,8 +108,8 @@ export const Card: FC<{card: CardProps}> = (props) => {
           <h5 className="card-title">{props.card.Title}</h5>
           <p className="card-text">{props.card.Text}</p>
           <div className='row justify-content-around align-items-center'>
-            <button className="btn btn-soft-primary col-5" style={{fontSize:12}}>Редактировать</button>
-            <button className="btn btn-primary col-5" style={{fontSize:12}}>Удалить</button>
+            <button className="btn btn-primary col-5" style={{fontSize:12}} onClick={props.card.deleteClick}>Удалить</button>
+            <button className="btn btn-soft-primary col-5" style={{fontSize:12}} onClick={props.card.editClick}>Редактировать</button>
           </div>
         </div>
       </div>
