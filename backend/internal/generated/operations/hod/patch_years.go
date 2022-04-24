@@ -11,40 +11,40 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 )
 
-// GetYearsHandlerFunc turns a function with the right signature into a get years handler
-type GetYearsHandlerFunc func(GetYearsParams, interface{}) middleware.Responder
+// PatchYearsHandlerFunc turns a function with the right signature into a patch years handler
+type PatchYearsHandlerFunc func(PatchYearsParams, interface{}) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetYearsHandlerFunc) Handle(params GetYearsParams, principal interface{}) middleware.Responder {
+func (fn PatchYearsHandlerFunc) Handle(params PatchYearsParams, principal interface{}) middleware.Responder {
 	return fn(params, principal)
 }
 
-// GetYearsHandler interface for that can handle valid get years params
-type GetYearsHandler interface {
-	Handle(GetYearsParams, interface{}) middleware.Responder
+// PatchYearsHandler interface for that can handle valid patch years params
+type PatchYearsHandler interface {
+	Handle(PatchYearsParams, interface{}) middleware.Responder
 }
 
-// NewGetYears creates a new http.Handler for the get years operation
-func NewGetYears(ctx *middleware.Context, handler GetYearsHandler) *GetYears {
-	return &GetYears{Context: ctx, Handler: handler}
+// NewPatchYears creates a new http.Handler for the patch years operation
+func NewPatchYears(ctx *middleware.Context, handler PatchYearsHandler) *PatchYears {
+	return &PatchYears{Context: ctx, Handler: handler}
 }
 
-/* GetYears swagger:route GET /years hod getYears
+/* PatchYears swagger:route PATCH /years hod patchYears
 
-gets years list
+update year
 
 */
-type GetYears struct {
+type PatchYears struct {
 	Context *middleware.Context
-	Handler GetYearsHandler
+	Handler PatchYearsHandler
 }
 
-func (o *GetYears) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (o *PatchYears) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
 		*r = *rCtx
 	}
-	var Params = NewGetYearsParams()
+	var Params = NewPatchYearsParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
 	if err != nil {
 		o.Context.Respond(rw, r, route.Produces, route, err)

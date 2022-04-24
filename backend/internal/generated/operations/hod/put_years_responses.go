@@ -25,7 +25,7 @@ type PutYearsOK struct {
 	/*
 	  In: Body
 	*/
-	Payload *models.Month `json:"body,omitempty"`
+	Payload *models.Year `json:"body,omitempty"`
 }
 
 // NewPutYearsOK creates PutYearsOK with default headers values
@@ -35,13 +35,13 @@ func NewPutYearsOK() *PutYearsOK {
 }
 
 // WithPayload adds the payload to the put years o k response
-func (o *PutYearsOK) WithPayload(payload *models.Month) *PutYearsOK {
+func (o *PutYearsOK) WithPayload(payload *models.Year) *PutYearsOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the put years o k response
-func (o *PutYearsOK) SetPayload(payload *models.Month) {
+func (o *PutYearsOK) SetPayload(payload *models.Year) {
 	o.Payload = payload
 }
 

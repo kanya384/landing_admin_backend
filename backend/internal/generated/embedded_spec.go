@@ -100,7 +100,50 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "месяц успешно создан",
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Month"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "update month",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Month"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
             "schema": {
               "$ref": "#/definitions/Month"
             }
@@ -239,6 +282,52 @@ func init() {
             "description": "фото успешно добавлено",
             "schema": {
               "$ref": "#/definitions/HodPhoto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/photos/orders": {
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "updates photos oders",
+        "parameters": [
+          {
+            "description": "swap item orders",
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SwapStruct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "положения успешно обновленны",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
             }
           },
           "400": {
@@ -700,6 +789,11 @@ func init() {
     },
     "/years": {
       "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -754,7 +848,50 @@ func init() {
           "200": {
             "description": "год успешно создан",
             "schema": {
-              "$ref": "#/definitions/Month"
+              "$ref": "#/definitions/Year"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "update year",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Year"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Year"
             }
           },
           "400": {
@@ -1093,7 +1230,50 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "месяц успешно создан",
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Month"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "update month",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Month"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
             "schema": {
               "$ref": "#/definitions/Month"
             }
@@ -1232,6 +1412,52 @@ func init() {
             "description": "фото успешно добавлено",
             "schema": {
               "$ref": "#/definitions/HodPhoto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/photos/orders": {
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "updates photos oders",
+        "parameters": [
+          {
+            "description": "swap item orders",
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SwapStruct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "положения успешно обновленны",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
             }
           },
           "400": {
@@ -1693,6 +1919,11 @@ func init() {
     },
     "/years": {
       "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -1747,7 +1978,50 @@ func init() {
           "200": {
             "description": "год успешно создан",
             "schema": {
-              "$ref": "#/definitions/Month"
+              "$ref": "#/definitions/Year"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "update year",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Year"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Year"
             }
           },
           "400": {

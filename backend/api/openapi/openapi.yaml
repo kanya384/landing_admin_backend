@@ -270,6 +270,8 @@ paths:
   /years:
     get:
       summary: "gets years list"
+      security:
+        - Token: []
       tags:
         - hod
       consumes:
@@ -304,7 +306,33 @@ paths:
         '200':
           description: 'год успешно создан'
           schema:
-            $ref: '#/definitions/Month'
+            $ref: '#/definitions/Year'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    patch:
+      summary: "update year"
+      security:
+        - Token: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - hod
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/Year'
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Year'
         '400':
           description: 'Bad request'
           schema:
@@ -355,7 +383,33 @@ paths:
             $ref: '#/definitions/Month'
       responses:
         '200':
-          description: 'месяц успешно создан'
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Month'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    patch:
+      summary: "update month"
+      security:
+        - Token: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - hod
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/Month'
+      responses:
+        '200':
+          description: 'Request success'
           schema:
             $ref: '#/definitions/Month'
         '400':
@@ -443,6 +497,34 @@ paths:
           description: 'фото успешно добавлено'
           schema:
             $ref: '#/definitions/HodPhoto'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /photos/orders:
+    post:
+      summary: "updates photos oders"
+      security:
+        - Token: []
+      tags:
+        - hod
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/SwapStruct'
+          description: swap item orders
+      responses:
+        '200':
+          description: 'положения успешно обновленны'
+          schema:
+            $ref: '#/definitions/ResultResponse'
         '400':
           description: 'Bad request'
           schema:

@@ -73,14 +73,23 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		PostersGetPostersPosterIDHandler: posters.GetPostersPosterIDHandlerFunc(func(params posters.GetPostersPosterIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.GetPostersPosterID has not yet been implemented")
 		}),
-		HodGetYearsHandler: hod.GetYearsHandlerFunc(func(params hod.GetYearsParams) middleware.Responder {
+		HodGetYearsHandler: hod.GetYearsHandlerFunc(func(params hod.GetYearsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.GetYears has not yet been implemented")
+		}),
+		HodPatchMonthsHandler: hod.PatchMonthsHandlerFunc(func(params hod.PatchMonthsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation hod.PatchMonths has not yet been implemented")
 		}),
 		PostersPatchPostersHandler: posters.PatchPostersHandlerFunc(func(params posters.PatchPostersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.PatchPosters has not yet been implemented")
 		}),
+		HodPatchYearsHandler: hod.PatchYearsHandlerFunc(func(params hod.PatchYearsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation hod.PatchYears has not yet been implemented")
+		}),
 		PostLoginHandler: PostLoginHandlerFunc(func(params PostLoginParams) middleware.Responder {
 			return middleware.NotImplemented("operation PostLogin has not yet been implemented")
+		}),
+		HodPostPhotosOrdersHandler: hod.PostPhotosOrdersHandlerFunc(func(params hod.PostPhotosOrdersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation hod.PostPhotosOrders has not yet been implemented")
 		}),
 		PostersPostPostersOrdersHandler: posters.PostPostersOrdersHandlerFunc(func(params posters.PostPostersOrdersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.PostPostersOrders has not yet been implemented")
@@ -173,10 +182,16 @@ type BackendServiceAPI struct {
 	PostersGetPostersPosterIDHandler posters.GetPostersPosterIDHandler
 	// HodGetYearsHandler sets the operation handler for the get years operation
 	HodGetYearsHandler hod.GetYearsHandler
+	// HodPatchMonthsHandler sets the operation handler for the patch months operation
+	HodPatchMonthsHandler hod.PatchMonthsHandler
 	// PostersPatchPostersHandler sets the operation handler for the patch posters operation
 	PostersPatchPostersHandler posters.PatchPostersHandler
+	// HodPatchYearsHandler sets the operation handler for the patch years operation
+	HodPatchYearsHandler hod.PatchYearsHandler
 	// PostLoginHandler sets the operation handler for the post login operation
 	PostLoginHandler PostLoginHandler
+	// HodPostPhotosOrdersHandler sets the operation handler for the post photos orders operation
+	HodPostPhotosOrdersHandler hod.PostPhotosOrdersHandler
 	// PostersPostPostersOrdersHandler sets the operation handler for the post posters orders operation
 	PostersPostPostersOrdersHandler posters.PostPostersOrdersHandler
 	// HodPutMonthsHandler sets the operation handler for the put months operation
@@ -303,11 +318,20 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.HodGetYearsHandler == nil {
 		unregistered = append(unregistered, "hod.GetYearsHandler")
 	}
+	if o.HodPatchMonthsHandler == nil {
+		unregistered = append(unregistered, "hod.PatchMonthsHandler")
+	}
 	if o.PostersPatchPostersHandler == nil {
 		unregistered = append(unregistered, "posters.PatchPostersHandler")
 	}
+	if o.HodPatchYearsHandler == nil {
+		unregistered = append(unregistered, "hod.PatchYearsHandler")
+	}
 	if o.PostLoginHandler == nil {
 		unregistered = append(unregistered, "PostLoginHandler")
+	}
+	if o.HodPostPhotosOrdersHandler == nil {
+		unregistered = append(unregistered, "hod.PostPhotosOrdersHandler")
 	}
 	if o.PostersPostPostersOrdersHandler == nil {
 		unregistered = append(unregistered, "posters.PostPostersOrdersHandler")
@@ -469,11 +493,23 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
+	o.handlers["PATCH"]["/months"] = hod.NewPatchMonths(o.context, o.HodPatchMonthsHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
 	o.handlers["PATCH"]["/posters"] = posters.NewPatchPosters(o.context, o.PostersPatchPostersHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/years"] = hod.NewPatchYears(o.context, o.HodPatchYearsHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/login"] = NewPostLogin(o.context, o.PostLoginHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/photos/orders"] = hod.NewPostPhotosOrders(o.context, o.HodPostPhotosOrdersHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

@@ -6,7 +6,6 @@ import (
 	"landing_admin_backend/internal/domain"
 	repos "landing_admin_backend/internal/repository"
 
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
@@ -27,7 +26,7 @@ func NewRepository(db *mongo.Database) repos.Poster {
 }
 
 func (r *repository) Get(ctx context.Context, filter map[string]interface{}) (posters []*domain.Poster, err error) {
-	cur, err := r.collection.Find(ctx, primitive.M{}, options.Find().SetSort(bson.D{{"order", 1}, {"updated_at", -1}}))
+	cur, err := r.collection.Find(ctx, primitive.M{}, options.Find().SetSort(primitive.D{{"order", 1}, {"updated_at", -1}}))
 	if err != nil {
 		return
 	}

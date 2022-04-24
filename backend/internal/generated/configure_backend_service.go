@@ -17,6 +17,7 @@ import (
 
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/generated/operations"
+	"landing_admin_backend/internal/generated/operations/hod"
 	"landing_admin_backend/internal/generated/operations/posters"
 	"landing_admin_backend/internal/handlers"
 	mng "landing_admin_backend/internal/repository/mongo"
@@ -90,6 +91,23 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	api.PostersGetPostersPosterIDHandler = posters.GetPostersPosterIDHandlerFunc(handlers.Poster.GetPosterById)
 	api.PostersDeletePostersPosterIDHandler = posters.DeletePostersPosterIDHandlerFunc(handlers.Poster.Delete)
 	api.PostersPostPostersOrdersHandler = posters.PostPostersOrdersHandlerFunc(handlers.Poster.PostersOrdersChange)
+
+	/* hod handlers*/
+	/* years*/
+	api.HodGetYearsHandler = hod.GetYearsHandlerFunc(handlers.Years.Get)
+	api.HodPutYearsHandler = hod.PutYearsHandlerFunc(handlers.Years.Create)
+	api.HodPatchYearsHandler = hod.PatchYearsHandlerFunc(handlers.Years.Update)
+	api.HodDeleteYearsIDHandler = hod.DeleteYearsIDHandlerFunc(handlers.Years.Delete)
+	/*months*/
+	api.HodGetMonthsIDHandler = hod.GetMonthsIDHandlerFunc(handlers.Months.Get)
+	api.HodPutMonthsHandler = hod.PutMonthsHandlerFunc(handlers.Months.Create)
+	api.HodPatchMonthsHandler = hod.PatchMonthsHandlerFunc(handlers.Months.Update)
+	api.HodDeleteMonthsIDHandler = hod.DeleteMonthsIDHandlerFunc(handlers.Months.Delete)
+	/*photos*/
+	api.HodGetPhotosIDHandler = hod.GetPhotosIDHandlerFunc(handlers.HodPhotos.Get)
+	api.HodPutPhotosHandler = hod.PutPhotosHandlerFunc(handlers.HodPhotos.Create)
+	api.HodPostPhotosOrdersHandler = hod.PostPhotosOrdersHandlerFunc(handlers.HodPhotos.ChangePhotosOrders)
+	api.HodDeletePhotosIDHandler = hod.DeletePhotosIDHandlerFunc(handlers.HodPhotos.Delete)
 
 	http.FileServer(http.Dir("file_store"))
 

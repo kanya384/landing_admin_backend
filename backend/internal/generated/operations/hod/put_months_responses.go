@@ -16,7 +16,7 @@ import (
 // PutMonthsOKCode is the HTTP code returned for type PutMonthsOK
 const PutMonthsOKCode int = 200
 
-/*PutMonthsOK месяц успешно создан
+/*PutMonthsOK Request success
 
 swagger:response putMonthsOK
 */

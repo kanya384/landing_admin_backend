@@ -70,11 +70,11 @@ func (s *service) Delete(ctx context.Context, posterID primitive.ObjectID) (err 
 }
 
 func (s *service) PostersOrdersChange(ctx context.Context, first domain.UpdateOrder, second domain.UpdateOrder) (err error) {
-	err = s.repository.UpdateOrder(ctx, first.ID, first.Order)
+	err = s.repository.Poster.UpdateOrder(ctx, first.ID, first.Order)
 	if err != nil {
 		return
 	}
-	err = s.repository.UpdateOrder(ctx, second.ID, second.Order)
+	err = s.repository.Poster.UpdateOrder(ctx, second.ID, second.Order)
 	if err != nil {
 		return
 	}

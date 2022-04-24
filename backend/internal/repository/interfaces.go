@@ -35,14 +35,14 @@ type Docs interface {
 }
 
 type Year interface {
-	Get(ctx context.Context) (docs []domain.Year, err error)
+	Get(ctx context.Context) (years []domain.Year, err error)
 	Create(ctx context.Context, year domain.Year) (err error)
 	Update(ctx context.Context, year domain.Year) (err error)
 	Delete(ctx context.Context, yearID primitive.ObjectID) (err error)
 }
 
 type Month interface {
-	Get(ctx context.Context) (months []domain.Month, err error)
+	Get(ctx context.Context, yearID primitive.ObjectID) (months []domain.Month, err error)
 	Create(ctx context.Context, month domain.Month) (err error)
 	Update(ctx context.Context, month domain.Month) (err error)
 	Delete(ctx context.Context, monthID primitive.ObjectID) (err error)
@@ -52,6 +52,7 @@ type HodPhotos interface {
 	Get(ctx context.Context, monthID primitive.ObjectID) (hodPhotos []domain.HodPhoto, err error)
 	Create(ctx context.Context, hodPhoto domain.HodPhoto) (err error)
 	Delete(ctx context.Context, hodPhotoID primitive.ObjectID) (err error)
+	UpdateOrder(ctx context.Context, id primitive.ObjectID, order int) (err error)
 }
 
 type Plans interface {

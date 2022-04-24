@@ -5,7 +5,10 @@ package generated
 import (
 	"context"
 	"crypto/tls"
+	"crypto/x509"
 	"errors"
+	"fmt"
+	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
@@ -22,12 +25,7 @@ import (
 	flags "github.com/jessevdk/go-flags"
 	"golang.org/x/net/netutil"
 
-	"landing_admin_backend/client"
-	"landing_admin_backend/internal/generated"
 	"landing_admin_backend/internal/generated/operations"
-	"landing_admin_backend/internal/generated/operations/hod"
-	"landing_admin_backend/internal/generated/operations/posters"
-	"landing_admin_backend/models"
 )
 
 const (
