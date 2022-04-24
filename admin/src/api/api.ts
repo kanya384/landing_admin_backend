@@ -629,6 +629,43 @@ export const HodApiAxiosParamCreator = function (configuration?: Configuration) 
         },
         /**
          * 
+         * @summary update month
+         * @param {Month} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        monthsPatch: async (params?: Month, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/months`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary create month
          * @param {Month} [params] 
          * @param {*} [options] Override http request option.
@@ -740,6 +777,43 @@ export const HodApiAxiosParamCreator = function (configuration?: Configuration) 
         },
         /**
          * 
+         * @summary updates photos oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        photosOrdersPost: async (params?: SwapStruct, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/photos/orders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary create photo
          * @param {any} file The file to upload
          * @param {string} monthId 
@@ -808,6 +882,9 @@ export const HodApiAxiosParamCreator = function (configuration?: Configuration) 
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -850,6 +927,43 @@ export const HodApiAxiosParamCreator = function (configuration?: Configuration) 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary update year
+         * @param {Year} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        yearsPatch: async (params?: Year, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/years`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -927,6 +1041,17 @@ export const HodApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary update month
+         * @param {Month} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async monthsPatch(params?: Month, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Month>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.monthsPatch(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary create month
          * @param {Month} [params] 
          * @param {*} [options] Override http request option.
@@ -956,6 +1081,17 @@ export const HodApiFp = function(configuration?: Configuration) {
          */
         async photosIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<HodPhoto>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.photosIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary updates photos oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async photosOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.photosOrdersPost(params, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -993,12 +1129,23 @@ export const HodApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary update year
+         * @param {Year} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async yearsPatch(params?: Year, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Year>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.yearsPatch(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary create year
          * @param {Year} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async yearsPut(params?: Year, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Month>> {
+        async yearsPut(params?: Year, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Year>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.yearsPut(params, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1034,6 +1181,16 @@ export const HodApiFactory = function (configuration?: Configuration, basePath?:
         },
         /**
          * 
+         * @summary update month
+         * @param {Month} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        monthsPatch(params?: Month, options?: any): AxiosPromise<Month> {
+            return localVarFp.monthsPatch(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary create month
          * @param {Month} [params] 
          * @param {*} [options] Override http request option.
@@ -1061,6 +1218,16 @@ export const HodApiFactory = function (configuration?: Configuration, basePath?:
          */
         photosIdGet(id: string, options?: any): AxiosPromise<Array<HodPhoto>> {
             return localVarFp.photosIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary updates photos oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        photosOrdersPost(params?: SwapStruct, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.photosOrdersPost(params, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1094,12 +1261,22 @@ export const HodApiFactory = function (configuration?: Configuration, basePath?:
         },
         /**
          * 
+         * @summary update year
+         * @param {Year} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        yearsPatch(params?: Year, options?: any): AxiosPromise<Year> {
+            return localVarFp.yearsPatch(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary create year
          * @param {Year} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        yearsPut(params?: Year, options?: any): AxiosPromise<Month> {
+        yearsPut(params?: Year, options?: any): AxiosPromise<Year> {
             return localVarFp.yearsPut(params, options).then((request) => request(axios, basePath));
         },
     };
@@ -1134,6 +1311,18 @@ export class HodApi extends BaseAPI {
      */
     public monthsIdGet(id: string, options?: AxiosRequestConfig) {
         return HodApiFp(this.configuration).monthsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update month
+     * @param {Month} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public monthsPatch(params?: Month, options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).monthsPatch(params, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1174,6 +1363,18 @@ export class HodApi extends BaseAPI {
 
     /**
      * 
+     * @summary updates photos oders
+     * @param {SwapStruct} [params] swap item orders
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public photosOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).photosOrdersPost(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary create photo
      * @param {any} file The file to upload
      * @param {string} monthId 
@@ -1206,6 +1407,18 @@ export class HodApi extends BaseAPI {
      */
     public yearsIdDelete(id: string, options?: AxiosRequestConfig) {
         return HodApiFp(this.configuration).yearsIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update year
+     * @param {Year} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public yearsPatch(params?: Year, options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).yearsPatch(params, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -7,6 +7,7 @@ import React, { useEffect } from "react"
 import MenuComponent from "../../components/menu-component"
 import NavbarComponent from "../../components/navbar-component"
 import { Posters } from "../../pages/posters"
+import { Hod } from "../../pages/hod"
 
 const Router: React.FC = () => {
   const auths = useTypedSelector(({ auths }) => {
@@ -29,6 +30,7 @@ const Router: React.FC = () => {
           <NavbarComponent />
             <div className="content pt-5">
               <Routes>
+                <Route path="/progress" element={<Hod />} />
                 <Route path="/posters" element={<Posters />} />
                 <Route path="*" element={"good"} />
               </Routes>
