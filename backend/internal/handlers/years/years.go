@@ -11,6 +11,7 @@ import (
 
 	"github.com/go-openapi/runtime/middleware"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Handlers interface {
@@ -31,9 +32,9 @@ func NewHandlers(services *services.Services) Handlers {
 }
 
 func (h *handlers) Get(params hod.GetYearsParams, input interface{}) middleware.Responder {
-	yearsList, err := h.services.Years.Get(context.Background())
-	if err != nil {
-		return hod.NewGetYearsBadRequest()
+	yearsList, errD := h.services.Years.Get(context.Background())
+	if errD != nil && errD != mongo.ErrNoDocuments {
+		return hod.NewGetMonthsIDBadRequest()
 	}
 	yearsListResponse := models.GetYearsResponse{}
 	for _, yr := range yearsList {
@@ -42,9 +43,6 @@ func (h *handlers) Get(params hod.GetYearsParams, input interface{}) middleware.
 			Value: int64(yr.Value),
 		}
 		yearsListResponse = append(yearsListResponse, &yearIns)
-	}
-	if err != nil {
-		return hod.NewGetYearsInternalServerError()
 	}
 	return hod.NewGetYearsOK().WithPayload(yearsListResponse)
 }

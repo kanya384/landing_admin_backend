@@ -108,8 +108,8 @@ export const Card: FC<{card: CardProps}> = (props) => {
           <h5 className="card-title">{props.card.Title}</h5>
           <p className="card-text">{props.card.Text}</p>
           <div className='row justify-content-around align-items-center'>
-            <button className="btn btn-primary col-5" style={{fontSize:12}} onClick={props.card.deleteClick}>Удалить</button>
-            <button className="btn btn-soft-primary col-5" style={{fontSize:12}} onClick={props.card.editClick}>Редактировать</button>
+            <button className="btn btn-primary col-5" style={{fontSize:10}} onClick={props.card.deleteClick}>Удалить</button>
+            <button className="btn btn-soft-primary col-5" style={{fontSize:10}} onClick={props.card.editClick}>Редактировать</button>
           </div>
         </div>
       </div>

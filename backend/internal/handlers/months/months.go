@@ -11,6 +11,7 @@ import (
 
 	"github.com/go-openapi/runtime/middleware"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Handlers interface {
@@ -35,8 +36,8 @@ func (h *handlers) Get(params hod.GetMonthsIDParams, input interface{}) middlewa
 	if err != nil {
 		return hod.NewGetMonthsIDBadRequest()
 	}
-	monthsList, err := h.services.Months.Get(context.Background(), yearID)
-	if err != nil {
+	monthsList, errD := h.services.Months.Get(context.Background(), yearID)
+	if errD != nil && errD != mongo.ErrNoDocuments {
 		return hod.NewGetMonthsIDBadRequest()
 	}
 	monthsListResponse := []*models.Month{}
@@ -49,13 +50,12 @@ func (h *handlers) Get(params hod.GetMonthsIDParams, input interface{}) middlewa
 		}
 		monthsListResponse = append(monthsListResponse, &monthIns)
 	}
+
 	if err != nil {
 		return hod.NewGetMonthsIDBadRequest()
 	}
-	if len(monthsListResponse) > 0 {
-		return hod.NewGetMonthsIDOK().WithPayload(monthsListResponse)
-	}
-	return hod.NewGetMonthsIDOK()
+
+	return hod.NewGetMonthsIDOK().WithPayload(monthsListResponse)
 }
 
 func (h *handlers) Create(params hod.PutMonthsParams, input interface{}) middleware.Responder {

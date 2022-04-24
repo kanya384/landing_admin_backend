@@ -1,5 +1,5 @@
 import { Dispatch } from "react"
-import { Configuration, HodApi } from "../../api"
+import { Configuration, HodApi, HodPhoto, Month, Year } from "../../api"
 import { GetTokenFromCookies } from "../../utils";
 import { HodActionTypes } from "../action-types";
 import { Hod } from "../actions";
@@ -34,7 +34,38 @@ export const getYears = () =>{
   }
 }
 
-export const getMonths = (yearID: string) =>{
+export const addYear = (year: Year, callback?:(error: string) => void) => {
+  return async (dispatch: Dispatch<Hod>) => {
+    let token = GetTokenFromCookies()
+    hodService.yearsPut(year, {headers: {"Authorization": token}}).then((resp)=>{
+      if (resp.status === 200) {
+        dispatch({
+            type: HodActionTypes.HOD_YEARS_NEW,
+            payload: resp.data!,
+        });
+        callback!("")
+      }
+    }).catch((e)=>{
+      callback!("ошибка при добавлении")
+    })
+  }
+}
+
+export const deleteYear = (yearID: string) => {
+  return async (dispatch: Dispatch<Hod>) => {
+    let token = GetTokenFromCookies()
+    hodService.yearsIdDelete(yearID, {headers: {"Authorization": token}}).then((resp)=>{
+      if (resp.status === 200) {
+        dispatch({
+            type: HodActionTypes.HOD_YEARS_DELETE,
+            payload: resp.data!.msg!,
+        });
+      }
+    })
+  }
+}
+
+export const getMonths = (yearID: string, callback?:(error: string) => void) =>{
   return async (dispatch: Dispatch<Hod>) => {
     dispatch({
       type: HodActionTypes.HOD_MONTHS_REQUEST_SEND
@@ -61,7 +92,38 @@ export const getMonths = (yearID: string) =>{
   }
 }
 
-export const getPhotos = (monthID: string) =>{
+export const addMonth = (month: Month, callback?:(error: string) => void) => {
+  return async (dispatch: Dispatch<Hod>) => {
+    let token = GetTokenFromCookies()
+    hodService.monthsPut(month, {headers: {"Authorization": token}}).then((resp)=>{
+      if (resp.status === 200) {
+        dispatch({
+            type: HodActionTypes.HOD_MONTHS_NEW,
+            payload: resp.data!,
+        });
+        callback!("")
+      }
+    }).catch((e)=>{
+      callback!("ошибка при добавлении")
+    })
+  }
+}
+
+export const deleteMonth = (monthID: string) => {
+  return async (dispatch: Dispatch<Hod>) => {
+    let token = GetTokenFromCookies()
+    hodService.monthsIdDelete(monthID, {headers: {"Authorization": token}}).then((resp)=>{
+      if (resp.status === 200) {
+        dispatch({
+            type: HodActionTypes.HOD_MONTHS_DELETE,
+            payload: resp.data!.msg!,
+        });
+      }
+    })
+  }
+}
+
+export const getPhotos = (monthID: string, callback?:(error: string) => void) =>{
   return async (dispatch: Dispatch<Hod>) => {
     dispatch({
       type: HodActionTypes.HOD_PHOTOS_REQUEST_SEND
@@ -84,6 +146,34 @@ export const getPhotos = (monthID: string) =>{
         type: HodActionTypes.HOD_ERROR,
         payload: HOD_ERROR
       });
+    })
+  }
+}
+
+export const addPhoto = (file: any, monthId: string, callback?:(error: string) => void) => {
+  return async (dispatch: Dispatch<Hod>) => {
+    let token = GetTokenFromCookies()
+    hodService.photosPut(file, monthId, {headers: {"Authorization": token}}).then((resp)=>{
+      if (resp.status === 200) {
+        dispatch({
+            type: HodActionTypes.HOD_PHOTOS_NEW,
+            payload: resp.data!,
+        });
+      }
+    }).catch((e)=>{})
+  }
+}
+
+export const deletePhoto = (photoID: string, callback?:(error: string) => void) => {
+  return async (dispatch: Dispatch<Hod>) => {
+    let token = GetTokenFromCookies()
+    hodService.photosIdDelete(photoID, {headers: {"Authorization": token}}).then((resp)=>{
+      if (resp.status === 200) {
+        dispatch({
+            type: HodActionTypes.HOD_MONTHS_DELETE,
+            payload: resp.data!.msg!,
+        });
+      }
     })
   }
 }

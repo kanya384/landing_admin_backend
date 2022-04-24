@@ -44,13 +44,31 @@ const reducer = produce((state: HodState = initialState, action: Hod ) => {
       state.loadingYears = false;
       state.yearsList = action.payload;
       return state;
+    case HodActionTypes.HOD_YEARS_NEW:
+      state.yearsList.unshift(action.payload)
+      return state;
+    case HodActionTypes.HOD_YEARS_DELETE:
+      state.yearsList = state.yearsList.filter((value) => value.id != action.payload)
+      return state;
     case HodActionTypes.HOD_MONTHS_SUCCESS:
       state.loadingMonths = false;
       state.monthsList = action.payload;
       return state;
+    case HodActionTypes.HOD_MONTHS_NEW:
+      state.monthsList.unshift(action.payload)
+      return state;
+    case HodActionTypes.HOD_MONTHS_DELETE:
+      state.monthsList = state.monthsList.filter((value) => value.id != action.payload)
+      return state;
     case HodActionTypes.HOD_PHOTOS_SUCCESS:
       state.loadingPhotos = false;
       state.photosList = action.payload;
+      return state;
+    case HodActionTypes.HOD_PHOTOS_NEW:
+      state.photosList.unshift(action.payload)
+      return state;
+    case HodActionTypes.HOD_PHOTOS_DELETE:
+      state.photosList = state.photosList.filter((value) => value.id != action.payload)
       return state;
     default:
       return state;

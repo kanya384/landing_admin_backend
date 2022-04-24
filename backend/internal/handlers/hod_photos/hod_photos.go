@@ -11,6 +11,7 @@ import (
 
 	"github.com/go-openapi/runtime/middleware"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Handlers interface {
@@ -35,9 +36,9 @@ func (h *handlers) Get(params hod.GetPhotosIDParams, input interface{}) middlewa
 	if err != nil {
 		return hod.NewGetPhotosIDBadRequest()
 	}
-	photosList, err := h.services.HodPhotos.Get(context.Background(), yearID)
-	if err != nil {
-		return hod.NewGetPhotosIDBadRequest()
+	photosList, errD := h.services.HodPhotos.Get(context.Background(), yearID)
+	if errD != nil && errD != mongo.ErrNoDocuments {
+		return hod.NewGetMonthsIDBadRequest()
 	}
 	photosListResponse := []*models.HodPhoto{}
 	for _, photo := range photosList {
