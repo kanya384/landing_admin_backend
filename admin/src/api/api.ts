@@ -87,6 +87,68 @@ export interface GetPostersRequest {
 /**
  * 
  * @export
+ * @interface HodPhoto
+ */
+export interface HodPhoto {
+    /**
+     * 
+     * @type {string}
+     * @memberof HodPhoto
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof HodPhoto
+     */
+    'month_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof HodPhoto
+     */
+    'image'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof HodPhoto
+     */
+    'order'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface Month
+ */
+export interface Month {
+    /**
+     * 
+     * @type {string}
+     * @memberof Month
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Month
+     */
+    'value'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Month
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Month
+     */
+    'year_id'?: string;
+}
+/**
+ * 
+ * @export
  * @interface Poster
  */
 export interface Poster {
@@ -226,6 +288,25 @@ export interface UserCreateRequest {
      * @memberof UserCreateRequest
      */
     'role'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface Year
+ */
+export interface Year {
+    /**
+     * 
+     * @type {string}
+     * @memberof Year
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Year
+     */
+    'value'?: number;
 }
 
 /**
@@ -462,6 +543,681 @@ export class DefaultApi extends BaseAPI {
      */
     public usersPut(params?: UserCreateRequest, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).usersPut(params, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * HodApi - axios parameter creator
+ * @export
+ */
+export const HodApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary delete month by id
+         * @param {string} id String ID of the month to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        monthsIdDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('monthsIdDelete', 'id', id)
+            const localVarPath = `/months/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get months by year id
+         * @param {string} id String ID of the year
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        monthsIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('monthsIdGet', 'id', id)
+            const localVarPath = `/months/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create month
+         * @param {Month} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        monthsPut: async (params?: Month, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/months`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary delete photo by id
+         * @param {string} id String ID of the month to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        photosIdDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('photosIdDelete', 'id', id)
+            const localVarPath = `/photos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get photos by month id
+         * @param {string} id String ID of the month
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        photosIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('photosIdGet', 'id', id)
+            const localVarPath = `/photos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create photo
+         * @param {any} file The file to upload
+         * @param {string} monthId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        photosPut: async (file: any, monthId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('photosPut', 'file', file)
+            // verify required parameter 'monthId' is not null or undefined
+            assertParamExists('photosPut', 'monthId', monthId)
+            const localVarPath = `/photos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (monthId !== undefined) { 
+                localVarFormParams.append('month_id', monthId as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary gets years list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        yearsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/years`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary delete year by id
+         * @param {string} id String ID of the year to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        yearsIdDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('yearsIdDelete', 'id', id)
+            const localVarPath = `/years/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create year
+         * @param {Year} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        yearsPut: async (params?: Year, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/years`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * HodApi - functional programming interface
+ * @export
+ */
+export const HodApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = HodApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary delete month by id
+         * @param {string} id String ID of the month to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async monthsIdDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.monthsIdDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary get months by year id
+         * @param {string} id String ID of the year
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async monthsIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Month>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.monthsIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create month
+         * @param {Month} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async monthsPut(params?: Month, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Month>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.monthsPut(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary delete photo by id
+         * @param {string} id String ID of the month to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async photosIdDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.photosIdDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary get photos by month id
+         * @param {string} id String ID of the month
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async photosIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<HodPhoto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.photosIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create photo
+         * @param {any} file The file to upload
+         * @param {string} monthId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async photosPut(file: any, monthId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HodPhoto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.photosPut(file, monthId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary gets years list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async yearsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Year>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.yearsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary delete year by id
+         * @param {string} id String ID of the year to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async yearsIdDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.yearsIdDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create year
+         * @param {Year} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async yearsPut(params?: Year, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Month>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.yearsPut(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * HodApi - factory interface
+ * @export
+ */
+export const HodApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = HodApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary delete month by id
+         * @param {string} id String ID of the month to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        monthsIdDelete(id: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.monthsIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get months by year id
+         * @param {string} id String ID of the year
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        monthsIdGet(id: string, options?: any): AxiosPromise<Array<Month>> {
+            return localVarFp.monthsIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create month
+         * @param {Month} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        monthsPut(params?: Month, options?: any): AxiosPromise<Month> {
+            return localVarFp.monthsPut(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary delete photo by id
+         * @param {string} id String ID of the month to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        photosIdDelete(id: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.photosIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get photos by month id
+         * @param {string} id String ID of the month
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        photosIdGet(id: string, options?: any): AxiosPromise<Array<HodPhoto>> {
+            return localVarFp.photosIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create photo
+         * @param {any} file The file to upload
+         * @param {string} monthId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        photosPut(file: any, monthId: string, options?: any): AxiosPromise<HodPhoto> {
+            return localVarFp.photosPut(file, monthId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary gets years list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        yearsGet(options?: any): AxiosPromise<Array<Year>> {
+            return localVarFp.yearsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary delete year by id
+         * @param {string} id String ID of the year to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        yearsIdDelete(id: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.yearsIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create year
+         * @param {Year} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        yearsPut(params?: Year, options?: any): AxiosPromise<Month> {
+            return localVarFp.yearsPut(params, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * HodApi - object-oriented interface
+ * @export
+ * @class HodApi
+ * @extends {BaseAPI}
+ */
+export class HodApi extends BaseAPI {
+    /**
+     * 
+     * @summary delete month by id
+     * @param {string} id String ID of the month to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public monthsIdDelete(id: string, options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).monthsIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get months by year id
+     * @param {string} id String ID of the year
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public monthsIdGet(id: string, options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).monthsIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create month
+     * @param {Month} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public monthsPut(params?: Month, options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).monthsPut(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary delete photo by id
+     * @param {string} id String ID of the month to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public photosIdDelete(id: string, options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).photosIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get photos by month id
+     * @param {string} id String ID of the month
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public photosIdGet(id: string, options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).photosIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create photo
+     * @param {any} file The file to upload
+     * @param {string} monthId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public photosPut(file: any, monthId: string, options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).photosPut(file, monthId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary gets years list
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public yearsGet(options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).yearsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary delete year by id
+     * @param {string} id String ID of the year to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public yearsIdDelete(id: string, options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).yearsIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create year
+     * @param {Year} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HodApi
+     */
+    public yearsPut(params?: Year, options?: AxiosRequestConfig) {
+        return HodApiFp(this.configuration).yearsPut(params, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

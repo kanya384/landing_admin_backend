@@ -266,6 +266,242 @@ paths:
           description: 'Bad request'
         '500':
           description: 'Internal Server Error'
+  #hod
+  /years:
+    get:
+      summary: "gets years list"
+      tags:
+        - hod
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns years list'
+          schema:
+            $ref: '#/definitions/GetYearsResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    put:
+      summary: "create year"
+      security:
+        - Token: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - hod
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/Year'
+      responses:
+        '200':
+          description: 'год успешно создан'
+          schema:
+            $ref: '#/definitions/Month'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /years/{id}:
+    delete:
+      summary: "delete year by id"
+      security:
+        - Token: []
+      tags:
+        - hod
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String ID of the year to delete
+      responses:
+        '200':
+          description: 'year delete success'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+  /months:
+    put:
+      summary: "create month"
+      security:
+        - Token: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - hod
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/Month'
+      responses:
+        '200':
+          description: 'месяц успешно создан'
+          schema:
+            $ref: '#/definitions/Month'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /months/{id}:
+    get:
+      summary: "get months by year id"
+      security:
+        - Token: []
+      tags:
+        - hod
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String ID of the year
+      responses:
+        '200':
+          description: 'month get success'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Month'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    delete:
+      summary: "delete month by id"
+      security:
+        - Token: []
+      tags:
+        - hod
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String ID of the month to delete
+      responses:
+        '200':
+          description: 'month delete success'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+  /photos:
+    put:
+      summary: "create photo"
+      security:
+        - Token: []
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      tags:
+        - hod
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload
+        - in: formData
+          name: month_id
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 'фото успешно добавлено'
+          schema:
+            $ref: '#/definitions/HodPhoto'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /photos/{id}:
+    get:
+      summary: "get photos by month id"
+      security:
+        - Token: []
+      tags:
+        - hod
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String ID of the month
+      responses:
+        '200':
+          description: 'months photos get success'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/HodPhoto'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    delete:
+      summary: "delete photo by id"
+      security:
+        - Token: []
+      tags:
+        - hod
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String ID of the month to delete
+      responses:
+        '200':
+          description: 'delete photo success'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object
@@ -308,7 +544,7 @@ definitions:
     properties:
       msg:
         type: string
-        example: пользователь успешно создан
+        example: сообщение от бэкэнда
   GetPostersRequest:
     type: object
     properties:
@@ -324,6 +560,39 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Poster'
+  GetYearsResponse:
+    type: array
+    items:
+      $ref: '#/definitions/Year'
+  Year:
+    type: object
+    properties:
+      id:
+        type: string
+      value:
+        type: integer
+  Month:
+    type: object
+    properties:
+      id:
+        type: string
+      value:
+        type: integer
+      name: 
+        type: string
+      year_id:
+        type: string
+  HodPhoto:
+    type: object
+    properties:
+      id:
+        type: string
+      month_id:
+        type: string
+      image:
+        type: string
+      order:
+        type: integer
   Poster:
     type: object
     properties:

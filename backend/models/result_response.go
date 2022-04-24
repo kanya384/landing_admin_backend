@@ -18,7 +18,7 @@ import (
 type ResultResponse struct {
 
 	// msg
-	// Example: пользователь успешно создан
+	// Example: сообщение от бэкэнда
 	Msg string `json:"msg,omitempty"`
 }
 

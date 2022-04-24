@@ -72,6 +72,272 @@ func init() {
         }
       }
     },
+    "/months": {
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "create month",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Month"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "месяц успешно создан",
+            "schema": {
+              "$ref": "#/definitions/Month"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/months/{id}": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "get months by year id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the year",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "month get success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Month"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "delete month by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the month to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "month delete success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/photos": {
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "create photo",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "month_id",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "фото успешно добавлено",
+            "schema": {
+              "$ref": "#/definitions/HodPhoto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/photos/{id}": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "get photos by month id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the month",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "months photos get success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HodPhoto"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "delete photo by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the month to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete photo success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/ping": {
       "get": {
         "security": [
@@ -431,6 +697,119 @@ func init() {
           }
         }
       }
+    },
+    "/years": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "gets years list",
+        "responses": {
+          "200": {
+            "description": "returns years list",
+            "schema": {
+              "$ref": "#/definitions/GetYearsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "create year",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Year"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "год успешно создан",
+            "schema": {
+              "$ref": "#/definitions/Month"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/years/{id}": {
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "delete year by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the year to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "year delete success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -485,6 +864,46 @@ func init() {
         "$ref": "#/definitions/Poster"
       }
     },
+    "GetYearsResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Year"
+      }
+    },
+    "HodPhoto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "month_id": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer"
+        }
+      }
+    },
+    "Month": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
+        },
+        "year_id": {
+          "type": "string"
+        }
+      }
+    },
     "Poster": {
       "type": "object",
       "properties": {
@@ -524,7 +943,7 @@ func init() {
       "properties": {
         "msg": {
           "type": "string",
-          "example": "пользователь успешно создан"
+          "example": "сообщение от бэкэнда"
         }
       }
     },
@@ -568,6 +987,17 @@ func init() {
         "role": {
           "type": "string",
           "example": "роль"
+        }
+      }
+    },
+    "Year": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
         }
       }
     }
@@ -635,6 +1065,272 @@ func init() {
         }
       }
     },
+    "/months": {
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "create month",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Month"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "месяц успешно создан",
+            "schema": {
+              "$ref": "#/definitions/Month"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/months/{id}": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "get months by year id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the year",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "month get success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Month"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "delete month by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the month to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "month delete success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/photos": {
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "create photo",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "month_id",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "фото успешно добавлено",
+            "schema": {
+              "$ref": "#/definitions/HodPhoto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/photos/{id}": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "get photos by month id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the month",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "months photos get success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HodPhoto"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "delete photo by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the month to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete photo success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/ping": {
       "get": {
         "security": [
@@ -994,6 +1690,119 @@ func init() {
           }
         }
       }
+    },
+    "/years": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "gets years list",
+        "responses": {
+          "200": {
+            "description": "returns years list",
+            "schema": {
+              "$ref": "#/definitions/GetYearsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "create year",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Year"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "год успешно создан",
+            "schema": {
+              "$ref": "#/definitions/Month"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/years/{id}": {
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hod"
+        ],
+        "summary": "delete year by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the year to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "year delete success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1048,6 +1857,46 @@ func init() {
         "$ref": "#/definitions/Poster"
       }
     },
+    "GetYearsResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Year"
+      }
+    },
+    "HodPhoto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "month_id": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer"
+        }
+      }
+    },
+    "Month": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
+        },
+        "year_id": {
+          "type": "string"
+        }
+      }
+    },
     "Poster": {
       "type": "object",
       "properties": {
@@ -1087,7 +1936,7 @@ func init() {
       "properties": {
         "msg": {
           "type": "string",
-          "example": "пользователь успешно создан"
+          "example": "сообщение от бэкэнда"
         }
       }
     },
@@ -1131,6 +1980,17 @@ func init() {
         "role": {
           "type": "string",
           "example": "роль"
+        }
+      }
+    },
+    "Year": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
         }
       }
     }
