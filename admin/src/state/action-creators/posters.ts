@@ -65,7 +65,7 @@ export const addNewPoster = (file: any, title: string, description: string, call
       return
     }
     if (!title || !description) {
-      callback("не заполнили одно из полей")
+      callback("не все поля заполненны")
       return
     }
     let token = GetTokenFromCookies()
@@ -89,7 +89,7 @@ export const updatePoster = (poster: Poster, callback:(error: string) => void, f
     let token = GetTokenFromCookies()
     if (poster.id?.length === 0 || poster.title?.length === 0 || poster.description?.length === 0 || poster.active === undefined || poster.order === undefined) {
       console.log('sdsd')
-      callback("не заполнили одно из полей")
+      callback("не все поля заполненны")
       return
     }
     postersService.postersPatch(poster.id!, poster.title!, poster.description!, poster.active!, poster.order!, file, poster.photo, {headers: {"Authorization": token}}).then((resp)=>{

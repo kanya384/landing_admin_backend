@@ -70,6 +70,9 @@ const reducer = produce((state: HodState = initialState, action: Hod ) => {
     case HodActionTypes.HOD_PHOTOS_DELETE:
       state.photosList = state.photosList.filter((value) => value.id != action.payload)
       return state;
+    case HodActionTypes.HOD_PHOTOS_SORT:
+      state.photosList = sortPhotos(state.photosList, action.payload.dragIndex, action.payload.hoverIndex);
+      return state;
     default:
       return state;
   }

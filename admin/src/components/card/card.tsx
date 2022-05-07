@@ -7,6 +7,7 @@ import { ItemTypes } from './itemTypes';
 
 interface CardProps {
   ID: string,
+  Type: number,
   Title: string,
   Text: string,
   Image: string,
@@ -100,20 +101,31 @@ export const Card: FC<{card: CardProps}> = (props) => {
 
   const opacity = isDragging ? 0.5 : 1
   drag(drop(ref))
-  return (
-    <div ref={ref} style={{ opacity }} key={props.card.ID} data-handler-id={handlerId} className='col-sm-6 col-md-4 col-lg-3'>
-      <div className="card" >
-        <img className="card-img-top" src={props.card.Image} alt="..." />
-        <div className="card-body">
-          <h5 className="card-title">{props.card.Title}</h5>
-          <p className="card-text">{props.card.Text}</p>
-          <div className='row justify-content-around align-items-center'>
-            <button className="btn btn-primary col-5" style={{fontSize:10}} onClick={props.card.deleteClick}>Удалить</button>
-            <button className="btn btn-soft-primary col-5" style={{fontSize:10}} onClick={props.card.editClick}>Редактировать</button>
+  switch (props.card.Type){
+    case 1:
+      return ( <div ref={ref}  className="card text-white overflow-hidden" data-handler-id={handlerId} style={{opacity, width:"18rem", padding: 0, margin: "4px"}}>
+            <img className="card-img-top" src={props.card.Image} alt="..." />
+          <div className="card-img-overlay d-flex align-items-end">
+            <div>
+              <h4 className="card-title text-white">{props.card.Title}</h4>
+              <p className="card-text">{props.card.Text}</p>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  )
+        </div>)
+    default:
+      return ( <div ref={ref} style={{ opacity }} key={props.card.ID} data-handler-id={handlerId} className='col-sm-6 col-md-4 col-lg-3'>
+          <div className="card" >
+            <img className="card-img-top" src={props.card.Image} alt="..." />
+            <div className="card-body">
+              <h5 className="card-title">{props.card.Title}</h5>
+              <p className="card-text">{props.card.Text}</p>
+              <div className='row justify-content-around align-items-center'>
+                <button className="btn btn-primary col-5" style={{fontSize:10}} onClick={props.card.deleteClick}>Удалить</button>
+                <button className="btn btn-soft-primary col-5" style={{fontSize:10}} onClick={props.card.editClick}>Редактировать</button>
+              </div>
+            </div>
+          </div>
+        </div>)
+  }
 
 }

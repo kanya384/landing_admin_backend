@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Trash } from "react-feather";
+import Card from "../../components/card";
 import { Popups } from "../../components/popups/popups";
 import { useActions } from "../../hooks/use-actions";
 import { useTypedSelector } from "../../hooks/use-typed-selector";
@@ -13,7 +14,7 @@ interface Active {
 }
 export const Hod: React.FC = () =>{
   const [yearForm, setYearForm] = useState({
-    value: 1990,
+    value: new Date().getFullYear(),
   })
   const [monthForm, setMonthForm] = useState({
     value: 3,
@@ -30,7 +31,7 @@ export const Hod: React.FC = () =>{
   const hod = useTypedSelector(({ hod }) => {
     return hod
   })
-  const { getYears, getMonths, getPhotos, addYear, deleteYear, addMonth, deleteMonth } = useActions();
+  const { getYears, getMonths, getPhotos, addYear, deleteYear, addMonth, deleteMonth, addPhotos, sortPhotos } = useActions();
   const getMonthID = (monthIn: number) => {
     let monthRes: string = ""
     hod?.monthsList.map((month) => {
@@ -49,6 +50,13 @@ export const Hod: React.FC = () =>{
     })
     return monthRes
   }
+
+  const moveCard = useCallback(async (dragIndex: number, hoverIndex: number) => {
+    if (hod!.photosList.length>0){
+      await sortPhotos([...hod!.photosList],dragIndex, hoverIndex)
+    }
+  }, [sortPhotos, hod])
+
   const getYearID = (monthIn: number) => {
     let yearRes: string = ""
     hod?.yearsList.map((year) => {
@@ -121,7 +129,7 @@ export const Hod: React.FC = () =>{
     {
       title: `Добавить фото (${getMonthName(active.month!)} ${active.year})`,
       stateAction: setPhotosForm,
-      sendAction: () =>{ addMonth({value: monthForm.value, year_id: getYearID(active.year!)}, requestCallback);},
+      sendAction: () =>{ addPhotos(photosForm.photos, getMonthID(active.month!), requestCallback);},
       error: error,
       fields: [
         {
@@ -206,7 +214,9 @@ export const Hod: React.FC = () =>{
         <div className='p-4'>
           <DndProvider backend={HTML5Backend}>
             <div className='row g-4'>
-              
+              {hod.photosList?.map((photo, index)=>{
+                return <Card key={photo.id} card={{ID: photo.id!, Type:1, Title: "", Text: "", Image: "http://localhost:8080/store/"+photo.image!, Index: index, moveCard: moveCard, deleteClick: () => {}, editClick: ()=>{}}} />
+              })}
             </div>
           </DndProvider>
         </div>

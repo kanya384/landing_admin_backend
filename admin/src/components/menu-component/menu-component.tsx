@@ -9,18 +9,15 @@ const MenuComponent = () => {
   return(
         <nav className="navbar navbar-light navbar-vertical navbar-vibrant navbar-expand-lg">
           <div className="navbarVerticalCollapse">
-          <div className="navbar-logo">
+          <div className="navbar-logo justify-content-center">
             <button className="btn navbar-toggler navbar-toggler-humburger-icon" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation">
               <span className="navbar-toggle-icon">
                 <span className="toggle-line"></span>
               </span>
             </button>
             <a className="navbar-brand me-1 me-sm-3" href="../../index.html">
-              <div className="d-flex align-items-center">
-                <div className="d-flex align-items-center">
-                  <img src="../../assets/img/icons/logo.png" alt="phoenix" width="32" />
-                  <p className="logo-text ms-2 d-none d-sm-block">phoenix</p>
-                </div>
+              <div className="d-flex justify-content-center">
+                  <img src="../../assets/img/icons/logo.png" alt="phoenix" width="105" />
               </div>
             </a>
           </div>

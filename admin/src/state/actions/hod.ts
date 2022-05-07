@@ -71,6 +71,14 @@ export interface HodPhotosRequestSuccess {
   payload: HodPhoto[],
 }
 
+export interface HodPhotosSort {
+  type: HodActionTypes.HOD_PHOTOS_SORT,
+  payload: {
+    dragIndex: number,
+    hoverIndex: number
+  },
+}
+
 export interface HodPhotosNew {
   type: HodActionTypes.HOD_PHOTOS_NEW,
   payload: HodPhoto,
@@ -100,6 +108,7 @@ export type Hod =
   | HodMonthsDelete
   | HodPhotosRequestSend
   | HodPhotosRequestSuccess
+  | HodPhotosSort
   | HodPhotosNew
   | HodPhotosUpdate
   | HodPhotosDelete

@@ -150,17 +150,29 @@ export const getPhotos = (monthID: string, callback?:(error: string) => void) =>
   }
 }
 
-export const addPhoto = (file: any, monthId: string, callback?:(error: string) => void) => {
+export const addPhotos = (filesList: any[], monthId: string, callback:(error: string) => void) => {
   return async (dispatch: Dispatch<Hod>) => {
+    console.log(filesList)
+    if (filesList.length == 0) {
+      callback("не приложили ни один файл")
+      return
+    }
+    if (!monthId) {
+      callback("не указан месяц")
+      return
+    }
     let token = GetTokenFromCookies()
-    hodService.photosPut(file, monthId, {headers: {"Authorization": token}}).then((resp)=>{
-      if (resp.status === 200) {
-        dispatch({
-            type: HodActionTypes.HOD_PHOTOS_NEW,
-            payload: resp.data!,
-        });
-      }
-    }).catch((e)=>{})
+    filesList.forEach((file) => {
+      console.log(file)
+      hodService.photosPut(file, monthId, {headers: {"Authorization": token}}).then((resp)=>{
+        if (resp.status === 200) {
+          dispatch({
+              type: HodActionTypes.HOD_PHOTOS_NEW,
+              payload: resp.data!,
+          });
+        }
+      }).catch((e)=>{})
+    })
   }
 }
 
@@ -172,6 +184,31 @@ export const deletePhoto = (photoID: string, callback?:(error: string) => void) 
         dispatch({
             type: HodActionTypes.HOD_MONTHS_DELETE,
             payload: resp.data!.msg!,
+        });
+      }
+    })
+  }
+}
+
+export const sortPhotos = (photos: HodPhoto[], dragIndex: number, hoverIndex: number) => {
+  return async (dispatch: Dispatch<Hod>) => {
+    let first  = {
+      id: photos[dragIndex].id,
+      order: hoverIndex,
+    }
+    let second = {
+      id: photos[hoverIndex].id,
+      order: dragIndex,
+    }
+    let token = GetTokenFromCookies()
+    hodService.photosOrdersPost({first: first, second: second}, {headers: {"Authorization": token}}).then((resp)=>{
+      if (resp.status === 200) {
+        dispatch({
+          type: HodActionTypes.HOD_PHOTOS_SORT,
+          payload: {
+            dragIndex: dragIndex,
+            hoverIndex: hoverIndex
+          },
         });
       }
     })
