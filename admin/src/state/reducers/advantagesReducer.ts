@@ -49,13 +49,13 @@ const reducer = produce((state: AdvantagesState = initialState, action: Advantag
             return state
         case AdvantagesActionTypes.ADVANTAGES_UPDATE:
             for (let i=0; i<state.advantagesList.length; i++) {
-                if (state.advantagesList[i].id == action.payload.id) {
+                if (state.advantagesList[i].id === action.payload.id) {
                     state.advantagesList[i] = action.payload
                 }
             }
             return state;
         case AdvantagesActionTypes.ADVANTAGES_DELETE:
-            state.advantagesList = state.advantagesList.filter((value) => value.id != action.payload)
+            state.advantagesList = state.advantagesList.filter((value) => value.id !== action.payload)
             return state;
         case AdvantagesActionTypes.ADVANTAGES_SORT:
             state.advantagesList = sortAdvantages(state.advantagesList, action.payload.dragIndex, action.payload.hoverIndex)
@@ -70,7 +70,7 @@ const reducer = produce((state: AdvantagesState = initialState, action: Advantag
             state.photosList.unshift(action.payload)
             return state;
         case AdvantagesActionTypes.ADVANTAGE_PHOTO_DELETE:
-            state.photosList = state.photosList.filter((value) => value.id != action.payload)
+            state.photosList = state.photosList.filter((value) => value.id !== action.payload)
             return state;
         case AdvantagesActionTypes.ADVANTAGE_PHOTO_SORT:
             state.photosList = sortPhotos(state.photosList, action.payload.dragIndex, action.payload.hoverIndex);

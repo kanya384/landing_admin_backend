@@ -14,7 +14,8 @@ interface CardProps {
   Index: number,
   moveCard: (dragIndex: number, hoverIndex: number) => void,
   editClick?:any,
-  deleteClick?:any, 
+  deleteClick?:any,
+  date?:string
 }
 
 interface DragItem {
@@ -101,6 +102,7 @@ export const Card: FC<{card: CardProps}> = (props) => {
 
   const opacity = isDragging ? 0.5 : 1
   drag(drop(ref))
+  
   switch (props.card.Type){
     case 1:
       return ( <div ref={ref}  className="card text-white overflow-hidden" data-handler-id={handlerId} style={{opacity, width:"18rem", padding: 0, margin: "4px"}}>
@@ -112,6 +114,22 @@ export const Card: FC<{card: CardProps}> = (props) => {
             </div>
           </div>
         </div>)
+    case 2:
+      return (
+        <div className="p-2 code-to-copy" ref={ref} data-handler-id={handlerId} style={{opacity}}>
+          <div className="card" >
+            <div className="row g-0">
+              <div className="col-md-8">
+                <div className="card-body">
+                  <h4 className="card-title">{props.card.Title}</h4>
+                  <p className="card-text">{props.card.Text}</p>
+                  <p className="card-text"><small className="text-muted">{new Date(Date.parse(props.card.date!)).toISOString().slice(0,10)}</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
     default:
       return ( <div ref={ref} style={{ opacity }} key={props.card.ID} data-handler-id={handlerId} className='col-sm-6 col-md-4 col-lg-3'>
           <div className="card" >

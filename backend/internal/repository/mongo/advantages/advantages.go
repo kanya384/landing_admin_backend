@@ -43,9 +43,9 @@ func (r *repository) Get(ctx context.Context) (advantages []*domain.Advantage, e
 		return
 	}
 
-	if len(advantages) == 0 {
-		return advantages, mongo.ErrNoDocuments
-	}
+	//if len(advantages) == 0 {
+	//	return advantages, mongo.ErrNoDocuments
+	//}
 
 	cur.Close(ctx)
 
