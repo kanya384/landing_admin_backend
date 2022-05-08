@@ -17,6 +17,7 @@ import (
 
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/generated/operations"
+	"landing_admin_backend/internal/generated/operations/advantages"
 	"landing_admin_backend/internal/generated/operations/hod"
 	"landing_admin_backend/internal/generated/operations/posters"
 	"landing_admin_backend/internal/handlers"
@@ -108,6 +109,20 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	api.HodPutPhotosHandler = hod.PutPhotosHandlerFunc(handlers.HodPhotos.Create)
 	api.HodPostPhotosOrdersHandler = hod.PostPhotosOrdersHandlerFunc(handlers.HodPhotos.ChangePhotosOrders)
 	api.HodDeletePhotosIDHandler = hod.DeletePhotosIDHandlerFunc(handlers.HodPhotos.Delete)
+
+	/* advantages*/
+	api.AdvantagesGetAdvantagesHandler = advantages.GetAdvantagesHandlerFunc(handlers.Advantages.Get)
+	api.AdvantagesGetAdvantagesIDHandler = advantages.GetAdvantagesIDHandlerFunc(handlers.Advantages.GetByID)
+	api.AdvantagesPutAdvantagesHandler = advantages.PutAdvantagesHandlerFunc(handlers.Advantages.Create)
+	api.AdvantagesPatchAdvantagesHandler = advantages.PatchAdvantagesHandlerFunc(handlers.Advantages.Update)
+	api.AdvantagesDeleteAdvantagesIDHandler = advantages.DeleteAdvantagesIDHandlerFunc(handlers.Advantages.Delete)
+	api.AdvantagesPostAdvantagesOrdersHandler = advantages.PostAdvantagesOrdersHandlerFunc(handlers.Advantages.ChangeAdvantageOrders)
+
+	/* advantages photos*/
+	api.AdvantagesGetAdvantagePhotoIDHandler = advantages.GetAdvantagePhotoIDHandlerFunc(handlers.AdvantagesPhoto.Get)
+	api.AdvantagesPutAdvantagePhotoHandler = advantages.PutAdvantagePhotoHandlerFunc(handlers.AdvantagesPhoto.Create)
+	api.AdvantagesDeleteAdvantagePhotoIDHandler = advantages.DeleteAdvantagePhotoIDHandlerFunc(handlers.AdvantagesPhoto.Delete)
+	api.AdvantagesPostAdvantagePhotoOrdersHandler = advantages.PostAdvantagePhotoOrdersHandlerFunc(handlers.AdvantagesPhoto.ChangeAdvantagePhotosOrders)
 
 	http.FileServer(http.Dir("file_store"))
 

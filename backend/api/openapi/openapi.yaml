@@ -584,6 +584,267 @@ paths:
           description: 'Bad request'
         '500':
           description: 'Internal Server Error'
+  /advantages:
+    get:
+      summary: "get advantages list"
+      security:
+        - Token: []
+      tags:
+        - advantages
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns advantages list'
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/Advantage'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    put:
+      summary: "create advantage"
+      security:
+        - Token: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - advantages
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/Advantage'
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Advantage'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    patch:
+      summary: "update advantage"
+      security:
+        - Token: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - advantages
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/Advantage'
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Advantage'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /advantages/{id}:
+    get:
+      summary: "get advantage by id"
+      security:
+        - Token: []
+      tags:
+        - advantages
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: string ID of the advantage
+      responses:
+        '200':
+          description: 'get advantage by id success'
+          schema:
+            $ref: '#/definitions/Advantage'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    delete:
+      summary: "delete advantage by id"
+      security:
+        - Token: []
+      tags:
+        - advantages
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String ID of the advantage to delete
+      responses:
+        '200':
+          description: 'delete advantage success'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+  /advantages/orders:
+    post:
+      summary: "updates advantages oders"
+      security:
+        - Token: []
+      tags:
+        - advantages
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/SwapStruct'
+          description: swap item orders
+      responses:
+        '200':
+          description: 'положения успешно обновленны'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /advantage_photo:
+    put:
+      summary: "create advantage photo"
+      security:
+        - Token: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - advantages
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/AdvantagePhoto'
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/AdvantagePhoto'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'  
+  /advantage_photo/{id}:
+    get:
+      summary: "get photos list by advantage id"
+      security:
+        - Token: []
+      tags:
+        - advantages
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String id of the advantage
+      responses:
+        '200':
+          description: 'returns advantage photos list'
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/Advantage'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    delete:
+      summary: "delete advantage photo by id"
+      security:
+        - Token: []
+      tags:
+        - advantages
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String id of the advantage photo to delete
+      responses:
+        '200':
+          description: 'delete advantage success'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+  /advantage_photo/orders:
+    post:
+      summary: "updates advantage photo oders"
+      security:
+        - Token: []
+      tags:
+        - advantages
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/SwapStruct'
+          description: swap item orders
+      responses:
+        '200':
+          description: 'положения успешно обновленны'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object
@@ -712,3 +973,41 @@ definitions:
         type: string
       order:
         type: integer
+  Advantage:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      order:
+        type: integer
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  AdvantagePhoto:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      advantage_id:
+        type: string
+      image:
+        type: string
+      order:
+        type: integer
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      
+      

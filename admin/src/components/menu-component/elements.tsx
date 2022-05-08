@@ -68,7 +68,7 @@ const elements: MenuItem[] = [
     divider: false,
   },
   {
-    name: 'Преимущества',
+    name: 'А так же вас ждет',
     icon:  <Grid size={ICON_SIZE} />,
     url: "/advantages",
     children: [],

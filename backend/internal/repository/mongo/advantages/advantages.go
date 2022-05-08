@@ -1,4 +1,4 @@
-package posters
+package advantages
 
 import (
 	"context"
@@ -7,45 +7,44 @@ import (
 	repos "landing_admin_backend/internal/repository"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo/options"
-
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const COLLECTION = "posters"
+const COLLECTION = "advantages"
 
 type repository struct {
 	collection *mongo.Collection
 }
 
-func NewRepository(db *mongo.Database) repos.Poster {
+func NewRepository(db *mongo.Database) repos.Advantages {
 	collection := db.Collection(COLLECTION)
 	return &repository{
 		collection: collection,
 	}
 }
 
-func (r *repository) Get(ctx context.Context, filter map[string]interface{}) (posters []*domain.Poster, err error) {
+func (r *repository) Get(ctx context.Context) (advantages []*domain.Advantage, err error) {
 	cur, err := r.collection.Find(ctx, primitive.M{}, options.Find().SetSort(primitive.D{{"order", 1}, {"updated_at", -1}}))
 	if err != nil {
 		return
 	}
 	for cur.Next(ctx) {
-		var poster *domain.Poster
-		err = cur.Decode(&poster)
+		var advantage *domain.Advantage
+		err = cur.Decode(&advantage)
 		if err != nil {
 			return
 		}
 
-		posters = append(posters, poster)
+		advantages = append(advantages, advantage)
 	}
 
 	if err = cur.Err(); err != nil {
 		return
 	}
 
-	if len(posters) == 0 {
-		return posters, mongo.ErrNoDocuments
+	if len(advantages) == 0 {
+		return advantages, mongo.ErrNoDocuments
 	}
 
 	cur.Close(ctx)
@@ -53,19 +52,21 @@ func (r *repository) Get(ctx context.Context, filter map[string]interface{}) (po
 	return
 }
 
-func (r *repository) GetByID(ctx context.Context, id primitive.ObjectID) (poster domain.Poster, err error) {
-	err = r.collection.FindOne(ctx, primitive.M{"_id": id}).Decode(&poster)
+func (r *repository) GetByID(ctx context.Context, id primitive.ObjectID) (advantage domain.Advantage, err error) {
+	err = r.collection.FindOne(ctx, primitive.M{"_id": id}).Decode(&advantage)
 	if err != nil && err.Error() == "mongo: no documents in result" {
-		return poster, errors.New(domain.ErrNoFieldWithID)
+		return advantage, errors.New(domain.ErrNoFieldWithID)
 	}
 	return
 }
-func (r *repository) Create(ctx context.Context, poster domain.Poster) (err error) {
-	_, err = r.collection.InsertOne(ctx, &poster)
+
+func (r *repository) Create(ctx context.Context, advantage domain.Advantage) (err error) {
+	_, err = r.collection.InsertOne(ctx, &advantage)
 	return
 }
-func (r *repository) Update(ctx context.Context, poster domain.Poster) (err error) {
-	result, err := r.collection.UpdateOne(ctx, primitive.M{"_id": poster.ID}, primitive.D{{Key: "$set", Value: primitive.M{"title": poster.Title, "description": poster.Description, "photo": poster.Photo, "active": poster.Active, "order": poster.Order, "updated_at": poster.UpdateAt, "modified_by": poster.ModifiedBy}}})
+
+func (r *repository) Update(ctx context.Context, advantage domain.Advantage) (err error) {
+	result, err := r.collection.UpdateOne(ctx, primitive.M{"_id": advantage.ID}, primitive.D{{Key: "$set", Value: primitive.M{"title": advantage.Title, "description": advantage.Description, "order": advantage.Order, "updated_at": advantage.UpdateAt, "modified_by": advantage.ModifiedBy}}})
 	switch true {
 	case result.MatchedCount == 0:
 		return errors.New(domain.ErrNoFieldWithID)
@@ -84,8 +85,8 @@ func (r *repository) UpdateOrder(ctx context.Context, id primitive.ObjectID, ord
 	return
 }
 
-func (r *repository) Delete(ctx context.Context, posterID primitive.ObjectID) (err error) {
-	result, err := r.collection.DeleteOne(ctx, primitive.M{"_id": posterID})
+func (r *repository) Delete(ctx context.Context, advantageID primitive.ObjectID) (err error) {
+	result, err := r.collection.DeleteOne(ctx, primitive.M{"_id": advantageID})
 	if result.DeletedCount == 0 {
 		return errors.New(domain.ErrNoFieldWithID)
 	}

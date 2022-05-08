@@ -24,6 +24,98 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface Advantage
+ */
+export interface Advantage {
+    /**
+     * 
+     * @type {string}
+     * @memberof Advantage
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Advantage
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Advantage
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Advantage
+     */
+    'order'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Advantage
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Advantage
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface AdvantagePhoto
+ */
+export interface AdvantagePhoto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AdvantagePhoto
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdvantagePhoto
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdvantagePhoto
+     */
+    'advantage_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdvantagePhoto
+     */
+    'image'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AdvantagePhoto
+     */
+    'order'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdvantagePhoto
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AdvantagePhoto
+     */
+    'updatedAt'?: string;
+}
+/**
+ * 
+ * @export
  * @interface AuthenticateRequest
  */
 export interface AuthenticateRequest {
@@ -308,6 +400,737 @@ export interface Year {
      */
     'value'?: number;
 }
+
+/**
+ * AdvantagesApi - axios parameter creator
+ * @export
+ */
+export const AdvantagesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary delete advantage photo by id
+         * @param {string} id String id of the advantage photo to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagePhotoIdDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('advantagePhotoIdDelete', 'id', id)
+            const localVarPath = `/advantage_photo/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get photos list by advantage id
+         * @param {string} id String id of the advantage
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagePhotoIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('advantagePhotoIdGet', 'id', id)
+            const localVarPath = `/advantage_photo/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary updates advantage photo oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagePhotoOrdersPost: async (params?: SwapStruct, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/advantage_photo/orders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create advantage photo
+         * @param {AdvantagePhoto} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagePhotoPut: async (params?: AdvantagePhoto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/advantage_photo`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get advantages list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/advantages`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary delete advantage by id
+         * @param {string} id String ID of the advantage to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesIdDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('advantagesIdDelete', 'id', id)
+            const localVarPath = `/advantages/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get advantage by id
+         * @param {string} id string ID of the advantage
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesIdGet: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('advantagesIdGet', 'id', id)
+            const localVarPath = `/advantages/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary updates advantages oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesOrdersPost: async (params?: SwapStruct, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/advantages/orders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary update advantage
+         * @param {Advantage} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesPatch: async (params?: Advantage, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/advantages`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create advantage
+         * @param {Advantage} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesPut: async (params?: Advantage, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/advantages`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AdvantagesApi - functional programming interface
+ * @export
+ */
+export const AdvantagesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AdvantagesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary delete advantage photo by id
+         * @param {string} id String id of the advantage photo to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async advantagePhotoIdDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagePhotoIdDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary get photos list by advantage id
+         * @param {string} id String id of the advantage
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async advantagePhotoIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Advantage>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagePhotoIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary updates advantage photo oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async advantagePhotoOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagePhotoOrdersPost(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create advantage photo
+         * @param {AdvantagePhoto} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async advantagePhotoPut(params?: AdvantagePhoto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdvantagePhoto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagePhotoPut(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary get advantages list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async advantagesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Advantage>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagesGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary delete advantage by id
+         * @param {string} id String ID of the advantage to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async advantagesIdDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagesIdDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary get advantage by id
+         * @param {string} id string ID of the advantage
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async advantagesIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Advantage>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagesIdGet(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary updates advantages oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async advantagesOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagesOrdersPost(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary update advantage
+         * @param {Advantage} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async advantagesPatch(params?: Advantage, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Advantage>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagesPatch(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create advantage
+         * @param {Advantage} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async advantagesPut(params?: Advantage, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Advantage>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagesPut(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * AdvantagesApi - factory interface
+ * @export
+ */
+export const AdvantagesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AdvantagesApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary delete advantage photo by id
+         * @param {string} id String id of the advantage photo to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagePhotoIdDelete(id: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.advantagePhotoIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get photos list by advantage id
+         * @param {string} id String id of the advantage
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagePhotoIdGet(id: string, options?: any): AxiosPromise<Array<Advantage>> {
+            return localVarFp.advantagePhotoIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary updates advantage photo oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagePhotoOrdersPost(params?: SwapStruct, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.advantagePhotoOrdersPost(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create advantage photo
+         * @param {AdvantagePhoto} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagePhotoPut(params?: AdvantagePhoto, options?: any): AxiosPromise<AdvantagePhoto> {
+            return localVarFp.advantagePhotoPut(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get advantages list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesGet(options?: any): AxiosPromise<Array<Advantage>> {
+            return localVarFp.advantagesGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary delete advantage by id
+         * @param {string} id String ID of the advantage to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesIdDelete(id: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.advantagesIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get advantage by id
+         * @param {string} id string ID of the advantage
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesIdGet(id: string, options?: any): AxiosPromise<Advantage> {
+            return localVarFp.advantagesIdGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary updates advantages oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesOrdersPost(params?: SwapStruct, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.advantagesOrdersPost(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary update advantage
+         * @param {Advantage} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesPatch(params?: Advantage, options?: any): AxiosPromise<Advantage> {
+            return localVarFp.advantagesPatch(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create advantage
+         * @param {Advantage} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        advantagesPut(params?: Advantage, options?: any): AxiosPromise<Advantage> {
+            return localVarFp.advantagesPut(params, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AdvantagesApi - object-oriented interface
+ * @export
+ * @class AdvantagesApi
+ * @extends {BaseAPI}
+ */
+export class AdvantagesApi extends BaseAPI {
+    /**
+     * 
+     * @summary delete advantage photo by id
+     * @param {string} id String id of the advantage photo to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdvantagesApi
+     */
+    public advantagePhotoIdDelete(id: string, options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagePhotoIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get photos list by advantage id
+     * @param {string} id String id of the advantage
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdvantagesApi
+     */
+    public advantagePhotoIdGet(id: string, options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagePhotoIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary updates advantage photo oders
+     * @param {SwapStruct} [params] swap item orders
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdvantagesApi
+     */
+    public advantagePhotoOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagePhotoOrdersPost(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create advantage photo
+     * @param {AdvantagePhoto} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdvantagesApi
+     */
+    public advantagePhotoPut(params?: AdvantagePhoto, options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagePhotoPut(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get advantages list
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdvantagesApi
+     */
+    public advantagesGet(options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagesGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary delete advantage by id
+     * @param {string} id String ID of the advantage to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdvantagesApi
+     */
+    public advantagesIdDelete(id: string, options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagesIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get advantage by id
+     * @param {string} id string ID of the advantage
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdvantagesApi
+     */
+    public advantagesIdGet(id: string, options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagesIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary updates advantages oders
+     * @param {SwapStruct} [params] swap item orders
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdvantagesApi
+     */
+    public advantagesOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagesOrdersPost(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update advantage
+     * @param {Advantage} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdvantagesApi
+     */
+    public advantagesPatch(params?: Advantage, options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagesPatch(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create advantage
+     * @param {Advantage} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdvantagesApi
+     */
+    public advantagesPut(params?: Advantage, options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagesPut(params, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
 
 /**
  * DefaultApi - axios parameter creator

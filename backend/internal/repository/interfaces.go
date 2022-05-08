@@ -16,15 +16,19 @@ type Users interface {
 }
 
 type Advantages interface {
-	Get(ctx context.Context) (advantages []domain.Advantage, err error)
+	Get(ctx context.Context) (advantages []*domain.Advantage, err error)
+	GetByID(ctx context.Context, id primitive.ObjectID) (advantage domain.Advantage, err error)
 	Create(ctx context.Context, advantage domain.Advantage) (err error)
 	Update(ctx context.Context, advantage domain.Advantage) (err error)
 	Delete(ctx context.Context, advantageID primitive.ObjectID) (err error)
+	UpdateOrder(ctx context.Context, id primitive.ObjectID, order int) (err error)
 }
 
 type AdvantagePhoto interface {
+	Get(ctx context.Context, advantageID primitive.ObjectID) (advantagePhoto []domain.AdvantagePhoto, err error)
 	Create(ctx context.Context, advantagePhoto domain.AdvantagePhoto) (err error)
 	Delete(ctx context.Context, advantagePhotoID primitive.ObjectID) (err error)
+	UpdateOrder(ctx context.Context, id primitive.ObjectID, order int) (err error)
 }
 
 type Docs interface {
