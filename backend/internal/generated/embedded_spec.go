@@ -48,11 +48,23 @@ func init() {
         "summary": "create advantage photo",
         "parameters": [
           {
-            "name": "params",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/AdvantagePhoto"
-            }
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "advantage_id",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "name": "order",
+            "in": "formData",
+            "required": true
           }
         ],
         "responses": {
@@ -152,7 +164,7 @@ func init() {
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Advantage"
+                "$ref": "#/definitions/AdvantagePhoto"
               }
             }
           },
@@ -1419,9 +1431,6 @@ func init() {
         },
         "order": {
           "type": "integer"
-        },
-        "title": {
-          "type": "string"
         },
         "updatedAt": {
           "type": "string",
@@ -1657,11 +1666,23 @@ func init() {
         "summary": "create advantage photo",
         "parameters": [
           {
-            "name": "params",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/AdvantagePhoto"
-            }
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "advantage_id",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "name": "order",
+            "in": "formData",
+            "required": true
           }
         ],
         "responses": {
@@ -1761,7 +1782,7 @@ func init() {
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Advantage"
+                "$ref": "#/definitions/AdvantagePhoto"
               }
             }
           },
@@ -3028,9 +3049,6 @@ func init() {
         },
         "order": {
           "type": "integer"
-        },
-        "title": {
-          "type": "string"
         },
         "updatedAt": {
           "type": "string",

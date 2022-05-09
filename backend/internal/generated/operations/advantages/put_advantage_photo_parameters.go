@@ -6,16 +6,24 @@ package advantages
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
+	"io"
+	"mime/multipart"
 	"net/http"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	"landing_admin_backend/models"
 )
+
+// PutAdvantagePhotoMaxParseMemory sets the maximum size in bytes for
+// the multipart form parser for this operation.
+//
+// The default value is 32 MB.
+// The multipart parser stores up to this + 10MB.
+var PutAdvantagePhotoMaxParseMemory int64 = 32 << 20
 
 // NewPutAdvantagePhotoParams creates a new PutAdvantagePhotoParams object
 //
@@ -35,9 +43,20 @@ type PutAdvantagePhotoParams struct {
 	HTTPRequest *http.Request `json:"-"`
 
 	/*
-	  In: body
+	  Required: true
+	  In: formData
 	*/
-	Params *models.AdvantagePhoto
+	AdvantageID string
+	/*The file to upload
+	  Required: true
+	  In: formData
+	*/
+	File io.ReadCloser
+	/*
+	  Required: true
+	  In: formData
+	*/
+	Order int64
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -49,29 +68,88 @@ func (o *PutAdvantagePhotoParams) BindRequest(r *http.Request, route *middleware
 
 	o.HTTPRequest = r
 
-	if runtime.HasBody(r) {
-		defer r.Body.Close()
-		var body models.AdvantagePhoto
-		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			res = append(res, errors.NewParseError("params", "body", "", err))
-		} else {
-			// validate body object
-			if err := body.Validate(route.Formats); err != nil {
-				res = append(res, err)
-			}
-
-			ctx := validate.WithOperationRequest(context.Background())
-			if err := body.ContextValidate(ctx, route.Formats); err != nil {
-				res = append(res, err)
-			}
-
-			if len(res) == 0 {
-				o.Params = &body
-			}
+	if err := r.ParseMultipartForm(PutAdvantagePhotoMaxParseMemory); err != nil {
+		if err != http.ErrNotMultipart {
+			return errors.New(400, "%v", err)
+		} else if err := r.ParseForm(); err != nil {
+			return errors.New(400, "%v", err)
 		}
+	}
+	fds := runtime.Values(r.Form)
+
+	fdAdvantageID, fdhkAdvantageID, _ := fds.GetOK("advantage_id")
+	if err := o.bindAdvantageID(fdAdvantageID, fdhkAdvantageID, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	file, fileHeader, err := r.FormFile("file")
+	if err != nil {
+		res = append(res, errors.New(400, "reading file %q failed: %v", "file", err))
+	} else if err := o.bindFile(file, fileHeader); err != nil {
+		// Required: true
+		res = append(res, err)
+	} else {
+		o.File = &runtime.File{Data: file, Header: fileHeader}
+	}
+
+	fdOrder, fdhkOrder, _ := fds.GetOK("order")
+	if err := o.bindOrder(fdOrder, fdhkOrder, route.Formats); err != nil {
+		res = append(res, err)
 	}
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindAdvantageID binds and validates parameter AdvantageID from formData.
+func (o *PutAdvantagePhotoParams) bindAdvantageID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	if !hasKey {
+		return errors.Required("advantage_id", "formData", rawData)
+	}
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: true
+
+	if err := validate.RequiredString("advantage_id", "formData", raw); err != nil {
+		return err
+	}
+	o.AdvantageID = raw
+
+	return nil
+}
+
+// bindFile binds file parameter File.
+//
+// The only supported validations on files are MinLength and MaxLength
+func (o *PutAdvantagePhotoParams) bindFile(file multipart.File, header *multipart.FileHeader) error {
+	return nil
+}
+
+// bindOrder binds and validates parameter Order from formData.
+func (o *PutAdvantagePhotoParams) bindOrder(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	if !hasKey {
+		return errors.Required("order", "formData", rawData)
+	}
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: true
+
+	if err := validate.RequiredString("order", "formData", raw); err != nil {
+		return err
+	}
+
+	value, err := swag.ConvertInt64(raw)
+	if err != nil {
+		return errors.InvalidType("order", "formData", "int64", raw)
+	}
+	o.Order = value
+
 	return nil
 }

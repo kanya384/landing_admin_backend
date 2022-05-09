@@ -25,7 +25,7 @@ type GetAdvantagePhotoIDOK struct {
 	/*
 	  In: Body
 	*/
-	Payload []*models.Advantage `json:"body,omitempty"`
+	Payload []*models.AdvantagePhoto `json:"body,omitempty"`
 }
 
 // NewGetAdvantagePhotoIDOK creates GetAdvantagePhotoIDOK with default headers values
@@ -35,13 +35,13 @@ func NewGetAdvantagePhotoIDOK() *GetAdvantagePhotoIDOK {
 }
 
 // WithPayload adds the payload to the get advantage photo Id o k response
-func (o *GetAdvantagePhotoIDOK) WithPayload(payload []*models.Advantage) *GetAdvantagePhotoIDOK {
+func (o *GetAdvantagePhotoIDOK) WithPayload(payload []*models.AdvantagePhoto) *GetAdvantagePhotoIDOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the get advantage photo Id o k response
-func (o *GetAdvantagePhotoIDOK) SetPayload(payload []*models.Advantage) {
+func (o *GetAdvantagePhotoIDOK) SetPayload(payload []*models.AdvantagePhoto) {
 	o.Payload = payload
 }
 
@@ -52,7 +52,7 @@ func (o *GetAdvantagePhotoIDOK) WriteResponse(rw http.ResponseWriter, producer r
 	payload := o.Payload
 	if payload == nil {
 		// return empty array
-		payload = make([]*models.Advantage, 0, 50)
+		payload = make([]*models.AdvantagePhoto, 0, 50)
 	}
 
 	if err := producer.Produce(rw, payload); err != nil {

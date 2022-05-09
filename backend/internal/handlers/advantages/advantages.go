@@ -147,7 +147,7 @@ func (h *handlers) ChangeAdvantageOrders(params advantages.PostAdvantagesOrdersP
 	if err != nil {
 		return advantages.NewPostAdvantagesOrdersBadRequest()
 	}
-	err = h.services.Posters.PostersOrdersChange(ctx, first, second)
+	err = h.services.Advantages.UpdateOrder(ctx, first, second)
 	if err != nil {
 		return advantages.NewPostAdvantagesOrdersInternalServerError()
 	}

@@ -81,12 +81,6 @@ export interface AdvantagePhoto {
      * @type {string}
      * @memberof AdvantagePhoto
      */
-    'title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdvantagePhoto
-     */
     'advantage_id'?: string;
     /**
      * 
@@ -521,11 +515,13 @@ export const AdvantagesApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 
          * @summary create advantage photo
-         * @param {AdvantagePhoto} [params] 
+         * @param {UNKNOWN_BASE_TYPE} uNKNOWNBASETYPE 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        advantagePhotoPut: async (params?: AdvantagePhoto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        advantagePhotoPut: async (uNKNOWNBASETYPE: UNKNOWN_BASE_TYPE, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'uNKNOWNBASETYPE' is not null or undefined
+            assertParamExists('advantagePhotoPut', 'uNKNOWNBASETYPE', uNKNOWNBASETYPE)
             const localVarPath = `/advantage_photo`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -548,7 +544,7 @@ export const AdvantagesApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(uNKNOWNBASETYPE, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -801,7 +797,7 @@ export const AdvantagesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async advantagePhotoIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Advantage>>> {
+        async advantagePhotoIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AdvantagePhoto>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.advantagePhotoIdGet(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -819,12 +815,12 @@ export const AdvantagesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary create advantage photo
-         * @param {AdvantagePhoto} [params] 
+         * @param {UNKNOWN_BASE_TYPE} uNKNOWNBASETYPE 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async advantagePhotoPut(params?: AdvantagePhoto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdvantagePhoto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagePhotoPut(params, options);
+        async advantagePhotoPut(uNKNOWNBASETYPE: UNKNOWN_BASE_TYPE, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdvantagePhoto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagePhotoPut(uNKNOWNBASETYPE, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -919,7 +915,7 @@ export const AdvantagesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        advantagePhotoIdGet(id: string, options?: any): AxiosPromise<Array<Advantage>> {
+        advantagePhotoIdGet(id: string, options?: any): AxiosPromise<Array<AdvantagePhoto>> {
             return localVarFp.advantagePhotoIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -935,12 +931,12 @@ export const AdvantagesApiFactory = function (configuration?: Configuration, bas
         /**
          * 
          * @summary create advantage photo
-         * @param {AdvantagePhoto} [params] 
+         * @param {UNKNOWN_BASE_TYPE} uNKNOWNBASETYPE 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        advantagePhotoPut(params?: AdvantagePhoto, options?: any): AxiosPromise<AdvantagePhoto> {
-            return localVarFp.advantagePhotoPut(params, options).then((request) => request(axios, basePath));
+        advantagePhotoPut(uNKNOWNBASETYPE: UNKNOWN_BASE_TYPE, options?: any): AxiosPromise<AdvantagePhoto> {
+            return localVarFp.advantagePhotoPut(uNKNOWNBASETYPE, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1050,13 +1046,13 @@ export class AdvantagesApi extends BaseAPI {
     /**
      * 
      * @summary create advantage photo
-     * @param {AdvantagePhoto} [params] 
+     * @param {UNKNOWN_BASE_TYPE} uNKNOWNBASETYPE 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AdvantagesApi
      */
-    public advantagePhotoPut(params?: AdvantagePhoto, options?: AxiosRequestConfig) {
-        return AdvantagesApiFp(this.configuration).advantagePhotoPut(params, options).then((request) => request(this.axios, this.basePath));
+    public advantagePhotoPut(uNKNOWNBASETYPE: UNKNOWN_BASE_TYPE, options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagePhotoPut(uNKNOWNBASETYPE, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

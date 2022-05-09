@@ -25,7 +25,7 @@ func NewRepository(db *mongo.Database) repos.AdvantagePhoto {
 }
 
 func (r *repository) Get(ctx context.Context, advantageID primitive.ObjectID) (advantagePhotos []domain.AdvantagePhoto, err error) {
-	cur, err := r.collection.Find(ctx, primitive.M{"month_id": advantageID}, options.Find().SetSort(primitive.D{{"order", 1}, {"updated_at", -1}}))
+	cur, err := r.collection.Find(ctx, primitive.M{"advantage_id": advantageID}, options.Find().SetSort(primitive.D{{"order", 1}, {"updated_at", -1}}))
 	if err != nil {
 		return
 	}

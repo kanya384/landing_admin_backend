@@ -749,10 +749,19 @@ paths:
       tags:
         - advantages
       parameters:
-        - in: body
-          name: params
-          schema:
-            $ref: '#/definitions/AdvantagePhoto'
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload
+        - in: formData
+          name: advantage_id
+          type: string
+          required: true
+        - in: formData
+          name: order
+          type: integer
+          required: true
       responses:
         '200':
           description: 'Request success'
@@ -787,7 +796,7 @@ paths:
           schema:
             type: array
             items: 
-              $ref: '#/definitions/Advantage'
+              $ref: '#/definitions/AdvantagePhoto'
         '400':
           description: 'Bad request'
         '500':
@@ -994,8 +1003,6 @@ definitions:
     type: object
     properties:
       id:
-        type: string
-      title:
         type: string
       advantage_id:
         type: string

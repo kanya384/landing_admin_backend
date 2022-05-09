@@ -35,9 +35,6 @@ type AdvantagePhoto struct {
 	// order
 	Order int64 `json:"order,omitempty"`
 
-	// title
-	Title string `json:"title,omitempty"`
-
 	// updated at
 	// Format: date-time
 	UpdatedAt strfmt.DateTime `json:"updatedAt,omitempty"`
