@@ -60,8 +60,10 @@ type HodPhotos interface {
 }
 
 type Plans interface {
-	CreateOrUpdate(ctx context.Context, plan domain.Plan) (err error)
-	UpdateImage(ctx context.Context, id primitive.ObjectID, image string) (err error)
+	Get(ctx context.Context, filter map[string]interface{}) (plans []domain.Plan, err error)
+	Create(ctx context.Context, plan domain.Plan) (err error)
+	Update(ctx context.Context, plan domain.Plan) (err error)
+	Delete(ctx context.Context, planID string) (err error)
 }
 
 type Poster interface {
