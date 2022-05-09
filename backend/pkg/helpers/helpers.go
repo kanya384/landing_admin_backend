@@ -2,6 +2,7 @@ package helpers
 
 import (
 	"bytes"
+	"encoding/csv"
 	"errors"
 	"fmt"
 	"image"
@@ -95,4 +96,14 @@ func SaveFile(fileContent []byte, fileNameIn string, path string) (string, error
 
 func DeleteFile(filename string, path string) (err error) {
 	return os.Remove(fmt.Sprintf("%s/%s", path, filename))
+}
+
+func ReadCsvFile(file io.ReadCloser) (rows [][]string, err error) {
+	defer file.Close()
+	csvReader := csv.NewReader(file)
+	csvReader.Comma = ';'
+	csvReader.FieldsPerRecord = -1
+	rows, err = csvReader.ReadAll()
+	rows = rows[1:]
+	return
 }

@@ -874,12 +874,12 @@ paths:
               $ref: '#/definitions/Plan'
         '400':
           description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
         '500':
           description: 'Internal Server Error'
     put:
-      summary: "update plans from file"
-      security:
-        - Token: []
+      summary: "create/update plans from file"
       consumes:
         - multipart/form-data
       produces:
@@ -892,6 +892,11 @@ paths:
           type: file
           required: true
           description: The file to upload
+        - in: formData
+          name: key
+          type: string
+          required: true
+          description: security key from env
       responses:
         '200':
           description: 'Request success'
@@ -952,10 +957,8 @@ paths:
               properties:
                 id: 
                   type: string
-                  required: true
                 status:
                   type: boolean
-                  required: true
       responses:
         '200':
           description: 'Request success'
@@ -1151,7 +1154,7 @@ definitions:
       kitchen_area:
         type: number
       price:
-        type: interger
+        type: integer
       discount_price:
         type: integer
       square_price:

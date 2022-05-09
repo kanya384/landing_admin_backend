@@ -47,7 +47,7 @@ func (r *repository) Get(ctx context.Context, filter map[string]interface{}) (pl
 	return
 }
 
-func (r *repository) GetByID(ctx context.Context, id primitive.ObjectID) (plan domain.Plan, err error) {
+func (r *repository) GetByID(ctx context.Context, id string) (plan domain.Plan, err error) {
 	err = r.collection.FindOne(ctx, primitive.M{"_id": id}).Decode(&plan)
 	if err != nil && err.Error() == "mongo: no documents in result" {
 		return plan, errors.New(domain.ErrNoFieldWithID)
@@ -65,8 +65,6 @@ func (r *repository) Update(ctx context.Context, plan domain.Plan) (err error) {
 	switch true {
 	case result.MatchedCount == 0:
 		return errors.New(domain.ErrNoFieldWithID)
-	case result.MatchedCount > 0 && result.ModifiedCount == 0:
-		return errors.New(domain.ErrNoModificationsForEntity)
 	}
 	return
 }

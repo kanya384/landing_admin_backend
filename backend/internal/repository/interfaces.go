@@ -61,7 +61,7 @@ type HodPhotos interface {
 
 type Plans interface {
 	Get(ctx context.Context, filter map[string]interface{}) (plans []*domain.Plan, err error)
-	GetByID(ctx context.Context, id primitive.ObjectID) (plan domain.Plan, err error)
+	GetByID(ctx context.Context, id string) (plan domain.Plan, err error)
 	Create(ctx context.Context, plan domain.Plan) (err error)
 	Update(ctx context.Context, plan domain.Plan) (err error)
 	Delete(ctx context.Context, planID string) (err error)

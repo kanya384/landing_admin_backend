@@ -19,6 +19,7 @@ import (
 	"landing_admin_backend/internal/generated/operations"
 	"landing_admin_backend/internal/generated/operations/advantages"
 	"landing_admin_backend/internal/generated/operations/hod"
+	"landing_admin_backend/internal/generated/operations/plans"
 	"landing_admin_backend/internal/generated/operations/posters"
 	"landing_admin_backend/internal/handlers"
 	mng "landing_admin_backend/internal/repository/mongo"
@@ -123,6 +124,12 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	api.AdvantagesPutAdvantagePhotoHandler = advantages.PutAdvantagePhotoHandlerFunc(handlers.AdvantagesPhoto.Create)
 	api.AdvantagesDeleteAdvantagePhotoIDHandler = advantages.DeleteAdvantagePhotoIDHandlerFunc(handlers.AdvantagesPhoto.Delete)
 	api.AdvantagesPostAdvantagePhotoOrdersHandler = advantages.PostAdvantagePhotoOrdersHandlerFunc(handlers.AdvantagesPhoto.ChangeAdvantagePhotosOrders)
+
+	/* plans */
+	api.PlansPutPlansHandler = plans.PutPlansHandlerFunc(handlers.Plans.ProcessPlans)
+	api.PlansGetPlansHandler = plans.GetPlansHandlerFunc(handlers.Plans.GetPlans)
+	api.PlansPatchPlansHandler = plans.PatchPlansHandlerFunc(handlers.Plans.UpdatePlan)
+	api.PlansPostPlansHandler = plans.PostPlansHandlerFunc(handlers.Plans.UpdatePlansActivity)
 
 	http.FileServer(http.Dir("file_store"))
 

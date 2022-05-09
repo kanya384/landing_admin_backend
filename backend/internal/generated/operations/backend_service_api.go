@@ -21,6 +21,7 @@ import (
 
 	"landing_admin_backend/internal/generated/operations/advantages"
 	"landing_admin_backend/internal/generated/operations/hod"
+	"landing_admin_backend/internal/generated/operations/plans"
 	"landing_admin_backend/internal/generated/operations/posters"
 )
 
@@ -83,6 +84,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		GetPingHandler: GetPingHandlerFunc(func(params GetPingParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation GetPing has not yet been implemented")
 		}),
+		PlansGetPlansHandler: plans.GetPlansHandlerFunc(func(params plans.GetPlansParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation plans.GetPlans has not yet been implemented")
+		}),
 		PostersGetPostersHandler: posters.GetPostersHandlerFunc(func(params posters.GetPostersParams) middleware.Responder {
 			return middleware.NotImplemented("operation posters.GetPosters has not yet been implemented")
 		}),
@@ -97,6 +101,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		HodPatchMonthsHandler: hod.PatchMonthsHandlerFunc(func(params hod.PatchMonthsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.PatchMonths has not yet been implemented")
+		}),
+		PlansPatchPlansHandler: plans.PatchPlansHandlerFunc(func(params plans.PatchPlansParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation plans.PatchPlans has not yet been implemented")
 		}),
 		PostersPatchPostersHandler: posters.PatchPostersHandlerFunc(func(params posters.PatchPostersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.PatchPosters has not yet been implemented")
@@ -116,6 +123,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		HodPostPhotosOrdersHandler: hod.PostPhotosOrdersHandlerFunc(func(params hod.PostPhotosOrdersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.PostPhotosOrders has not yet been implemented")
 		}),
+		PlansPostPlansHandler: plans.PostPlansHandlerFunc(func(params plans.PostPlansParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation plans.PostPlans has not yet been implemented")
+		}),
 		PostersPostPostersOrdersHandler: posters.PostPostersOrdersHandlerFunc(func(params posters.PostPostersOrdersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.PostPostersOrders has not yet been implemented")
 		}),
@@ -130,6 +140,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		HodPutPhotosHandler: hod.PutPhotosHandlerFunc(func(params hod.PutPhotosParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.PutPhotos has not yet been implemented")
+		}),
+		PlansPutPlansHandler: plans.PutPlansHandlerFunc(func(params plans.PutPlansParams) middleware.Responder {
+			return middleware.NotImplemented("operation plans.PutPlans has not yet been implemented")
 		}),
 		PostersPutPostersHandler: posters.PutPostersHandlerFunc(func(params posters.PutPostersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.PutPosters has not yet been implemented")
@@ -217,6 +230,8 @@ type BackendServiceAPI struct {
 	HodGetPhotosIDHandler hod.GetPhotosIDHandler
 	// GetPingHandler sets the operation handler for the get ping operation
 	GetPingHandler GetPingHandler
+	// PlansGetPlansHandler sets the operation handler for the get plans operation
+	PlansGetPlansHandler plans.GetPlansHandler
 	// PostersGetPostersHandler sets the operation handler for the get posters operation
 	PostersGetPostersHandler posters.GetPostersHandler
 	// PostersGetPostersPosterIDHandler sets the operation handler for the get posters poster ID operation
@@ -227,6 +242,8 @@ type BackendServiceAPI struct {
 	AdvantagesPatchAdvantagesHandler advantages.PatchAdvantagesHandler
 	// HodPatchMonthsHandler sets the operation handler for the patch months operation
 	HodPatchMonthsHandler hod.PatchMonthsHandler
+	// PlansPatchPlansHandler sets the operation handler for the patch plans operation
+	PlansPatchPlansHandler plans.PatchPlansHandler
 	// PostersPatchPostersHandler sets the operation handler for the patch posters operation
 	PostersPatchPostersHandler posters.PatchPostersHandler
 	// HodPatchYearsHandler sets the operation handler for the patch years operation
@@ -239,6 +256,8 @@ type BackendServiceAPI struct {
 	PostLoginHandler PostLoginHandler
 	// HodPostPhotosOrdersHandler sets the operation handler for the post photos orders operation
 	HodPostPhotosOrdersHandler hod.PostPhotosOrdersHandler
+	// PlansPostPlansHandler sets the operation handler for the post plans operation
+	PlansPostPlansHandler plans.PostPlansHandler
 	// PostersPostPostersOrdersHandler sets the operation handler for the post posters orders operation
 	PostersPostPostersOrdersHandler posters.PostPostersOrdersHandler
 	// AdvantagesPutAdvantagePhotoHandler sets the operation handler for the put advantage photo operation
@@ -249,6 +268,8 @@ type BackendServiceAPI struct {
 	HodPutMonthsHandler hod.PutMonthsHandler
 	// HodPutPhotosHandler sets the operation handler for the put photos operation
 	HodPutPhotosHandler hod.PutPhotosHandler
+	// PlansPutPlansHandler sets the operation handler for the put plans operation
+	PlansPutPlansHandler plans.PutPlansHandler
 	// PostersPutPostersHandler sets the operation handler for the put posters operation
 	PostersPutPostersHandler posters.PutPostersHandler
 	// PutUsersHandler sets the operation handler for the put users operation
@@ -375,6 +396,9 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.GetPingHandler == nil {
 		unregistered = append(unregistered, "GetPingHandler")
 	}
+	if o.PlansGetPlansHandler == nil {
+		unregistered = append(unregistered, "plans.GetPlansHandler")
+	}
 	if o.PostersGetPostersHandler == nil {
 		unregistered = append(unregistered, "posters.GetPostersHandler")
 	}
@@ -389,6 +413,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.HodPatchMonthsHandler == nil {
 		unregistered = append(unregistered, "hod.PatchMonthsHandler")
+	}
+	if o.PlansPatchPlansHandler == nil {
+		unregistered = append(unregistered, "plans.PatchPlansHandler")
 	}
 	if o.PostersPatchPostersHandler == nil {
 		unregistered = append(unregistered, "posters.PatchPostersHandler")
@@ -408,6 +435,9 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.HodPostPhotosOrdersHandler == nil {
 		unregistered = append(unregistered, "hod.PostPhotosOrdersHandler")
 	}
+	if o.PlansPostPlansHandler == nil {
+		unregistered = append(unregistered, "plans.PostPlansHandler")
+	}
 	if o.PostersPostPostersOrdersHandler == nil {
 		unregistered = append(unregistered, "posters.PostPostersOrdersHandler")
 	}
@@ -422,6 +452,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.HodPutPhotosHandler == nil {
 		unregistered = append(unregistered, "hod.PutPhotosHandler")
+	}
+	if o.PlansPutPlansHandler == nil {
+		unregistered = append(unregistered, "plans.PutPlansHandler")
 	}
 	if o.PostersPutPostersHandler == nil {
 		unregistered = append(unregistered, "posters.PutPostersHandler")
@@ -582,6 +615,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/plans"] = plans.NewGetPlans(o.context, o.PlansGetPlansHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/posters"] = posters.NewGetPosters(o.context, o.PostersGetPostersHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -599,6 +636,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/months"] = hod.NewPatchMonths(o.context, o.HodPatchMonthsHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/plans"] = plans.NewPatchPlans(o.context, o.PlansPatchPlansHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
@@ -626,6 +667,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/plans"] = plans.NewPostPlans(o.context, o.PlansPostPlansHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/posters/orders"] = posters.NewPostPostersOrders(o.context, o.PostersPostPostersOrdersHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
@@ -643,6 +688,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/photos"] = hod.NewPutPhotos(o.context, o.HodPutPhotosHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/plans"] = plans.NewPutPlans(o.context, o.PlansPutPlansHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
