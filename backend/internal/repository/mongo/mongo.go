@@ -6,6 +6,7 @@ import (
 	"landing_admin_backend/internal/repository/mongo/advantages"
 	"landing_admin_backend/internal/repository/mongo/hod_photos"
 	"landing_admin_backend/internal/repository/mongo/months"
+	"landing_admin_backend/internal/repository/mongo/plans"
 	"landing_admin_backend/internal/repository/mongo/posters"
 	"landing_admin_backend/internal/repository/mongo/users"
 	"landing_admin_backend/internal/repository/mongo/years"
@@ -22,5 +23,6 @@ func Setup(db *mongo.Database) *repository.Repository {
 		HodPhotos:      hod_photos.NewRepository(db),
 		Advantages:     advantages.NewRepository(db),
 		AdvantagePhoto: advantage_photo.NewRepository(db),
+		Plans:          plans.NewRepository(db),
 	}
 }

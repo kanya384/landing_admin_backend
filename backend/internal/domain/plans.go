@@ -8,6 +8,7 @@ import (
 
 type Plan struct {
 	ID                  primitive.ObjectID `bson:"_id"`
+	Image               string             `bson:"image" json:"image"`
 	Entrance            int                `bson:"entrance" json:"entrance"`
 	Commerce            bool               `bson:"commerce" json:"commerce"`
 	Floor               int                `bson:"floor" json:"floor"`
@@ -16,7 +17,7 @@ type Plan struct {
 	Area                float32            `bson:"area" json:"area"`
 	LivingArea          float32            `bson:"living_area" json:"living_area"`
 	KitchenArea         float32            `bson:"kitchen_area" json:"kitchen_area"`
-	Price               int                `bson:"prcie" json:"prcie"`
+	Price               int                `bson:"price" json:"price"`
 	DiscountPrice       int                `bson:"discount_price" json:"discount_price"`
 	SquarePrice         int                `bson:"square_price" json:"square_price"`
 	SquareDiscountPrice int                `bson:"square_discount_price" json:"square_discount_price"`

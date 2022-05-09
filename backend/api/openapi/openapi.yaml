@@ -854,6 +854,115 @@ paths:
             $ref: '#/definitions/ResultResponse'
         '500':
           description: 'Internal Server Error'
+  /plans:
+    get:
+      summary: "get plans list"
+      security:
+        - Token: []
+      tags:
+        - plans
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns plans list'
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/Plan'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    put:
+      summary: "update plans from file"
+      security:
+        - Token: []
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      tags:
+        - plans
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    patch:
+      summary: "update plan"
+      security:
+        - Token: []
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      tags:
+        - plans
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload
+        - in: formData
+          name: id
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Plan'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    post:
+      summary: 'update plans activity'
+      security:
+        - Token: []
+      tags:
+        - plans
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: params
+          schema:
+              type: object
+              properties:
+                id: 
+                  type: string
+                  required: true
+                status:
+                  type: boolean
+                  required: true
+      responses:
+        '200':
+          description: 'Request success'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object
@@ -1016,5 +1125,52 @@ definitions:
       updatedAt:
         type: string
         format: date-time
-      
-      
+  Plan:
+    type: object
+    properties:
+      id:
+        type: string
+      active:
+        type: boolean
+      image:
+        type: string
+      entrance:
+        type: integer
+      commerce:
+        type: boolean
+      floor:
+        type: integer
+      number:
+        type: integer
+      rooms:
+        type: integer
+      area:
+        type: number
+      living_area:
+        type: number
+      kitchen_area:
+        type: number
+      price:
+        type: interger
+      discount_price:
+        type: integer
+      square_price:
+        type: integer
+      square_discount_price:
+        type: integer
+      discount:
+        type: number
+      status:
+        type: boolean
+      window_view:
+        type: string
+      liter:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      modifiedBy:
+        type: string

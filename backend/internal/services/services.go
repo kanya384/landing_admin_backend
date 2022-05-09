@@ -8,6 +8,7 @@ import (
 	"landing_admin_backend/internal/services/auth"
 	"landing_admin_backend/internal/services/hod_photos"
 	"landing_admin_backend/internal/services/months"
+	"landing_admin_backend/internal/services/plans"
 	"landing_admin_backend/internal/services/posters"
 	"landing_admin_backend/internal/services/users"
 	"landing_admin_backend/internal/services/years"
@@ -23,6 +24,7 @@ type Services struct {
 	HodPhotos      hod_photos.Service
 	Advantages     advantages.Service
 	AdvantagePhoto advantage_photo.Service
+	Plans          plans.Service
 }
 
 func Setup(cfg *config.Config, repository *repository.Repository) *Services {
@@ -36,5 +38,6 @@ func Setup(cfg *config.Config, repository *repository.Repository) *Services {
 		HodPhotos:      hod_photos.NewService(repository, cfg),
 		Advantages:     advantages.NewService(repository, cfg),
 		AdvantagePhoto: advantage_photo.NewService(repository, cfg),
+		Plans:          plans.NewService(repository, cfg),
 	}
 }
