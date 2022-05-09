@@ -58,7 +58,7 @@ export const Advantages: React.FC = () => {
       <div className="card-header p-4 border-300 bg-soft">
         <div className="row g-3 justify-content-between align-items-center">
           <div className="col-12 col-md">
-            <h1>Преимущества</h1>
+            <h1>А так же вас ждет</h1>
           </div>
           <div className="col col-md-auto">
             <nav className="nav nav-underline justify-content-end border-0 doc-tab-nav align-items-center" role="tablist">

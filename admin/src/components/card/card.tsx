@@ -116,12 +116,18 @@ export const Card: FC<{card: CardProps}> = (props) => {
         </div>)
     case 2:
       return (
-        <div className="p-2 code-to-copy" ref={ref} data-handler-id={handlerId} style={{opacity}}>
+        <div className="p-2 code-to-copy" ref={ref} data-handler-id={handlerId} style={{opacity, cursor: "pointer"}}>
           <div className="card" >
+            <div className='p-2' style={{position:"absolute", right: 0}}>
+                <button className="btn btn-primary" style={{fontSize:10}} onClick={props.card.deleteClick}>Удалить</button>
+                <button className="btn btn-soft-primary" style={{fontSize:10, marginLeft: "10px"}} onClick={props.card.editClick}>Редактировать</button>
+            </div>
             <div className="row g-0">
-              <div className="col-md-8">
+              <div className="col-md-10">
                 <div className="card-body">
-                  <h4 className="card-title">{props.card.Title}</h4>
+                  <div className='row justify-content-between align-items-center'>
+                    <h4 className="col-5">{props.card.Title}</h4>
+                  </div>
                   <p className="card-text">{props.card.Text}</p>
                   <p className="card-text"><small className="text-muted">{new Date(Date.parse(props.card.date!)).toISOString().slice(0,10)}</small></p>
                 </div>

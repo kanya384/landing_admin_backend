@@ -515,13 +515,19 @@ export const AdvantagesApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 
          * @summary create advantage photo
-         * @param {UNKNOWN_BASE_TYPE} uNKNOWNBASETYPE 
+         * @param {any} file The file to upload
+         * @param {string} advantageId 
+         * @param {number} order 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        advantagePhotoPut: async (uNKNOWNBASETYPE: UNKNOWN_BASE_TYPE, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'uNKNOWNBASETYPE' is not null or undefined
-            assertParamExists('advantagePhotoPut', 'uNKNOWNBASETYPE', uNKNOWNBASETYPE)
+        advantagePhotoPut: async (file: any, advantageId: string, order: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('advantagePhotoPut', 'file', file)
+            // verify required parameter 'advantageId' is not null or undefined
+            assertParamExists('advantagePhotoPut', 'advantageId', advantageId)
+            // verify required parameter 'order' is not null or undefined
+            assertParamExists('advantagePhotoPut', 'order', order)
             const localVarPath = `/advantage_photo`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -533,18 +539,31 @@ export const AdvantagesApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication Token required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
 
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
+            if (advantageId !== undefined) { 
+                localVarFormParams.append('advantage_id', advantageId as any);
+            }
+    
+            if (order !== undefined) { 
+                localVarFormParams.append('order', order as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(uNKNOWNBASETYPE, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -815,12 +834,14 @@ export const AdvantagesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary create advantage photo
-         * @param {UNKNOWN_BASE_TYPE} uNKNOWNBASETYPE 
+         * @param {any} file The file to upload
+         * @param {string} advantageId 
+         * @param {number} order 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async advantagePhotoPut(uNKNOWNBASETYPE: UNKNOWN_BASE_TYPE, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdvantagePhoto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagePhotoPut(uNKNOWNBASETYPE, options);
+        async advantagePhotoPut(file: any, advantageId: string, order: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdvantagePhoto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.advantagePhotoPut(file, advantageId, order, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -931,12 +952,14 @@ export const AdvantagesApiFactory = function (configuration?: Configuration, bas
         /**
          * 
          * @summary create advantage photo
-         * @param {UNKNOWN_BASE_TYPE} uNKNOWNBASETYPE 
+         * @param {any} file The file to upload
+         * @param {string} advantageId 
+         * @param {number} order 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        advantagePhotoPut(uNKNOWNBASETYPE: UNKNOWN_BASE_TYPE, options?: any): AxiosPromise<AdvantagePhoto> {
-            return localVarFp.advantagePhotoPut(uNKNOWNBASETYPE, options).then((request) => request(axios, basePath));
+        advantagePhotoPut(file: any, advantageId: string, order: number, options?: any): AxiosPromise<AdvantagePhoto> {
+            return localVarFp.advantagePhotoPut(file, advantageId, order, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1046,13 +1069,15 @@ export class AdvantagesApi extends BaseAPI {
     /**
      * 
      * @summary create advantage photo
-     * @param {UNKNOWN_BASE_TYPE} uNKNOWNBASETYPE 
+     * @param {any} file The file to upload
+     * @param {string} advantageId 
+     * @param {number} order 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AdvantagesApi
      */
-    public advantagePhotoPut(uNKNOWNBASETYPE: UNKNOWN_BASE_TYPE, options?: AxiosRequestConfig) {
-        return AdvantagesApiFp(this.configuration).advantagePhotoPut(uNKNOWNBASETYPE, options).then((request) => request(this.axios, this.basePath));
+    public advantagePhotoPut(file: any, advantageId: string, order: number, options?: AxiosRequestConfig) {
+        return AdvantagesApiFp(this.configuration).advantagePhotoPut(file, advantageId, order, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

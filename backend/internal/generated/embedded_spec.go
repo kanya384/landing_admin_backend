@@ -37,7 +37,7 @@ func init() {
           }
         ],
         "consumes": [
-          "application/json"
+          "multipart/form-data"
         ],
         "produces": [
           "application/json"
@@ -1655,7 +1655,7 @@ func init() {
           }
         ],
         "consumes": [
-          "application/json"
+          "multipart/form-data"
         ],
         "produces": [
           "application/json"
