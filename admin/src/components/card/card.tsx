@@ -4,6 +4,7 @@ import { useDrag, useDrop } from 'react-dnd'
 import "./card.css"
 import type { Identifier, XYCoord } from 'dnd-core'
 import { ItemTypes } from './itemTypes';
+import { Accordion, AccordionItem } from '../accordion'
 
 interface CardProps {
   ID: string,
@@ -15,7 +16,8 @@ interface CardProps {
   moveCard: (dragIndex: number, hoverIndex: number) => void,
   editClick?:any,
   deleteClick?:any,
-  date?:string
+  click?:any,
+  date?:string,
 }
 
 interface DragItem {
@@ -122,7 +124,7 @@ export const Card: FC<{card: CardProps}> = (props) => {
                 <button className="btn btn-primary" style={{fontSize:10}} onClick={props.card.deleteClick}>Удалить</button>
                 <button className="btn btn-soft-primary" style={{fontSize:10, marginLeft: "10px"}} onClick={props.card.editClick}>Редактировать</button>
             </div>
-            <div className="row g-0">
+            <div className="row g-0" onClick={props.card.click}>
               <div className="col-md-10">
                 <div className="card-body">
                   <div className='row justify-content-between align-items-center'>
@@ -133,6 +135,7 @@ export const Card: FC<{card: CardProps}> = (props) => {
                 </div>
               </div>
             </div>
+           
           </div>
         </div>
       )

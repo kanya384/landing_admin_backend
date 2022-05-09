@@ -43,9 +43,9 @@ func (r *repository) Get(ctx context.Context, advantageID primitive.ObjectID) (a
 		return
 	}
 
-	if len(advantagePhotos) == 0 {
-		return advantagePhotos, mongo.ErrNoDocuments
-	}
+	//if len(advantagePhotos) == 0 {
+	//	return advantagePhotos, mongo.ErrNoDocuments
+	//}
 
 	cur.Close(ctx)
 

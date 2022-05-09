@@ -88,7 +88,6 @@ export const updatePoster = (poster: Poster, callback:(error: string) => void, f
   return async (dispatch: Dispatch<Posters>) => {
     let token = GetTokenFromCookies()
     if (poster.id?.length === 0 || poster.title?.length === 0 || poster.description?.length === 0 || poster.active === undefined || poster.order === undefined) {
-      console.log('sdsd')
       callback("не все поля заполненны")
       return
     }

@@ -60,6 +60,26 @@ export interface AdvantagePhotoSort{
     },
 }
 
+export interface AdvantageIDRequestSend{
+    type: AdvantagesActionTypes.ADVANTAGE_ID_REQUEST_SEND,
+}
+
+export interface AdvantageIDSuccess{
+    type: AdvantagesActionTypes.ADVANTAGE_ID_SUCCESS,
+    payload: Advantage,
+}
+
+export interface AdvantageIDError {
+    type: AdvantagesActionTypes.ADVANTAGE_ID_ERROR,
+    payload: string,
+}
+
+export interface AdvantagePhotosGet {
+    type: AdvantagesActionTypes.ADVANTAGE_PHOTO_SUCCESS,
+    payload: AdvantagePhoto[],
+}
+
+
 export type AdvantageAction = 
     | AdvantagesRequestSend
     | AdvantagesRequestSuccess
@@ -72,3 +92,7 @@ export type AdvantageAction =
     | AdvantagePhotoNew
     | AdvantagePhotoDelete
     | AdvantagePhotoSort
+    | AdvantagePhotosGet
+    | AdvantageIDRequestSend
+    | AdvantageIDSuccess
+    | AdvantageIDError

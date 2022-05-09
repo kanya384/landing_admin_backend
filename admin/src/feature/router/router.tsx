@@ -9,6 +9,7 @@ import NavbarComponent from "../../components/navbar-component"
 import { Posters } from "../../pages/posters"
 import { Hod } from "../../pages/hod"
 import { Advantages } from "../../pages/advantages"
+import { AdvantageDetail } from "../../pages/advantage_detail"
 
 const Router: React.FC = () => {
   const auths = useTypedSelector(({ auths }) => {
@@ -31,6 +32,7 @@ const Router: React.FC = () => {
           <NavbarComponent />
             <div className="content pt-5">
               <Routes>
+                <Route path="/advantages/:id" element={<AdvantageDetail />} />
                 <Route path="/advantages" element={<Advantages />} />
                 <Route path="/progress" element={<Hod />} />
                 <Route path="/posters" element={<Posters />} />

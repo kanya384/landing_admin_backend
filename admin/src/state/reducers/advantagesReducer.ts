@@ -7,14 +7,18 @@ interface AdvantagesState {
     loading: boolean;
     advantagesList: Advantage[],
     photosList: AdvantagePhoto[],
+    detail: Advantage | null,
     error: string | null,
+    errorDet: string | null,
 }
 
 const initialState: AdvantagesState = {
     loading: false,
     advantagesList: [],
     photosList: [],
+    detail: null, 
     error: null,
+    errorDet: null,
 }
 
 const sortAdvantages = (advantagesList: Advantage[], dragIndex: number, hoverIndex: number):Advantage[]  => {
@@ -65,6 +69,11 @@ const reducer = produce((state: AdvantagesState = initialState, action: Advantag
 
         case AdvantagesActionTypes.ADVANTAGE_PHOTO_REQUEST:
             state.loading = true;
+            state.photosList = [];
+            return state;
+        case AdvantagesActionTypes.ADVANTAGE_PHOTO_SUCCESS:
+            state.loading = false;
+            state.photosList = action.payload;
             return state;
         case AdvantagesActionTypes.ADVANTAGE_PHOTO_NEW:
             state.photosList.unshift(action.payload)
@@ -74,6 +83,15 @@ const reducer = produce((state: AdvantagesState = initialState, action: Advantag
             return state;
         case AdvantagesActionTypes.ADVANTAGE_PHOTO_SORT:
             state.photosList = sortPhotos(state.photosList, action.payload.dragIndex, action.payload.hoverIndex);
+            return state;
+        case AdvantagesActionTypes.ADVANTAGE_ID_REQUEST_SEND:
+            state.detail = null;
+            return state;
+        case AdvantagesActionTypes.ADVANTAGE_ID_SUCCESS:
+            state.detail = action.payload;
+            return state;
+        case AdvantagesActionTypes.ADVANTAGE_ID_ERROR:
+            state.errorDet = action.payload;
             return state;
         default:
             return state;
