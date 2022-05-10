@@ -10,6 +10,5 @@ type Repository struct {
 	HodPhotos
 	Plans
 	Poster
-	ProjectInfo
 	Video
 }

@@ -177,8 +177,8 @@ export const Hod: React.FC = () =>{
             <div>
               {hod?.yearsList.map((year)=>{
                 return <div className="btn-group p-2" role="group" key={year.id!} aria-label="Basic example">
-                  <button className={active.year === year.value?"btn btn-primary":"btn btn-phoenix-primary"} onClick={()=>{yearClick(year.value!)}} type="button">{year.value}</button>
-                  <button className="btn btn-soft-danger" style={{padding: 10}}><Trash size={15} onClick={()=>{deleteYear(year.id!)}}  /></button>
+                  <button className={active.year === year.value?"btn btn-primary":"btn tn-soft-primary"} onClick={()=>{yearClick(year.value!)}} type="button">{year.value}</button>
+                  <button className={active.year === year.value?"btn btn btn-primary":"btn tn-soft-primary"} style={{padding: 2}}><Trash size={15} onClick={()=>{deleteYear(year.id!)}} /></button>
                 </div>
               })}
           </div>
@@ -196,8 +196,8 @@ export const Hod: React.FC = () =>{
               <div>
               {hod?.monthsList.map((month)=>{
                 return <div className="btn-group p-2" role="group" aria-label="Basic example">
-                <button className={active.month === month.value?"btn btn btn-primary":"btn btn-phoenix-primary"} onClick={()=>{monthClick(month.value!)}} type="button">{month.name}</button>
-                <button className="btn btn-soft-danger" style={{padding: 10}}><Trash size={15} onClick={()=>{deleteMonth(month.id!)}} /></button>
+                <button className={active.month === month.value?"btn btn btn-primary":"btn tn-soft-primary"} onClick={()=>{monthClick(month.value!)}} type="button">{month.name}</button>
+                <button className={active.month === month.value?"btn btn btn-primary":"btn tn-soft-primary"} style={{padding: 2}}><Trash size={15} onClick={()=>{deleteMonth(month.id!)}} /></button>
               </div>
               })}
             </div>

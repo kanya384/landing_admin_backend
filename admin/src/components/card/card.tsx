@@ -135,7 +135,6 @@ export const Card: FC<{card: CardProps}> = (props) => {
                 </div>
               </div>
             </div>
-           
           </div>
         </div>
       )

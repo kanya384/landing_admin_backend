@@ -204,6 +204,25 @@ export interface HodPhoto {
 /**
  * 
  * @export
+ * @interface InlineObject
+ */
+export interface InlineObject {
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineObject
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineObject
+     */
+    'status'?: boolean;
+}
+/**
+ * 
+ * @export
  * @interface Month
  */
 export interface Month {
@@ -231,6 +250,145 @@ export interface Month {
      * @memberof Month
      */
     'year_id'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface Plan
+ */
+export interface Plan {
+    /**
+     * 
+     * @type {string}
+     * @memberof Plan
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Plan
+     */
+    'active'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Plan
+     */
+    'image'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'entrance'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Plan
+     */
+    'commerce'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'floor'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'number'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'rooms'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'area'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'living_area'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'kitchen_area'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'price'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'discount_price'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'square_price'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'square_discount_price'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Plan
+     */
+    'discount'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Plan
+     */
+    'status'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Plan
+     */
+    'window_view'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Plan
+     */
+    'liter'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Plan
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Plan
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Plan
+     */
+    'modifiedBy'?: string;
 }
 /**
  * 
@@ -2275,6 +2433,348 @@ export class HodApi extends BaseAPI {
      */
     public yearsPut(params?: Year, options?: AxiosRequestConfig) {
         return HodApiFp(this.configuration).yearsPut(params, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PlansApi - axios parameter creator
+ * @export
+ */
+export const PlansApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary get plans list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plansGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/plans`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary update plan
+         * @param {any} file The file to upload
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plansPatch: async (file: any, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('plansPatch', 'file', file)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('plansPatch', 'id', id)
+            const localVarPath = `/plans`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (id !== undefined) { 
+                localVarFormParams.append('id', id as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary update plans activity
+         * @param {InlineObject} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plansPost: async (params?: InlineObject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/plans`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create/update plans from file
+         * @param {any} file The file to upload
+         * @param {string} key security key from env
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plansPut: async (file: any, key: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('plansPut', 'file', file)
+            // verify required parameter 'key' is not null or undefined
+            assertParamExists('plansPut', 'key', key)
+            const localVarPath = `/plans`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (key !== undefined) { 
+                localVarFormParams.append('key', key as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PlansApi - functional programming interface
+ * @export
+ */
+export const PlansApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PlansApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary get plans list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plansGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Plan>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plansGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary update plan
+         * @param {any} file The file to upload
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plansPatch(file: any, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Plan>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plansPatch(file, id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary update plans activity
+         * @param {InlineObject} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plansPost(params?: InlineObject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plansPost(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create/update plans from file
+         * @param {any} file The file to upload
+         * @param {string} key security key from env
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async plansPut(file: any, key: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.plansPut(file, key, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PlansApi - factory interface
+ * @export
+ */
+export const PlansApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PlansApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary get plans list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plansGet(options?: any): AxiosPromise<Array<Plan>> {
+            return localVarFp.plansGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary update plan
+         * @param {any} file The file to upload
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plansPatch(file: any, id: string, options?: any): AxiosPromise<Plan> {
+            return localVarFp.plansPatch(file, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary update plans activity
+         * @param {InlineObject} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plansPost(params?: InlineObject, options?: any): AxiosPromise<void> {
+            return localVarFp.plansPost(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create/update plans from file
+         * @param {any} file The file to upload
+         * @param {string} key security key from env
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plansPut(file: any, key: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.plansPut(file, key, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PlansApi - object-oriented interface
+ * @export
+ * @class PlansApi
+ * @extends {BaseAPI}
+ */
+export class PlansApi extends BaseAPI {
+    /**
+     * 
+     * @summary get plans list
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlansApi
+     */
+    public plansGet(options?: AxiosRequestConfig) {
+        return PlansApiFp(this.configuration).plansGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update plan
+     * @param {any} file The file to upload
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlansApi
+     */
+    public plansPatch(file: any, id: string, options?: AxiosRequestConfig) {
+        return PlansApiFp(this.configuration).plansPatch(file, id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update plans activity
+     * @param {InlineObject} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlansApi
+     */
+    public plansPost(params?: InlineObject, options?: AxiosRequestConfig) {
+        return PlansApiFp(this.configuration).plansPost(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create/update plans from file
+     * @param {any} file The file to upload
+     * @param {string} key security key from env
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PlansApi
+     */
+    public plansPut(file: any, key: string, options?: AxiosRequestConfig) {
+        return PlansApiFp(this.configuration).plansPut(file, key, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -70,16 +70,44 @@ func (h *handlers) ProcessPlans(params plans.PutPlansParams) middleware.Responde
 	}
 	err = h.services.Plans.ProcessPlans(context.Background(), records)
 	if err != nil {
-		fmt.Println(err)
 		return plans.NewPutPlansBadRequest()
 	}
 	return plans.NewPutPlansOK()
 }
 
 func (h *handlers) UpdatePlan(params plans.PatchPlansParams, input interface{}) middleware.Responder {
-	return plans.NewPatchPlansOK()
+	plan, err := h.services.Plans.UpdatePlansPhoto(context.Background(), params.File, params.ID)
+	if err != nil {
+		return plans.NewPatchPlansBadRequest()
+	}
+	tPlan := models.Plan{
+		ID:                  plan.ID,
+		Image:               plan.Image,
+		Entrance:            int64(plan.Entrance),
+		Commerce:            plan.Commerce,
+		Floor:               int64(plan.Floor),
+		Number:              int64(plan.Number),
+		Rooms:               int64(plan.Rooms),
+		Area:                plan.Area,
+		LivingArea:          plan.LivingArea,
+		KitchenArea:         plan.KitchenArea,
+		Price:               int64(plan.Price),
+		DiscountPrice:       int64(plan.DiscountPrice),
+		SquarePrice:         int64(plan.SquarePrice),
+		SquareDiscountPrice: int64(plan.SquareDiscountPrice),
+		Discount:            plan.Discount,
+		Status:              plan.Status,
+		WindowView:          plan.WindowView,
+		Liter:               plan.Liter,
+		CreatedAt:           strfmt.DateTime(plan.CreatedAt),
+	}
+	return plans.NewPatchPlansOK().WithPayload(&tPlan)
 }
 
 func (h *handlers) UpdatePlansActivity(params plans.PostPlansParams, input interface{}) middleware.Responder {
+	err := h.services.Plans.UpdatePlansActivity(context.Background(), params.Params.ID, params.Params.Status)
+	if err != nil {
+		return plans.NewPutPlansBadRequest()
+	}
 	return plans.NewPostPlansOK()
 }

@@ -32,7 +32,7 @@ type AdvantagePhoto interface {
 }
 
 type Docs interface {
-	Get(ctx context.Context) (docs []domain.Doc, err error)
+	Get(ctx context.Context) (docs []*domain.Doc, err error)
 	Create(ctx context.Context, doc domain.Doc) (err error)
 	Update(ctx context.Context, doc domain.Doc) (err error)
 	Delete(ctx context.Context, docID primitive.ObjectID) (err error)
@@ -76,16 +76,9 @@ type Poster interface {
 	Delete(ctx context.Context, posterID primitive.ObjectID) (err error)
 }
 
-type ProjectInfo interface {
-	Get() (projectInfoList []domain.ProjectInfo, err error)
-	Create(projectInfo domain.ProjectInfo) (err error)
-	Update(projectInfo domain.ProjectInfo) (err error)
-	Delete(projectInfoID primitive.ObjectID) (err error)
-}
-
 type Video interface {
-	Get() (video []domain.Video, err error)
-	Create(video domain.Video) (err error)
-	Update(video domain.Video) (err error)
-	Delete(videoID primitive.ObjectID) (err error)
+	Get(ctx context.Context) (video []*domain.Video, err error)
+	Create(ctx context.Context, video domain.Video) (err error)
+	Update(ctx context.Context, video domain.Video) (err error)
+	Delete(ctx context.Context, videoID primitive.ObjectID) (err error)
 }

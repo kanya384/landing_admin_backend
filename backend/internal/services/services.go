@@ -6,11 +6,13 @@ import (
 	"landing_admin_backend/internal/services/advantage_photo"
 	"landing_admin_backend/internal/services/advantages"
 	"landing_admin_backend/internal/services/auth"
+	"landing_admin_backend/internal/services/docs"
 	"landing_admin_backend/internal/services/hod_photos"
 	"landing_admin_backend/internal/services/months"
 	"landing_admin_backend/internal/services/plans"
 	"landing_admin_backend/internal/services/posters"
 	"landing_admin_backend/internal/services/users"
+	"landing_admin_backend/internal/services/video"
 	"landing_admin_backend/internal/services/years"
 	"landing_admin_backend/pkg/token_manager"
 )
@@ -25,6 +27,8 @@ type Services struct {
 	Advantages     advantages.Service
 	AdvantagePhoto advantage_photo.Service
 	Plans          plans.Service
+	Video          video.Service
+	Docs           docs.Service
 }
 
 func Setup(cfg *config.Config, repository *repository.Repository) *Services {
@@ -39,5 +43,7 @@ func Setup(cfg *config.Config, repository *repository.Repository) *Services {
 		Advantages:     advantages.NewService(repository, cfg),
 		AdvantagePhoto: advantage_photo.NewService(repository, cfg),
 		Plans:          plans.NewService(repository, cfg),
+		Video:          video.NewService(repository, cfg),
+		Docs:           docs.NewService(repository, cfg),
 	}
 }
