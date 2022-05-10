@@ -15,3 +15,22 @@ type Video struct {
 	UpdateAt   time.Time          `bson:"updated_at" json:"updated_at"`
 	ModifiedBy primitive.ObjectID `bson:"modified_by" json:"modified_by"`
 }
+
+func NewVideo(id string, url string, preview string, CreatedAt time.Time, UpdateAt time.Time, ModifiedBy primitive.ObjectID) (video Video, err error) {
+	video = Video{
+		URL:        url,
+		Preview:    preview,
+		CreatedAt:  CreatedAt,
+		UpdateAt:   UpdateAt,
+		ModifiedBy: ModifiedBy,
+	}
+	if id == "" {
+		video.ID = primitive.NewObjectID()
+	} else {
+		video.ID, err = primitive.ObjectIDFromHex(id)
+		if err != nil {
+			return
+		}
+	}
+	return
+}

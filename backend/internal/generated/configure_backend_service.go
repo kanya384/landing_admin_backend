@@ -18,6 +18,7 @@ import (
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/generated/operations"
 	"landing_admin_backend/internal/generated/operations/advantages"
+	"landing_admin_backend/internal/generated/operations/docs"
 	"landing_admin_backend/internal/generated/operations/hod"
 	"landing_admin_backend/internal/generated/operations/plans"
 	"landing_admin_backend/internal/generated/operations/posters"
@@ -130,6 +131,12 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	api.PlansGetPlansHandler = plans.GetPlansHandlerFunc(handlers.Plans.GetPlans)
 	api.PlansPatchPlansHandler = plans.PatchPlansHandlerFunc(handlers.Plans.UpdatePlan)
 	api.PlansPostPlansHandler = plans.PostPlansHandlerFunc(handlers.Plans.UpdatePlansActivity)
+
+	/* docs */
+	api.DocsGetDocHandler = docs.GetDocHandlerFunc(handlers.Docs.Get)
+	api.DocsPutDocHandler = docs.PutDocHandlerFunc(handlers.Docs.Create)
+	api.DocsPatchDocHandler = docs.PatchDocHandlerFunc(handlers.Docs.Update)
+	api.DocsDeleteDocIDHandler = docs.DeleteDocIDHandlerFunc(handlers.Docs.Delete)
 
 	http.FileServer(http.Dir("file_store"))
 

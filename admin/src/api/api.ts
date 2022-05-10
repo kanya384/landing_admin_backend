@@ -154,6 +154,49 @@ export interface AuthenticateResponse {
 /**
  * 
  * @export
+ * @interface Doc
+ */
+export interface Doc {
+    /**
+     * 
+     * @type {string}
+     * @memberof Doc
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Doc
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Doc
+     */
+    'file'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Doc
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Doc
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Doc
+     */
+    'modifiedBy'?: string;
+}
+/**
+ * 
+ * @export
  * @interface GetPostersRequest
  */
 export interface GetPostersRequest {
@@ -532,6 +575,49 @@ export interface UserCreateRequest {
      * @memberof UserCreateRequest
      */
     'role'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface Video
+ */
+export interface Video {
+    /**
+     * 
+     * @type {string}
+     * @memberof Video
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Video
+     */
+    'url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Video
+     */
+    'preview'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Video
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Video
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Video
+     */
+    'modifiedBy'?: string;
 }
 /**
  * 
@@ -1545,6 +1631,359 @@ export class DefaultApi extends BaseAPI {
      */
     public usersPut(params?: UserCreateRequest, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).usersPut(params, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * DocsApi - axios parameter creator
+ * @export
+ */
+export const DocsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary get docs list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        docGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/doc`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary delete doc by id
+         * @param {string} id String id doc to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        docIdDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('docIdDelete', 'id', id)
+            const localVarPath = `/doc/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary update doc
+         * @param {string} id 
+         * @param {string} title docs title
+         * @param {any} [file] The file to upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        docPatch: async (id: string, title: string, file?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('docPatch', 'id', id)
+            // verify required parameter 'title' is not null or undefined
+            assertParamExists('docPatch', 'title', title)
+            const localVarPath = `/doc`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (id !== undefined) { 
+                localVarFormParams.append('id', id as any);
+            }
+    
+            if (title !== undefined) { 
+                localVarFormParams.append('title', title as any);
+            }
+    
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create doc file
+         * @param {any} file The file to upload
+         * @param {string} title docs title
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        docPut: async (file: any, title: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('docPut', 'file', file)
+            // verify required parameter 'title' is not null or undefined
+            assertParamExists('docPut', 'title', title)
+            const localVarPath = `/doc`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (title !== undefined) { 
+                localVarFormParams.append('title', title as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * DocsApi - functional programming interface
+ * @export
+ */
+export const DocsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = DocsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary get docs list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async docGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Doc>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.docGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary delete doc by id
+         * @param {string} id String id doc to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async docIdDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.docIdDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary update doc
+         * @param {string} id 
+         * @param {string} title docs title
+         * @param {any} [file] The file to upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async docPatch(id: string, title: string, file?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Doc>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.docPatch(id, title, file, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create doc file
+         * @param {any} file The file to upload
+         * @param {string} title docs title
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async docPut(file: any, title: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Doc>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.docPut(file, title, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * DocsApi - factory interface
+ * @export
+ */
+export const DocsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = DocsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary get docs list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        docGet(options?: any): AxiosPromise<Array<Doc>> {
+            return localVarFp.docGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary delete doc by id
+         * @param {string} id String id doc to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        docIdDelete(id: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.docIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary update doc
+         * @param {string} id 
+         * @param {string} title docs title
+         * @param {any} [file] The file to upload
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        docPatch(id: string, title: string, file?: any, options?: any): AxiosPromise<Doc> {
+            return localVarFp.docPatch(id, title, file, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create doc file
+         * @param {any} file The file to upload
+         * @param {string} title docs title
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        docPut(file: any, title: string, options?: any): AxiosPromise<Doc> {
+            return localVarFp.docPut(file, title, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * DocsApi - object-oriented interface
+ * @export
+ * @class DocsApi
+ * @extends {BaseAPI}
+ */
+export class DocsApi extends BaseAPI {
+    /**
+     * 
+     * @summary get docs list
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocsApi
+     */
+    public docGet(options?: AxiosRequestConfig) {
+        return DocsApiFp(this.configuration).docGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary delete doc by id
+     * @param {string} id String id doc to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocsApi
+     */
+    public docIdDelete(id: string, options?: AxiosRequestConfig) {
+        return DocsApiFp(this.configuration).docIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update doc
+     * @param {string} id 
+     * @param {string} title docs title
+     * @param {any} [file] The file to upload
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocsApi
+     */
+    public docPatch(id: string, title: string, file?: any, options?: AxiosRequestConfig) {
+        return DocsApiFp(this.configuration).docPatch(id, title, file, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create doc file
+     * @param {any} file The file to upload
+     * @param {string} title docs title
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocsApi
+     */
+    public docPut(file: any, title: string, options?: AxiosRequestConfig) {
+        return DocsApiFp(this.configuration).docPut(file, title, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

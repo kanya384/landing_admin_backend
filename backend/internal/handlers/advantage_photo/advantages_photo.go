@@ -68,12 +68,12 @@ func (h *handlers) Create(params advantages.PutAdvantagePhotoParams, input inter
 
 	advantagePhoto, err := domain.NewAdvantagePhoto("", params.AdvantageID, "", 0, time.Now(), time.Now(), userID)
 	if err != nil {
-		return advantages.NewPutAdvantagePhotoBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating poster"})
+		return advantages.NewPutAdvantagePhotoBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating advantage"})
 	}
 
 	advantageRes, err := h.services.AdvantagePhoto.Create(ctx, advantagePhoto, params.File)
 	if err != nil {
-		return advantages.NewPutAdvantagePhotoBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating poster"})
+		return advantages.NewPutAdvantagePhotoBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating advantage"})
 	}
 	res := models.AdvantagePhoto{
 		ID:        advantageRes.ID.Hex(),

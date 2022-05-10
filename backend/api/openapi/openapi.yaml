@@ -966,6 +966,124 @@ paths:
           description: 'Bad request'
         '500':
           description: 'Internal Server Error'
+  /doc:
+    get:
+      summary: "get docs list"
+      security:
+        - Token: []
+      tags:
+        - docs
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns docs list'
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/Doc'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    put:
+      summary: "create doc file"
+      security:
+        - Token: []
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      tags:
+        - docs
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload
+        - in: formData
+          name: title
+          type: string
+          required: true
+          description: docs title
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Doc'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    patch:
+      summary: "update doc"
+      security:
+        - Token: []
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      tags:
+        - docs
+      parameters:
+        - in: formData
+          name: id
+          type: string
+          required: true
+        - in: formData
+          name: title
+          type: string
+          required: true
+          description: docs title
+        - in: formData
+          name: file
+          type: file
+          required: false
+          description: The file to upload
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Doc'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /doc/{id}:
+    delete:
+      summary: "delete doc by id"
+      security:
+        - Token: []
+      tags:
+        - docs
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String id doc to delete
+      responses:
+        '200':
+          description: 'delete doc success'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object
@@ -1179,6 +1297,7 @@ definitions:
         type: string
   Video:
     type: object
+    properties:
       id:
         type: string
       url:
@@ -1195,6 +1314,7 @@ definitions:
         type: string
   Doc:
     type: object
+    properties:
       id:
         type: string
       title:

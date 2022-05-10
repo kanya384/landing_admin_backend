@@ -20,6 +20,7 @@ import (
 	"github.com/go-openapi/swag"
 
 	"landing_admin_backend/internal/generated/operations/advantages"
+	"landing_admin_backend/internal/generated/operations/docs"
 	"landing_admin_backend/internal/generated/operations/hod"
 	"landing_admin_backend/internal/generated/operations/plans"
 	"landing_admin_backend/internal/generated/operations/posters"
@@ -54,6 +55,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		AdvantagesDeleteAdvantagesIDHandler: advantages.DeleteAdvantagesIDHandlerFunc(func(params advantages.DeleteAdvantagesIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.DeleteAdvantagesID has not yet been implemented")
 		}),
+		DocsDeleteDocIDHandler: docs.DeleteDocIDHandlerFunc(func(params docs.DeleteDocIDParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation docs.DeleteDocID has not yet been implemented")
+		}),
 		HodDeleteMonthsIDHandler: hod.DeleteMonthsIDHandlerFunc(func(params hod.DeleteMonthsIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.DeleteMonthsID has not yet been implemented")
 		}),
@@ -74,6 +78,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		AdvantagesGetAdvantagesIDHandler: advantages.GetAdvantagesIDHandlerFunc(func(params advantages.GetAdvantagesIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.GetAdvantagesID has not yet been implemented")
+		}),
+		DocsGetDocHandler: docs.GetDocHandlerFunc(func(params docs.GetDocParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation docs.GetDoc has not yet been implemented")
 		}),
 		HodGetMonthsIDHandler: hod.GetMonthsIDHandlerFunc(func(params hod.GetMonthsIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.GetMonthsID has not yet been implemented")
@@ -98,6 +105,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		AdvantagesPatchAdvantagesHandler: advantages.PatchAdvantagesHandlerFunc(func(params advantages.PatchAdvantagesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.PatchAdvantages has not yet been implemented")
+		}),
+		DocsPatchDocHandler: docs.PatchDocHandlerFunc(func(params docs.PatchDocParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation docs.PatchDoc has not yet been implemented")
 		}),
 		HodPatchMonthsHandler: hod.PatchMonthsHandlerFunc(func(params hod.PatchMonthsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.PatchMonths has not yet been implemented")
@@ -134,6 +144,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		AdvantagesPutAdvantagesHandler: advantages.PutAdvantagesHandlerFunc(func(params advantages.PutAdvantagesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.PutAdvantages has not yet been implemented")
+		}),
+		DocsPutDocHandler: docs.PutDocHandlerFunc(func(params docs.PutDocParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation docs.PutDoc has not yet been implemented")
 		}),
 		HodPutMonthsHandler: hod.PutMonthsHandlerFunc(func(params hod.PutMonthsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.PutMonths has not yet been implemented")
@@ -210,6 +223,8 @@ type BackendServiceAPI struct {
 	AdvantagesDeleteAdvantagePhotoIDHandler advantages.DeleteAdvantagePhotoIDHandler
 	// AdvantagesDeleteAdvantagesIDHandler sets the operation handler for the delete advantages ID operation
 	AdvantagesDeleteAdvantagesIDHandler advantages.DeleteAdvantagesIDHandler
+	// DocsDeleteDocIDHandler sets the operation handler for the delete doc ID operation
+	DocsDeleteDocIDHandler docs.DeleteDocIDHandler
 	// HodDeleteMonthsIDHandler sets the operation handler for the delete months ID operation
 	HodDeleteMonthsIDHandler hod.DeleteMonthsIDHandler
 	// HodDeletePhotosIDHandler sets the operation handler for the delete photos ID operation
@@ -224,6 +239,8 @@ type BackendServiceAPI struct {
 	AdvantagesGetAdvantagesHandler advantages.GetAdvantagesHandler
 	// AdvantagesGetAdvantagesIDHandler sets the operation handler for the get advantages ID operation
 	AdvantagesGetAdvantagesIDHandler advantages.GetAdvantagesIDHandler
+	// DocsGetDocHandler sets the operation handler for the get doc operation
+	DocsGetDocHandler docs.GetDocHandler
 	// HodGetMonthsIDHandler sets the operation handler for the get months ID operation
 	HodGetMonthsIDHandler hod.GetMonthsIDHandler
 	// HodGetPhotosIDHandler sets the operation handler for the get photos ID operation
@@ -240,6 +257,8 @@ type BackendServiceAPI struct {
 	HodGetYearsHandler hod.GetYearsHandler
 	// AdvantagesPatchAdvantagesHandler sets the operation handler for the patch advantages operation
 	AdvantagesPatchAdvantagesHandler advantages.PatchAdvantagesHandler
+	// DocsPatchDocHandler sets the operation handler for the patch doc operation
+	DocsPatchDocHandler docs.PatchDocHandler
 	// HodPatchMonthsHandler sets the operation handler for the patch months operation
 	HodPatchMonthsHandler hod.PatchMonthsHandler
 	// PlansPatchPlansHandler sets the operation handler for the patch plans operation
@@ -264,6 +283,8 @@ type BackendServiceAPI struct {
 	AdvantagesPutAdvantagePhotoHandler advantages.PutAdvantagePhotoHandler
 	// AdvantagesPutAdvantagesHandler sets the operation handler for the put advantages operation
 	AdvantagesPutAdvantagesHandler advantages.PutAdvantagesHandler
+	// DocsPutDocHandler sets the operation handler for the put doc operation
+	DocsPutDocHandler docs.PutDocHandler
 	// HodPutMonthsHandler sets the operation handler for the put months operation
 	HodPutMonthsHandler hod.PutMonthsHandler
 	// HodPutPhotosHandler sets the operation handler for the put photos operation
@@ -366,6 +387,9 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.AdvantagesDeleteAdvantagesIDHandler == nil {
 		unregistered = append(unregistered, "advantages.DeleteAdvantagesIDHandler")
 	}
+	if o.DocsDeleteDocIDHandler == nil {
+		unregistered = append(unregistered, "docs.DeleteDocIDHandler")
+	}
 	if o.HodDeleteMonthsIDHandler == nil {
 		unregistered = append(unregistered, "hod.DeleteMonthsIDHandler")
 	}
@@ -386,6 +410,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.AdvantagesGetAdvantagesIDHandler == nil {
 		unregistered = append(unregistered, "advantages.GetAdvantagesIDHandler")
+	}
+	if o.DocsGetDocHandler == nil {
+		unregistered = append(unregistered, "docs.GetDocHandler")
 	}
 	if o.HodGetMonthsIDHandler == nil {
 		unregistered = append(unregistered, "hod.GetMonthsIDHandler")
@@ -410,6 +437,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.AdvantagesPatchAdvantagesHandler == nil {
 		unregistered = append(unregistered, "advantages.PatchAdvantagesHandler")
+	}
+	if o.DocsPatchDocHandler == nil {
+		unregistered = append(unregistered, "docs.PatchDocHandler")
 	}
 	if o.HodPatchMonthsHandler == nil {
 		unregistered = append(unregistered, "hod.PatchMonthsHandler")
@@ -446,6 +476,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.AdvantagesPutAdvantagesHandler == nil {
 		unregistered = append(unregistered, "advantages.PutAdvantagesHandler")
+	}
+	if o.DocsPutDocHandler == nil {
+		unregistered = append(unregistered, "docs.PutDocHandler")
 	}
 	if o.HodPutMonthsHandler == nil {
 		unregistered = append(unregistered, "hod.PutMonthsHandler")
@@ -575,6 +608,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
+	o.handlers["DELETE"]["/doc/{id}"] = docs.NewDeleteDocID(o.context, o.DocsDeleteDocIDHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
 	o.handlers["DELETE"]["/months/{id}"] = hod.NewDeleteMonthsID(o.context, o.HodDeleteMonthsIDHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
@@ -600,6 +637,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/advantages/{id}"] = advantages.NewGetAdvantagesID(o.context, o.AdvantagesGetAdvantagesIDHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/doc"] = docs.NewGetDoc(o.context, o.DocsGetDocHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -632,6 +673,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/advantages"] = advantages.NewPatchAdvantages(o.context, o.AdvantagesPatchAdvantagesHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/doc"] = docs.NewPatchDoc(o.context, o.DocsPatchDocHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
@@ -680,6 +725,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/advantages"] = advantages.NewPutAdvantages(o.context, o.AdvantagesPutAdvantagesHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/doc"] = docs.NewPutDoc(o.context, o.DocsPutDocHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

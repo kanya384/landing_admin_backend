@@ -69,7 +69,7 @@ func (h *handlers) Update(params posters.PatchPostersParams, input interface{}) 
 	defer cancel()
 	userID, err := helpers.GetUserIdFromHandler(input)
 	if err != nil {
-		return posters.NewPostPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
+		return posters.NewPatchPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
 	}
 	photo := ""
 	if params.Photo != nil {
@@ -77,14 +77,14 @@ func (h *handlers) Update(params posters.PatchPostersParams, input interface{}) 
 	}
 	poster, err := domain.NewPoster(params.ID, params.Title, params.Description, photo, params.Active, int(params.Order), time.Now(), time.Now(), userID)
 	if err != nil {
-		return posters.NewPostPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error updating poster"})
+		return posters.NewPatchPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error updating poster"})
 	}
 	err = h.services.Posters.Update(ctx, poster, params.File)
 	if err != nil {
-		return posters.NewPostPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error updating poster"})
+		return posters.NewPatchPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error updating poster"})
 	}
 
-	return posters.NewPostPostersOK().WithPayload(&models.ResultResponse{Msg: "poster created"})
+	return posters.NewPatchPostersOK().WithPayload(&models.ResultResponse{Msg: "poster created"})
 }
 
 func (h *handlers) Delete(params posters.DeletePostersPosterIDParams, input interface{}) middleware.Responder {
@@ -158,15 +158,15 @@ func (h *handlers) PostersOrdersChange(params posters.PostPostersOrdersParams, i
 	defer cancel()
 	first, err := domain.NewUpdateOrderStruct(params.Params.First.ID, int(params.Params.First.Order))
 	if err != nil {
-		return posters.NewPostPostersBadRequest()
+		return posters.NewPostPostersOrdersBadRequest()
 	}
 	second, err := domain.NewUpdateOrderStruct(params.Params.Second.ID, int(params.Params.Second.Order))
 	if err != nil {
-		return posters.NewPostPostersBadRequest()
+		return posters.NewPostPostersOrdersBadRequest()
 	}
 	err = h.services.Posters.PostersOrdersChange(ctx, first, second)
 	if err != nil {
-		return posters.NewPostPostersInternalServerError()
+		return posters.NewPostPostersOrdersInternalServerError()
 	}
 	return posters.NewPostPostersOrdersOK()
 }
