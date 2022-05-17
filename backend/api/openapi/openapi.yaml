@@ -1084,6 +1084,125 @@ paths:
           description: 'Bad request'
         '500':
           description: 'Internal Server Error'
+  /video:
+    get:
+      summary: "get video list"
+      security:
+        - Token: []
+      tags:
+        - video
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns video list'
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/Video'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    put:
+      summary: "create video file"
+      security:
+        - Token: []
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      tags:
+        - video
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload
+        - in: formData
+          name: url
+          type: string
+          required: true
+          description: video title
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Video'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    patch:
+      summary: "update video file"
+      security:
+        - Token: []
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      tags:
+        - video
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload
+        - in: formData
+          name: id
+          type: string
+          required: true
+          description: video id
+        - in: formData
+          name: url
+          type: string
+          required: true
+          description: video title
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Video'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /video/{id}:
+    delete:
+      summary: "delete video by id"
+      security:
+        - Token: []
+      tags:
+        - video
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String id video to delete
+      responses:
+        '200':
+          description: 'delete video success'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object

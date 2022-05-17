@@ -573,12 +573,6 @@ func init() {
         "summary": "update doc",
         "parameters": [
           {
-            "type": "file",
-            "description": "The file to upload",
-            "name": "file",
-            "in": "formData"
-          },
-          {
             "type": "string",
             "name": "id",
             "in": "formData",
@@ -590,6 +584,12 @@ func init() {
             "name": "title",
             "in": "formData",
             "required": true
+          },
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData"
           }
         ],
         "responses": {
@@ -1582,6 +1582,194 @@ func init() {
             "schema": {
               "$ref": "#/definitions/ResultResponse"
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/video": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "video"
+        ],
+        "summary": "get video list",
+        "responses": {
+          "200": {
+            "description": "returns video list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Video"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "video"
+        ],
+        "summary": "create video file",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "video title",
+            "name": "url",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Video"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "video"
+        ],
+        "summary": "update video file",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "video id",
+            "name": "id",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "video title",
+            "name": "url",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Video"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/video/{id}": {
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "video"
+        ],
+        "summary": "delete video by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String id video to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete video success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -2678,12 +2866,6 @@ func init() {
         "summary": "update doc",
         "parameters": [
           {
-            "type": "file",
-            "description": "The file to upload",
-            "name": "file",
-            "in": "formData"
-          },
-          {
             "type": "string",
             "name": "id",
             "in": "formData",
@@ -2695,6 +2877,12 @@ func init() {
             "name": "title",
             "in": "formData",
             "required": true
+          },
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData"
           }
         ],
         "responses": {
@@ -3687,6 +3875,194 @@ func init() {
             "schema": {
               "$ref": "#/definitions/ResultResponse"
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/video": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "video"
+        ],
+        "summary": "get video list",
+        "responses": {
+          "200": {
+            "description": "returns video list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Video"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "video"
+        ],
+        "summary": "create video file",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "video title",
+            "name": "url",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Video"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "video"
+        ],
+        "summary": "update video file",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "video id",
+            "name": "id",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "video title",
+            "name": "url",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Video"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/video/{id}": {
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "video"
+        ],
+        "summary": "delete video by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String id video to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete video success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
           },
           "500": {
             "description": "Internal Server Error"

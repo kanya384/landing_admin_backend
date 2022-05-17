@@ -17,26 +17,26 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// PutDocsMaxParseMemory sets the maximum size in bytes for
+// PutVideoMaxParseMemory sets the maximum size in bytes for
 // the multipart form parser for this operation.
 //
 // The default value is 32 MB.
 // The multipart parser stores up to this + 10MB.
-var PutDocsMaxParseMemory int64 = 32 << 20
+var PutVideoMaxParseMemory int64 = 32 << 20
 
-// NewPutDocsParams creates a new PutDocsParams object
+// NewPutVideoParams creates a new PutVideoParams object
 //
 // There are no default values defined in the spec.
-func NewPutDocsParams() PutDocsParams {
+func NewPutVideoParams() PutVideoParams {
 
-	return PutDocsParams{}
+	return PutVideoParams{}
 }
 
-// PutDocsParams contains all the bound params for the put docs operation
+// PutVideoParams contains all the bound params for the put video operation
 // typically these are obtained from a http.Request
 //
-// swagger:parameters PutDocs
-type PutDocsParams struct {
+// swagger:parameters PutVideo
+type PutVideoParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
@@ -46,23 +46,23 @@ type PutDocsParams struct {
 	  In: formData
 	*/
 	File io.ReadCloser
-	/*docs title
+	/*video title
 	  Required: true
 	  In: formData
 	*/
-	Title string
+	URL string
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
 // for simple values it will use straight method calls.
 //
-// To ensure default values, the struct must have been initialized with NewPutDocsParams() beforehand.
-func (o *PutDocsParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// To ensure default values, the struct must have been initialized with NewPutVideoParams() beforehand.
+func (o *PutVideoParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
 	o.HTTPRequest = r
 
-	if err := r.ParseMultipartForm(PutDocsMaxParseMemory); err != nil {
+	if err := r.ParseMultipartForm(PutVideoMaxParseMemory); err != nil {
 		if err != http.ErrNotMultipart {
 			return errors.New(400, "%v", err)
 		} else if err := r.ParseForm(); err != nil {
@@ -81,8 +81,8 @@ func (o *PutDocsParams) BindRequest(r *http.Request, route *middleware.MatchedRo
 		o.File = &runtime.File{Data: file, Header: fileHeader}
 	}
 
-	fdTitle, fdhkTitle, _ := fds.GetOK("title")
-	if err := o.bindTitle(fdTitle, fdhkTitle, route.Formats); err != nil {
+	fdURL, fdhkURL, _ := fds.GetOK("url")
+	if err := o.bindURL(fdURL, fdhkURL, route.Formats); err != nil {
 		res = append(res, err)
 	}
 	if len(res) > 0 {
@@ -94,14 +94,14 @@ func (o *PutDocsParams) BindRequest(r *http.Request, route *middleware.MatchedRo
 // bindFile binds file parameter File.
 //
 // The only supported validations on files are MinLength and MaxLength
-func (o *PutDocsParams) bindFile(file multipart.File, header *multipart.FileHeader) error {
+func (o *PutVideoParams) bindFile(file multipart.File, header *multipart.FileHeader) error {
 	return nil
 }
 
-// bindTitle binds and validates parameter Title from formData.
-func (o *PutDocsParams) bindTitle(rawData []string, hasKey bool, formats strfmt.Registry) error {
+// bindURL binds and validates parameter URL from formData.
+func (o *PutVideoParams) bindURL(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	if !hasKey {
-		return errors.Required("title", "formData", rawData)
+		return errors.Required("url", "formData", rawData)
 	}
 	var raw string
 	if len(rawData) > 0 {
@@ -110,10 +110,10 @@ func (o *PutDocsParams) bindTitle(rawData []string, hasKey bool, formats strfmt.
 
 	// Required: true
 
-	if err := validate.RequiredString("title", "formData", raw); err != nil {
+	if err := validate.RequiredString("url", "formData", raw); err != nil {
 		return err
 	}
-	o.Title = raw
+	o.URL = raw
 
 	return nil
 }

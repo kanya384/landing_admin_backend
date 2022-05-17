@@ -11,40 +11,40 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 )
 
-// DeleteDocsIDHandlerFunc turns a function with the right signature into a delete docs ID handler
-type DeleteDocsIDHandlerFunc func(DeleteDocsIDParams, interface{}) middleware.Responder
+// PutVideoHandlerFunc turns a function with the right signature into a put video handler
+type PutVideoHandlerFunc func(PutVideoParams, interface{}) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteDocsIDHandlerFunc) Handle(params DeleteDocsIDParams, principal interface{}) middleware.Responder {
+func (fn PutVideoHandlerFunc) Handle(params PutVideoParams, principal interface{}) middleware.Responder {
 	return fn(params, principal)
 }
 
-// DeleteDocsIDHandler interface for that can handle valid delete docs ID params
-type DeleteDocsIDHandler interface {
-	Handle(DeleteDocsIDParams, interface{}) middleware.Responder
+// PutVideoHandler interface for that can handle valid put video params
+type PutVideoHandler interface {
+	Handle(PutVideoParams, interface{}) middleware.Responder
 }
 
-// NewDeleteDocsID creates a new http.Handler for the delete docs ID operation
-func NewDeleteDocsID(ctx *middleware.Context, handler DeleteDocsIDHandler) *DeleteDocsID {
-	return &DeleteDocsID{Context: ctx, Handler: handler}
+// NewPutVideo creates a new http.Handler for the put video operation
+func NewPutVideo(ctx *middleware.Context, handler PutVideoHandler) *PutVideo {
+	return &PutVideo{Context: ctx, Handler: handler}
 }
 
-/* DeleteDocsID swagger:route DELETE /docs/{id} docs deleteDocsId
+/* PutVideo swagger:route PUT /video docs putVideo
 
-delete doc by id
+create video file
 
 */
-type DeleteDocsID struct {
+type PutVideo struct {
 	Context *middleware.Context
-	Handler DeleteDocsIDHandler
+	Handler PutVideoHandler
 }
 
-func (o *DeleteDocsID) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (o *PutVideo) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
 		*r = *rCtx
 	}
-	var Params = NewDeleteDocsIDParams()
+	var Params = NewPutVideoParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
 	if err != nil {
 		o.Context.Respond(rw, r, route.Produces, route, err)

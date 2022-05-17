@@ -5,6 +5,7 @@ import hodReducer from './hodReducer';
 import advantagesReducer from './advantagesReducer';
 import plansReducer from './plansReducer';
 import docsReducer from './docsReducer';
+import videoReducer from './videoReducer';
 
 const reducers = combineReducers({
     auths: authsReducer,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
     advantages: advantagesReducer,
     plans: plansReducer,
     docs: docsReducer,
+    videoReducer: videoReducer,
 })
 
 export default reducers;

@@ -3756,3 +3756,358 @@ export class PostersApi extends BaseAPI {
 }
 
 
+/**
+ * VideoApi - axios parameter creator
+ * @export
+ */
+export const VideoApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary get video list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        videoGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/video`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary delete video by id
+         * @param {string} id String id video to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        videoIdDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('videoIdDelete', 'id', id)
+            const localVarPath = `/video/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary update video file
+         * @param {any} file The file to upload
+         * @param {string} id video id
+         * @param {string} url video title
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        videoPatch: async (file: any, id: string, url: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('videoPatch', 'file', file)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('videoPatch', 'id', id)
+            // verify required parameter 'url' is not null or undefined
+            assertParamExists('videoPatch', 'url', url)
+            const localVarPath = `/video`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (id !== undefined) { 
+                localVarFormParams.append('id', id as any);
+            }
+    
+            if (url !== undefined) { 
+                localVarFormParams.append('url', url as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create video file
+         * @param {any} file The file to upload
+         * @param {string} url video title
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        videoPut: async (file: any, url: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('videoPut', 'file', file)
+            // verify required parameter 'url' is not null or undefined
+            assertParamExists('videoPut', 'url', url)
+            const localVarPath = `/video`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (url !== undefined) { 
+                localVarFormParams.append('url', url as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * VideoApi - functional programming interface
+ * @export
+ */
+export const VideoApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = VideoApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary get video list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async videoGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Video>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.videoGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary delete video by id
+         * @param {string} id String id video to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async videoIdDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.videoIdDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary update video file
+         * @param {any} file The file to upload
+         * @param {string} id video id
+         * @param {string} url video title
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async videoPatch(file: any, id: string, url: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Video>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.videoPatch(file, id, url, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create video file
+         * @param {any} file The file to upload
+         * @param {string} url video title
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async videoPut(file: any, url: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Video>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.videoPut(file, url, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * VideoApi - factory interface
+ * @export
+ */
+export const VideoApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = VideoApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary get video list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        videoGet(options?: any): AxiosPromise<Array<Video>> {
+            return localVarFp.videoGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary delete video by id
+         * @param {string} id String id video to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        videoIdDelete(id: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.videoIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary update video file
+         * @param {any} file The file to upload
+         * @param {string} id video id
+         * @param {string} url video title
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        videoPatch(file: any, id: string, url: string, options?: any): AxiosPromise<Video> {
+            return localVarFp.videoPatch(file, id, url, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create video file
+         * @param {any} file The file to upload
+         * @param {string} url video title
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        videoPut(file: any, url: string, options?: any): AxiosPromise<Video> {
+            return localVarFp.videoPut(file, url, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * VideoApi - object-oriented interface
+ * @export
+ * @class VideoApi
+ * @extends {BaseAPI}
+ */
+export class VideoApi extends BaseAPI {
+    /**
+     * 
+     * @summary get video list
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VideoApi
+     */
+    public videoGet(options?: AxiosRequestConfig) {
+        return VideoApiFp(this.configuration).videoGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary delete video by id
+     * @param {string} id String id video to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VideoApi
+     */
+    public videoIdDelete(id: string, options?: AxiosRequestConfig) {
+        return VideoApiFp(this.configuration).videoIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update video file
+     * @param {any} file The file to upload
+     * @param {string} id video id
+     * @param {string} url video title
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VideoApi
+     */
+    public videoPatch(file: any, id: string, url: string, options?: AxiosRequestConfig) {
+        return VideoApiFp(this.configuration).videoPatch(file, id, url, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create video file
+     * @param {any} file The file to upload
+     * @param {string} url video title
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VideoApi
+     */
+    public videoPut(file: any, url: string, options?: AxiosRequestConfig) {
+        return VideoApiFp(this.configuration).videoPut(file, url, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+

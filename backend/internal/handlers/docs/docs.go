@@ -2,7 +2,6 @@ package docs
 
 import (
 	"context"
-	"fmt"
 	"landing_admin_backend/internal/domain"
 	"landing_admin_backend/internal/generated/operations/docs"
 	"landing_admin_backend/internal/services"
@@ -33,10 +32,9 @@ func NewHandlers(services *services.Services) Handlers {
 }
 
 func (h *handlers) Get(params docs.GetDocParams, input interface{}) middleware.Responder {
-	fmt.Println("get")
 	docsList, err := h.services.Docs.Get(context.Background())
 	if err != nil {
-		return docs.NewGetDocsBadRequest()
+		return docs.NewGetDocBadRequest()
 	}
 	docsListResponse := []*models.Doc{}
 	for _, doc := range docsList {
@@ -51,24 +49,23 @@ func (h *handlers) Get(params docs.GetDocParams, input interface{}) middleware.R
 		docsListResponse = append(docsListResponse, &docIns)
 	}
 	if err != nil {
-		return docs.NewGetDocsBadRequest()
+		return docs.NewGetDocBadRequest()
 	}
-	return docs.NewGetDocsOK().WithPayload(docsListResponse)
+	return docs.NewGetDocOK().WithPayload(docsListResponse)
 }
 
 func (h *handlers) Create(params docs.PutDocParams, input interface{}) middleware.Responder {
-	fmt.Println("insert")
 	userID, err := helpers.GetUserIdFromHandler(input)
 	if err != nil {
-		return docs.NewPutDocsBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
+		return docs.NewPutDocBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
 	}
 	doc, err := domain.NewDoc("", params.Title, "", time.Now(), time.Now(), userID)
 	if err != nil {
-		return docs.NewPutDocsBadRequest().WithPayload(&models.ResultResponse{Msg: "check request params"})
+		return docs.NewPutDocBadRequest().WithPayload(&models.ResultResponse{Msg: "check request params"})
 	}
 	docInserted, err := h.services.Docs.Create(context.Background(), doc, params.File, "file.pdf")
 	if err != nil {
-		return docs.NewPutDocsInternalServerError()
+		return docs.NewPutDocInternalServerError()
 	}
 	docRes := models.Doc{
 		ID:         docInserted.ID.Hex(),
@@ -78,21 +75,21 @@ func (h *handlers) Create(params docs.PutDocParams, input interface{}) middlewar
 		UpdatedAt:  strfmt.DateTime(docInserted.UpdateAt),
 		ModifiedBy: docInserted.ModifiedBy.Hex(),
 	}
-	return docs.NewPutDocsOK().WithPayload(&docRes)
+	return docs.NewPutDocOK().WithPayload(&docRes)
 }
 
 func (h *handlers) Update(params docs.PatchDocParams, input interface{}) middleware.Responder {
 	userID, err := helpers.GetUserIdFromHandler(input)
 	if err != nil {
-		return docs.NewPutDocsBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
+		return docs.NewPutDocBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
 	}
 	doc, err := domain.NewDoc("", params.Title, "", time.Now(), time.Now(), userID)
 	if err != nil {
-		return docs.NewPutDocsBadRequest().WithPayload(&models.ResultResponse{Msg: "check request params"})
+		return docs.NewPutDocBadRequest().WithPayload(&models.ResultResponse{Msg: "check request params"})
 	}
 	docInserted, err := h.services.Docs.Create(context.Background(), doc, params.File, "file.pdf")
 	if err != nil {
-		return docs.NewPutDocsInternalServerError()
+		return docs.NewPutDocInternalServerError()
 	}
 	docRes := models.Doc{
 		ID:         docInserted.ID.Hex(),
@@ -102,17 +99,17 @@ func (h *handlers) Update(params docs.PatchDocParams, input interface{}) middlew
 		UpdatedAt:  strfmt.DateTime(docInserted.UpdateAt),
 		ModifiedBy: docInserted.ModifiedBy.Hex(),
 	}
-	return docs.NewPatchDocsOK().WithPayload(&docRes)
+	return docs.NewPatchDocOK().WithPayload(&docRes)
 }
 
 func (h *handlers) Delete(params docs.DeleteDocIDParams, input interface{}) middleware.Responder {
 	id, err := primitive.ObjectIDFromHex(params.ID)
 	if err != nil {
-		return docs.NewDeleteDocsIDBadRequest()
+		return docs.NewDeleteDocIDBadRequest()
 	}
 	err = h.services.Docs.Delete(context.Background(), id)
 	if err != nil {
-		return docs.NewDeleteDocsIDInternalServerError()
+		return docs.NewDeleteDocIDInternalServerError()
 	}
-	return docs.NewDeleteDocsIDOK()
+	return docs.NewDeleteDocIDOK()
 }

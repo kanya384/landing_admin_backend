@@ -12,19 +12,19 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 )
 
-// NewGetDocsParams creates a new GetDocsParams object
+// NewGetVideoParams creates a new GetVideoParams object
 //
 // There are no default values defined in the spec.
-func NewGetDocsParams() GetDocsParams {
+func NewGetVideoParams() GetVideoParams {
 
-	return GetDocsParams{}
+	return GetVideoParams{}
 }
 
-// GetDocsParams contains all the bound params for the get docs operation
+// GetVideoParams contains all the bound params for the get video operation
 // typically these are obtained from a http.Request
 //
-// swagger:parameters GetDocs
-type GetDocsParams struct {
+// swagger:parameters GetVideo
+type GetVideoParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
@@ -33,8 +33,8 @@ type GetDocsParams struct {
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
 // for simple values it will use straight method calls.
 //
-// To ensure default values, the struct must have been initialized with NewGetDocsParams() beforehand.
-func (o *GetDocsParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// To ensure default values, the struct must have been initialized with NewGetVideoParams() beforehand.
+func (o *GetVideoParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
 	o.HTTPRequest = r
