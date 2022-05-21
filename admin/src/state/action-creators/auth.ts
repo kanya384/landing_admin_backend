@@ -8,8 +8,7 @@ import { Configuration, DefaultApi } from '../../api';
 
 const AUTH_ERROR = "Проверьте логин или пароль"
 const ERR_FIELD_EMPTY = "Заполните необходимые поля"
-const url = "http://localhost:3000"
-const authService = new DefaultApi(new Configuration(), url);
+const authService = new DefaultApi(new Configuration(), process.env.REACT_APP_BACKEND_URL);
 export const sendAuth = (login: string, pass: string) => {
     return async (dispatch: Dispatch<Authorize>) => {
         if (login === "" || pass === "") {

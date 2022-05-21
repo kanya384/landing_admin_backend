@@ -1,10 +1,10 @@
-import type { FC } from 'react'
+import { FC, useState } from 'react'
 import { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import "./card.css"
 import type { Identifier, XYCoord } from 'dnd-core'
 import { ItemTypes } from './itemTypes';
-import { Accordion, AccordionItem } from '../accordion'
+import YouTube from 'react-youtube'
 
 interface CardProps {
   ID: string,
@@ -18,6 +18,7 @@ interface CardProps {
   deleteClick?:any,
   click?:any,
   date?:string,
+  url?:string,
 }
 
 interface DragItem {
@@ -27,7 +28,9 @@ interface DragItem {
 }
 
 export const Card: FC<{card: CardProps}> = (props) => {
+  const [showVideo, setShowVideo] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<YouTube | null>(null)
   const [{ handlerId }, drop] = useDrop<
     DragItem,
     void,
@@ -138,6 +141,34 @@ export const Card: FC<{card: CardProps}> = (props) => {
           </div>
         </div>
       )
+    case 3:
+      console.log()
+      return ( <div ref={ref}  className="card text-white overflow-hidden"  data-handler-id={handlerId} style={{opacity, width:"90%", cursor:"pointer", padding: 0, margin: "4px", background:`url('${props.card.Image}')`}}>
+            <img className="card-img-top" src={props.card.Image} alt="..." />
+              <div style={{zIndex:"1000", position: "absolute", top: 0, right: 0,}}>
+                <div style={{marginTop:"10px", marginRight:"10px"}}>
+                  <button className="btn btn-soft-primary" onClick={() => {props.card.editClick();}}>Редактировать</button>
+                  <button className="btn btn-primary" style={{marginLeft:"10px"}} onClick={() => {props.card.deleteClick();}}>Удалить</button>
+                </div>
+              </div>
+              <div className="card-img-overlay" onClick={() => { setShowVideo(!showVideo); }} style={{padding: 0}}>
+                <div className='d-flex justify-content-end align-items-start' style={{display: "block", width:"100%", height:"100%", position:"relative"}}>
+                  <YouTube
+                    ref={videoRef}
+                    videoId = {props.card.url?.split('/')[props.card.url?.split('/').length-1]} 
+                    style={{position:"absolute",top: 0,bottom: 0,width: "100%", display:showVideo?"block":"none"}}
+                    onPause = {()=>{
+                      setShowVideo(false)
+                    }}
+                    opts = {{
+                      height: "100%",
+                      width: "100%",
+                    }}
+                  />
+                
+              </div>
+            </div>
+        </div>)
     default:
       return ( <div ref={ref} style={{ opacity }} key={props.card.ID} data-handler-id={handlerId} className='col-sm-6 col-md-4 col-lg-3'>
           <div className="card" >

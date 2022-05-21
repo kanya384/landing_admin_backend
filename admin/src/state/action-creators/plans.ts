@@ -5,8 +5,7 @@ import { PlansActionTypes } from "../action-types"
 import { PlansAction } from "../actions"
 
 const PLANS_ERROR = "Ошибка при получении данных"
-const url = "http://localhost:3000"
-const plansService = new PlansApi(new Configuration(), url)
+const plansService = new PlansApi(new Configuration(), process.env.REACT_APP_BACKEND_URL)
 
 export const getPlans = () => {
   return async (dispatch: Dispatch<PlansAction>) => {

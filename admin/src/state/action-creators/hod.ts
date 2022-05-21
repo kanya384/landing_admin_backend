@@ -5,8 +5,7 @@ import { HodActionTypes } from "../action-types";
 import { Hod } from "../actions";
 
 const HOD_ERROR = "Ошибка при получении данных"
-const url = "http://localhost:3000"
-const hodService = new HodApi(new Configuration(), url)
+const hodService = new HodApi(new Configuration(), process.env.REACT_APP_BACKEND_URL)
 export const getYears = () =>{
   return async (dispatch: Dispatch<Hod>) => {
     dispatch({

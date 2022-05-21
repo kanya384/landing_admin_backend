@@ -14,7 +14,7 @@ const reducers = combineReducers({
     advantages: advantagesReducer,
     plans: plansReducer,
     docs: docsReducer,
-    videoReducer: videoReducer,
+    videos: videoReducer,
 })
 
 export default reducers;

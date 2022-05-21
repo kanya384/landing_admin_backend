@@ -5,8 +5,7 @@ import { PostersActionTypes } from "../action-types";
 import { Posters } from "../actions";
 
 const POSTERS_ERROR = "Ошибка при получении данных"
-const url = "http://localhost:3000"
-const postersService = new PostersApi(new Configuration(), url)
+const postersService = new PostersApi(new Configuration(), process.env.REACT_APP_BACKEND_URL)
 export const getPosters = () => {
   return async (dispatch: Dispatch<Posters>) => {
     dispatch({

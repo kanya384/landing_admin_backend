@@ -5,8 +5,7 @@ import { DocsActionTypes } from "../action-types"
 import { DocAction } from "../actions/docs"
 
 const DOCS_ERROR = "Ошибка при получении данных"
-const url = "http://localhost:3000"
-const docsService = new DocsApi(new Configuration(), url)
+const docsService = new DocsApi(new Configuration(), process.env.REACT_APP_BACKEND_URL)
 export const getDocs = () => {
   return async (dispatch: Dispatch<DocAction>) => {
     dispatch({

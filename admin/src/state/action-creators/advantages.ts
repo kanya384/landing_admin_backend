@@ -5,8 +5,7 @@ import { AdvantagesActionTypes } from "../action-types";
 import { GetTokenFromCookies } from "../../utils";
 
 const ADVANTAGES_ERROR = "Ошибка при получении данных"
-const url = "http://localhost:3000"
-const advantagesService = new AdvantagesApi(new Configuration(), url)
+const advantagesService = new AdvantagesApi(new Configuration(), process.env.REACT_APP_BACKEND_URL)
 export const getAdvantages = () => {
     return async (dispatch: Dispatch<AdvantageAction>) => {
         dispatch({

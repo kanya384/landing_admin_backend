@@ -5,8 +5,7 @@ import { VideosActionTypes } from "../action-types";
 import { GetTokenFromCookies } from "../../utils";
 
 const VIDEOS_ERROR = "Ошибка при получении данных"
-const url = "http://localhost:3000"
-const videosService = new VideoApi(new Configuration(), url)
+const videosService = new VideoApi(new Configuration(), process.env.REACT_APP_BACKEND_URL)
 
 export const getVideos = () => {
   return async (dispatch: Dispatch<VideosAction>) => {
@@ -14,7 +13,8 @@ export const getVideos = () => {
       type: VideosActionTypes.VIDEOS_REQUEST_SEND
     })
 
-    videosService.videoGet().then((resp)=>{
+    let token = GetTokenFromCookies()
+    videosService.videoGet({headers: {"Authorization": token}}).then((resp)=>{
       if (resp.status === 200) {
         dispatch({
           type: VideosActionTypes.VIDEOS_SUCCESS,
@@ -74,7 +74,7 @@ export const updateVideo = (file: any, id: string, url: string, callback: (error
     videosService.videoPatch(file, id, url, {headers: {"Authorization": token}}).then((resp) => {
       if (resp.status === 200) {
         dispatch({
-          type: VideosActionTypes.VIDEOS_NEW,
+          type: VideosActionTypes.VIDEOS_UPDATE,
           payload: resp.data,
         });
         callback("")
