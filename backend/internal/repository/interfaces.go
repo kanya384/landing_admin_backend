@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"landing_admin_backend/internal/domain"
+	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -87,4 +88,5 @@ type Leads interface {
 	Get(ctx context.Context) (leads []*domain.Lead, err error)
 	Create(ctx context.Context, lead domain.Lead) (err error)
 	Delete(ctx context.Context, leadID primitive.ObjectID) (err error)
+	CountDocuments(ctx context.Context, startDate time.Time, endDate time.Time) (count int, err error)
 }

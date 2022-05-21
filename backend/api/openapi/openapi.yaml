@@ -1251,6 +1251,28 @@ paths:
             $ref: '#/definitions/ResultResponse'
         '500':
           description: 'Internal Server Error'
+  /lead/analytics:
+    get:
+      summary: "get leads analytics"
+      security:
+        - Token: []
+      tags:
+        - leads
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns leads analytics'
+          schema:
+            $ref: '#/definitions/Analytics'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
   /lead/{id}:
     delete:
       summary: "delete lead by id"
@@ -1522,6 +1544,24 @@ definitions:
         format: date-time
       modifiedBy:
         type: string
+  DayLeadsInfo:
+    type: object
+    properties:
+      date:
+        type: string
+      count:
+        type: number
+  Analytics:
+    type: object
+    properties:
+      today_count:
+        type: number
+      month_count:
+        type: number
+      chart_info:
+        type: array
+        items:
+          $ref: '#/definitions/DayLeadsInfo'
   Lead:
     type: object
     properties:
@@ -1555,5 +1595,3 @@ definitions:
       updatedAt:
         type: string
         format: date-time
-      modifiedBy:
-        type: string

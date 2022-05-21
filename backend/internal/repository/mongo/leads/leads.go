@@ -5,6 +5,7 @@ import (
 	"errors"
 	"landing_admin_backend/internal/domain"
 	repos "landing_admin_backend/internal/repository"
+	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -57,4 +58,10 @@ func (r *repository) Delete(ctx context.Context, leadID primitive.ObjectID) (err
 		return errors.New(domain.ErrNoFieldWithID)
 	}
 	return
+}
+
+func (r *repository) CountDocuments(ctx context.Context, startDate time.Time, endDate time.Time) (count int, err error) {
+	filter := primitive.D{{"created_at", primitive.D{{"$gt", startDate}}}, {"created_at", primitive.D{{"$lt", endDate}}}}
+	countInt64, err := r.collection.CountDocuments(ctx, filter)
+	return int(countInt64), err
 }

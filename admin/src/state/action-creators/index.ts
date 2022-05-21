@@ -5,3 +5,4 @@ export * from './advantages';
 export * from './plans';
 export * from './docs';
 export * from './videos';
+export * from './leads'

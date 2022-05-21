@@ -21,10 +21,9 @@ type Lead struct {
 	SendedToCrm  bool               `bson:"sended_to_crm" json:"sended_to_crm" form:"sended_to_crm"`
 	CreatedAt    time.Time          `bson:"created_at" json:"created_at"`
 	UpdatedAt    time.Time          `bson:"updated_at" json:"updated_at"`
-	ModifiedBy   primitive.ObjectID `bson:"modified_by" json:"modified_by"`
 }
 
-func NewLead(id string, name string, phone string, email string, text string, roistat string, utm_source string, utm_medium string, utm_term string, utm_campaign string, utm_content string, CreatedAt time.Time, UpdatedAt time.Time, ModifiedBy primitive.ObjectID) (lead Lead, err error) {
+func NewLead(id string, name string, phone string, email string, text string, roistat string, utm_source string, utm_medium string, utm_term string, utm_campaign string, utm_content string, CreatedAt time.Time, UpdatedAt time.Time) (lead Lead, err error) {
 	lead = Lead{
 		Name:         name,
 		Phone:        phone,
@@ -39,7 +38,6 @@ func NewLead(id string, name string, phone string, email string, text string, ro
 		SendedToCrm:  false,
 		CreatedAt:    CreatedAt,
 		UpdatedAt:    UpdatedAt,
-		ModifiedBy:   ModifiedBy,
 	}
 	if id == "" {
 		lead.ID = primitive.NewObjectID()
@@ -50,4 +48,15 @@ func NewLead(id string, name string, phone string, email string, text string, ro
 		}
 	}
 	return
+}
+
+type DayLeadsInfo struct {
+	Date  string
+	Count int
+}
+
+type Analytics struct {
+	TodayCount int
+	MonthCount int
+	ChartInfo  []*DayLeadsInfo
 }

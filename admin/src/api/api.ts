@@ -110,6 +110,31 @@ export interface AdvantagePhoto {
 /**
  * 
  * @export
+ * @interface Analytics
+ */
+export interface Analytics {
+    /**
+     * 
+     * @type {number}
+     * @memberof Analytics
+     */
+    'today_count'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Analytics
+     */
+    'month_count'?: number;
+    /**
+     * 
+     * @type {Array<DayLeadsInfo>}
+     * @memberof Analytics
+     */
+    'chart_info'?: Array<DayLeadsInfo>;
+}
+/**
+ * 
+ * @export
  * @interface AuthenticateRequest
  */
 export interface AuthenticateRequest {
@@ -150,6 +175,25 @@ export interface AuthenticateResponse {
      * @memberof AuthenticateResponse
      */
     'error'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface DayLeadsInfo
+ */
+export interface DayLeadsInfo {
+    /**
+     * 
+     * @type {string}
+     * @memberof DayLeadsInfo
+     */
+    'date'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof DayLeadsInfo
+     */
+    'count'?: number;
 }
 /**
  * 
@@ -353,12 +397,6 @@ export interface Lead {
      * @memberof Lead
      */
     'updatedAt'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Lead
-     */
-    'modifiedBy'?: string;
 }
 /**
  * 
@@ -2981,6 +3019,39 @@ export const LeadsApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
+         * @summary get leads analytics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        leadAnalyticsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/lead/analytics`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary get leads list
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3095,6 +3166,16 @@ export const LeadsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary get leads analytics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async leadAnalyticsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Analytics>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.leadAnalyticsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary get leads list
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3137,6 +3218,15 @@ export const LeadsApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
+         * @summary get leads analytics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        leadAnalyticsGet(options?: any): AxiosPromise<Analytics> {
+            return localVarFp.leadAnalyticsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary get leads list
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3174,6 +3264,17 @@ export const LeadsApiFactory = function (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export class LeadsApi extends BaseAPI {
+    /**
+     * 
+     * @summary get leads analytics
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LeadsApi
+     */
+    public leadAnalyticsGet(options?: AxiosRequestConfig) {
+        return LeadsApiFp(this.configuration).leadAnalyticsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary get leads list

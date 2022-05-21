@@ -6,7 +6,6 @@ import (
 	"landing_admin_backend/internal/generated/operations/leads"
 	"landing_admin_backend/internal/services"
 	"landing_admin_backend/models"
-	"landing_admin_backend/pkg/helpers"
 	"time"
 
 	"github.com/go-openapi/runtime/middleware"
@@ -16,6 +15,7 @@ import (
 
 type Handlers interface {
 	Get(params leads.GetLeadParams, input interface{}) middleware.Responder
+	GetAnalytics(params leads.GetLeadAnalyticsParams, input interface{}) middleware.Responder
 	Create(params leads.PutLeadParams) middleware.Responder
 	Delete(params leads.DeleteLeadIDParams, input interface{}) middleware.Responder
 }
@@ -57,12 +57,28 @@ func (h *handlers) Get(params leads.GetLeadParams, input interface{}) middleware
 	return leads.NewGetLeadOK().WithPayload(leadListResponse)
 }
 
-func (h *handlers) Create(params leads.PutLeadParams) middleware.Responder {
-	userID, err := helpers.GetUserIdFromHandler(params)
+func (h *handlers) GetAnalytics(params leads.GetLeadAnalyticsParams, input interface{}) middleware.Responder {
+	analytics, err := h.services.Leads.GetAnalytics(context.Background())
 	if err != nil {
-		return leads.NewPutLeadBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
+		return leads.NewGetLeadAnalyticsBadRequest().WithPayload(&models.ResultResponse{Msg: "check request params"})
 	}
-	lead, err := domain.NewLead(params.Params.ID, params.Params.Name, params.Params.Phone, params.Params.Email, params.Params.Text, params.Params.Roistat, params.Params.UtmSource, params.Params.UtmMedium, params.Params.UtmTerm, params.Params.UtmCampaign, params.Params.UtmContent, time.Now(), time.Now(), userID)
+	chartInfo := []*models.DayLeadsInfo{}
+	for _, dayInfo := range analytics.ChartInfo {
+		chartInfo = append(chartInfo, &models.DayLeadsInfo{
+			Date:  dayInfo.Date,
+			Count: float64(dayInfo.Count),
+		})
+	}
+	result := models.Analytics{
+		TodayCount: float64(analytics.TodayCount),
+		MonthCount: float64(analytics.MonthCount),
+		ChartInfo:  chartInfo,
+	}
+	return leads.NewGetLeadAnalyticsOK().WithPayload(&result)
+}
+
+func (h *handlers) Create(params leads.PutLeadParams) middleware.Responder {
+	lead, err := domain.NewLead(params.Params.ID, params.Params.Name, params.Params.Phone, params.Params.Email, params.Params.Text, params.Params.Roistat, params.Params.UtmSource, params.Params.UtmMedium, params.Params.UtmTerm, params.Params.UtmCampaign, params.Params.UtmContent, time.Now(), time.Now())
 	if err != nil {
 		return leads.NewPutLeadBadRequest().WithPayload(&models.ResultResponse{Msg: "check request params"})
 	}

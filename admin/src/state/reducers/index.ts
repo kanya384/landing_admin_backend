@@ -6,6 +6,7 @@ import advantagesReducer from './advantagesReducer';
 import plansReducer from './plansReducer';
 import docsReducer from './docsReducer';
 import videoReducer from './videoReducer';
+import leadsReducer from './leadsReducer';
 
 const reducers = combineReducers({
     auths: authsReducer,
@@ -15,6 +16,7 @@ const reducers = combineReducers({
     plans: plansReducer,
     docs: docsReducer,
     videos: videoReducer,
+    leads: leadsReducer,
 })
 
 export default reducers;

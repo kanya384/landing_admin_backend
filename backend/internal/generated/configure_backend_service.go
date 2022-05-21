@@ -150,6 +150,7 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	api.LeadsGetLeadHandler = leads.GetLeadHandlerFunc(handlers.Leads.Get)
 	api.LeadsPutLeadHandler = leads.PutLeadHandlerFunc(handlers.Leads.Create)
 	api.LeadsDeleteLeadIDHandler = leads.DeleteLeadIDHandlerFunc(handlers.Leads.Delete)
+	api.LeadsGetLeadAnalyticsHandler = leads.GetLeadAnalyticsHandlerFunc(handlers.Leads.GetAnalytics)
 
 	http.FileServer(http.Dir("file_store"))
 

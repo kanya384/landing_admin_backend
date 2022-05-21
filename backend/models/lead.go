@@ -29,9 +29,6 @@ type Lead struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// modified by
-	ModifiedBy string `json:"modifiedBy,omitempty"`
-
 	// name
 	Name string `json:"name,omitempty"`
 

@@ -730,6 +730,42 @@ func init() {
         }
       }
     },
+    "/lead/analytics": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "leads"
+        ],
+        "summary": "get leads analytics",
+        "responses": {
+          "200": {
+            "description": "returns leads analytics",
+            "schema": {
+              "$ref": "#/definitions/Analytics"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/lead/{id}": {
       "delete": {
         "security": [
@@ -2109,6 +2145,23 @@ func init() {
         }
       }
     },
+    "Analytics": {
+      "type": "object",
+      "properties": {
+        "chart_info": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DayLeadsInfo"
+          }
+        },
+        "month_count": {
+          "type": "number"
+        },
+        "today_count": {
+          "type": "number"
+        }
+      }
+    },
     "AuthenticateRequest": {
       "type": "object",
       "properties": {
@@ -2136,6 +2189,17 @@ func init() {
         "token": {
           "type": "string",
           "example": "asdkjkzxcqw1290090"
+        }
+      }
+    },
+    "DayLeadsInfo": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "number"
+        },
+        "date": {
+          "type": "string"
         }
       }
     },
@@ -2219,9 +2283,6 @@ func init() {
           "type": "string"
         },
         "id": {
-          "type": "string"
-        },
-        "modifiedBy": {
           "type": "string"
         },
         "name": {
@@ -3194,6 +3255,42 @@ func init() {
         }
       }
     },
+    "/lead/analytics": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "leads"
+        ],
+        "summary": "get leads analytics",
+        "responses": {
+          "200": {
+            "description": "returns leads analytics",
+            "schema": {
+              "$ref": "#/definitions/Analytics"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/lead/{id}": {
       "delete": {
         "security": [
@@ -4573,6 +4670,23 @@ func init() {
         }
       }
     },
+    "Analytics": {
+      "type": "object",
+      "properties": {
+        "chart_info": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DayLeadsInfo"
+          }
+        },
+        "month_count": {
+          "type": "number"
+        },
+        "today_count": {
+          "type": "number"
+        }
+      }
+    },
     "AuthenticateRequest": {
       "type": "object",
       "properties": {
@@ -4600,6 +4714,17 @@ func init() {
         "token": {
           "type": "string",
           "example": "asdkjkzxcqw1290090"
+        }
+      }
+    },
+    "DayLeadsInfo": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "number"
+        },
+        "date": {
+          "type": "string"
         }
       }
     },
@@ -4683,9 +4808,6 @@ func init() {
           "type": "string"
         },
         "id": {
-          "type": "string"
-        },
-        "modifiedBy": {
           "type": "string"
         },
         "name": {

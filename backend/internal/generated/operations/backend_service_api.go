@@ -93,6 +93,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		LeadsGetLeadHandler: leads.GetLeadHandlerFunc(func(params leads.GetLeadParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation leads.GetLead has not yet been implemented")
 		}),
+		LeadsGetLeadAnalyticsHandler: leads.GetLeadAnalyticsHandlerFunc(func(params leads.GetLeadAnalyticsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation leads.GetLeadAnalytics has not yet been implemented")
+		}),
 		HodGetMonthsIDHandler: hod.GetMonthsIDHandlerFunc(func(params hod.GetMonthsIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.GetMonthsID has not yet been implemented")
 		}),
@@ -270,6 +273,8 @@ type BackendServiceAPI struct {
 	DocsGetDocHandler docs.GetDocHandler
 	// LeadsGetLeadHandler sets the operation handler for the get lead operation
 	LeadsGetLeadHandler leads.GetLeadHandler
+	// LeadsGetLeadAnalyticsHandler sets the operation handler for the get lead analytics operation
+	LeadsGetLeadAnalyticsHandler leads.GetLeadAnalyticsHandler
 	// HodGetMonthsIDHandler sets the operation handler for the get months ID operation
 	HodGetMonthsIDHandler hod.GetMonthsIDHandler
 	// HodGetPhotosIDHandler sets the operation handler for the get photos ID operation
@@ -459,6 +464,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.LeadsGetLeadHandler == nil {
 		unregistered = append(unregistered, "leads.GetLeadHandler")
+	}
+	if o.LeadsGetLeadAnalyticsHandler == nil {
+		unregistered = append(unregistered, "leads.GetLeadAnalyticsHandler")
 	}
 	if o.HodGetMonthsIDHandler == nil {
 		unregistered = append(unregistered, "hod.GetMonthsIDHandler")
@@ -711,6 +719,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/lead"] = leads.NewGetLead(o.context, o.LeadsGetLeadHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/lead/analytics"] = leads.NewGetLeadAnalytics(o.context, o.LeadsGetLeadAnalyticsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
