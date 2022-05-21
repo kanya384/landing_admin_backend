@@ -1203,6 +1203,80 @@ paths:
           description: 'Bad request'
         '500':
           description: 'Internal Server Error'
+  /lead:
+    get:
+      summary: "get leads list"
+      security:
+        - Token: []
+      tags:
+        - leads
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns leads list'
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/Lead'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    put:
+      summary: "create lead"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - leads
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/Lead'
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Lead'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /lead/{id}:
+    delete:
+      summary: "delete lead by id"
+      security:
+        - Token: []
+      tags:
+        - leads
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String id lead to delete
+      responses:
+        '200':
+          description: 'delete lead success'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object
@@ -1440,6 +1514,41 @@ definitions:
         type: string
       file:
         type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      modifiedBy:
+        type: string
+  Lead:
+    type: object
+    properties:
+      id:
+        type: string
+      name: 
+        type: string
+      phone:
+        type: string
+      email:
+        type: string
+      text:
+        type: string
+      roistat:
+        type: string
+      utm_source:
+        type: string
+      utm_medium:
+        type: string
+      utm_term:
+        type: string
+      utm_campaign:
+        type: string
+      utm_content:
+        type: string
+      sended_to_crm:
+        type: boolean
       createdAt:
         type: string
         format: date-time

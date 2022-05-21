@@ -11,4 +11,5 @@ type Repository struct {
 	Plans
 	Poster
 	Video
+	Leads
 }

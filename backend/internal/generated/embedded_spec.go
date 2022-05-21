@@ -653,6 +653,125 @@ func init() {
         }
       }
     },
+    "/lead": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "leads"
+        ],
+        "summary": "get leads list",
+        "responses": {
+          "200": {
+            "description": "returns leads list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Lead"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "leads"
+        ],
+        "summary": "create lead",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Lead"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Lead"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/lead/{id}": {
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "leads"
+        ],
+        "summary": "delete lead by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String id lead to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete lead success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/login": {
       "post": {
         "consumes": [
@@ -2086,6 +2205,58 @@ func init() {
         },
         "order": {
           "type": "integer"
+        }
+      }
+    },
+    "Lead": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "roistat": {
+          "type": "string"
+        },
+        "sended_to_crm": {
+          "type": "boolean"
+        },
+        "text": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "utm_campaign": {
+          "type": "string"
+        },
+        "utm_content": {
+          "type": "string"
+        },
+        "utm_medium": {
+          "type": "string"
+        },
+        "utm_source": {
+          "type": "string"
+        },
+        "utm_term": {
+          "type": "string"
         }
       }
     },
@@ -2946,6 +3117,125 @@ func init() {
         }
       }
     },
+    "/lead": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "leads"
+        ],
+        "summary": "get leads list",
+        "responses": {
+          "200": {
+            "description": "returns leads list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Lead"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "leads"
+        ],
+        "summary": "create lead",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Lead"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Lead"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/lead/{id}": {
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "leads"
+        ],
+        "summary": "delete lead by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String id lead to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete lead success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/login": {
       "post": {
         "consumes": [
@@ -4379,6 +4669,58 @@ func init() {
         },
         "order": {
           "type": "integer"
+        }
+      }
+    },
+    "Lead": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "roistat": {
+          "type": "string"
+        },
+        "sended_to_crm": {
+          "type": "boolean"
+        },
+        "text": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "utm_campaign": {
+          "type": "string"
+        },
+        "utm_content": {
+          "type": "string"
+        },
+        "utm_medium": {
+          "type": "string"
+        },
+        "utm_source": {
+          "type": "string"
+        },
+        "utm_term": {
+          "type": "string"
         }
       }
     },

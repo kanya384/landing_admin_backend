@@ -266,6 +266,103 @@ export interface InlineObject {
 /**
  * 
  * @export
+ * @interface Lead
+ */
+export interface Lead {
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'phone'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'email'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'text'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'roistat'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'utm_source'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'utm_medium'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'utm_term'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'utm_campaign'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'utm_content'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Lead
+     */
+    'sended_to_crm'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Lead
+     */
+    'modifiedBy'?: string;
+}
+/**
+ * 
+ * @export
  * @interface Month
  */
 export interface Month {
@@ -2872,6 +2969,244 @@ export class HodApi extends BaseAPI {
      */
     public yearsPut(params?: Year, options?: AxiosRequestConfig) {
         return HodApiFp(this.configuration).yearsPut(params, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * LeadsApi - axios parameter creator
+ * @export
+ */
+export const LeadsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary get leads list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        leadGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/lead`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary delete lead by id
+         * @param {string} id String id lead to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        leadIdDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('leadIdDelete', 'id', id)
+            const localVarPath = `/lead/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create lead
+         * @param {Lead} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        leadPut: async (params?: Lead, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/lead`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * LeadsApi - functional programming interface
+ * @export
+ */
+export const LeadsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LeadsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary get leads list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async leadGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Lead>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.leadGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary delete lead by id
+         * @param {string} id String id lead to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async leadIdDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.leadIdDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create lead
+         * @param {Lead} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async leadPut(params?: Lead, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Lead>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.leadPut(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * LeadsApi - factory interface
+ * @export
+ */
+export const LeadsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LeadsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary get leads list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        leadGet(options?: any): AxiosPromise<Array<Lead>> {
+            return localVarFp.leadGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary delete lead by id
+         * @param {string} id String id lead to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        leadIdDelete(id: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.leadIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create lead
+         * @param {Lead} [params] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        leadPut(params?: Lead, options?: any): AxiosPromise<Lead> {
+            return localVarFp.leadPut(params, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * LeadsApi - object-oriented interface
+ * @export
+ * @class LeadsApi
+ * @extends {BaseAPI}
+ */
+export class LeadsApi extends BaseAPI {
+    /**
+     * 
+     * @summary get leads list
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LeadsApi
+     */
+    public leadGet(options?: AxiosRequestConfig) {
+        return LeadsApiFp(this.configuration).leadGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary delete lead by id
+     * @param {string} id String id lead to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LeadsApi
+     */
+    public leadIdDelete(id: string, options?: AxiosRequestConfig) {
+        return LeadsApiFp(this.configuration).leadIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create lead
+     * @param {Lead} [params] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LeadsApi
+     */
+    public leadPut(params?: Lead, options?: AxiosRequestConfig) {
+        return LeadsApiFp(this.configuration).leadPut(params, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -13,6 +13,7 @@ import { AdvantageDetail } from "../../pages/advantage_detail"
 import { Plans } from "../../pages/plans"
 import { Doc } from "../../pages/docs"
 import { Videos } from "../../pages/videos"
+import { Leads } from "../../pages/leads"
 
 const Router: React.FC = () => {
   const auths = useTypedSelector(({ auths }) => {
@@ -35,6 +36,7 @@ const Router: React.FC = () => {
           <NavbarComponent />
             <div className="content pt-5">
               <Routes>
+                <Route path="/" element={<Leads />} />
                 <Route path="/video" element={<Videos />} />
                 <Route path="/docs" element={<Doc />} />
                 <Route path="/plans" element={<Plans />} />

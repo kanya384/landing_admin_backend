@@ -20,6 +20,7 @@ import (
 	"landing_admin_backend/internal/generated/operations/advantages"
 	"landing_admin_backend/internal/generated/operations/docs"
 	"landing_admin_backend/internal/generated/operations/hod"
+	"landing_admin_backend/internal/generated/operations/leads"
 	"landing_admin_backend/internal/generated/operations/plans"
 	"landing_admin_backend/internal/generated/operations/posters"
 	"landing_admin_backend/internal/generated/operations/video"
@@ -144,6 +145,11 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	api.VideoPutVideoHandler = video.PutVideoHandlerFunc(handlers.Video.Create)
 	api.VideoDeleteVideoIDHandler = video.DeleteVideoIDHandlerFunc(handlers.Video.Delete)
 	api.VideoPatchVideoHandler = video.PatchVideoHandlerFunc(handlers.Video.Update)
+
+	/* leads */
+	api.LeadsGetLeadHandler = leads.GetLeadHandlerFunc(handlers.Leads.Get)
+	api.LeadsPutLeadHandler = leads.PutLeadHandlerFunc(handlers.Leads.Create)
+	api.LeadsDeleteLeadIDHandler = leads.DeleteLeadIDHandlerFunc(handlers.Leads.Delete)
 
 	http.FileServer(http.Dir("file_store"))
 

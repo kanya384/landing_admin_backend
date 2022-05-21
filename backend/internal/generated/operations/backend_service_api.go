@@ -22,6 +22,7 @@ import (
 	"landing_admin_backend/internal/generated/operations/advantages"
 	"landing_admin_backend/internal/generated/operations/docs"
 	"landing_admin_backend/internal/generated/operations/hod"
+	"landing_admin_backend/internal/generated/operations/leads"
 	"landing_admin_backend/internal/generated/operations/plans"
 	"landing_admin_backend/internal/generated/operations/posters"
 	"landing_admin_backend/internal/generated/operations/video"
@@ -59,6 +60,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		DocsDeleteDocIDHandler: docs.DeleteDocIDHandlerFunc(func(params docs.DeleteDocIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation docs.DeleteDocID has not yet been implemented")
 		}),
+		LeadsDeleteLeadIDHandler: leads.DeleteLeadIDHandlerFunc(func(params leads.DeleteLeadIDParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation leads.DeleteLeadID has not yet been implemented")
+		}),
 		HodDeleteMonthsIDHandler: hod.DeleteMonthsIDHandlerFunc(func(params hod.DeleteMonthsIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.DeleteMonthsID has not yet been implemented")
 		}),
@@ -85,6 +89,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		DocsGetDocHandler: docs.GetDocHandlerFunc(func(params docs.GetDocParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation docs.GetDoc has not yet been implemented")
+		}),
+		LeadsGetLeadHandler: leads.GetLeadHandlerFunc(func(params leads.GetLeadParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation leads.GetLead has not yet been implemented")
 		}),
 		HodGetMonthsIDHandler: hod.GetMonthsIDHandlerFunc(func(params hod.GetMonthsIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.GetMonthsID has not yet been implemented")
@@ -157,6 +164,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		DocsPutDocHandler: docs.PutDocHandlerFunc(func(params docs.PutDocParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation docs.PutDoc has not yet been implemented")
+		}),
+		LeadsPutLeadHandler: leads.PutLeadHandlerFunc(func(params leads.PutLeadParams) middleware.Responder {
+			return middleware.NotImplemented("operation leads.PutLead has not yet been implemented")
 		}),
 		HodPutMonthsHandler: hod.PutMonthsHandlerFunc(func(params hod.PutMonthsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.PutMonths has not yet been implemented")
@@ -238,6 +248,8 @@ type BackendServiceAPI struct {
 	AdvantagesDeleteAdvantagesIDHandler advantages.DeleteAdvantagesIDHandler
 	// DocsDeleteDocIDHandler sets the operation handler for the delete doc ID operation
 	DocsDeleteDocIDHandler docs.DeleteDocIDHandler
+	// LeadsDeleteLeadIDHandler sets the operation handler for the delete lead ID operation
+	LeadsDeleteLeadIDHandler leads.DeleteLeadIDHandler
 	// HodDeleteMonthsIDHandler sets the operation handler for the delete months ID operation
 	HodDeleteMonthsIDHandler hod.DeleteMonthsIDHandler
 	// HodDeletePhotosIDHandler sets the operation handler for the delete photos ID operation
@@ -256,6 +268,8 @@ type BackendServiceAPI struct {
 	AdvantagesGetAdvantagesIDHandler advantages.GetAdvantagesIDHandler
 	// DocsGetDocHandler sets the operation handler for the get doc operation
 	DocsGetDocHandler docs.GetDocHandler
+	// LeadsGetLeadHandler sets the operation handler for the get lead operation
+	LeadsGetLeadHandler leads.GetLeadHandler
 	// HodGetMonthsIDHandler sets the operation handler for the get months ID operation
 	HodGetMonthsIDHandler hod.GetMonthsIDHandler
 	// HodGetPhotosIDHandler sets the operation handler for the get photos ID operation
@@ -304,6 +318,8 @@ type BackendServiceAPI struct {
 	AdvantagesPutAdvantagesHandler advantages.PutAdvantagesHandler
 	// DocsPutDocHandler sets the operation handler for the put doc operation
 	DocsPutDocHandler docs.PutDocHandler
+	// LeadsPutLeadHandler sets the operation handler for the put lead operation
+	LeadsPutLeadHandler leads.PutLeadHandler
 	// HodPutMonthsHandler sets the operation handler for the put months operation
 	HodPutMonthsHandler hod.PutMonthsHandler
 	// HodPutPhotosHandler sets the operation handler for the put photos operation
@@ -411,6 +427,9 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.DocsDeleteDocIDHandler == nil {
 		unregistered = append(unregistered, "docs.DeleteDocIDHandler")
 	}
+	if o.LeadsDeleteLeadIDHandler == nil {
+		unregistered = append(unregistered, "leads.DeleteLeadIDHandler")
+	}
 	if o.HodDeleteMonthsIDHandler == nil {
 		unregistered = append(unregistered, "hod.DeleteMonthsIDHandler")
 	}
@@ -437,6 +456,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.DocsGetDocHandler == nil {
 		unregistered = append(unregistered, "docs.GetDocHandler")
+	}
+	if o.LeadsGetLeadHandler == nil {
+		unregistered = append(unregistered, "leads.GetLeadHandler")
 	}
 	if o.HodGetMonthsIDHandler == nil {
 		unregistered = append(unregistered, "hod.GetMonthsIDHandler")
@@ -509,6 +531,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.DocsPutDocHandler == nil {
 		unregistered = append(unregistered, "docs.PutDocHandler")
+	}
+	if o.LeadsPutLeadHandler == nil {
+		unregistered = append(unregistered, "leads.PutLeadHandler")
 	}
 	if o.HodPutMonthsHandler == nil {
 		unregistered = append(unregistered, "hod.PutMonthsHandler")
@@ -645,6 +670,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
+	o.handlers["DELETE"]["/lead/{id}"] = leads.NewDeleteLeadID(o.context, o.LeadsDeleteLeadIDHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
 	o.handlers["DELETE"]["/months/{id}"] = hod.NewDeleteMonthsID(o.context, o.HodDeleteMonthsIDHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
@@ -678,6 +707,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/doc"] = docs.NewGetDoc(o.context, o.DocsGetDocHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/lead"] = leads.NewGetLead(o.context, o.LeadsGetLeadHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -774,6 +807,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/doc"] = docs.NewPutDoc(o.context, o.DocsPutDocHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/lead"] = leads.NewPutLead(o.context, o.LeadsPutLeadHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

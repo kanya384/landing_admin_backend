@@ -82,3 +82,9 @@ type Video interface {
 	Update(ctx context.Context, video domain.Video) (err error)
 	Delete(ctx context.Context, videoID primitive.ObjectID) (err error)
 }
+
+type Leads interface {
+	Get(ctx context.Context) (leads []*domain.Lead, err error)
+	Create(ctx context.Context, lead domain.Lead) (err error)
+	Delete(ctx context.Context, leadID primitive.ObjectID) (err error)
+}

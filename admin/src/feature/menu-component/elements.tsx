@@ -26,13 +26,6 @@ const elements: MenuItem[] = [
     divider: false
   },
   {
-    name: 'Заявки',
-    icon:  <Server size={ICON_SIZE} />,
-    url: "/leads",
-    children: [],
-    divider: false
-  },
-  {
     name: "Контент",
     icon: null,
     url: null,
