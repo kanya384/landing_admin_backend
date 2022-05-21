@@ -63,7 +63,7 @@ func (h *handlers) Create(params video.PutVideoParams, input interface{}) middle
 	if err != nil {
 		return video.NewPutVideoBadRequest().WithPayload(&models.ResultResponse{Msg: "check request params"})
 	}
-	videoInserted, err := h.services.Video.Create(context.Background(), vid, params.File, "file.pdf")
+	videoInserted, err := h.services.Video.Create(context.Background(), vid, params.File, "file.jpg")
 	if err != nil {
 		return video.NewPutVideoInternalServerError()
 	}
@@ -81,16 +81,18 @@ func (h *handlers) Create(params video.PutVideoParams, input interface{}) middle
 func (h *handlers) Update(params video.PatchVideoParams, input interface{}) middleware.Responder {
 	userID, err := helpers.GetUserIdFromHandler(input)
 	if err != nil {
-		return video.NewPutVideoBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
+		return video.NewPatchVideoBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
 	}
-	vid, err := domain.NewVideo("", params.URL, "", time.Now(), time.Now(), userID)
+	vid, err := domain.NewVideo(params.ID, params.URL, "", time.Now(), time.Now(), userID)
 	if err != nil {
-		return video.NewPutVideoBadRequest().WithPayload(&models.ResultResponse{Msg: "check request params"})
+		return video.NewPatchVideoBadRequest().WithPayload(&models.ResultResponse{Msg: "check request params"})
 	}
-	videoInserted, err := h.services.Video.Create(context.Background(), vid, params.File, "file.pdf")
+
+	videoInserted, err := h.services.Video.Update(context.Background(), vid, params.File, "file.jpg")
 	if err != nil {
-		return video.NewPutVideoInternalServerError()
+		return video.NewPatchVideoInternalServerError()
 	}
+
 	videoRes := models.Video{
 		ID:         videoInserted.ID.Hex(),
 		Preview:    videoInserted.Preview,
@@ -107,7 +109,7 @@ func (h *handlers) Delete(params video.DeleteVideoIDParams, input interface{}) m
 	if err != nil {
 		return video.NewDeleteVideoIDBadRequest()
 	}
-	err = h.services.Docs.Delete(context.Background(), id)
+	err = h.services.Video.Delete(context.Background(), id)
 	if err != nil {
 		return video.NewDeleteVideoIDInternalServerError()
 	}
