@@ -15,7 +15,7 @@ export const TableItem: FC<TableItemProps> = (props) => {
           <td>{props.lead.name}</td>
           <td>{props.lead.email}</td>
           <td>{props.lead.text}</td>
-          <td className="col-sm" style={{width:"235px"}}>
+          <td className="col-sm" style={{width:"100px"}}>
             <button className="btn btn-soft-danger btn-sm" type="button" onClick={()=>{props.deleteAction()}}>Удалить</button>
           </td>
         </tr>

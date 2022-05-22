@@ -5,6 +5,7 @@ import (
 	"landing_admin_backend/internal/repository/mongo/advantage_photo"
 	"landing_admin_backend/internal/repository/mongo/advantages"
 	"landing_admin_backend/internal/repository/mongo/docs"
+	"landing_admin_backend/internal/repository/mongo/editable"
 	"landing_admin_backend/internal/repository/mongo/hod_photos"
 	"landing_admin_backend/internal/repository/mongo/leads"
 	"landing_admin_backend/internal/repository/mongo/months"
@@ -30,5 +31,6 @@ func Setup(db *mongo.Database) *repository.Repository {
 		Video:          video.NewRepository(db),
 		Docs:           docs.NewRepository(db),
 		Leads:          leads.NewRepository(db),
+		Editable:       editable.NewRepository(db),
 	}
 }

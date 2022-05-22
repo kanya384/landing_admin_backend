@@ -26,7 +26,7 @@ func NewRepository(db *mongo.Database) repos.Leads {
 }
 
 func (r *repository) Get(ctx context.Context) (leads []*domain.Lead, err error) {
-	cur, err := r.collection.Find(ctx, primitive.M{}, options.Find().SetSort(primitive.D{{"created_at", -1}}))
+	cur, err := r.collection.Find(ctx, primitive.M{}, options.Find().SetLimit(50).SetSort(primitive.D{{"created_at", -1}}))
 	if err != nil {
 		return
 	}

@@ -21,6 +21,7 @@ import (
 
 	"landing_admin_backend/internal/generated/operations/advantages"
 	"landing_admin_backend/internal/generated/operations/docs"
+	"landing_admin_backend/internal/generated/operations/editable"
 	"landing_admin_backend/internal/generated/operations/hod"
 	"landing_admin_backend/internal/generated/operations/leads"
 	"landing_admin_backend/internal/generated/operations/plans"
@@ -146,6 +147,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		AdvantagesPostAdvantagesOrdersHandler: advantages.PostAdvantagesOrdersHandlerFunc(func(params advantages.PostAdvantagesOrdersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.PostAdvantagesOrders has not yet been implemented")
+		}),
+		EditablePostEditableHandler: editable.PostEditableHandlerFunc(func(params editable.PostEditableParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation editable.PostEditable has not yet been implemented")
 		}),
 		PostLoginHandler: PostLoginHandlerFunc(func(params PostLoginParams) middleware.Responder {
 			return middleware.NotImplemented("operation PostLogin has not yet been implemented")
@@ -309,6 +313,8 @@ type BackendServiceAPI struct {
 	AdvantagesPostAdvantagePhotoOrdersHandler advantages.PostAdvantagePhotoOrdersHandler
 	// AdvantagesPostAdvantagesOrdersHandler sets the operation handler for the post advantages orders operation
 	AdvantagesPostAdvantagesOrdersHandler advantages.PostAdvantagesOrdersHandler
+	// EditablePostEditableHandler sets the operation handler for the post editable operation
+	EditablePostEditableHandler editable.PostEditableHandler
 	// PostLoginHandler sets the operation handler for the post login operation
 	PostLoginHandler PostLoginHandler
 	// HodPostPhotosOrdersHandler sets the operation handler for the post photos orders operation
@@ -518,6 +524,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.AdvantagesPostAdvantagesOrdersHandler == nil {
 		unregistered = append(unregistered, "advantages.PostAdvantagesOrdersHandler")
+	}
+	if o.EditablePostEditableHandler == nil {
+		unregistered = append(unregistered, "editable.PostEditableHandler")
 	}
 	if o.PostLoginHandler == nil {
 		unregistered = append(unregistered, "PostLoginHandler")
@@ -791,6 +800,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/advantages/orders"] = advantages.NewPostAdvantagesOrders(o.context, o.AdvantagesPostAdvantagesOrdersHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/editable"] = editable.NewPostEditable(o.context, o.EditablePostEditableHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

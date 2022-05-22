@@ -7,6 +7,7 @@ import (
 	"landing_admin_backend/internal/services/advantages"
 	"landing_admin_backend/internal/services/auth"
 	"landing_admin_backend/internal/services/docs"
+	"landing_admin_backend/internal/services/editable"
 	"landing_admin_backend/internal/services/hod_photos"
 	"landing_admin_backend/internal/services/leads"
 	"landing_admin_backend/internal/services/months"
@@ -31,6 +32,7 @@ type Services struct {
 	Video          video.Service
 	Docs           docs.Service
 	Leads          leads.Service
+	Editable       editable.Service
 }
 
 func Setup(cfg *config.Config, repository *repository.Repository) *Services {
@@ -48,5 +50,6 @@ func Setup(cfg *config.Config, repository *repository.Repository) *Services {
 		Video:          video.NewService(repository, cfg),
 		Docs:           docs.NewService(repository, cfg),
 		Leads:          leads.NewService(repository, cfg),
+		Editable:       editable.NewService(repository, cfg),
 	}
 }

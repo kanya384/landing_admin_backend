@@ -19,6 +19,7 @@ import (
 	"landing_admin_backend/internal/generated/operations"
 	"landing_admin_backend/internal/generated/operations/advantages"
 	"landing_admin_backend/internal/generated/operations/docs"
+	"landing_admin_backend/internal/generated/operations/editable"
 	"landing_admin_backend/internal/generated/operations/hod"
 	"landing_admin_backend/internal/generated/operations/leads"
 	"landing_admin_backend/internal/generated/operations/plans"
@@ -151,6 +152,9 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	api.LeadsPutLeadHandler = leads.PutLeadHandlerFunc(handlers.Leads.Create)
 	api.LeadsDeleteLeadIDHandler = leads.DeleteLeadIDHandlerFunc(handlers.Leads.Delete)
 	api.LeadsGetLeadAnalyticsHandler = leads.GetLeadAnalyticsHandlerFunc(handlers.Leads.GetAnalytics)
+
+	/* editable */
+	api.EditablePostEditableHandler = editable.PostEditableHandlerFunc(handlers.Editable.CreateOrUpdate)
 
 	http.FileServer(http.Dir("file_store"))
 

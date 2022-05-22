@@ -40,6 +40,7 @@ func (h *handlers) Get(params leads.GetLeadParams, input interface{}) middleware
 			Phone:       ld.Phone,
 			Email:       ld.Email,
 			Roistat:     ld.Roistat,
+			Text:        ld.Text,
 			UtmSource:   ld.Utm_source,
 			UtmMedium:   ld.Utm_medium,
 			UtmTerm:     ld.Utm_term,

@@ -1,18 +1,10 @@
 import React, { useEffect } from "react"
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { Area, AreaChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 import { useActions } from "../../hooks/use-actions";
 import { useTypedSelector } from "../../hooks/use-typed-selector";
 import { TableItem } from "./table-item";
 
 export const Leads: React.FC = () => {
-  const data = [
-    {date: '21.05', лиды: 5, pv: 2400, amt: 2400}, 
-    {date: '22.05', лиды: 10, pv: 2400, amt: 2400},
-    {date: '23.05', лиды: 3, pv: 2400, amt: 2400},
-    {date: '24.05', лиды: 10, pv: 2400, amt: 2400},
-    {date: '25.05', лиды: 3, pv: 2400, amt: 2400},
-    {date: '20.05', лиды: 20, pv: 2400, amt: 2400},
-  ];
   const { getLeads, getLeadsAnalytics, deleteLead } = useActions()
   const leads = useTypedSelector(({ leads }) => {
     return leads
@@ -39,7 +31,7 @@ export const Leads: React.FC = () => {
           <div className="col-12 col-md-auto">
             <div className="d-flex align-items-center"><img src="assets/img/icons/illustrations/4.png" alt="" width="46" height="46" />
               <div className="ms-3">
-                <h4 className="mb-0">{leads.analytics.today_count} шт</h4>
+                <h4 className="mb-0">{leads.analytics.today_count?leads.analytics.today_count:0} шт</h4>
                 <p className="text-800 fs--1 mb-0">Количество заявок за сегодня</p>
               </div>
             </div>
@@ -47,7 +39,7 @@ export const Leads: React.FC = () => {
           <div className="col-12 col-md-auto">
             <div className="d-flex align-items-center"><img src="assets/img/icons/illustrations/2.png" alt="" width="46" height="46" />
               <div className="ms-3">
-                <h4 className="mb-0">{leads.analytics.month_count} шт</h4>
+                <h4 className="mb-0">{leads.analytics.month_count?leads.analytics.month_count:0} шт</h4>
                 <p className="text-800 fs--1 mb-0">Количество заявок в этом месяце</p>
               </div>
             </div>
@@ -61,11 +53,12 @@ export const Leads: React.FC = () => {
           </div>
         </div>
         <ResponsiveContainer width='100%' aspect={4.0/1}>
-          <LineChart data={leads.analytics.chart_info}>
-            <Line type="monotone" dataKey="count" stroke="#8884d8" />
+          <AreaChart data={leads.analytics.chart_info}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <Area type="monotone" dataKey="count" stroke="#82ca9d" fill="#82ca9d" />
             <XAxis dataKey="date" />
             <Tooltip />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>:""}
       <div className="card-body">
@@ -90,7 +83,7 @@ export const Leads: React.FC = () => {
         </thead>
         <tbody>
            {leads?.leadsList.map((lead, index) => {
-             return <TableItem lead={lead} index={index+1} deleteAction={deleteLead}/>
+             return <TableItem lead={lead} index={index+1} deleteAction={() => deleteLead(lead.id!)}/>
            })}
         </tbody>
       </table>

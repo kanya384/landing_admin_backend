@@ -19,7 +19,7 @@ const elements: MenuItem[] = [
     divider: true,
   },
   {
-    name: 'Панель',
+    name: 'Панель управления',
     icon:  <Grid size={ICON_SIZE} />,
     url: "/",
     children: [],

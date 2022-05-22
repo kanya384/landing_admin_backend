@@ -90,3 +90,10 @@ type Leads interface {
 	Delete(ctx context.Context, leadID primitive.ObjectID) (err error)
 	CountDocuments(ctx context.Context, startDate time.Time, endDate time.Time) (count int, err error)
 }
+
+type Editable interface {
+	Get(ctx context.Context) (ediatbles []*domain.Editable, err error)
+	GetByID(ctx context.Context, id primitive.ObjectID) (editable domain.Editable, err error)
+	Create(ctx context.Context, editable *domain.Editable) (err error)
+	Update(ctx context.Context, editable *domain.Editable) (err error)
+}

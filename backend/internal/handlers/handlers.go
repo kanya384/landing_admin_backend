@@ -6,6 +6,7 @@ import (
 	"landing_admin_backend/internal/handlers/advantages"
 	"landing_admin_backend/internal/handlers/auths"
 	"landing_admin_backend/internal/handlers/docs"
+	"landing_admin_backend/internal/handlers/editable"
 	"landing_admin_backend/internal/handlers/hod_photos"
 	"landing_admin_backend/internal/handlers/leads"
 	"landing_admin_backend/internal/handlers/months"
@@ -30,6 +31,7 @@ type Handlers struct {
 	Docs            docs.Handlers
 	Video           video.Handlers
 	Leads           leads.Handlers
+	Editable        editable.Handlers
 }
 
 func NewHandlers(services *services.Services, cfg *config.Config) *Handlers {
@@ -46,5 +48,6 @@ func NewHandlers(services *services.Services, cfg *config.Config) *Handlers {
 		Docs:            docs.NewHandlers(services),
 		Video:           video.NewHandlers(services),
 		Leads:           leads.NewHandlers(services),
+		Editable:        editable.NewHandlers(services),
 	}
 }

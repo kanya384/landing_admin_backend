@@ -653,6 +653,54 @@ func init() {
         }
       }
     },
+    "/editable": {
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "editable"
+        ],
+        "summary": "add or update editable fields",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Editable"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok response",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/lead": {
       "get": {
         "security": [
@@ -2225,6 +2273,26 @@ func init() {
         "updatedAt": {
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "Editable": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer"
+        },
+        "value": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer"
         }
       }
     },
@@ -3178,6 +3246,54 @@ func init() {
         }
       }
     },
+    "/editable": {
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "editable"
+        ],
+        "summary": "add or update editable fields",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Editable"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok response",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/lead": {
       "get": {
         "security": [
@@ -4750,6 +4866,26 @@ func init() {
         "updatedAt": {
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "Editable": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer"
+        },
+        "value": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer"
         }
       }
     },

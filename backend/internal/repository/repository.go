@@ -12,4 +12,5 @@ type Repository struct {
 	Poster
 	Video
 	Leads
+	Editable
 }

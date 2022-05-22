@@ -1299,6 +1299,35 @@ paths:
           description: 'Bad request'
         '500':
           description: 'Internal Server Error'
+  /editable:
+    post:
+      summary: "add or update editable fields"
+      security:
+        - Token: []
+      tags:
+        - editable
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: params
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/Editable'
+      responses:
+        '200':
+          description: 'Ok response'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object
@@ -1595,3 +1624,16 @@ definitions:
       updatedAt:
         type: string
         format: date-time
+  Editable:
+    type: object
+    properties:
+      id:
+        type: string
+      type:
+        type: integer
+      value:
+        type: string
+      width:
+        type: integer
+      height:
+        type: integer
