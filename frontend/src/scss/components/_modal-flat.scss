@@ -1,0 +1,236 @@
+.modal {
+  &-centered {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-right: 530px;
+    height: 100%;
+    overflow: auto;
+    
+    @include qxl {
+      // width: calc(72% - 140px);
+      
+    }
+    @include qlg {
+      width: 100%;
+      padding-right: 0;
+    }
+    
+    .modal-centered-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      min-height: calc(100% - 3.5rem);
+      &:before {
+        display: block;
+        content: "";
+        height: calc(100vh - 3.5rem);
+        height: -webkit-min-content;
+        height: -moz-min-content;
+        height: min-content;
+      }
+    }
+    &--form {
+      .modal-centered-wrapper {
+        max-width: 550px;
+        width: 100%;
+        
+      }
+      .inp-group {
+        width: 100%;
+        margin-bottom: 40px;
+      }
+      .input-group-x2__col {
+        width: 50%;
+      }
+      .form-ec__b-btn {
+        padding-top: 24px;
+      }
+    }
+    &--bg {
+      margin-right: 530px;
+      padding-right: 0;
+    }
+  }
+  &-text-body {
+    line-height: 1.6;
+    font-weight: 500;
+  }
+  &-image {
+    display: none;
+    @include qlg {
+      display: block;
+      height: 240px;
+    }
+  }
+  &-header {
+    padding-bottom: 40px;
+    width: 100%;
+    position: relative;
+    &__title {
+      padding-bottom: 40px;
+      @include qlg {
+        font-size: 40px;
+      }
+    }
+  }
+  &-text-right {
+    position: absolute;
+    top: 10px;
+    left: calc(100% + 200px);
+    width: 250px;
+    @include qxl {
+      left: calc(100% + 100px);
+    }
+    @include qlg {
+      position: relative;
+      left: 0;
+      width: 100%;
+    }
+  }
+  &-content {
+    width: 100%;
+  }
+  &-bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 120px;
+    max-width: 410px;
+    overflow: hidden;
+    @include qxl {
+      width: 28%;
+    }
+    @include qlg {
+      display: none;
+    }
+    img {
+      object-fit: cover;
+      min-height: 100%;
+    }
+  }
+}
+.modal-full {
+  position: fixed;
+  z-index: 51;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  left: 120vw;
+  transition: all 1s ease;
+  padding: 24px;
+  @include qlg {
+    padding-top: 96px;
+    left: 0;
+    top: -120vh;
+    
+  }
+  &.open {
+    left: 0;
+    @include qlg {
+      top: 0;
+    }
+  }
+  &__close {
+    background: $clr-second-primary;
+    position: absolute;
+    padding: 50px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    @include qlg {
+      bottom: auto;
+      left: 0;
+      padding: 18px;
+    }
+    &:hover {
+      opacity: .8;
+    }
+    .svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+      stroke: #fff;
+    }
+  }
+  &__content {
+    margin: 0 auto;
+    max-width: 1184px;
+    padding: 24px;
+    @include qmd {
+      padding: 0;
+    }
+  }
+}
+.modal-flat {
+  &__header {
+    display: flex;
+    padding-bottom: 30px;
+  }
+  &-title {
+    font-size: 64px;
+    line-height: 1.2;
+    font-weight: 500;
+    padding-bottom: 30px;
+    max-width: 50%;
+    margin-right: 10px;
+    text-transform: uppercase;
+    flex: 1 1 auto;
+    @include qlg {
+      max-width: 100%;
+      width: 100%;
+      font-size: 40px;
+      padding-bottom: 40px;
+      margin: 0;
+    }
+    @include qxxs {
+      font-size: 36px;
+    }
+  }
+  &-filter {
+    padding-bottom: 30px;
+    max-width: 352px;
+    min-width: 352px;
+    @include qlg {
+      display: none;
+    }
+    &--mobile {
+      display: none;
+      @include qlg {
+        display: block;
+      }
+    }
+
+  }
+  .entrance-list {
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #000;
+    .entrance-item {
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 25px;
+      cursor: pointer;
+      
+      &:hover, &.active {
+        color: $clr-first-primary;
+      }
+    }
+  }
+  .floor-slider {
+    &__title {
+      font-weight: 500;
+      font-size: 16px;
+      padding-bottom: 5px;
+      padding-top: 5px;
+    }
+  }
+}

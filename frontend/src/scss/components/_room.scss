@@ -1,0 +1,106 @@
+.options-room {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -20px;
+  padding-bottom: 120px;
+  @include qsm {
+    padding-bottom: 40px;
+  }
+  .option-room__item {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 24px 0;
+    overflow: hidden;
+    margin-bottom: -1px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    @include qsm {
+      flex-wrap: wrap;
+    }
+    &-wrap {
+      padding: 0 20px;
+      width: 33.33%;
+      @include qlg {
+        width: 50%;
+      }
+      @include qmd {
+        width: 100%;
+      }
+    }
+    .label {
+      overflow: hidden;
+      @include qsm {
+        width: 100%;
+        font-size: 20px;
+      }
+    }
+    .value {
+      font-size: 40px;
+      flex: 1 1 auto;
+      text-align: right;
+      @include qsm {
+        width: 100%;
+        text-align: left;
+      }
+    }
+  }
+}
+.room-card-img-mobile {
+  display: none;
+  @include qmd {
+    display: block;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+}
+.room-card {
+  display: flex;
+  &__img {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F7F7F7;
+    @include qmd {
+      display: none;
+    }
+  }
+  &__info {
+    padding-left: 40px;
+    width: 50%;
+    max-width: 450px;
+    margin-left: auto;
+    
+    @include qmd {
+      width: 100%;
+      max-width: 100%;
+      padding-left: 0;
+    }
+  }
+  &__title {
+    font-size: 40px;
+    line-height: 1.2;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding-bottom: 64px;
+    color: $clr-first-primary;
+    @include qmd {
+      text-align: center;
+    }
+  }
+  &__form {
+    .form-ec__input-row {
+    
+    }
+    .form-ec__b-btn {
+      padding-top: 0;
+    }
+    .inp-group {
+      width: 100%;
+      padding-bottom: 40px;
+    }
+  }
+}
+
+

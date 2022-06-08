@@ -1,0 +1,391 @@
+.about-map {
+  position: relative;
+  padding-left: 200px;
+  margin-bottom: -100px;
+  @media(max-width: 768px){
+    padding-left: 100px;
+  }
+  @include qmd {
+    margin-bottom: 80px;
+    padding-left: 0;
+  }
+  &-title {
+    font-size: 20px;
+    font-weight: 500;
+    max-width: 388px;
+    position: absolute;
+    top: 376px;
+    left: 0;
+    @include qmd {
+      top: 0;
+      position: relative;
+    }
+  }
+  .map-wrapper {
+    position: relative;
+    margin-top: -200px;
+    @include qmd {
+      display: none;
+      margin-top: 0;
+    }
+    .map-img {
+      width: 2700px;
+    }
+  }
+}
+
+.about-banner {
+  position: relative;
+  margin: 0 -23px 160px;
+  text-align: center;
+  @include qxl {
+    margin-bottom: 80px;
+  }
+  @include qmd {
+    height: 560px;
+  }
+  .b-text {
+    color: #fff;
+    position: absolute;
+    bottom: 64px;
+    width: 1140px;
+    left: calc(50% - 570px);
+    text-align: left;
+    z-index: 2;
+    @include qxl {
+     width: 90%;
+     left: 23px;
+    }
+  }
+  &__title {
+    font-size: 64px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  &__text {
+  
+  }
+  .img {
+    position: relative;
+    overflow: hidden;
+    img {
+      @include qmd {
+        height: 560px;
+        max-width: 1418px;
+        width: 1418px;
+        position: relative;
+        left: calc(50% - 980px)
+      }
+    }
+  }
+}
+
+.options-room--about {
+  max-width: 1180px;
+  margin: 0 -40px;
+  min-width: 100%;
+  display: flex;
+  @include qxl {
+    margin: 0 -20px;
+  }
+  @include qlg {
+    flex-wrap: wrap;
+  }
+  &__wrapper {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 40px;
+    border-top: none;
+    position: relative;
+    @include qxl {
+      padding: 0 20px;
+    }
+    @include qlg {
+      width: 100%;
+    }
+    &:after {
+      height: 1px;
+      width: auto;
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 40px;
+      right: 40px;
+      background: #000;
+      @include qxl {
+        left: 20px;
+        right: 20px;
+      }
+    }
+  }
+  .option-room {
+    &__description {
+      width: 50%;
+      padding: 0 40px;
+      @include qxl {
+        padding: 0 20px;
+      }
+      @include qlg {
+        width: 100%;
+        margin-bottom: 80px;
+      }
+      .text {
+        padding-bottom: 40px;
+        font-weight: 500;
+      }
+      .b-download {
+      
+      }
+      .link-download {
+        display: inline-flex;
+        vertical-align: top;
+        color: #0CA5E6;
+        text-decoration: none;
+        padding-left: 64px;
+        position: relative;
+        min-height: 48px;
+        align-items: center;
+        
+        &:hover {
+          color: $clr-second-primary;
+          .svg {
+            margin-top: 10px;
+          }
+        }
+        .svg {
+          position: absolute;
+          top: calc(50% - 24px);
+          left: 0;
+          width: 48px;
+          height: 48px;
+          fill: currentColor;
+          margin-top: 0;
+          transition: all 0.3s ease;
+        }
+      }
+    }
+    &__item-wrap {
+      width: 50%;
+      padding: 0;
+      border-bottom: 1px solid #000;
+      @include qxs {
+        width: 100%;
+      }
+    }
+    &__item {
+      padding: 24px 10px;
+      border: none;
+      flex-direction: column-reverse;
+      font-size: 16px;
+      font-weight: 500;
+      @include qxs {
+        padding-top: 15px;
+      }
+      .label {
+        @include qlg {
+          width: 100%;
+        }
+        @include qmd {
+          font-size: 14px;
+        }
+      }
+      .value {
+        text-align: left;
+        width: 100%;
+        font-size: 64px;
+        @include qmd {
+          font-size: 40px;
+        }
+      }
+    }
+  }
+}
+.about-slider {
+  position: relative;
+  margin-bottom: 80px;
+  z-index: 2;
+  @media(max-width: 768px){
+    margin-bottom: 0;
+  }
+  @include qmd {
+    margin-bottom: 80px;
+  }
+}
+.about-form {
+  position: relative;
+}
+
+.about-slider {
+  .slide {
+    position: relative;
+    padding-bottom: 280px;
+    vertical-align: top;
+    @media(max-width: 768px){
+      padding-bottom: 0;
+    }
+    .img {
+    
+    }
+    .description {
+      position: absolute;
+      right: 0;
+      top: 550px;
+      display: flex;
+      justify-content: flex-end;
+      @media(max-width: 768px){
+        top: 0;
+        left: 0;
+        position: relative;
+        justify-content: flex-start;
+      }
+      
+      .num {
+        color: $clr-first-primary;
+        line-height: 1;
+        font-size: 380px;
+        font-weight: 500;
+        position: relative;
+        top: -100px;
+        margin-right: 40px;
+        @media(max-width: 768px){
+          font-size: 200px;
+          top: 0;
+        }
+        @include qmd {
+          font-size: 80px;
+          margin-right: 20px;
+          top: -8px;
+        }
+      }
+      .text {
+        max-width: 340px;
+        padding-top: 70px;
+        text-align: left;
+        font-weight: 500;
+        @media(max-width: 768px){
+          max-width: 80vw;
+          flex: 1 1 auto;
+        }
+        @include qmd {
+          padding-top: 0;
+        }
+      }
+    }
+  }
+  .slider-construction-progress__slider-for .slick-track {
+    height: 800px;
+    @media(max-width: 768px){
+      height: auto;
+      align-items: flex-start;
+      transition: none;
+    }
+  }
+  .slick-slide .img {
+    @media(max-width: 720px){
+      height: 500px;
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    @media(max-width: 620px){
+      height: 450px;
+    }
+    @media(max-width: 520px){
+      height: 350px;
+    }
+    @media(max-width: 420px){
+      height: 290px;
+    }
+    @media(max-width: 340px){
+      height: 240px;
+    }
+  }
+  .slick-slide img {
+    @media(max-width: 768px){
+      max-width: 100vw;
+      top: 0;
+      transition: none;
+    }
+  }
+  .slider-construction-progress__slider-for {
+    @media(max-width: 768px){
+      // left: calc(50% - 75vw);
+      left: 0;
+      min-width: 100%;
+      max-width: 100%;
+      vertical-align: top;
+      transition: none;
+    }
+  }
+  .slider-construction-progress__slider-for .slick-slide {
+    @media(max-width: 768px){
+      margin: 0;
+      transform: scale(1);
+      padding-top: 0;
+      vertical-align: top;
+      transition: none;
+      padding-bottom: 0;
+    }
+  }
+  .slider-construction-progress__slider-for .slick-slide.slick-center,
+  .slider-construction-progress__slider-for .slick-slide.slick-current {
+    @media(max-width: 768px){
+      padding-top: 0;
+      transition: none;
+    }
+  }
+  .slider-construction-progress {
+    @media(max-width: 768px){
+      align-items: flex-start;
+      justify-content: flex-start;
+      transition: none;
+    }
+  }
+  .slider-construction-progress-nav {
+    justify-content: flex-start;
+    position: absolute;
+    top: 580px;
+    left: 0;
+    z-index: 1;
+    @media(max-width: 768px){
+      top: 506px;
+    }
+    @media(max-width: 620px){
+      top: 456px;
+    }
+    @media(max-width: 520px){
+      top: 360px;
+    }
+    @media(max-width: 420px){
+      top: 300px;
+    }
+    @media(max-width: 340px){
+      top: 250px;
+    }
+    &--wrapper {
+      width: 100%;
+      position: relative;
+    }
+  }
+  .slick-slide .description {
+    opacity: 0;
+    transform:scale(0);
+    transition: all .6s ease;
+    @media(max-width: 768px){
+      opacity: 1;
+      transform: none;
+      transition: none;
+      margin-top: 35px;
+    }
+    @include qmd {
+      margin-top: 70px;
+      align-items: flex-start;
+    }
+  }
+  .slick-center .description {
+    transform:scale(1);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,21 @@
+<svg width="0" height="0" class="hidden">
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="close">
+    <path d="M22 2L12 12M12 12L2 22M12 12L22 22M12 12L2 2" stroke-width="4"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 12" fill="none" id="checked">
+    <path d="M1 5L5.64286 10L14 1" stroke="#0CA5E6" stroke-width="2"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 30" fill="none" id="arr-back">
+    <path d="M16.1524 29L2 14.9983M2 14.9983L16.1524 1M2 14.9983H66" stroke-width="2"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" id="select-arr">
+    <path d="M13 16L18 10H8L13 16Z" />
+  </symbol>
+
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="circle-download">
+
+    <circle cx="24" cy="24" r="24" />
+    <path d="M24 13V35M24 35L31 28.2581M24 35L17 28.2581" stroke="white" stroke-width="2"/>
+  </symbol>
+
+</svg>

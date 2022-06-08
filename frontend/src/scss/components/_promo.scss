@@ -1,0 +1,15 @@
+.promo-first {
+  text-align: center;
+  max-width: 620px;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 120px;
+  font-weight: 500;
+  &__title {
+    padding-bottom: 40px;
+  
+  }
+  &__text {
+    line-height: 1.6;
+  }
+}

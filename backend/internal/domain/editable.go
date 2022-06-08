@@ -1,8 +1,6 @@
 package domain
 
 import (
-	"fmt"
-
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -15,7 +13,6 @@ type Editable struct {
 }
 
 func NewEditable(id string, Type int, value string, width int, height int) (editable Editable, err error) {
-	fmt.Println(id)
 	editable = Editable{
 		Type:   Type,
 		Value:  value,

@@ -1,0 +1,100 @@
+.footer {
+  background: #F1F1F1;
+  margin: 200px -23px 0;
+  padding: 80px 0;
+  @include qmd {
+    padding: 100px 24px 40px;
+  }
+  &-row {
+    display: flex;
+    margin: 0 -40px;
+    @include qmd {
+      flex-wrap: wrap;
+    }
+  }
+  &-logo {
+    @include qmd {
+      display: none;
+    }
+    &--mobile {
+      display: none;
+      @include qmd {
+        display: block;
+        text-align: center;
+        padding-top: 40px;
+      }
+    }
+  }
+  &-map {
+    position: relative;
+    top: -80px;
+    margin-top: -120px;
+    @include qmd {
+      top: -40px;
+      margin-top: -160px;
+    }
+  }
+  &-left {
+    padding: 0 40px;
+    width: 50%;
+    @include qmd {
+      width: 100%;
+    }
+  }
+  &-right {
+    padding: 0 40px;
+    width: 50%;
+    @include qmd {
+      width: 100%;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: 500;
+      padding-bottom: 40px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    
+  }
+  &-contact-info {
+    margin: 0 -12px;
+    font-size: 12px;
+    font-weight: 500;
+    padding-bottom: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    @include qmd {
+      padding-bottom: 16px;
+    }
+    .b-col {
+      padding: 0 12px 8px;
+      max-width: 50%;
+      min-width: 50%;
+      @include qmd {
+        min-width: 100%;
+        max-width: 100%;
+      }
+      &--addr {
+        order: 0;
+        padding-bottom: 8px;
+      }
+      &--phone {
+        order: 2;
+      }
+      &--time {
+        order: 1;
+        padding-bottom: 24px;
+      }
+      strong {
+        font-weight: 700;
+        font-size: 16px;
+      }
+    }
+  }
+  &-text {
+    color: rgba(0,0,0, .5);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+}

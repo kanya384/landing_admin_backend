@@ -1,0 +1,27 @@
+// If you want to override variables do it here
+@import 'variables';
+@import 'fonts';
+@import 'reset';
+
+@import 'mixins/mixins';
+
+@import 'layout';
+
+// forms
+@import "forms";
+
+
+// If you want to add custom CSS you can put it here.
+
+@import 'slick-slider/slick/slick';
+@import "components/header";
+@import "components/footer";
+@import "components/main";
+@import "components/сhoise";
+@import "components/room";
+@import "components/promo";
+@import "components/about";
+
+// modals
+@import "components/modal-flat";
+
