@@ -10,6 +10,7 @@
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
+    "reactstrap": "^9.1.1",
     "sass": "^1.52.2",
     "slick-slider": "^1.8.2",
     "web-vitals": "^2.1.4"
