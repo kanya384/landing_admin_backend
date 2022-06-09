@@ -189,7 +189,10 @@
     }
   }
 }
-
+.blocks {
+  display: flex;
+  flex-direction: column;
+}
 .slider-construction-progress {
   margin-left: auto;
   position: relative;
@@ -197,7 +200,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  
+  .slick-list, .slick-slider {
+    position: relative;
+    display: block;
+  }
   .nav-build {
     overflow: hidden;
     max-width: 135px;
@@ -207,35 +213,66 @@
     max-width: 150vw;
     min-width: 150vw;
     left: -110px;
+    @include qxxl {
+      max-width: 2300px;
+      min-width: 2300px;
+    }
+    @include qlg {
+      max-width: 100%;
+      min-width: 100%;
+      left: 0;
+    }
     // min-width: 2853px;
-  
+    .slide {
+      // min-width: 927px;
+      // max-width: 927px;
+      display: block !important;
+      margin: 0 -84px;
+      width: auto !important;
+      @include qlg {
+        margin: 0;
+      }
+    }
     .slick-track {
       display: flex;
       align-items: center;
       flex-wrap: nowrap;
       height: 604px;
-      justify-content: center;
+      justify-content: flex-start;
+      @include qlg {
+        height: auto;
+      }
     }
     .slick-slide{
       float: none;
       display: inline-block;
       vertical-align: middle;
       padding: 10px 0;
-      margin: 0 -84px;
+      // margin: 0 -84px;
       background-color: white;
       transition: all 0.3s ease;
       height: auto;
       text-align: center;
       transform:scale(.6);
+      @include qlg {
+        transform: none;
+      }
       img {
         position: relative;
         top: -240px;
         transition: all 0.3s ease;
+        @include qlg {
+          top: 0;
+        }
       }
+      
       &.slick-current,
       &.slick-center {
         transform:scale(1);
         padding: 130px 0;
+        @include qlg {
+          padding: 0;
+        }
         img {
           position: relative;
           top: 0;

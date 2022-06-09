@@ -7,8 +7,9 @@
     position: fixed;
     z-index: 90;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: 23px;
+    width: auto;
+    right: 23px;
   }
   &--inside {
     border-bottom: 1px solid #000;
@@ -118,13 +119,12 @@
   line-height:1;
   position: absolute;
   top: 38px;
-  right: 61px;
+  right: 84px;
   color: $clr-first-primary;
   font-size: 16px;
   font-weight: 500;
   @include qxl {
     display: block;
-    right: 60px;
   }
   strong {
     position:absolute;
