@@ -6,3 +6,5 @@ node_modules
 build
 file_store
 .env
+
+.idea

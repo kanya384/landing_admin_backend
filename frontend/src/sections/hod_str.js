@@ -47,7 +47,7 @@ export const HodStr = () => {
                   <div class="dropdown-filter__label-text">март</div>
                   <div class="dropdown-filter__arr">
                     <svg width="14" height="9" viewBox="0 0 14 9" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M13 1L7 7L1 1" stroke-width="2"/>
+                      <path d="M13 1L7 7L1 1" strokeWidth="2"/>
                     </svg>
                   </div>
                 </div>
@@ -74,7 +74,6 @@ export const HodStr = () => {
                 <div class="slide"><img src="img/constr-prog1.png" alt="" /></div>
                 <div class="slide"><img src="img/constr-prog1.png" alt="" /></div>
               </Slider>
-              </div>
               <div class="slider-construction-progress-nav">
                 <div class="arr-left">
                   <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -99,5 +98,6 @@ export const HodStr = () => {
           </div>
         </div>
       </div>
+    </div>
   )
 }
