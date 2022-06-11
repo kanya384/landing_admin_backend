@@ -16,7 +16,7 @@ const (
 	IMAGE_HEIGHT = 350
 )
 
-type Service interface {
+type AdvantagePhoto interface {
 	Get(ctx context.Context, advantageID primitive.ObjectID) (list []domain.AdvantagePhoto, err error)
 	Create(ctx context.Context, advantagePhoto domain.AdvantagePhoto, file io.ReadCloser) (advantagePhotoRes domain.AdvantagePhoto, err error)
 	Delete(ctx context.Context, advantagePhotoID primitive.ObjectID) (err error)
@@ -28,7 +28,7 @@ type service struct {
 	cfg        *config.Config
 }
 
-func NewService(repository *repository.Repository, cfg *config.Config) Service {
+func NewService(repository *repository.Repository, cfg *config.Config) AdvantagePhoto {
 	return &service{
 		repository: repository,
 		cfg:        cfg,

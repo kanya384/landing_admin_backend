@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Service interface {
+type Users interface {
 	Get(ctx context.Context) (users []*domain.UserInfo, err error)
 	Create(ctx context.Context, user domain.User) (err error)
 	Update(ctx context.Context, user domain.User) (err error)
@@ -19,7 +19,7 @@ type service struct {
 	repository *repository.Repository
 }
 
-func NewService(repository *repository.Repository) Service {
+func NewService(repository *repository.Repository) Users {
 	return &service{
 		repository: repository,
 	}

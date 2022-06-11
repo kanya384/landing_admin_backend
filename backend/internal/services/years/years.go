@@ -16,7 +16,7 @@ const (
 	IMAGE_HEIGHT = 350
 )
 
-type Service interface {
+type Years interface {
 	Get(ctx context.Context) (years []domain.Year, err error)
 	Create(ctx context.Context, year domain.Year) (err error)
 	Update(ctx context.Context, year domain.Year) (err error)
@@ -28,7 +28,7 @@ type service struct {
 	cfg        *config.Config
 }
 
-func NewService(repository *repository.Repository, cfg *config.Config) Service {
+func NewService(repository *repository.Repository, cfg *config.Config) Years {
 	return &service{
 		repository: repository,
 		cfg:        cfg,

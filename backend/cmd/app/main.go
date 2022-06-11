@@ -5,7 +5,7 @@ import (
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/generated"
 	"landing_admin_backend/internal/generated/operations"
-	"landing_admin_backend/pkg/logger"
+	"landing_admin_backend/pkg/helpers"
 	"log"
 	"os"
 
@@ -25,7 +25,7 @@ func main() {
 	}
 	defer file.Close()
 
-	logger, err := logger.NewLogger(cfg.ServiceName, cfg.LogLevel, file)
+	logger, err := helpers.ConfigureLogger(cfg.ServiceName, cfg.LogLevel, file)
 	if err != nil {
 		panic(fmt.Sprintf("error initializing logger %s", err))
 	}

@@ -16,7 +16,7 @@ const (
 	IMAGE_HEIGHT = 350
 )
 
-type Service interface {
+type Photos interface {
 	Get(ctx context.Context, monthID primitive.ObjectID) (hodPhotos []domain.HodPhoto, err error)
 	Create(ctx context.Context, hodPhoto domain.HodPhoto, file io.ReadCloser) (hodPhotoRes domain.HodPhoto, err error)
 	Delete(ctx context.Context, hodPhotoID primitive.ObjectID) (err error)
@@ -28,7 +28,7 @@ type service struct {
 	cfg        *config.Config
 }
 
-func NewService(repository *repository.Repository, cfg *config.Config) Service {
+func NewService(repository *repository.Repository, cfg *config.Config) Photos {
 	return &service{
 		repository: repository,
 		cfg:        cfg,

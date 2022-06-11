@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Service interface {
+type Advantages interface {
 	Get(ctx context.Context) (advantages []*domain.Advantage, err error)
 	GetByID(ctx context.Context, id primitive.ObjectID) (advantage domain.Advantage, err error)
 	Create(ctx context.Context, advantage domain.Advantage) (err error)
@@ -24,7 +24,7 @@ type service struct {
 	cfg        *config.Config
 }
 
-func NewService(repository *repository.Repository, cfg *config.Config) Service {
+func NewService(repository *repository.Repository, cfg *config.Config) Advantages {
 	return &service{
 		repository: repository,
 		cfg:        cfg,

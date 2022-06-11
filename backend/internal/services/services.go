@@ -17,39 +17,41 @@ import (
 	"landing_admin_backend/internal/services/video"
 	"landing_admin_backend/internal/services/years"
 	"landing_admin_backend/pkg/token_manager"
+
+	"github.com/sirupsen/logrus"
 )
 
 type Services struct {
-	Auth           auth.Service
-	Users          users.Service
-	Posters        posters.Service
-	Years          years.Service
-	Months         months.Service
-	HodPhotos      hod_photos.Service
-	Advantages     advantages.Service
-	AdvantagePhoto advantage_photo.Service
-	Plans          plans.Service
-	Video          video.Service
-	Docs           docs.Service
-	Leads          leads.Service
-	Editable       editable.Service
+	Auth           auth.Auth
+	Users          users.Users
+	Posters        posters.Posters
+	Years          years.Years
+	Months         months.Months
+	HodPhotos      hod_photos.Photos
+	Advantages     advantages.Advantages
+	AdvantagePhoto advantage_photo.AdvantagePhoto
+	Plans          plans.Plans
+	Video          video.Video
+	Docs           docs.Docs
+	Leads          leads.Leads
+	Editable       editable.Editable
 }
 
-func Setup(cfg *config.Config, repository *repository.Repository) *Services {
+func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus.Entry) *Services {
 	tokenManager := token_manager.NewTokenManager(cfg.TokenSecret, cfg.TokenTTL, cfg.RefreshTokenTTL)
 	return &Services{
-		Auth:           auth.NewService(repository, tokenManager),
-		Users:          users.NewService(repository),
-		Posters:        posters.NewService(repository, cfg),
-		Years:          years.NewService(repository, cfg),
-		Months:         months.NewService(repository, cfg),
-		HodPhotos:      hod_photos.NewService(repository, cfg),
-		Advantages:     advantages.NewService(repository, cfg),
-		AdvantagePhoto: advantage_photo.NewService(repository, cfg),
-		Plans:          plans.NewService(repository, cfg),
-		Video:          video.NewService(repository, cfg),
-		Docs:           docs.NewService(repository, cfg),
-		Leads:          leads.NewService(repository, cfg),
-		Editable:       editable.NewService(repository, cfg),
+		Auth:           auth.NewAuthWithLogrus(auth.NewService(repository, tokenManager), logger),
+		Users:          users.NewUsersWithLogrus(users.NewService(repository), logger),
+		Posters:        posters.NewPostersWithLogrus(posters.NewService(repository, cfg), logger),
+		Years:          years.NewYearsWithLogrus(years.NewService(repository, cfg), logger),
+		Months:         months.NewMonthsWithLogrus(months.NewService(repository, cfg), logger),
+		HodPhotos:      hod_photos.NewPhotosWithLogrus(hod_photos.NewService(repository, cfg), logger),
+		Advantages:     advantages.NewAdvantagesWithLogrus(advantages.NewService(repository, cfg), logger),
+		AdvantagePhoto: advantage_photo.NewAdvantagePhotoWithLogrus(advantage_photo.NewService(repository, cfg), logger),
+		Plans:          plans.NewPlansWithLogrus(plans.NewService(repository, cfg), logger),
+		Video:          video.NewVideoWithLogrus(video.NewService(repository, cfg), logger),
+		Docs:           docs.NewDocsWithLogrus(docs.NewService(repository, cfg), logger),
+		Leads:          leads.NewLeadsWithLogrus(leads.NewService(repository, cfg), logger),
+		Editable:       editable.NewEditableWithLogrus(editable.NewService(repository, cfg), logger),
 	}
 }

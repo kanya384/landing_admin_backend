@@ -16,7 +16,7 @@ const (
 	IMAGE_HEIGHT = 350
 )
 
-type Service interface {
+type Video interface {
 	Get(ctx context.Context) (videos []*domain.Video, err error)
 	Create(ctx context.Context, video domain.Video, file io.ReadCloser, fileName string) (domain.Video, error)
 	Update(ctx context.Context, video domain.Video, file interface{}, fileName string) (domain.Video, error)
@@ -28,7 +28,7 @@ type service struct {
 	cfg        *config.Config
 }
 
-func NewService(repository *repository.Repository, cfg *config.Config) Service {
+func NewService(repository *repository.Repository, cfg *config.Config) Video {
 	return &service{
 		repository: repository,
 		cfg:        cfg,

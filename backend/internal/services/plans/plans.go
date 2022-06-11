@@ -16,7 +16,7 @@ const (
 	IMAGE_HEIGHT = 350
 )
 
-type Service interface {
+type Plans interface {
 	GetPlans(ctx context.Context) (plans []*domain.Plan, err error)
 	GetActivePlans(ctx context.Context) (plans []*domain.Plan, err error)
 	ProcessPlans(ctx context.Context, plansList [][]string) (err error)
@@ -29,7 +29,7 @@ type service struct {
 	cfg        *config.Config
 }
 
-func NewService(repository *repository.Repository, cfg *config.Config) Service {
+func NewService(repository *repository.Repository, cfg *config.Config) Plans {
 	return &service{
 		repository: repository,
 		cfg:        cfg,

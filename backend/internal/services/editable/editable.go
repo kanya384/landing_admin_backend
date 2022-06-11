@@ -7,7 +7,7 @@ import (
 	"landing_admin_backend/internal/repository"
 )
 
-type Service interface {
+type Editable interface {
 	Get(ctx context.Context) (ediatables []*domain.Editable, err error)
 	CreateOrUpdate(ctx context.Context, editable domain.Editable) (err error)
 }
@@ -17,7 +17,7 @@ type service struct {
 	cfg        *config.Config
 }
 
-func NewService(repository *repository.Repository, cfg *config.Config) Service {
+func NewService(repository *repository.Repository, cfg *config.Config) Editable {
 	return &service{
 		repository: repository,
 		cfg:        cfg,

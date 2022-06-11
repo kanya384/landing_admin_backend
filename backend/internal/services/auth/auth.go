@@ -11,7 +11,7 @@ const (
 	RefreshCookieKey = "refresh_token"
 )
 
-type Service interface {
+type Auth interface {
 	Authenticate(ctx context.Context, login string, pass string) (tokens token_manager.AuthTokens, err error)
 }
 
@@ -20,7 +20,7 @@ type service struct {
 	tokenManager token_manager.TokenManager
 }
 
-func NewService(repository *repository.Repository, tokenManager token_manager.TokenManager) Service {
+func NewService(repository *repository.Repository, tokenManager token_manager.TokenManager) Auth {
 	return &service{
 		repository:   repository,
 		tokenManager: tokenManager,

@@ -14,8 +14,11 @@ import (
 	"strings"
 	"time"
 
+	runtime "github.com/banzaicloud/logrus-runtime-formatter"
 	"github.com/disintegration/imaging"
+	formatter "github.com/fabienm/go-logrus-formatters"
 	satori "github.com/satori/go.uuid"
+	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -106,4 +109,18 @@ func ReadCsvFile(file io.ReadCloser) (rows [][]string, err error) {
 	rows, err = csvReader.ReadAll()
 	rows = rows[1:]
 	return
+}
+
+func ConfigureLogger(serviceName string, logLevel uint32, file *os.File) (*logrus.Entry, error) {
+	log := logrus.New()
+	log.SetLevel(logrus.Level(logLevel))
+	gelFmt := formatter.NewGelf(serviceName)
+	runtimeFormatter := &runtime.Formatter{ChildFormatter: gelFmt}
+	log.SetFormatter(runtimeFormatter)
+
+	log.SetOutput(file)
+	//hook := graylog.NewGraylogHook(greyLogHost, map[string]interface{}{})
+	//log.AddHook(hook)
+
+	return log.WithField("service_name", "backend"), nil
 }

@@ -12,7 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Service interface {
+type Docs interface {
 	Get(ctx context.Context) (docs []*domain.Doc, err error)
 	Create(ctx context.Context, doc domain.Doc, file io.ReadCloser, fileName string) (domain.Doc, error)
 	Update(ctx context.Context, doc domain.Doc, file interface{}, fileName string) (domain.Doc, error)
@@ -24,7 +24,7 @@ type service struct {
 	cfg        *config.Config
 }
 
-func NewService(repository *repository.Repository, cfg *config.Config) Service {
+func NewService(repository *repository.Repository, cfg *config.Config) Docs {
 	return &service{
 		repository: repository,
 		cfg:        cfg,

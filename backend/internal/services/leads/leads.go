@@ -11,7 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Service interface {
+type Leads interface {
 	Get(ctx context.Context) (leads []*domain.Lead, err error)
 	GetAnalytics(ctx context.Context) (analytics domain.Analytics, err error)
 	Create(ctx context.Context, lead domain.Lead) (err error)
@@ -23,7 +23,7 @@ type service struct {
 	cfg        *config.Config
 }
 
-func NewService(repository *repository.Repository, cfg *config.Config) Service {
+func NewService(repository *repository.Repository, cfg *config.Config) Leads {
 	return &service{
 		repository: repository,
 		cfg:        cfg,

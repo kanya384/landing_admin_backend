@@ -28,7 +28,7 @@ import (
 	"landing_admin_backend/internal/handlers"
 	mng "landing_admin_backend/internal/repository/mongo"
 	"landing_admin_backend/internal/services"
-	"landing_admin_backend/pkg/logger"
+	"landing_admin_backend/pkg/helpers"
 	"landing_admin_backend/pkg/token_manager"
 )
 
@@ -58,7 +58,7 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 		panic(fmt.Sprintf("error opening log file config %s", err))
 	}
 
-	logger, err := logger.NewLogger(cfg.ServiceName, cfg.LogLevel, file)
+	logger, err := helpers.ConfigureLogger(cfg.ServiceName, cfg.LogLevel, file)
 	if err != nil {
 		panic(fmt.Sprintf("error initializing logger %s", err))
 	}
@@ -80,7 +80,7 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	}
 
 	repository := mng.Setup(client.Database("public"))
-	services := services.Setup(cfg, repository)
+	services := services.Setup(cfg, repository, logger)
 	handlers := handlers.NewHandlers(services, cfg)
 	api.PostLoginHandler = operations.PostLoginHandlerFunc(handlers.Auth.Authenticate)
 	api.GetPingHandler = operations.GetPingHandlerFunc(handlers.Auth.Ping)

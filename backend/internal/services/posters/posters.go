@@ -16,7 +16,7 @@ const (
 	IMAGE_HEIGHT = 350
 )
 
-type Service interface {
+type Posters interface {
 	Get(ctx context.Context, filter map[string]interface{}) (posters []*domain.Poster, err error)
 	GetByID(ctx context.Context, id primitive.ObjectID) (poster domain.Poster, err error)
 	Create(ctx context.Context, poster domain.Poster, file io.ReadCloser) (posterRes domain.Poster, err error)
@@ -30,7 +30,7 @@ type service struct {
 	cfg        *config.Config
 }
 
-func NewService(repository *repository.Repository, cfg *config.Config) Service {
+func NewService(repository *repository.Repository, cfg *config.Config) Posters {
 	return &service{
 		repository: repository,
 		cfg:        cfg,
