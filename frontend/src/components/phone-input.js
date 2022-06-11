@@ -50,9 +50,9 @@ export const PhoneInput = () => {
             setPhone(value);
         }
         if (value.length > 18) {
-            e.currentTarget.parentElement.classList.add("err");
+            e.currentTarget.parentElement.classList.add("inp-group--error");
         } else {
-            e.currentTarget.parentElement.classList.remove("err");
+            e.currentTarget.parentElement.classList.remove("inp-group--error");
         }
 
         if (value.length < lastVal.length) {
@@ -61,10 +61,10 @@ export const PhoneInput = () => {
             }
         }
     }
-    return ( <div class="form-ec__input-row">
-                <div class="inp-group">
-                    <div class="inp-group-label">Телефон</div>
-                    <input class="input" placeholder="Телефон" onChange={phoneChange} value={phone} />
+    return ( <div className="form-ec__input-row">
+                <div className="inp-group">
+                    <div className="inp-group-label">Телефон</div>
+                    <input className="input" placeholder="Телефон" name="phone" onChange={phoneChange} value={phone} />
                 </div>
             </div>
     )

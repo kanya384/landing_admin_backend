@@ -17,7 +17,7 @@ import { GetPodbor } from "../sections/get_podbor";
 import { Infra } from "../sections/infra";
 import { HodStr } from "../sections/hod_str";
 import { Question } from "../sections/question";
-import { Footer } from "../sections/footer";
+import { Footer } from "../components/footer";
 
 
 export const Loader = () => {

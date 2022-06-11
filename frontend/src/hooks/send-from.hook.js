@@ -1,9 +1,9 @@
 export const useSendForm = () => {
   const addError = (element) => {
-      element.classList.add('err')
+      element.parentElement.classList.add('inp-group--error')
   }
   const removeError = (element) => {
-      element.classList.remove('err')
+      element.parentElement.classList.remove('inp-group--error')
   }
   const checkPhone = (element) => {
       if (element.value.indexOf('_') !== -1 || element.value.length !== 18) {
@@ -152,11 +152,11 @@ export const useSendForm = () => {
           })
           callback()
           console.log(senddata)
-          fetch("fd_log/ajax.php", requestOptions)
+          /*fetch("fd_log/ajax.php", requestOptions)
               .then(data => data.ok)
               .then(response => {
                   showAlert(senddata, celtype)
-              });
+              });*/
       }
   }
   return { sendForm }

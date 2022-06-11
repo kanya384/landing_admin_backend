@@ -4,22 +4,22 @@ import { Modal } from "../components/modals"
 export const Presentation = () => {
   const [isOpen, setModalState] = useState(null)
   return ( <React.Fragment>
-    <div class="lvl7">
-      <div class="wrapper">
-        <div class="form-ec">
-          <div class="form-ec__title">Получите подробную презентацию жилого комплекса</div>
-          <div class="form-ec__content">
-            <div class="form-ec__input-row">
-              <div class="inp-group">
-                <div class="inp-group-label">Ваше имя</div>
-                <input class="input" placeholder="Ваше имя" type="text" />
+    <div className="lvl7">
+      <div className="wrapper">
+        <div className="form-ec">
+          <div className="form-ec__title">Получите подробную презентацию жилого комплекса</div>
+          <div className="form-ec__content">
+            <div className="form-ec__input-row">
+              <div className="inp-group">
+                <div className="inp-group-label">Ваше имя</div>
+                <input className="input" placeholder="Ваше имя" type="text" />
               </div>
-              <div class="inp-group">
-                <div class="inp-group-label">E-mail</div>
-                <input class="input" placeholder="E-mail" type="text" />
+              <div className="inp-group">
+                <div className="inp-group-label">E-mail</div>
+                <input className="input" placeholder="E-mail" type="text" />
               </div>
             </div>
-            <div class="form-ec__b-btn"><button class="btn-submit" onClick={(e) => {e.preventDefault(); setModalState(true)}}><span class="btn-submit-text">Отправить</span></button></div>
+            <div className="form-ec__b-btn"><button className="btn-submit" onClick={(e) => {e.preventDefault(); setModalState(true)}}><span className="btn-submit-text">Отправить</span></button></div>
           </div>
         </div>
       </div>

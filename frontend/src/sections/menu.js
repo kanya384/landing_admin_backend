@@ -1,29 +1,31 @@
+import { Link } from "react-router-dom"
+
 export const Menu = () => {
   return(
-    <header class="header">
-      <div class="wrapper">
-        <div class="logo">
+    <header className="header">
+      <div className="wrapper">
+        <div className="logo">
           <a href="#">
             <img src="./img/logo.svg" alt="logo" />
           </a>
         </div>
-        <div class="header-phone">
-          <div class="phone">+7 987 654-32-10</div>
-          <a href="#" class="btn-recall">Заказать звонок</a>
+        <div className="header-phone">
+          <div className="phone">+7 987 654-32-10</div>
+          <a href="#" className="btn-recall">Заказать звонок</a>
         </div>
         
-        <a href="javascript:void(0);" id="hamburger-icon">
-          <span class="line line-1"></span>
-          <span class="line line-2"></span>
-          <span class="line line-3"></span>
+        <a href="#" id="hamburger-icon">
+          <span className="line line-1"></span>
+          <span className="line line-2"></span>
+          <span className="line line-3"></span>
           <strong>МЕНЮ</strong>
         </a>
-      <nav class="navigation">
+      <nav className="navigation">
         <ul>
           <li><a href="">Инфраструктура</a></li>
           <li><a href="">Планировки и цены</a></li>
           <li><a href="">Способы покупки</a></li>
-          <li><a href="">О застройщике</a></li>
+          <li><Link to="/about">О застройщике</Link></li>
           <li><a href="">Контакты</a></li>
         </ul>
       </nav>

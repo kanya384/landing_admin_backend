@@ -1,7 +1,13 @@
+import { FloorsModal } from "../feature/floors-modal";
 import { Form } from "./form"
-import { useEffect, useState } from "react";
+const parse = require('html-react-parser');
 
-export const Modal = ({title, subtitle, classes, fields, content, btnTitle, image, imageMobile, opened, close}) => {
+export const Modal = ({title, subtitle, classes, description, fields, content, btnTitle, image, imageMobile, opened, close}) => {
+  
+  if (classes === "modal-flat") {
+    return <FloorsModal {...{title, classes, opened, close}}/>
+  }
+  
   return (<div className={opened?`modal-full ${classes} open`:`modal-full ${classes}`}>
           <div className="modal-full__close js-close-modal" onClick={()=>close()}>
             <div className="close-icon" >
@@ -12,15 +18,15 @@ export const Modal = ({title, subtitle, classes, fields, content, btnTitle, imag
             <div className="modal-centered-wrapper">
               <div className="modal-header">
                 <div className="modal-header__title h1">{title}</div>
-                {subtitle?<div className="modal-text-right">{subtitle}</div>:""}
+                {subtitle?<div className="modal-text-right">{parse(subtitle)}</div>:""}
                 <div className="modal-image"><img src={imageMobile} alt="" /></div>
               </div>
               {fields.length>0?<div className="modal-content">
-                <Form fields={fields} btnTitle={btnTitle} />
+                <Form fields={fields} btnTitle={btnTitle} description={description} close={close} />
               </div>:""}
               {content?<div className="modal-content">
                 <div className="modal-text-body">
-                  {content}
+                  {parse(content)}
                 </div>
               </div>:""}
             </div>

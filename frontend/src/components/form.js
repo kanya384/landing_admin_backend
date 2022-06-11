@@ -1,25 +1,28 @@
+import { useSendForm } from "../hooks/send-from.hook"
 import { PhoneInput } from "./phone-input"
 
-export const Form = ({fields, btnTitle}) => {
-    return ( <div class="form-ec">
-                <div class="form-ec__content">
+export const Form = ({fields, description, btnTitle, close}) => {
+    const sendForm = useSendForm()
+    return ( <form className="form-ec">
+                <div className="form-ec__content">
                     {fields.map(({name, title, placeholder}) => {
                         if (name==="phone") {
                             return <PhoneInput />
                         }
-                        return <div class="form-ec__input-row">  
-                                <div class="inp-group">
-                                    <div class="inp-group-label">{title}</div>
-                                    <input class="input" placeholder={placeholder} name={name} />
+                        return <div className="form-ec__input-row">  
+                                <div className="inp-group">
+                                    <div className="inp-group-label">{title}</div>
+                                    <input className="input" placeholder={placeholder} name={name} />
                                 </div>
                             </div>
                     })}
-                    <div class="form-ec__b-btn">
-                        <button class="btn-submit">
-                            <span class="btn-submit-text">{btnTitle}</span>
+                    <input type="hidden" className="text" value={description} />
+                    <div className="form-ec__b-btn">
+                        <button className="btn-submit" onClick={(e) => sendForm.sendForm(e, close)}>
+                            <span className="btn-submit-text">{btnTitle}</span>
                         </button>
                     </div>
                 </div>
-            </div>
+            </form>
     )
 }

@@ -24,23 +24,23 @@ export const Walks = () => {
                 </div>
               </div>
             </div>
-            <div class="lvl4">
-              <div class="wrapper">
-                <div class="b-small-fix-height">
-                  <div class="img-float-label">
+            <div className="lvl4">
+              <div className="wrapper">
+                <div className="b-small-fix-height">
+                  <div className="img-float-label">
                     <img src="img/img4.svg" alt="" />
-                    <div class="b-label">Анапский парк</div>
+                    <div className="b-label">Анапский парк</div>
                   </div>
-                  <div class="text">
+                  <div className="text">
                     Достопримечательность и отличное место для прогулок и фото. Отсюда открывается восхитительный вид на бесконечную синеву моря с белыми кораблями и парусниками. Рядом с маяком много лавочек, беседо и кафе
                   </div>
                 </div>
-                <div class="b-small-fix-height">
-                  <div class="img-float-label">
+                <div className="b-small-fix-height">
+                  <div className="img-float-label">
                     <img src="img/img5.svg" alt="" />
-                    <div class="b-label">Бювет минеральных вод</div>
+                    <div className="b-label">Бювет минеральных вод</div>
                   </div>
-                  <div class="text">
+                  <div className="text">
                     Еще одно знаковое городское место. Это облагороженный источник, где можно попробовать знаменитую лечебно-стоповую минеральную воду «Анапская»
                   </div>
                 </div>
