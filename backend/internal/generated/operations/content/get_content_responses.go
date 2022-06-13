@@ -25,7 +25,7 @@ type GetContentOK struct {
 	/*
 	  In: Body
 	*/
-	Payload *models.Content `json:"body,omitempty"`
+	Payload interface{} `json:"body,omitempty"`
 }
 
 // NewGetContentOK creates GetContentOK with default headers values
@@ -35,13 +35,13 @@ func NewGetContentOK() *GetContentOK {
 }
 
 // WithPayload adds the payload to the get content o k response
-func (o *GetContentOK) WithPayload(payload *models.Content) *GetContentOK {
+func (o *GetContentOK) WithPayload(payload interface{}) *GetContentOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the get content o k response
-func (o *GetContentOK) SetPayload(payload *models.Content) {
+func (o *GetContentOK) SetPayload(payload interface{}) {
 	o.Payload = payload
 }
 
@@ -49,11 +49,9 @@ func (o *GetContentOK) SetPayload(payload *models.Content) {
 func (o *GetContentOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
 	rw.WriteHeader(200)
-	if o.Payload != nil {
-		payload := o.Payload
-		if err := producer.Produce(rw, payload); err != nil {
-			panic(err) // let the recovery middleware deal with this
-		}
+	payload := o.Payload
+	if err := producer.Produce(rw, payload); err != nil {
+		panic(err) // let the recovery middleware deal with this
 	}
 }
 

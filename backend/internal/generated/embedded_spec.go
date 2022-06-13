@@ -483,7 +483,7 @@ func init() {
           "200": {
             "description": "returns landing content",
             "schema": {
-              "$ref": "#/definitions/Content"
+              "type": "object"
             }
           },
           "400": {
@@ -3154,7 +3154,7 @@ func init() {
           "200": {
             "description": "returns landing content",
             "schema": {
-              "$ref": "#/definitions/Content"
+              "type": "object"
             }
           },
           "400": {

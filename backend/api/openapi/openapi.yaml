@@ -1341,7 +1341,7 @@ paths:
         '200':
           description: 'returns landing content'
           schema:
-            $ref: '#/definitions/Content'
+            type: "object"
         '400':
           description: 'Bad request'
           schema:
