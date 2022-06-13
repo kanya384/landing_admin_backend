@@ -19,15 +19,9 @@ import (
 // swagger:model Poster
 type Poster struct {
 
-	// active
-	Active bool `json:"active,omitempty"`
-
 	// created at
 	// Format: date-time
 	CreatedAt strfmt.DateTime `json:"createdAt,omitempty"`
-
-	// description
-	Description string `json:"description,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`

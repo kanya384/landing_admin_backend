@@ -41,11 +41,6 @@ type PutPostersParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
-	/*
-	  Required: true
-	  In: formData
-	*/
-	Description string
 	/*The file to upload
 	  Required: true
 	  In: formData
@@ -76,11 +71,6 @@ func (o *PutPostersParams) BindRequest(r *http.Request, route *middleware.Matche
 	}
 	fds := runtime.Values(r.Form)
 
-	fdDescription, fdhkDescription, _ := fds.GetOK("description")
-	if err := o.bindDescription(fdDescription, fdhkDescription, route.Formats); err != nil {
-		res = append(res, err)
-	}
-
 	file, fileHeader, err := r.FormFile("file")
 	if err != nil {
 		res = append(res, errors.New(400, "reading file %q failed: %v", "file", err))
@@ -98,26 +88,6 @@ func (o *PutPostersParams) BindRequest(r *http.Request, route *middleware.Matche
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-// bindDescription binds and validates parameter Description from formData.
-func (o *PutPostersParams) bindDescription(rawData []string, hasKey bool, formats strfmt.Registry) error {
-	if !hasKey {
-		return errors.Required("description", "formData", rawData)
-	}
-	var raw string
-	if len(rawData) > 0 {
-		raw = rawData[len(rawData)-1]
-	}
-
-	// Required: true
-
-	if err := validate.RequiredString("description", "formData", raw); err != nil {
-		return err
-	}
-	o.Description = raw
-
 	return nil
 }
 

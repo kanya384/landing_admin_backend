@@ -42,16 +42,6 @@ type PatchPostersParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
-	/*
-	  Required: true
-	  In: formData
-	*/
-	Active bool
-	/*
-	  Required: true
-	  In: formData
-	*/
-	Description string
 	/*The file to upload
 	  In: formData
 	*/
@@ -95,16 +85,6 @@ func (o *PatchPostersParams) BindRequest(r *http.Request, route *middleware.Matc
 	}
 	fds := runtime.Values(r.Form)
 
-	fdActive, fdhkActive, _ := fds.GetOK("active")
-	if err := o.bindActive(fdActive, fdhkActive, route.Formats); err != nil {
-		res = append(res, err)
-	}
-
-	fdDescription, fdhkDescription, _ := fds.GetOK("description")
-	if err := o.bindDescription(fdDescription, fdhkDescription, route.Formats); err != nil {
-		res = append(res, err)
-	}
-
 	file, fileHeader, err := r.FormFile("file")
 	if err != nil && err != http.ErrMissingFile {
 		res = append(res, errors.New(400, "reading file %q failed: %v", "file", err))
@@ -138,51 +118,6 @@ func (o *PatchPostersParams) BindRequest(r *http.Request, route *middleware.Matc
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-// bindActive binds and validates parameter Active from formData.
-func (o *PatchPostersParams) bindActive(rawData []string, hasKey bool, formats strfmt.Registry) error {
-	if !hasKey {
-		return errors.Required("active", "formData", rawData)
-	}
-	var raw string
-	if len(rawData) > 0 {
-		raw = rawData[len(rawData)-1]
-	}
-
-	// Required: true
-
-	if err := validate.RequiredString("active", "formData", raw); err != nil {
-		return err
-	}
-
-	value, err := swag.ConvertBool(raw)
-	if err != nil {
-		return errors.InvalidType("active", "formData", "bool", raw)
-	}
-	o.Active = value
-
-	return nil
-}
-
-// bindDescription binds and validates parameter Description from formData.
-func (o *PatchPostersParams) bindDescription(rawData []string, hasKey bool, formats strfmt.Registry) error {
-	if !hasKey {
-		return errors.Required("description", "formData", rawData)
-	}
-	var raw string
-	if len(rawData) > 0 {
-		raw = rawData[len(rawData)-1]
-	}
-
-	// Required: true
-
-	if err := validate.RequiredString("description", "formData", raw); err != nil {
-		return err
-	}
-	o.Description = raw
-
 	return nil
 }
 

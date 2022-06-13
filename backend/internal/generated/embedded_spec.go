@@ -1549,12 +1549,6 @@ func init() {
             "name": "title",
             "in": "formData",
             "required": true
-          },
-          {
-            "type": "string",
-            "name": "description",
-            "in": "formData",
-            "required": true
           }
         ],
         "responses": {
@@ -1607,18 +1601,6 @@ func init() {
           {
             "type": "string",
             "name": "title",
-            "in": "formData",
-            "required": true
-          },
-          {
-            "type": "string",
-            "name": "description",
-            "in": "formData",
-            "required": true
-          },
-          {
-            "type": "boolean",
-            "name": "active",
             "in": "formData",
             "required": true
           },
@@ -2560,15 +2542,9 @@ func init() {
     "Poster": {
       "type": "object",
       "properties": {
-        "active": {
-          "type": "boolean"
-        },
         "createdAt": {
           "type": "string",
           "format": "date-time"
-        },
-        "description": {
-          "type": "string"
         },
         "id": {
           "type": "string"
@@ -4220,12 +4196,6 @@ func init() {
             "name": "title",
             "in": "formData",
             "required": true
-          },
-          {
-            "type": "string",
-            "name": "description",
-            "in": "formData",
-            "required": true
           }
         ],
         "responses": {
@@ -4278,18 +4248,6 @@ func init() {
           {
             "type": "string",
             "name": "title",
-            "in": "formData",
-            "required": true
-          },
-          {
-            "type": "string",
-            "name": "description",
-            "in": "formData",
-            "required": true
-          },
-          {
-            "type": "boolean",
-            "name": "active",
             "in": "formData",
             "required": true
           },
@@ -5231,15 +5189,9 @@ func init() {
     "Poster": {
       "type": "object",
       "properties": {
-        "active": {
-          "type": "boolean"
-        },
         "createdAt": {
           "type": "string",
           "format": "date-time"
-        },
-        "description": {
-          "type": "string"
         },
         "id": {
           "type": "string"

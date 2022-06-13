@@ -12,15 +12,12 @@ export const Posters: React.FC = () =>  {
     const [opened, setOpened] = useState<number|null>(null);
     const [addForm, setAddFrom] = useState({
       title: "",
-      description: "",
       file: null,
     })
     const [addFormError, setAddFormError] = useState("")
     const [updateForm, setUpdateForm] = useState({
       id: "",
       title: "",
-      description: "",
-      active: true,
       photo: "",
       order: 0,
       file: null,
@@ -44,7 +41,7 @@ export const Posters: React.FC = () =>  {
       {
         title: "Добавить постер",
         stateAction: setAddFrom,
-        sendAction: () =>{ addNewPoster(addForm.file, addForm.title, addForm.description, addPosterCallback);},
+        sendAction: () =>{ addNewPoster(addForm.file, addForm.title, addPosterCallback);},
         error: addFormError,
         fields: [
           {
@@ -62,14 +59,6 @@ export const Posters: React.FC = () =>  {
             name: "title", 
             isError: false, 
             value:addForm.title,
-          },
-          {
-            title: "Описание",
-            type: "textarea", 
-            placeholder: "Введите описание", 
-            name: "description", 
-            isError: false, 
-            value:addForm.description,
           },
         ],
       },
@@ -94,22 +83,6 @@ export const Posters: React.FC = () =>  {
             name: "title", 
             isError: false, 
             value:updateForm!.title,
-          },
-          {
-            title: "Описание",
-            type: "textarea", 
-            placeholder: "Введите описание", 
-            name: "description", 
-            isError: false, 
-            value:updateForm!.description,
-          },
-          {
-            title: "Активность",
-            type: "boolean", 
-            placeholder: "Введите описание", 
-            name: "active", 
-            isError: false, 
-            value:updateForm!.active,
           },
           {
             title: "Индекс",
@@ -162,7 +135,7 @@ export const Posters: React.FC = () =>  {
           <DndProvider backend={HTML5Backend}>
               <div className='row g-4'>
                 {posters?.postersList.map((poster, index)=>{
-                  return <Card key={poster.id} card={{ID: poster.id!, Type:0, Title: poster.title!, Text: poster.description!, Image: "http://localhost:8080/store/"+poster.photo!, Index: index, moveCard: moveCard, deleteClick: () => {deletePoster(poster.id!)}, editClick:()=>{setUpdateForm({id:poster.id!, title:poster.title!, description:poster.description!, active: poster.active===true, photo:poster.photo!, order: !poster.order?0:poster.order!, file:null}); setUpdateFormError(""); setOpened(1)}}}/>
+                  return <Card key={poster.id} card={{ID: poster.id!, Type:0, Title: poster.title!, Text: "", Image: "http://localhost:8080/store/"+poster.photo!, Index: index, moveCard: moveCard, deleteClick: () => {deletePoster(poster.id!)}, editClick:()=>{setUpdateForm({id:poster.id!, title:poster.title!, photo:poster.photo!, order: !poster.order?0:poster.order!, file:null}); setUpdateFormError(""); setOpened(1)}}}/>
                 })}
               </div>
           </ DndProvider>

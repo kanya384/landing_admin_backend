@@ -6,15 +6,29 @@ package hod
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
 	"io"
-	"mime/multipart"
 	"net/http"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/runtime/security"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
+
+	"landing_admin_backend/internal/generated/operations"
+	"landing_admin_backend/internal/generated/operations/advantages"
+	"landing_admin_backend/internal/generated/operations/content"
+	"landing_admin_backend/internal/generated/operations/docs"
+	"landing_admin_backend/internal/generated/operations/editable"
+	"landing_admin_backend/internal/generated/operations/hod"
+	"landing_admin_backend/internal/generated/operations/leads"
+	"landing_admin_backend/internal/generated/operations/plans"
+	"landing_admin_backend/internal/generated/operations/posters"
+	"landing_admin_backend/internal/generated/operations/video"
+	"landing_admin_backend/models"
 )
 
 // PutPhotosMaxParseMemory sets the maximum size in bytes for

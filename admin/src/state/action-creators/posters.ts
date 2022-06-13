@@ -57,18 +57,18 @@ export const sortPosters = (posters: Poster[], dragIndex: number, hoverIndex: nu
   }
 }
 
-export const addNewPoster = (file: any, title: string, description: string, callback:(error: string) => void) => {
+export const addNewPoster = (file: any, title: string, callback:(error: string) => void) => {
   return async (dispatch: Dispatch<Posters>) => {
     if (!file) {
       callback("не приложили файл")
       return
     }
-    if (!title || !description) {
+    if (!title) {
       callback("не все поля заполненны")
       return
     }
     let token = GetTokenFromCookies()
-    postersService.postersPut(file, title, description, {headers: {"Authorization": token}}).then((resp)=> {
+    postersService.postersPut(file, title, {headers: {"Authorization": token}}).then((resp)=> {
       if (resp.status === 200) {
         dispatch({
           type: PostersActionTypes.POSTERS_NEW,
@@ -86,11 +86,11 @@ export const addNewPoster = (file: any, title: string, description: string, call
 export const updatePoster = (poster: Poster, callback:(error: string) => void, file?: any) => {
   return async (dispatch: Dispatch<Posters>) => {
     let token = GetTokenFromCookies()
-    if (poster.id?.length === 0 || poster.title?.length === 0 || poster.description?.length === 0 || poster.active === undefined || poster.order === undefined) {
+    if (poster.id?.length === 0 || poster.title?.length === 0 || poster.order === undefined) {
       callback("не все поля заполненны")
       return
     }
-    postersService.postersPatch(poster.id!, poster.title!, poster.description!, poster.active!, poster.order!, file, poster.photo, {headers: {"Authorization": token}}).then((resp)=>{
+    postersService.postersPatch(poster.id!, poster.title!, poster.order!, file, poster.photo, {headers: {"Authorization": token}}).then((resp)=>{
       if (resp.status === 200) {
         dispatch({
           type: PostersActionTypes.POSTERS_UPDATE,

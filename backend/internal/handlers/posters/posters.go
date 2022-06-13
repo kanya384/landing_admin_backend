@@ -42,7 +42,7 @@ func (h *handlers) Create(params posters.PutPostersParams, input interface{}) mi
 		return posters.NewPutPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
 	}
 
-	poster, err := domain.NewPoster("", params.Title, params.Description, "", true, 0, time.Now(), time.Now(), userID)
+	poster, err := domain.NewPoster("", params.Title, "", 0, time.Now(), time.Now(), userID)
 	if err != nil {
 		return posters.NewPutPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating poster"})
 	}
@@ -52,14 +52,13 @@ func (h *handlers) Create(params posters.PutPostersParams, input interface{}) mi
 		return posters.NewPutPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating poster"})
 	}
 	resPoster := models.Poster{
-		ID:          posterRes.ID.Hex(),
-		Title:       posterRes.Title,
-		Description: posterRes.Description,
-		CreatedAt:   strfmt.DateTime(posterRes.CreatedAt),
-		UpdatedAt:   strfmt.DateTime(posterRes.UpdateAt),
-		Order:       int64(posterRes.Order),
-		Photo:       posterRes.Photo,
-		ModifiedBy:  posterRes.ModifiedBy.Hex(),
+		ID:         posterRes.ID.Hex(),
+		Title:      posterRes.Title,
+		CreatedAt:  strfmt.DateTime(posterRes.CreatedAt),
+		UpdatedAt:  strfmt.DateTime(posterRes.UpdateAt),
+		Order:      int64(posterRes.Order),
+		Photo:      posterRes.Photo,
+		ModifiedBy: posterRes.ModifiedBy.Hex(),
 	}
 	return posters.NewPutPostersOK().WithPayload(&resPoster)
 }
@@ -75,7 +74,7 @@ func (h *handlers) Update(params posters.PatchPostersParams, input interface{}) 
 	if params.Photo != nil {
 		photo = *params.Photo
 	}
-	poster, err := domain.NewPoster(params.ID, params.Title, params.Description, photo, params.Active, int(params.Order), time.Now(), time.Now(), userID)
+	poster, err := domain.NewPoster(params.ID, params.Title, photo, int(params.Order), time.Now(), time.Now(), userID)
 	if err != nil {
 		return posters.NewPatchPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error updating poster"})
 	}
@@ -110,15 +109,13 @@ func (h *handlers) Get(params posters.GetPostersParams) middleware.Responder {
 	postersListResponse := models.GetPostersResponse{}
 	for _, pst := range postersList {
 		postIns := models.Poster{
-			ID:          pst.ID.Hex(),
-			Title:       pst.Title,
-			Description: pst.Description,
-			Photo:       pst.Photo,
-			ModifiedBy:  pst.ModifiedBy.Hex(),
-			Active:      pst.Active,
-			Order:       int64(pst.Order),
-			UpdatedAt:   strfmt.DateTime(pst.UpdateAt),
-			CreatedAt:   strfmt.DateTime(pst.CreatedAt),
+			ID:         pst.ID.Hex(),
+			Title:      pst.Title,
+			Photo:      pst.Photo,
+			ModifiedBy: pst.ModifiedBy.Hex(),
+			Order:      int64(pst.Order),
+			UpdatedAt:  strfmt.DateTime(pst.UpdateAt),
+			CreatedAt:  strfmt.DateTime(pst.CreatedAt),
 		}
 		postersListResponse = append(postersListResponse, &postIns)
 	}
@@ -140,15 +137,13 @@ func (h *handlers) GetPosterById(params posters.GetPostersPosterIDParams, input 
 		return posters.NewDeletePostersPosterIDBadRequest()
 	}
 	res := models.Poster{
-		ID:          poster.ID.Hex(),
-		Title:       poster.Title,
-		Description: poster.Description,
-		Photo:       poster.Photo,
-		Active:      poster.Active,
-		Order:       int64(poster.Order),
-		CreatedAt:   strfmt.DateTime(poster.CreatedAt),
-		UpdatedAt:   strfmt.DateTime(poster.UpdateAt),
-		ModifiedBy:  poster.ModifiedBy.Hex(),
+		ID:         poster.ID.Hex(),
+		Title:      poster.Title,
+		Photo:      poster.Photo,
+		Order:      int64(poster.Order),
+		CreatedAt:  strfmt.DateTime(poster.CreatedAt),
+		UpdatedAt:  strfmt.DateTime(poster.UpdateAt),
+		ModifiedBy: poster.ModifiedBy.Hex(),
 	}
 	return posters.NewGetPostersPosterIDOK().WithPayload(&res)
 }
