@@ -467,6 +467,37 @@ func init() {
         }
       }
     },
+    "/content": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "content"
+        ],
+        "summary": "get landing content",
+        "responses": {
+          "200": {
+            "description": "returns landing content",
+            "schema": {
+              "$ref": "#/definitions/Content"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/doc": {
       "get": {
         "security": [
@@ -2237,6 +2268,53 @@ func init() {
         "token": {
           "type": "string",
           "example": "asdkjkzxcqw1290090"
+        }
+      }
+    },
+    "Content": {
+      "type": "object",
+      "properties": {
+        "advantages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Advantage"
+          }
+        },
+        "docs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Doc"
+          }
+        },
+        "editables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Editable"
+          }
+        },
+        "hod": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Year"
+          }
+        },
+        "plans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Plan"
+          }
+        },
+        "posters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Poster"
+          }
+        },
+        "video": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Video"
+          }
         }
       }
     },
@@ -3060,6 +3138,37 @@ func init() {
         }
       }
     },
+    "/content": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "content"
+        ],
+        "summary": "get landing content",
+        "responses": {
+          "200": {
+            "description": "returns landing content",
+            "schema": {
+              "$ref": "#/definitions/Content"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/doc": {
       "get": {
         "security": [
@@ -4830,6 +4939,53 @@ func init() {
         "token": {
           "type": "string",
           "example": "asdkjkzxcqw1290090"
+        }
+      }
+    },
+    "Content": {
+      "type": "object",
+      "properties": {
+        "advantages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Advantage"
+          }
+        },
+        "docs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Doc"
+          }
+        },
+        "editables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Editable"
+          }
+        },
+        "hod": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Year"
+          }
+        },
+        "plans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Plan"
+          }
+        },
+        "posters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Poster"
+          }
+        },
+        "video": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Video"
+          }
         }
       }
     },

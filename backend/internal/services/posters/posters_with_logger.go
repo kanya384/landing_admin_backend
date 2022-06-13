@@ -104,24 +104,6 @@ func (_d PostersWithLogrus) GetByID(ctx context.Context, id primitive.ObjectID) 
 	return _d._base.GetByID(ctx, id)
 }
 
-// PostersOrdersChange implements Posters
-func (_d PostersWithLogrus) PostersOrdersChange(ctx context.Context, first domain.UpdateOrder, second domain.UpdateOrder) (err error) {
-	_d._log.WithFields(logrus.Fields(map[string]interface{}{
-		"ctx":    ctx,
-		"first":  first,
-		"second": second})).Debug("PostersWithLogrus: calling PostersOrdersChange")
-	defer func() {
-		if err != nil {
-			_d._log.WithFields(logrus.Fields(map[string]interface{}{
-				"err": err})).Error("PostersWithLogrus: method PostersOrdersChange returned an error")
-		} else {
-			_d._log.WithFields(logrus.Fields(map[string]interface{}{
-				"err": err})).Debug("PostersWithLogrus: method PostersOrdersChange finished")
-		}
-	}()
-	return _d._base.PostersOrdersChange(ctx, first, second)
-}
-
 // Update implements Posters
 func (_d PostersWithLogrus) Update(ctx context.Context, poster domain.Poster, file interface{}) (err error) {
 	_d._log.WithFields(logrus.Fields(map[string]interface{}{
@@ -138,4 +120,22 @@ func (_d PostersWithLogrus) Update(ctx context.Context, poster domain.Poster, fi
 		}
 	}()
 	return _d._base.Update(ctx, poster, file)
+}
+
+// UpdateOrder implements Posters
+func (_d PostersWithLogrus) UpdateOrder(ctx context.Context, first domain.UpdateOrder, second domain.UpdateOrder) (err error) {
+	_d._log.WithFields(logrus.Fields(map[string]interface{}{
+		"ctx":    ctx,
+		"first":  first,
+		"second": second})).Debug("PostersWithLogrus: calling UpdateOrder")
+	defer func() {
+		if err != nil {
+			_d._log.WithFields(logrus.Fields(map[string]interface{}{
+				"err": err})).Error("PostersWithLogrus: method UpdateOrder returned an error")
+		} else {
+			_d._log.WithFields(logrus.Fields(map[string]interface{}{
+				"err": err})).Debug("PostersWithLogrus: method UpdateOrder finished")
+		}
+	}()
+	return _d._base.UpdateOrder(ctx, first, second)
 }

@@ -9,7 +9,7 @@ import (
 
 type Cache interface {
 	Set(key string, value interface{})
-	Get(key string) (interface{}, bool)
+	Get(key string) (Item, bool)
 	Delete(key string) error
 }
 
@@ -38,7 +38,7 @@ func (c *cache) Set(key string, value interface{}) {
 	c.mu.Unlock()
 }
 
-func (c *cache) Get(key string) (interface{}, bool) {
+func (c *cache) Get(key string) (Item, bool) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	item, ok := c.items[key]

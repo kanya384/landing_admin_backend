@@ -18,6 +18,7 @@ import (
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/generated/operations"
 	"landing_admin_backend/internal/generated/operations/advantages"
+	"landing_admin_backend/internal/generated/operations/content"
 	"landing_admin_backend/internal/generated/operations/docs"
 	"landing_admin_backend/internal/generated/operations/editable"
 	"landing_admin_backend/internal/generated/operations/hod"
@@ -29,6 +30,7 @@ import (
 	mng "landing_admin_backend/internal/repository/mongo"
 	"landing_admin_backend/internal/services"
 	"landing_admin_backend/pkg/helpers"
+	"landing_admin_backend/pkg/memcache"
 	"landing_admin_backend/pkg/token_manager"
 )
 
@@ -80,7 +82,8 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	}
 
 	repository := mng.Setup(client.Database("public"))
-	services := services.Setup(cfg, repository, logger)
+	cache := memcache.New()
+	services := services.Setup(cfg, repository, logger, cache)
 	handlers := handlers.NewHandlers(services, cfg)
 	api.PostLoginHandler = operations.PostLoginHandlerFunc(handlers.Auth.Authenticate)
 	api.GetPingHandler = operations.GetPingHandlerFunc(handlers.Auth.Ping)
@@ -155,6 +158,9 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 
 	/* editable */
 	api.EditablePostEditableHandler = editable.PostEditableHandlerFunc(handlers.Editable.CreateOrUpdate)
+
+	/* content */
+	api.ContentGetContentHandler = content.GetContentHandlerFunc(handlers.Content.Get)
 
 	http.FileServer(http.Dir("file_store"))
 

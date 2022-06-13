@@ -22,7 +22,7 @@ type Posters interface {
 	Create(ctx context.Context, poster domain.Poster, file io.ReadCloser) (posterRes domain.Poster, err error)
 	Update(ctx context.Context, poster domain.Poster, file interface{}) (err error)
 	Delete(ctx context.Context, posterID primitive.ObjectID) (err error)
-	PostersOrdersChange(ctx context.Context, first domain.UpdateOrder, second domain.UpdateOrder) (err error)
+	UpdateOrder(ctx context.Context, first domain.UpdateOrder, second domain.UpdateOrder) (err error)
 }
 
 type service struct {
@@ -69,7 +69,7 @@ func (s *service) Delete(ctx context.Context, posterID primitive.ObjectID) (err 
 	return s.repository.Poster.Delete(ctx, posterID)
 }
 
-func (s *service) PostersOrdersChange(ctx context.Context, first domain.UpdateOrder, second domain.UpdateOrder) (err error) {
+func (s *service) UpdateOrder(ctx context.Context, first domain.UpdateOrder, second domain.UpdateOrder) (err error) {
 	err = s.repository.Poster.UpdateOrder(ctx, first.ID, first.Order)
 	if err != nil {
 		return

@@ -1,0 +1,60 @@
+import (
+	"io"
+	"landing_admin_backend/pkg/memcache"
+  )
+  
+  {{ $decorator := (or .Vars.DecoratorName (printf "%sWithCache" .Interface.Name)) }}
+  {{ $interfaceName := ( .Interface.Name)}}
+  
+  // {{$decorator}} implements {{.Interface.Type}} that is instrumented with logging
+  type {{$decorator}} struct {
+	cache memcache.Cache
+	_base {{.Interface.Type}}
+  }
+  
+  // New{{$decorator}} instruments an implementation of the {{.Interface.Type}} with simple logging
+  func New{{$decorator}}(base {{.Interface.Type}}, cache memcache.Cache) {{$decorator}} {
+	return {{$decorator}}{
+	  _base: base, 
+	  cache: cache,
+	}
+  }
+  
+  {{range $method := .Interface.Methods}}
+	// {{$method.Name}} implements {{$.Interface.Type}}
+	func (_d {{$decorator}}) {{$method.Declaration}} {
+		{{- if eq $method.Name "Create"}}
+			defer _d.cache.Delete("{{ $interfaceName }}")
+		{{end -}}
+		{{- if eq $method.Name "Delete"}}
+			defer _d.cache.Delete("{{ $interfaceName }}")
+		{{end -}}
+		{{- if eq $method.Name "Update"}}
+			defer _d.cache.Delete("{{ $interfaceName }}")
+		{{end -}}
+		{{- if eq $method.Name "UpdateOrder"}}
+			defer _d.cache.Delete("{{ $interfaceName }}")
+		{{end -}}
+		{{- if eq $method.Name "CreateOrUpdate"}} 
+			defer _d.cache.Delete("{{ $interfaceName }}")
+		{{ end }}
+		{{- if eq $method.Name "Get"}}
+			cached, ok := _d.cache.Get("{{ $interfaceName }}")
+			if ok {
+				{{- range $param := $method.Results}}
+					{{if not (eq $param.Type "error")}}
+						return cached.Value.({{ $param.Type }}), err
+					{{ end }}
+				{{ end }}
+			}
+			res, err:=_d._base.{{ $method.Call }}
+			if err!=nil {
+				return 
+			}
+			_d.cache.Set("{{ $interfaceName }}", res)
+			return res, err
+		{{ else }}
+			{{ $method.Pass "_d._base." }}
+		{{end -}}
+	}
+  {{end}}

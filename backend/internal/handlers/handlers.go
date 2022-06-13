@@ -5,6 +5,7 @@ import (
 	"landing_admin_backend/internal/handlers/advantage_photo"
 	"landing_admin_backend/internal/handlers/advantages"
 	"landing_admin_backend/internal/handlers/auths"
+	"landing_admin_backend/internal/handlers/content"
 	"landing_admin_backend/internal/handlers/docs"
 	"landing_admin_backend/internal/handlers/editable"
 	"landing_admin_backend/internal/handlers/hod_photos"
@@ -32,6 +33,7 @@ type Handlers struct {
 	Video           video.Handlers
 	Leads           leads.Handlers
 	Editable        editable.Handlers
+	Content         content.Handlers
 }
 
 func NewHandlers(services *services.Services, cfg *config.Config) *Handlers {
@@ -49,5 +51,6 @@ func NewHandlers(services *services.Services, cfg *config.Config) *Handlers {
 		Video:           video.NewHandlers(services),
 		Leads:           leads.NewHandlers(services),
 		Editable:        editable.NewHandlers(services),
+		Content:         content.NewHandlers(services),
 	}
 }

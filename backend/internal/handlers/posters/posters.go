@@ -164,7 +164,7 @@ func (h *handlers) PostersOrdersChange(params posters.PostPostersOrdersParams, i
 	if err != nil {
 		return posters.NewPostPostersOrdersBadRequest()
 	}
-	err = h.services.Posters.PostersOrdersChange(ctx, first, second)
+	err = h.services.Posters.UpdateOrder(ctx, first, second)
 	if err != nil {
 		return posters.NewPostPostersOrdersInternalServerError()
 	}

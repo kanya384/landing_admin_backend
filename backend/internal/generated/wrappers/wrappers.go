@@ -13,3 +13,10 @@ package wrappers
 //go:generate gowrap gen -p ../../services/users -i Users -t logrus -o ../../services/users/users_with_logger.go
 //go:generate gowrap gen -p ../../services/video -i Video -t logrus -o ../../services/video/video_with_logger.go
 //go:generate gowrap gen -p ../../services/years -i Years -t logrus -o ../../services/years/years_with_logger.go
+
+//gowrap gen -p ../../services/advantages -i Advantages -t ./cache -o ../../services/advantages/advantages_with_cache.go
+//gowrap gen -p ../../services/docs -i Docs -t ./cache -o ../../services/docs/docs_with_cache.go
+//gowrap gen -p ../../services/editable -i Editable -t ./cache -o ../../services/editable/editable_with_cache.go
+//gowrap gen -p ../../services/plans -i Plans -t ./cache -o ../../services/plans/plans_with_cache.go
+//gowrap gen -p ../../services/posters -i Posters -t ./cache -o ../../services/posters/posters_with_cache.go
+//gowrap gen -p ../../services/video -i Video -t ./cache -o ../../services/video/video_with_cache.go

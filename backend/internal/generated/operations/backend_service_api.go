@@ -20,6 +20,7 @@ import (
 	"github.com/go-openapi/swag"
 
 	"landing_admin_backend/internal/generated/operations/advantages"
+	"landing_admin_backend/internal/generated/operations/content"
 	"landing_admin_backend/internal/generated/operations/docs"
 	"landing_admin_backend/internal/generated/operations/editable"
 	"landing_admin_backend/internal/generated/operations/hod"
@@ -87,6 +88,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		AdvantagesGetAdvantagesIDHandler: advantages.GetAdvantagesIDHandlerFunc(func(params advantages.GetAdvantagesIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.GetAdvantagesID has not yet been implemented")
+		}),
+		ContentGetContentHandler: content.GetContentHandlerFunc(func(params content.GetContentParams) middleware.Responder {
+			return middleware.NotImplemented("operation content.GetContent has not yet been implemented")
 		}),
 		DocsGetDocHandler: docs.GetDocHandlerFunc(func(params docs.GetDocParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation docs.GetDoc has not yet been implemented")
@@ -273,6 +277,8 @@ type BackendServiceAPI struct {
 	AdvantagesGetAdvantagesHandler advantages.GetAdvantagesHandler
 	// AdvantagesGetAdvantagesIDHandler sets the operation handler for the get advantages ID operation
 	AdvantagesGetAdvantagesIDHandler advantages.GetAdvantagesIDHandler
+	// ContentGetContentHandler sets the operation handler for the get content operation
+	ContentGetContentHandler content.GetContentHandler
 	// DocsGetDocHandler sets the operation handler for the get doc operation
 	DocsGetDocHandler docs.GetDocHandler
 	// LeadsGetLeadHandler sets the operation handler for the get lead operation
@@ -464,6 +470,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.AdvantagesGetAdvantagesIDHandler == nil {
 		unregistered = append(unregistered, "advantages.GetAdvantagesIDHandler")
+	}
+	if o.ContentGetContentHandler == nil {
+		unregistered = append(unregistered, "content.GetContentHandler")
 	}
 	if o.DocsGetDocHandler == nil {
 		unregistered = append(unregistered, "docs.GetDocHandler")
@@ -720,6 +729,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/advantages/{id}"] = advantages.NewGetAdvantagesID(o.context, o.AdvantagesGetAdvantagesIDHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/content"] = content.NewGetContent(o.context, o.ContentGetContentHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

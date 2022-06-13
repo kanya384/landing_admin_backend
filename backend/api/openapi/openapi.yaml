@@ -1328,6 +1328,26 @@ paths:
             $ref: '#/definitions/ResultResponse'
         '500':
           description: 'Internal Server Error'
+  /content:
+    get:
+      summary: "get landing content"
+      tags:
+        - content
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns landing content'
+          schema:
+            $ref: '#/definitions/Content'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object
@@ -1637,3 +1657,34 @@ definitions:
         type: integer
       height:
         type: integer
+  Content:
+    type: object
+    properties:
+      advantages:
+        type: array
+        items:
+            $ref: '#/definitions/Advantage'
+      docs:
+        type: array
+        items:
+            $ref: '#/definitions/Doc'
+      editables:
+        type: array
+        items:
+            $ref: '#/definitions/Editable'
+      hod:
+        type: array
+        items:
+            $ref: '#/definitions/Year'
+      plans:
+        type: array
+        items:
+            $ref: '#/definitions/Plan'
+      posters:
+        type: array
+        items:
+            $ref: '#/definitions/Poster'
+      video:
+        type: array
+        items:
+            $ref: '#/definitions/Video'
