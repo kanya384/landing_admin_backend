@@ -14,7 +14,7 @@ export const Walks = () => {
                   </div>
                   <div className="lvl-col b-big">
                     <div className="img-float-label">
-                      <img src="img/img3.svg" alt="" />
+                      <img src="img/img3.jpg" alt="" />
                       <div className="b-label">Ореховая роща</div>
                     </div>
                     <div className="b-text">
@@ -28,7 +28,7 @@ export const Walks = () => {
               <div className="wrapper">
                 <div className="b-small-fix-height">
                   <div className="img-float-label">
-                    <img src="img/img4.svg" alt="" />
+                    <img src="img/img4.jpg" alt="" />
                     <div className="b-label">Анапский парк</div>
                   </div>
                   <div className="text">
@@ -37,7 +37,7 @@ export const Walks = () => {
                 </div>
                 <div className="b-small-fix-height">
                   <div className="img-float-label">
-                    <img src="img/img5.svg" alt="" />
+                    <img src="img/img5.jpg" alt="" />
                     <div className="b-label">Бювет минеральных вод</div>
                   </div>
                   <div className="text">

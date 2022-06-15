@@ -12,7 +12,7 @@ export const Plans = () => {
           <div className="h-title">Подбор квартиры на 3D-плане</div>
           <div className="text">Выберите дом и этаж, чтобы посмотреть планировки и узнать цены. Передвигайтесь влево-вправо, ввех и вниз</div>
           <div className="b-3d" onClick={() => setModalState(true)}>
-            <img src="img/home3d.svg" alt="" />
+            <img src="img/home3d.jpg" alt="" />
           </div>
           <div className="b-link-row">
             <Link to="/plans" className="lnk-params js-open-modal-flat">

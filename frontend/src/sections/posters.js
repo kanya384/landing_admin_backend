@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick/lib/slider";
+import { ContentContext } from "../context/contentContext";
+import { useContent } from "../hooks/content.hook";
 
 export const Posters = () => {
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
+  const [posters, setPosters] = useState([])
+  const [index, setIndex] = useState(0)
+
+  const content = useContext(ContentContext)
   
   const settings = {
     slidesToShow: 1,
@@ -12,6 +18,7 @@ export const Posters = () => {
     dots: false,
     arrows: true,
     arrows: false,
+    beforeChange: (current, next) => setIndex(next)
   }
 
   const settings2 = {
@@ -23,12 +30,21 @@ export const Posters = () => {
     focusOnSelect: true
   }
 
+  useEffect(()=>{
+    if (posters.length === 0 && content.content !== undefined) {
+      setPosters(content.content.Posters)
+      setIndex(0)
+      setTimeout(()=>nav1.slickNext(),200)
+    }
+  },[content])
+ 
+
   return <div className="lvl1">
       <div className="wrapper">
         <div className="row-lvl">
           <div className="slide-text">
             <div className="title">
-              Жизнь на высоком берегу
+              {posters[index] ? posters[index].title:"Жизнь на высоком берегу"}
             </div>
             <div className="text">
               Квартиры в Анапе от 5 млн руб.
@@ -37,12 +53,9 @@ export const Posters = () => {
           <div className="slider-lvl1">
             <div className="slider-horiz js-slider-hor-wrapper">
               <Slider asNavFor={nav2} ref={(slider1) => setNav1(slider1)} className="slider slider-lvl1__slider-for js-slider-hor__slider-for" {...settings}>
-                <div className="slide"><img src="img/img1.svg" alt="" /></div>
-                <div className="slide"><img src="img/img1.svg" alt="" /></div>
-                <div className="slide"><img src="img/img1.svg" alt="" /></div>
-                <div className="slide"><img src="img/img1.svg" alt="" /></div>
-                <div className="slide"><img src="img/img1.svg" alt="" /></div>
-                <div className="slide"><img src="img/img1.svg" alt="" /></div>
+                {posters.length>0 ?posters.map((poster)=>{
+                  return <div className="slide"><img src={process.env.REACT_APP_BACKEND+"store/"+ poster.photo} alt="" /></div>
+                }):""}
               </Slider>
               <div className="slider-horiz-nav">
                 <div className="arr-up" onClick={()=>nav1.slickPrev()}>
@@ -53,12 +66,9 @@ export const Posters = () => {
                 <div className="nav-build">
                   <ul className="slider-lvl1__slider-nav js-slider-hor__slider-nav">
                     <Slider asNavFor={nav1} ref={(slider2) => setNav2(slider2)} {...settings2}>
-                      <li className="slider-nav-item"><span>01</span></li>
-                      <li className="slider-nav-item"><span>02</span></li>
-                      <li className="slider-nav-item"><span>03</span></li>
-                      <li className="slider-nav-item"><span>04</span></li>
-                      <li className="slider-nav-item"><span>05</span></li>
-                      <li className="slider-nav-item"><span>06</span></li>
+                      {Array.from(Array(posters.length).keys()).map((index)=>{
+                          return <li className="slider-nav-item"><span>{index+1<10?"0"+(index+1):index+1}</span></li>
+                      })}
                     </Slider>
                   </ul>
                 </div>

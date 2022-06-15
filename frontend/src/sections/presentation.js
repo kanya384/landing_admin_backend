@@ -44,8 +44,8 @@ export const Presentation = () => {
       ]}
       btnTitle={"Отправить"}
       celtype={"getPresentation"}
-      image ={"img/get-present-bg.svg"}
-      imageMobile={"img/get-present-bg-mobile.svg"}
+      image ={"img/get-present-bg.jpg"}
+      imageMobile={"img/get-present-bg-mobile.jpg"}
       opened={isOpen}
       close = {()=>{setModalState(null)}}
     />

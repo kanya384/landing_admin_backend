@@ -12,7 +12,7 @@ export const  About = () => {
               </div>
               <div className="about-info-list">
                 <div className="about-info-item">
-                  <div className="img"><img src="img/img6.svg" alt="" /></div>
+                  <div className="img"><img src="img/img6.jpg" alt="" /></div>
                   <div className="b-text">
                     <div className="title">Безопасный и умный дом</div>
                     <div className="text">Один из главных приоритетов жизни в жилом комплексе AVAnta - комфорт и безопасность жителей</div>
@@ -20,7 +20,7 @@ export const  About = () => {
                   </div>
                 </div>
                 <div className="about-info-item">
-                  <div className="img"><img src="img/img7.svg" alt="" /></div>
+                  <div className="img"><img src="img/img7.jpg" alt="" /></div>
                   <div className="b-text">
                     <div className="title">Двор как место притяжения</div>
                     <div className="text">Дворы дружбы и добрых соседей — именно такой принцип заложен в основу благоустройства территории</div>
@@ -28,7 +28,7 @@ export const  About = () => {
                   </div>
                 </div>
                 <div className="about-info-item">
-                  <div className="img"><img src="img/img8.svg" alt="" /></div>
+                  <div className="img"><img src="img/img8.jpg" alt="" /></div>
                   <div className="b-text">
                     <div className="title">Фасады AVAnta</div>
                     <div className="text">Вентилируеймый фасад жилого комплекса подчеркивает статус домов класса комфорт+</div>
@@ -36,7 +36,7 @@ export const  About = () => {
                   </div>
                 </div>
                 <div className="about-info-item">
-                  <div className="img"><img src="img/img9.svg" alt="" /></div>
+                  <div className="img"><img src="img/img9.jpg" alt="" /></div>
                   <div className="b-text">
                     <div className="title">Дом изнутри</div>
                     <div className="text">Отделка мест общественного пользования дополняет архитектуру зданий и выполнена в теплом морском стиле</div>
