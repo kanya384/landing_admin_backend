@@ -16,7 +16,7 @@ import (
 // PatchPostersOKCode is the HTTP code returned for type PatchPostersOK
 const PatchPostersOKCode int = 200
 
-/*PatchPostersOK постер успешно создан
+/*PatchPostersOK постер успешно обновлен
 
 swagger:response patchPostersOK
 */
@@ -25,7 +25,7 @@ type PatchPostersOK struct {
 	/*
 	  In: Body
 	*/
-	Payload *models.ResultResponse `json:"body,omitempty"`
+	Payload *models.Poster `json:"body,omitempty"`
 }
 
 // NewPatchPostersOK creates PatchPostersOK with default headers values
@@ -35,13 +35,13 @@ func NewPatchPostersOK() *PatchPostersOK {
 }
 
 // WithPayload adds the payload to the patch posters o k response
-func (o *PatchPostersOK) WithPayload(payload *models.ResultResponse) *PatchPostersOK {
+func (o *PatchPostersOK) WithPayload(payload *models.Poster) *PatchPostersOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the patch posters o k response
-func (o *PatchPostersOK) SetPayload(payload *models.ResultResponse) {
+func (o *PatchPostersOK) SetPayload(payload *models.Poster) {
 	o.Payload = payload
 }
 

@@ -78,12 +78,22 @@ func (h *handlers) Update(params posters.PatchPostersParams, input interface{}) 
 	if err != nil {
 		return posters.NewPatchPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error updating poster"})
 	}
-	err = h.services.Posters.Update(ctx, poster, params.File)
+	poster, err = h.services.Posters.Update(ctx, poster, params.File)
 	if err != nil {
 		return posters.NewPatchPostersBadRequest().WithPayload(&models.ResultResponse{Msg: "error updating poster"})
 	}
 
-	return posters.NewPatchPostersOK().WithPayload(&models.ResultResponse{Msg: "poster created"})
+	posterRes := &models.Poster{
+		ID:         poster.ID.Hex(),
+		Photo:      poster.Photo,
+		Title:      poster.Title,
+		Order:      int64(poster.Order),
+		ModifiedBy: poster.ModifiedBy.Hex(),
+		CreatedAt:  strfmt.DateTime(poster.CreatedAt),
+		UpdatedAt:  strfmt.DateTime(poster.UpdateAt),
+	}
+
+	return posters.NewPatchPostersOK().WithPayload(posterRes)
 }
 
 func (h *handlers) Delete(params posters.DeletePostersPosterIDParams, input interface{}) middleware.Responder {

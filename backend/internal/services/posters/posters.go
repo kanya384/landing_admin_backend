@@ -20,7 +20,7 @@ type Posters interface {
 	Get(ctx context.Context, filter map[string]interface{}) (posters []*domain.Poster, err error)
 	GetByID(ctx context.Context, id primitive.ObjectID) (poster domain.Poster, err error)
 	Create(ctx context.Context, poster domain.Poster, file io.ReadCloser) (posterRes domain.Poster, err error)
-	Update(ctx context.Context, poster domain.Poster, file interface{}) (err error)
+	Update(ctx context.Context, poster domain.Poster, file interface{}) (posterRes domain.Poster, err error)
 	Delete(ctx context.Context, posterID primitive.ObjectID) (err error)
 	UpdateOrder(ctx context.Context, first domain.UpdateOrder, second domain.UpdateOrder) (err error)
 }
@@ -56,13 +56,14 @@ func (s *service) Create(ctx context.Context, poster domain.Poster, file io.Read
 	return
 }
 
-func (s *service) Update(ctx context.Context, poster domain.Poster, file interface{}) (err error) {
+func (s *service) Update(ctx context.Context, poster domain.Poster, file interface{}) (posterRes domain.Poster, err error) {
 	filename, errIm := helpers.ProcessImage(file, s.cfg.FileStore, IMAGE_WIDTH, IMAGE_HEIGHT)
 	if errIm == nil {
 		//need to delete old file
 		poster.Photo = filename
 	}
-	return s.repository.Poster.Update(ctx, poster)
+	err = s.repository.Poster.Update(ctx, poster)
+	return
 }
 
 func (s *service) Delete(ctx context.Context, posterID primitive.ObjectID) (err error) {

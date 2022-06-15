@@ -94,7 +94,7 @@ export const updatePoster = (poster: Poster, callback:(error: string) => void, f
       if (resp.status === 200) {
         dispatch({
           type: PostersActionTypes.POSTERS_UPDATE,
-          payload: poster,
+          payload: resp.data,
         });
         callback("")
       } else {
