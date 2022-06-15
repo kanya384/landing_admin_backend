@@ -65,7 +65,7 @@ func (_d PostersWithCache) GetByID(ctx context.Context, id primitive.ObjectID) (
 }
 
 // Update implements Posters
-func (_d PostersWithCache) Update(ctx context.Context, poster domain.Poster, file interface{}) (err error) {
+func (_d PostersWithCache) Update(ctx context.Context, poster domain.Poster, file interface{}) (posterRes domain.Poster, err error) {
 	defer _d.cache.Delete("Posters")
 
 	return _d._base.Update(ctx, poster, file)

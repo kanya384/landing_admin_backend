@@ -105,7 +105,7 @@ func (_d PostersWithLogrus) GetByID(ctx context.Context, id primitive.ObjectID) 
 }
 
 // Update implements Posters
-func (_d PostersWithLogrus) Update(ctx context.Context, poster domain.Poster, file interface{}) (err error) {
+func (_d PostersWithLogrus) Update(ctx context.Context, poster domain.Poster, file interface{}) (posterRes domain.Poster, err error) {
 	_d._log.WithFields(logrus.Fields(map[string]interface{}{
 		"ctx":    ctx,
 		"poster": poster,
@@ -113,10 +113,12 @@ func (_d PostersWithLogrus) Update(ctx context.Context, poster domain.Poster, fi
 	defer func() {
 		if err != nil {
 			_d._log.WithFields(logrus.Fields(map[string]interface{}{
-				"err": err})).Error("PostersWithLogrus: method Update returned an error")
+				"posterRes": posterRes,
+				"err":       err})).Error("PostersWithLogrus: method Update returned an error")
 		} else {
 			_d._log.WithFields(logrus.Fields(map[string]interface{}{
-				"err": err})).Debug("PostersWithLogrus: method Update finished")
+				"posterRes": posterRes,
+				"err":       err})).Debug("PostersWithLogrus: method Update finished")
 		}
 	}()
 	return _d._base.Update(ctx, poster, file)

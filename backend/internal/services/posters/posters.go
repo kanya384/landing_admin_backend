@@ -63,6 +63,7 @@ func (s *service) Update(ctx context.Context, poster domain.Poster, file interfa
 		poster.Photo = filename
 	}
 	err = s.repository.Poster.Update(ctx, poster)
+	posterRes = poster
 	return
 }
 

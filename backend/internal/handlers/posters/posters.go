@@ -2,6 +2,7 @@ package posters
 
 import (
 	"context"
+	"fmt"
 	"landing_admin_backend/internal/domain"
 	"landing_admin_backend/internal/generated/operations/posters"
 	"landing_admin_backend/internal/services"
@@ -92,6 +93,8 @@ func (h *handlers) Update(params posters.PatchPostersParams, input interface{}) 
 		CreatedAt:  strfmt.DateTime(poster.CreatedAt),
 		UpdatedAt:  strfmt.DateTime(poster.UpdateAt),
 	}
+
+	fmt.Println(posterRes)
 
 	return posters.NewPatchPostersOK().WithPayload(posterRes)
 }
