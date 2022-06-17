@@ -97,3 +97,12 @@ type Editable interface {
 	Create(ctx context.Context, editable *domain.Editable) (err error)
 	Update(ctx context.Context, editable *domain.Editable) (err error)
 }
+
+type ProjectInfo interface {
+	Get(ctx context.Context, filter map[string]interface{}) (prjectInfos []*domain.ProjectInfo, err error)
+	GetByID(ctx context.Context, id primitive.ObjectID) (prjectInfo domain.ProjectInfo, err error)
+	Create(ctx context.Context, prjectInfo domain.ProjectInfo) (err error)
+	Update(ctx context.Context, prjectInfo domain.ProjectInfo) (err error)
+	UpdateOrder(ctx context.Context, id primitive.ObjectID, order int) (err error)
+	Delete(ctx context.Context, prjectInfoID primitive.ObjectID) (err error)
+}

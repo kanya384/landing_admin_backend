@@ -3,6 +3,7 @@ package repository
 type Repository struct {
 	Users
 	Advantages
+	ProjectInfo
 	AdvantagePhoto
 	Docs
 	Year

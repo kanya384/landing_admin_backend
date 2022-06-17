@@ -27,6 +27,7 @@ import (
 	"landing_admin_backend/internal/generated/operations/leads"
 	"landing_admin_backend/internal/generated/operations/plans"
 	"landing_admin_backend/internal/generated/operations/posters"
+	"landing_admin_backend/internal/generated/operations/project_info"
 	"landing_admin_backend/internal/generated/operations/video"
 )
 
@@ -74,6 +75,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		PostersDeletePostersPosterIDHandler: posters.DeletePostersPosterIDHandlerFunc(func(params posters.DeletePostersPosterIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.DeletePostersPosterID has not yet been implemented")
 		}),
+		ProjectInfoDeleteProjectInfoPojectInfoIDHandler: project_info.DeleteProjectInfoPojectInfoIDHandlerFunc(func(params project_info.DeleteProjectInfoPojectInfoIDParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project_info.DeleteProjectInfoPojectInfoID has not yet been implemented")
+		}),
 		VideoDeleteVideoIDHandler: video.DeleteVideoIDHandlerFunc(func(params video.DeleteVideoIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation video.DeleteVideoID has not yet been implemented")
 		}),
@@ -119,6 +123,12 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		PostersGetPostersPosterIDHandler: posters.GetPostersPosterIDHandlerFunc(func(params posters.GetPostersPosterIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.GetPostersPosterID has not yet been implemented")
 		}),
+		ProjectInfoGetProjectInfoHandler: project_info.GetProjectInfoHandlerFunc(func(params project_info.GetProjectInfoParams) middleware.Responder {
+			return middleware.NotImplemented("operation project_info.GetProjectInfo has not yet been implemented")
+		}),
+		ProjectInfoGetProjectInfoPojectInfoIDHandler: project_info.GetProjectInfoPojectInfoIDHandlerFunc(func(params project_info.GetProjectInfoPojectInfoIDParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project_info.GetProjectInfoPojectInfoID has not yet been implemented")
+		}),
 		VideoGetVideoHandler: video.GetVideoHandlerFunc(func(params video.GetVideoParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation video.GetVideo has not yet been implemented")
 		}),
@@ -139,6 +149,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		PostersPatchPostersHandler: posters.PatchPostersHandlerFunc(func(params posters.PatchPostersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.PatchPosters has not yet been implemented")
+		}),
+		ProjectInfoPatchProjectInfoHandler: project_info.PatchProjectInfoHandlerFunc(func(params project_info.PatchProjectInfoParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project_info.PatchProjectInfo has not yet been implemented")
 		}),
 		VideoPatchVideoHandler: video.PatchVideoHandlerFunc(func(params video.PatchVideoParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation video.PatchVideo has not yet been implemented")
@@ -167,6 +180,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		PostersPostPostersOrdersHandler: posters.PostPostersOrdersHandlerFunc(func(params posters.PostPostersOrdersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.PostPostersOrders has not yet been implemented")
 		}),
+		ProjectInfoPostProjectInfoOrdersHandler: project_info.PostProjectInfoOrdersHandlerFunc(func(params project_info.PostProjectInfoOrdersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project_info.PostProjectInfoOrders has not yet been implemented")
+		}),
 		AdvantagesPutAdvantagePhotoHandler: advantages.PutAdvantagePhotoHandlerFunc(func(params advantages.PutAdvantagePhotoParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.PutAdvantagePhoto has not yet been implemented")
 		}),
@@ -190,6 +206,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		PostersPutPostersHandler: posters.PutPostersHandlerFunc(func(params posters.PutPostersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation posters.PutPosters has not yet been implemented")
+		}),
+		ProjectInfoPutProjectInfoHandler: project_info.PutProjectInfoHandlerFunc(func(params project_info.PutProjectInfoParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project_info.PutProjectInfo has not yet been implemented")
 		}),
 		PutUsersHandler: PutUsersHandlerFunc(func(params PutUsersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation PutUsers has not yet been implemented")
@@ -267,6 +286,8 @@ type BackendServiceAPI struct {
 	HodDeletePhotosIDHandler hod.DeletePhotosIDHandler
 	// PostersDeletePostersPosterIDHandler sets the operation handler for the delete posters poster ID operation
 	PostersDeletePostersPosterIDHandler posters.DeletePostersPosterIDHandler
+	// ProjectInfoDeleteProjectInfoPojectInfoIDHandler sets the operation handler for the delete project info poject info ID operation
+	ProjectInfoDeleteProjectInfoPojectInfoIDHandler project_info.DeleteProjectInfoPojectInfoIDHandler
 	// VideoDeleteVideoIDHandler sets the operation handler for the delete video ID operation
 	VideoDeleteVideoIDHandler video.DeleteVideoIDHandler
 	// HodDeleteYearsIDHandler sets the operation handler for the delete years ID operation
@@ -297,6 +318,10 @@ type BackendServiceAPI struct {
 	PostersGetPostersHandler posters.GetPostersHandler
 	// PostersGetPostersPosterIDHandler sets the operation handler for the get posters poster ID operation
 	PostersGetPostersPosterIDHandler posters.GetPostersPosterIDHandler
+	// ProjectInfoGetProjectInfoHandler sets the operation handler for the get project info operation
+	ProjectInfoGetProjectInfoHandler project_info.GetProjectInfoHandler
+	// ProjectInfoGetProjectInfoPojectInfoIDHandler sets the operation handler for the get project info poject info ID operation
+	ProjectInfoGetProjectInfoPojectInfoIDHandler project_info.GetProjectInfoPojectInfoIDHandler
 	// VideoGetVideoHandler sets the operation handler for the get video operation
 	VideoGetVideoHandler video.GetVideoHandler
 	// HodGetYearsHandler sets the operation handler for the get years operation
@@ -311,6 +336,8 @@ type BackendServiceAPI struct {
 	PlansPatchPlansHandler plans.PatchPlansHandler
 	// PostersPatchPostersHandler sets the operation handler for the patch posters operation
 	PostersPatchPostersHandler posters.PatchPostersHandler
+	// ProjectInfoPatchProjectInfoHandler sets the operation handler for the patch project info operation
+	ProjectInfoPatchProjectInfoHandler project_info.PatchProjectInfoHandler
 	// VideoPatchVideoHandler sets the operation handler for the patch video operation
 	VideoPatchVideoHandler video.PatchVideoHandler
 	// HodPatchYearsHandler sets the operation handler for the patch years operation
@@ -329,6 +356,8 @@ type BackendServiceAPI struct {
 	PlansPostPlansHandler plans.PostPlansHandler
 	// PostersPostPostersOrdersHandler sets the operation handler for the post posters orders operation
 	PostersPostPostersOrdersHandler posters.PostPostersOrdersHandler
+	// ProjectInfoPostProjectInfoOrdersHandler sets the operation handler for the post project info orders operation
+	ProjectInfoPostProjectInfoOrdersHandler project_info.PostProjectInfoOrdersHandler
 	// AdvantagesPutAdvantagePhotoHandler sets the operation handler for the put advantage photo operation
 	AdvantagesPutAdvantagePhotoHandler advantages.PutAdvantagePhotoHandler
 	// AdvantagesPutAdvantagesHandler sets the operation handler for the put advantages operation
@@ -345,6 +374,8 @@ type BackendServiceAPI struct {
 	PlansPutPlansHandler plans.PutPlansHandler
 	// PostersPutPostersHandler sets the operation handler for the put posters operation
 	PostersPutPostersHandler posters.PutPostersHandler
+	// ProjectInfoPutProjectInfoHandler sets the operation handler for the put project info operation
+	ProjectInfoPutProjectInfoHandler project_info.PutProjectInfoHandler
 	// PutUsersHandler sets the operation handler for the put users operation
 	PutUsersHandler PutUsersHandler
 	// VideoPutVideoHandler sets the operation handler for the put video operation
@@ -456,6 +487,9 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.PostersDeletePostersPosterIDHandler == nil {
 		unregistered = append(unregistered, "posters.DeletePostersPosterIDHandler")
 	}
+	if o.ProjectInfoDeleteProjectInfoPojectInfoIDHandler == nil {
+		unregistered = append(unregistered, "project_info.DeleteProjectInfoPojectInfoIDHandler")
+	}
 	if o.VideoDeleteVideoIDHandler == nil {
 		unregistered = append(unregistered, "video.DeleteVideoIDHandler")
 	}
@@ -501,6 +535,12 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.PostersGetPostersPosterIDHandler == nil {
 		unregistered = append(unregistered, "posters.GetPostersPosterIDHandler")
 	}
+	if o.ProjectInfoGetProjectInfoHandler == nil {
+		unregistered = append(unregistered, "project_info.GetProjectInfoHandler")
+	}
+	if o.ProjectInfoGetProjectInfoPojectInfoIDHandler == nil {
+		unregistered = append(unregistered, "project_info.GetProjectInfoPojectInfoIDHandler")
+	}
 	if o.VideoGetVideoHandler == nil {
 		unregistered = append(unregistered, "video.GetVideoHandler")
 	}
@@ -521,6 +561,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.PostersPatchPostersHandler == nil {
 		unregistered = append(unregistered, "posters.PatchPostersHandler")
+	}
+	if o.ProjectInfoPatchProjectInfoHandler == nil {
+		unregistered = append(unregistered, "project_info.PatchProjectInfoHandler")
 	}
 	if o.VideoPatchVideoHandler == nil {
 		unregistered = append(unregistered, "video.PatchVideoHandler")
@@ -549,6 +592,9 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.PostersPostPostersOrdersHandler == nil {
 		unregistered = append(unregistered, "posters.PostPostersOrdersHandler")
 	}
+	if o.ProjectInfoPostProjectInfoOrdersHandler == nil {
+		unregistered = append(unregistered, "project_info.PostProjectInfoOrdersHandler")
+	}
 	if o.AdvantagesPutAdvantagePhotoHandler == nil {
 		unregistered = append(unregistered, "advantages.PutAdvantagePhotoHandler")
 	}
@@ -572,6 +618,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.PostersPutPostersHandler == nil {
 		unregistered = append(unregistered, "posters.PutPostersHandler")
+	}
+	if o.ProjectInfoPutProjectInfoHandler == nil {
+		unregistered = append(unregistered, "project_info.PutProjectInfoHandler")
 	}
 	if o.PutUsersHandler == nil {
 		unregistered = append(unregistered, "PutUsersHandler")
@@ -712,6 +761,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
+	o.handlers["DELETE"]["/projectInfo/{pojectInfoID}"] = project_info.NewDeleteProjectInfoPojectInfoID(o.context, o.ProjectInfoDeleteProjectInfoPojectInfoIDHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
 	o.handlers["DELETE"]["/video/{id}"] = video.NewDeleteVideoID(o.context, o.VideoDeleteVideoIDHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
@@ -772,6 +825,14 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/projectInfo"] = project_info.NewGetProjectInfo(o.context, o.ProjectInfoGetProjectInfoHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/projectInfo/{pojectInfoID}"] = project_info.NewGetProjectInfoPojectInfoID(o.context, o.ProjectInfoGetProjectInfoPojectInfoIDHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/video"] = video.NewGetVideo(o.context, o.VideoGetVideoHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -797,6 +858,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/posters"] = posters.NewPatchPosters(o.context, o.PostersPatchPostersHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/projectInfo"] = project_info.NewPatchProjectInfo(o.context, o.ProjectInfoPatchProjectInfoHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
@@ -833,6 +898,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/posters/orders"] = posters.NewPostPostersOrders(o.context, o.PostersPostPostersOrdersHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/projectInfo/orders"] = project_info.NewPostProjectInfoOrders(o.context, o.ProjectInfoPostProjectInfoOrdersHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
@@ -865,6 +934,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/posters"] = posters.NewPutPosters(o.context, o.PostersPutPostersHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/projectInfo"] = project_info.NewPutProjectInfo(o.context, o.ProjectInfoPutProjectInfoHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

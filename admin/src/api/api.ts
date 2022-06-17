@@ -706,6 +706,67 @@ export interface Poster {
 /**
  * 
  * @export
+ * @interface ProjectInfo
+ */
+export interface ProjectInfo {
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectInfo
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectInfo
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectInfo
+     */
+    'anonce'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectInfo
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectInfo
+     */
+    'photo'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectInfo
+     */
+    'order'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectInfo
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectInfo
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectInfo
+     */
+    'modifiedBy'?: string;
+}
+/**
+ * 
+ * @export
  * @interface ResultResponse
  */
 export interface ResultResponse {
@@ -4438,6 +4499,554 @@ export class PostersApi extends BaseAPI {
      */
     public postersPut(file: any, title: string, options?: AxiosRequestConfig) {
         return PostersApiFp(this.configuration).postersPut(file, title, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ProjectInfoApi - axios parameter creator
+ * @export
+ */
+export const ProjectInfoApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary gets filtered projectInfo list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/projectInfo`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary updates projectInfo oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoOrdersPost: async (params?: SwapStruct, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/projectInfo/orders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary update pojectInfo
+         * @param {string} id 
+         * @param {string} title 
+         * @param {number} order 
+         * @param {string} anonce 
+         * @param {string} description 
+         * @param {any} [file] The file to upload
+         * @param {string} [photo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoPatch: async (id: string, title: string, order: number, anonce: string, description: string, file?: any, photo?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('projectInfoPatch', 'id', id)
+            // verify required parameter 'title' is not null or undefined
+            assertParamExists('projectInfoPatch', 'title', title)
+            // verify required parameter 'order' is not null or undefined
+            assertParamExists('projectInfoPatch', 'order', order)
+            // verify required parameter 'anonce' is not null or undefined
+            assertParamExists('projectInfoPatch', 'anonce', anonce)
+            // verify required parameter 'description' is not null or undefined
+            assertParamExists('projectInfoPatch', 'description', description)
+            const localVarPath = `/projectInfo`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (id !== undefined) { 
+                localVarFormParams.append('id', id as any);
+            }
+    
+            if (title !== undefined) { 
+                localVarFormParams.append('title', title as any);
+            }
+    
+            if (photo !== undefined) { 
+                localVarFormParams.append('photo', photo as any);
+            }
+    
+            if (order !== undefined) { 
+                localVarFormParams.append('order', order as any);
+            }
+    
+            if (anonce !== undefined) { 
+                localVarFormParams.append('anonce', anonce as any);
+            }
+    
+            if (description !== undefined) { 
+                localVarFormParams.append('description', description as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary delete pojectInfo by id
+         * @param {string} pojectInfoID String ID of the pojectInfo to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoPojectInfoIDDelete: async (pojectInfoID: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'pojectInfoID' is not null or undefined
+            assertParamExists('projectInfoPojectInfoIDDelete', 'pojectInfoID', pojectInfoID)
+            const localVarPath = `/projectInfo/{pojectInfoID}`
+                .replace(`{${"pojectInfoID"}}`, encodeURIComponent(String(pojectInfoID)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get pojectInfo by id
+         * @param {string} pojectInfoID String ID of the pojectInfo to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoPojectInfoIDGet: async (pojectInfoID: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'pojectInfoID' is not null or undefined
+            assertParamExists('projectInfoPojectInfoIDGet', 'pojectInfoID', pojectInfoID)
+            const localVarPath = `/projectInfo/{pojectInfoID}`
+                .replace(`{${"pojectInfoID"}}`, encodeURIComponent(String(pojectInfoID)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create pojectInfo
+         * @param {any} file The file to upload
+         * @param {string} title 
+         * @param {string} anonce 
+         * @param {string} description 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoPut: async (file: any, title: string, anonce: string, description: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('projectInfoPut', 'file', file)
+            // verify required parameter 'title' is not null or undefined
+            assertParamExists('projectInfoPut', 'title', title)
+            // verify required parameter 'anonce' is not null or undefined
+            assertParamExists('projectInfoPut', 'anonce', anonce)
+            // verify required parameter 'description' is not null or undefined
+            assertParamExists('projectInfoPut', 'description', description)
+            const localVarPath = `/projectInfo`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (title !== undefined) { 
+                localVarFormParams.append('title', title as any);
+            }
+    
+            if (anonce !== undefined) { 
+                localVarFormParams.append('anonce', anonce as any);
+            }
+    
+            if (description !== undefined) { 
+                localVarFormParams.append('description', description as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ProjectInfoApi - functional programming interface
+ * @export
+ */
+export const ProjectInfoApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ProjectInfoApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary gets filtered projectInfo list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectInfoGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ProjectInfo>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectInfoGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary updates projectInfo oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectInfoOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectInfoOrdersPost(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary update pojectInfo
+         * @param {string} id 
+         * @param {string} title 
+         * @param {number} order 
+         * @param {string} anonce 
+         * @param {string} description 
+         * @param {any} [file] The file to upload
+         * @param {string} [photo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectInfoPatch(id: string, title: string, order: number, anonce: string, description: string, file?: any, photo?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectInfoPatch(id, title, order, anonce, description, file, photo, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary delete pojectInfo by id
+         * @param {string} pojectInfoID String ID of the pojectInfo to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectInfoPojectInfoIDDelete(pojectInfoID: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectInfoPojectInfoIDDelete(pojectInfoID, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary get pojectInfo by id
+         * @param {string} pojectInfoID String ID of the pojectInfo to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectInfoPojectInfoIDGet(pojectInfoID: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectInfoPojectInfoIDGet(pojectInfoID, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create pojectInfo
+         * @param {any} file The file to upload
+         * @param {string} title 
+         * @param {string} anonce 
+         * @param {string} description 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectInfoPut(file: any, title: string, anonce: string, description: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectInfoPut(file, title, anonce, description, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ProjectInfoApi - factory interface
+ * @export
+ */
+export const ProjectInfoApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ProjectInfoApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary gets filtered projectInfo list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoGet(options?: any): AxiosPromise<Array<ProjectInfo>> {
+            return localVarFp.projectInfoGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary updates projectInfo oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoOrdersPost(params?: SwapStruct, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.projectInfoOrdersPost(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary update pojectInfo
+         * @param {string} id 
+         * @param {string} title 
+         * @param {number} order 
+         * @param {string} anonce 
+         * @param {string} description 
+         * @param {any} [file] The file to upload
+         * @param {string} [photo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoPatch(id: string, title: string, order: number, anonce: string, description: string, file?: any, photo?: string, options?: any): AxiosPromise<ProjectInfo> {
+            return localVarFp.projectInfoPatch(id, title, order, anonce, description, file, photo, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary delete pojectInfo by id
+         * @param {string} pojectInfoID String ID of the pojectInfo to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoPojectInfoIDDelete(pojectInfoID: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.projectInfoPojectInfoIDDelete(pojectInfoID, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get pojectInfo by id
+         * @param {string} pojectInfoID String ID of the pojectInfo to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoPojectInfoIDGet(pojectInfoID: string, options?: any): AxiosPromise<ProjectInfo> {
+            return localVarFp.projectInfoPojectInfoIDGet(pojectInfoID, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create pojectInfo
+         * @param {any} file The file to upload
+         * @param {string} title 
+         * @param {string} anonce 
+         * @param {string} description 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectInfoPut(file: any, title: string, anonce: string, description: string, options?: any): AxiosPromise<ProjectInfo> {
+            return localVarFp.projectInfoPut(file, title, anonce, description, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ProjectInfoApi - object-oriented interface
+ * @export
+ * @class ProjectInfoApi
+ * @extends {BaseAPI}
+ */
+export class ProjectInfoApi extends BaseAPI {
+    /**
+     * 
+     * @summary gets filtered projectInfo list
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectInfoApi
+     */
+    public projectInfoGet(options?: AxiosRequestConfig) {
+        return ProjectInfoApiFp(this.configuration).projectInfoGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary updates projectInfo oders
+     * @param {SwapStruct} [params] swap item orders
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectInfoApi
+     */
+    public projectInfoOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig) {
+        return ProjectInfoApiFp(this.configuration).projectInfoOrdersPost(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update pojectInfo
+     * @param {string} id 
+     * @param {string} title 
+     * @param {number} order 
+     * @param {string} anonce 
+     * @param {string} description 
+     * @param {any} [file] The file to upload
+     * @param {string} [photo] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectInfoApi
+     */
+    public projectInfoPatch(id: string, title: string, order: number, anonce: string, description: string, file?: any, photo?: string, options?: AxiosRequestConfig) {
+        return ProjectInfoApiFp(this.configuration).projectInfoPatch(id, title, order, anonce, description, file, photo, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary delete pojectInfo by id
+     * @param {string} pojectInfoID String ID of the pojectInfo to get
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectInfoApi
+     */
+    public projectInfoPojectInfoIDDelete(pojectInfoID: string, options?: AxiosRequestConfig) {
+        return ProjectInfoApiFp(this.configuration).projectInfoPojectInfoIDDelete(pojectInfoID, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get pojectInfo by id
+     * @param {string} pojectInfoID String ID of the pojectInfo to get
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectInfoApi
+     */
+    public projectInfoPojectInfoIDGet(pojectInfoID: string, options?: AxiosRequestConfig) {
+        return ProjectInfoApiFp(this.configuration).projectInfoPojectInfoIDGet(pojectInfoID, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create pojectInfo
+     * @param {any} file The file to upload
+     * @param {string} title 
+     * @param {string} anonce 
+     * @param {string} description 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectInfoApi
+     */
+    public projectInfoPut(file: any, title: string, anonce: string, description: string, options?: AxiosRequestConfig) {
+        return ProjectInfoApiFp(this.configuration).projectInfoPut(file, title, anonce, description, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

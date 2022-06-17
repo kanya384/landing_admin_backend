@@ -1336,6 +1336,193 @@ paths:
             $ref: '#/definitions/ResultResponse'
         '500':
           description: 'Internal Server Error'
+  /projectInfo:
+    get:
+      summary: "gets filtered projectInfo list"
+      tags:
+        - projectInfo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns filtered projectInfo'
+          schema:
+            $ref: '#/definitions/GetProjectInfosResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    put:
+      summary: "create pojectInfo"
+      security:
+        - Token: []
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      tags:
+        - projectInfo
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload
+        - in: formData
+          name: title
+          type: string
+          required: true
+        - in: formData
+          name: anonce
+          type: string
+          required: true
+        - in: formData
+          name: description
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 'постер успешно создан'
+          schema:
+            $ref: '#/definitions/ProjectInfo'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    patch:
+      summary: "update pojectInfo"
+      security:
+        - Token: []
+      tags:
+        - projectInfo
+      consumes:
+         - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: false
+          description: The file to upload
+        - in: formData
+          name: id
+          type: string
+          required: true
+        - in: formData
+          name: title
+          type: string
+          required: true
+        - in: formData
+          name: photo
+          type: string
+          required: false
+        - in: formData
+          name: order
+          type: integer
+          required: true
+        - in: formData
+          name: anonce
+          type: string
+          required: true
+        - in: formData
+          name: description
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 'постер успешно обновлен'
+          schema:
+            $ref: '#/definitions/ProjectInfo'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /projectInfo/orders:
+    post:
+      summary: "updates projectInfo oders"
+      security:
+        - Token: []
+      tags:
+        - projectInfo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/SwapStruct'
+          description: swap item orders
+      responses:
+        '200':
+          description: 'положения успешно обновленны'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /projectInfo/{pojectInfoID}: 
+    get:
+      summary: "get pojectInfo by id"
+      security:
+        - Token: []
+      tags:
+        - projectInfo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pojectInfoID
+          type: string
+          required: true
+          description: String ID of the pojectInfo to get
+      responses:
+        '200':
+          description: 'returns requested pojectInfo'
+          schema:
+            $ref: '#/definitions/ProjectInfo'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    delete:
+      summary: "delete pojectInfo by id"
+      security:
+        - Token: []
+      tags:
+        - projectInfo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pojectInfoID
+          type: string
+          required: true
+          description: String ID of the pojectInfo to get
+      responses:
+        '200':
+          description: 'returns requested pojectInfo'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object
@@ -1394,6 +1581,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Poster'
+  GetProjectInfosResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ProjectInfo'
   GetYearsResponse:
     type: array
     items:
@@ -1672,3 +1863,26 @@ definitions:
         type: array
         items:
             $ref: '#/definitions/Video'
+  ProjectInfo:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      anonce:
+        type: string
+      description:
+        type: string
+      photo:
+        type: string
+      order:
+        type: integer
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      modifiedBy:
+        type: string

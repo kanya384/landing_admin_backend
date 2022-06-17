@@ -7,6 +7,7 @@ import plansReducer from './plansReducer';
 import docsReducer from './docsReducer';
 import videoReducer from './videoReducer';
 import leadsReducer from './leadsReducer';
+import projectInfosReducer from './projectInfosReducer';
 
 const reducers = combineReducers({
     auths: authsReducer,
@@ -17,6 +18,7 @@ const reducers = combineReducers({
     docs: docsReducer,
     videos: videoReducer,
     leads: leadsReducer,
+    projectInfos: projectInfosReducer,
 })
 
 export default reducers;

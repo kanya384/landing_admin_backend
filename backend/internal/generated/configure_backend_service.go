@@ -25,6 +25,7 @@ import (
 	"landing_admin_backend/internal/generated/operations/leads"
 	"landing_admin_backend/internal/generated/operations/plans"
 	"landing_admin_backend/internal/generated/operations/posters"
+	"landing_admin_backend/internal/generated/operations/project_info"
 	"landing_admin_backend/internal/generated/operations/video"
 	"landing_admin_backend/internal/handlers"
 	mng "landing_admin_backend/internal/repository/mongo"
@@ -161,6 +162,14 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 
 	/* content */
 	api.ContentGetContentHandler = content.GetContentHandlerFunc(handlers.Content.Get)
+
+	/* project info*/
+	api.ProjectInfoGetProjectInfoHandler = project_info.GetProjectInfoHandlerFunc(handlers.ProjectInfo.Get)
+	api.ProjectInfoGetProjectInfoPojectInfoIDHandler = project_info.GetProjectInfoPojectInfoIDHandlerFunc(handlers.ProjectInfo.GetPosterById)
+	api.ProjectInfoPutProjectInfoHandler = project_info.PutProjectInfoHandlerFunc(handlers.ProjectInfo.Create)
+	api.ProjectInfoPatchProjectInfoHandler = project_info.PatchProjectInfoHandlerFunc(handlers.ProjectInfo.Update)
+	api.ProjectInfoDeleteProjectInfoPojectInfoIDHandler = project_info.DeleteProjectInfoPojectInfoIDHandlerFunc(handlers.ProjectInfo.Delete)
+	api.ProjectInfoPostProjectInfoOrdersHandler = project_info.PostProjectInfoOrdersHandlerFunc(handlers.ProjectInfo.ProjectInfoOrdersChange)
 
 	http.FileServer(http.Dir("file_store"))
 

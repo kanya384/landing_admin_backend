@@ -14,6 +14,7 @@ import (
 	"landing_admin_backend/internal/services/months"
 	"landing_admin_backend/internal/services/plans"
 	"landing_admin_backend/internal/services/posters"
+	"landing_admin_backend/internal/services/project_info"
 	"landing_admin_backend/internal/services/users"
 	"landing_admin_backend/internal/services/video"
 	"landing_admin_backend/internal/services/years"
@@ -38,6 +39,7 @@ type Services struct {
 	Leads          leads.Leads
 	Editable       editable.Editable
 	LandingContent landing_content.LandingContent
+	ProjectInfo    project_info.ProjectInfo
 }
 
 func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus.Entry, cache memcache.Cache) *Services {
@@ -51,6 +53,7 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 	years := years.NewYearsWithLogrus(years.NewService(repository, cfg), logger)
 	hodPhotos := hod_photos.NewPhotosWithLogrus(hod_photos.NewService(repository, cfg), logger)
 	posters := posters.NewPostersWithCache(posters.NewPostersWithLogrus(posters.NewService(repository, cfg), logger), cache)
+	projectInfo := project_info.NewProjectInfoWithCache(project_info.NewProjectInfoWithLogrus(project_info.NewService(repository, cfg), logger), cache)
 	return &Services{
 		Auth:           auth.NewAuthWithLogrus(auth.NewService(repository, tokenManager), logger),
 		Users:          users.NewUsersWithLogrus(users.NewService(repository), logger),
@@ -66,5 +69,6 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 		Leads:          leads.NewLeadsWithLogrus(leads.NewService(repository, cfg), logger),
 		Editable:       editables,
 		LandingContent: landing_content.NewLandingContent(advantages, docs, editables, years, months, hodPhotos, plans, posters, video),
+		ProjectInfo:    projectInfo,
 	}
 }

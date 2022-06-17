@@ -1763,6 +1763,300 @@ func init() {
         }
       }
     },
+    "/projectInfo": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "gets filtered projectInfo list",
+        "responses": {
+          "200": {
+            "description": "returns filtered projectInfo",
+            "schema": {
+              "$ref": "#/definitions/GetProjectInfosResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "create pojectInfo",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "anonce",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно создан",
+            "schema": {
+              "$ref": "#/definitions/ProjectInfo"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "update pojectInfo",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData"
+          },
+          {
+            "type": "string",
+            "name": "id",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "photo",
+            "in": "formData"
+          },
+          {
+            "type": "integer",
+            "name": "order",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "anonce",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно обновлен",
+            "schema": {
+              "$ref": "#/definitions/ProjectInfo"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/projectInfo/orders": {
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "updates projectInfo oders",
+        "parameters": [
+          {
+            "description": "swap item orders",
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SwapStruct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "положения успешно обновленны",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/projectInfo/{pojectInfoID}": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "get pojectInfo by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the pojectInfo to get",
+            "name": "pojectInfoID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested pojectInfo",
+            "schema": {
+              "$ref": "#/definitions/ProjectInfo"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "delete pojectInfo by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the pojectInfo to get",
+            "name": "pojectInfoID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested pojectInfo",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/users": {
       "put": {
         "security": [
@@ -2377,6 +2671,12 @@ func init() {
         "$ref": "#/definitions/Poster"
       }
     },
+    "GetProjectInfosResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ProjectInfo"
+      }
+    },
     "GetYearsResponse": {
       "type": "array",
       "items": {
@@ -2545,6 +2845,40 @@ func init() {
         "createdAt": {
           "type": "string",
           "format": "date-time"
+        },
+        "id": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ProjectInfo": {
+      "type": "object",
+      "properties": {
+        "anonce": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
         },
         "id": {
           "type": "string"
@@ -4410,6 +4744,300 @@ func init() {
         }
       }
     },
+    "/projectInfo": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "gets filtered projectInfo list",
+        "responses": {
+          "200": {
+            "description": "returns filtered projectInfo",
+            "schema": {
+              "$ref": "#/definitions/GetProjectInfosResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "create pojectInfo",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "anonce",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно создан",
+            "schema": {
+              "$ref": "#/definitions/ProjectInfo"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "update pojectInfo",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData"
+          },
+          {
+            "type": "string",
+            "name": "id",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "photo",
+            "in": "formData"
+          },
+          {
+            "type": "integer",
+            "name": "order",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "anonce",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно обновлен",
+            "schema": {
+              "$ref": "#/definitions/ProjectInfo"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/projectInfo/orders": {
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "updates projectInfo oders",
+        "parameters": [
+          {
+            "description": "swap item orders",
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SwapStruct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "положения успешно обновленны",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/projectInfo/{pojectInfoID}": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "get pojectInfo by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the pojectInfo to get",
+            "name": "pojectInfoID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested pojectInfo",
+            "schema": {
+              "$ref": "#/definitions/ProjectInfo"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "projectInfo"
+        ],
+        "summary": "delete pojectInfo by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the pojectInfo to get",
+            "name": "pojectInfoID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested pojectInfo",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/users": {
       "put": {
         "security": [
@@ -5024,6 +5652,12 @@ func init() {
         "$ref": "#/definitions/Poster"
       }
     },
+    "GetProjectInfosResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ProjectInfo"
+      }
+    },
     "GetYearsResponse": {
       "type": "array",
       "items": {
@@ -5192,6 +5826,40 @@ func init() {
         "createdAt": {
           "type": "string",
           "format": "date-time"
+        },
+        "id": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ProjectInfo": {
+      "type": "object",
+      "properties": {
+        "anonce": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
         },
         "id": {
           "type": "string"
