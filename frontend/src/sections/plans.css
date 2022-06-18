@@ -1,0 +1,11 @@
+.b-3d{
+    position: relative;
+}
+#paths_plan{
+    display: block;
+    position: absolute;
+    z-index: 6;
+    width: 100%;
+    left: 0;
+    top: 0;
+}

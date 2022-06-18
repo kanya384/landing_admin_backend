@@ -15,7 +15,7 @@
   .slide-text {
     padding: 0 25px;
     width: 50%;
-    max-width: 428px;
+    max-width: 528px;
     @include qlg {
       width: 100%;
       padding-bottom: 40px;
@@ -23,7 +23,7 @@
     }
 
     .title {
-      font-size: 64px;
+      font-size: 40px;
       font-weight: 500;
       padding-top: 80px;
       text-transform: uppercase;
@@ -868,6 +868,15 @@
     margin-bottom: 80px;
     @include qmd {
       margin-bottom: 24px;
+    }
+  }
+}
+.svg-house-3d {
+  .section-house {
+    cursor: pointer;
+    fill: rgba(255,255,255, 0);
+    &:hover {
+      fill: #0CA5E6
     }
   }
 }
