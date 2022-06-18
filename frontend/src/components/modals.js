@@ -2,10 +2,10 @@ import { FloorsModal } from "../feature/floors-modal";
 import { Form } from "./form"
 const parse = require('html-react-parser');
 
-export const Modal = ({title, subtitle, classes, description, fields, content, btnTitle, image, imageMobile, opened, close}) => {
+export const Modal = ({title, subtitle, classes, liter, description, fields, content, btnTitle, image, imageMobile, opened, close}) => {
   
   if (classes === "modal-flat") {
-    return <FloorsModal {...{title, classes, opened, close}}/>
+    return <FloorsModal {...{title, liter, classes, opened, close}}/>
   }
   
   return (<div className={opened?`modal-full ${classes} open`:`modal-full ${classes}`}>

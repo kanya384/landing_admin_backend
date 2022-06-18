@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import { Modal } from "../components/modals"
 import { Link } from "react-router-dom";
 import Konva from "konva"
-import "./plans.css"
 var stage
 var layer
 
@@ -10,6 +9,7 @@ var layer
 export const Plans = () => {
   const [isOpen, setModalState] = useState(false)
   const [hovered, setHovered] = useState(false)
+  const [selectedLiter, setLiter] = useState()
   const paths = [
 		{
 			name: 'paths_plan1',
@@ -64,9 +64,13 @@ export const Plans = () => {
 			})
 			path.on('click', function () {
 				const liter = el.liter
+        setLiter(liter)
+        setModalState(true)
 			})
 			path.on('touchstart', function () {
 				const liter = el.liter
+        setLiter(liter)
+        setModalState(true)
 				
 			})
 			layer.add(path)
@@ -100,7 +104,7 @@ export const Plans = () => {
         <div className="wrapper">
           <div className="h-title">Подбор квартиры на 3D-плане</div>
           <div className="text">Выберите дом и этаж, чтобы посмотреть планировки и узнать цены. Передвигайтесь влево-вправо, ввех и вниз</div>
-          <div className="b-3d" onClick={() => setModalState(true)}>
+          <div className="b-3d">
             <img src="img/home3d.jpg" alt="" />
             <div id="paths_plan"></div>
           </div>
@@ -119,9 +123,10 @@ export const Plans = () => {
         </div>
       </div>
       <Modal 
-        title={"Планировки литера 2"}
+        title={`Планировки литера ${selectedLiter}`}
         position={window.pageYOffset}
         classes={"modal-flat"}
+        liter={selectedLiter}
         fields={[
             {
                 type:"text",

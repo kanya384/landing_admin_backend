@@ -871,14 +871,17 @@
     }
   }
 }
-.svg-house-3d {
-  .section-house {
-    cursor: pointer;
-    fill: rgba(255,255,255, 0);
-    &:hover {
-      fill: #0CA5E6
-    }
-  }
+
+.b-3d{
+  position: relative;
+}
+#paths_plan{
+  display: block;
+  position: absolute;
+  z-index: 6;
+  width: 100%;
+  left: 0;
+  top: 0;
 }
 
 .b-link-row {
