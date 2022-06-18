@@ -10,7 +10,7 @@ import (
 	"context"
 	"io"
 	"landing_admin_backend/internal/domain"
-	"landing_admin_backend/pkg/memcache"
+	"landing_admin_backend/internal/services/memcache"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -56,7 +56,7 @@ func (_d PostersWithCache) Get(ctx context.Context, filter map[string]interface{
 		return
 	}
 	_d.cache.Set("Posters", res)
-	return res, err
+	return res, nil
 }
 
 // GetByID implements Posters

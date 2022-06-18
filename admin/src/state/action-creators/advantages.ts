@@ -153,3 +153,18 @@ export const getAdvantagePhotosByID = (id: string) => {
         })
     }
 }
+
+export const deleteAdvantagePhotoByID = (id: string) => {
+    return async (dispatch: Dispatch<AdvantageAction>) => {
+
+        let token = GetTokenFromCookies()
+        advantagesService.advantagePhotoIdDelete(id, {headers: {"Authorization": token}}).then((resp)=>{
+            if (resp.status === 200) {
+                dispatch({
+                    type: AdvantagesActionTypes.ADVANTAGE_PHOTO_DELETE,
+                    payload: id,
+                })
+            }
+        })
+    }
+}

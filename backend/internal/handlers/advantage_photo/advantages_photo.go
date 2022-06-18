@@ -90,7 +90,7 @@ func (h *handlers) Delete(params advantages.DeleteAdvantagePhotoIDParams, input 
 	if err != nil {
 		return advantages.NewDeleteAdvantagePhotoIDBadRequest()
 	}
-	err = h.services.Advantages.Delete(context.Background(), id)
+	err = h.services.AdvantagePhoto.Delete(context.Background(), id)
 	if err != nil {
 		return advantages.NewDeleteAdvantagePhotoIDInternalServerError()
 	}

@@ -25,10 +25,19 @@ func NewRepository(db *mongo.Database) repos.AdvantagePhoto {
 }
 
 func (r *repository) Get(ctx context.Context, advantageID primitive.ObjectID) (advantagePhotos []domain.AdvantagePhoto, err error) {
-	cur, err := r.collection.Find(ctx, primitive.M{"advantage_id": advantageID}, options.Find().SetSort(primitive.D{{"order", 1}, {"updated_at", -1}}))
-	if err != nil {
-		return
+	var cur *mongo.Cursor
+	if advantageID == primitive.NilObjectID {
+		cur, err = r.collection.Find(ctx, primitive.M{}, options.Find().SetSort(primitive.D{{"order", 1}, {"updated_at", -1}}))
+		if err != nil {
+			return
+		}
+	} else {
+		cur, err = r.collection.Find(ctx, primitive.M{"advantage_id": advantageID}, options.Find().SetSort(primitive.D{{"order", 1}, {"updated_at", -1}}))
+		if err != nil {
+			return
+		}
 	}
+
 	for cur.Next(ctx) {
 		var photo domain.AdvantagePhoto
 		err = cur.Decode(&photo)

@@ -11,6 +11,7 @@ import (
 	"landing_admin_backend/internal/services/hod_photos"
 	"landing_admin_backend/internal/services/landing_content"
 	"landing_admin_backend/internal/services/leads"
+	"landing_admin_backend/internal/services/memcache"
 	"landing_admin_backend/internal/services/months"
 	"landing_admin_backend/internal/services/plans"
 	"landing_admin_backend/internal/services/posters"
@@ -18,7 +19,6 @@ import (
 	"landing_admin_backend/internal/services/users"
 	"landing_admin_backend/internal/services/video"
 	"landing_admin_backend/internal/services/years"
-	"landing_admin_backend/pkg/memcache"
 	"landing_admin_backend/pkg/token_manager"
 
 	"github.com/sirupsen/logrus"
@@ -54,6 +54,7 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 	hodPhotos := hod_photos.NewPhotosWithLogrus(hod_photos.NewService(repository, cfg), logger)
 	posters := posters.NewPostersWithCache(posters.NewPostersWithLogrus(posters.NewService(repository, cfg), logger), cache)
 	projectInfo := project_info.NewProjectInfoWithCache(project_info.NewProjectInfoWithLogrus(project_info.NewService(repository, cfg), logger), cache)
+	advantagePhotos := advantage_photo.NewAdvantagePhotoWithLogrus(advantage_photo.NewService(repository, cfg), logger)
 	return &Services{
 		Auth:           auth.NewAuthWithLogrus(auth.NewService(repository, tokenManager), logger),
 		Users:          users.NewUsersWithLogrus(users.NewService(repository), logger),
@@ -62,13 +63,13 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 		Months:         months,
 		HodPhotos:      hodPhotos,
 		Advantages:     advantages,
-		AdvantagePhoto: advantage_photo.NewAdvantagePhotoWithLogrus(advantage_photo.NewService(repository, cfg), logger),
+		AdvantagePhoto: advantagePhotos,
 		Plans:          plans,
 		Video:          video,
 		Docs:           docs,
 		Leads:          leads.NewLeadsWithLogrus(leads.NewService(repository, cfg), logger),
 		Editable:       editables,
-		LandingContent: landing_content.NewLandingContent(advantages, docs, editables, years, months, hodPhotos, plans, posters, video),
+		LandingContent: landing_content.NewLandingContentWithCache(landing_content.NewLandingContent(advantages, docs, editables, years, months, hodPhotos, plans, posters, video, projectInfo, advantagePhotos), cache),
 		ProjectInfo:    projectInfo,
 	}
 }

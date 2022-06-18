@@ -9,7 +9,7 @@ package advantages
 import (
 	"context"
 	"landing_admin_backend/internal/domain"
-	"landing_admin_backend/pkg/memcache"
+	"landing_admin_backend/internal/services/memcache"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )

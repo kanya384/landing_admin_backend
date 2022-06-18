@@ -30,9 +30,17 @@ func NewRepository(db *mongo.Database) repos.Month {
 }
 
 func (r *repository) Get(ctx context.Context, yearID primitive.ObjectID) (months []domain.Month, err error) {
-	cur, err := r.collection.Find(ctx, primitive.M{"year_id": yearID}, options.Find().SetSort(primitive.D{{"value", 1}}))
-	if err != nil {
-		return
+	var cur *mongo.Cursor
+	if yearID == primitive.NilObjectID {
+		cur, err = r.collection.Find(ctx, primitive.M{}, options.Find().SetSort(primitive.D{{"value", 1}}))
+		if err != nil {
+			return
+		}
+	} else {
+		cur, err = r.collection.Find(ctx, primitive.M{"year_id": yearID}, options.Find().SetSort(primitive.D{{"value", 1}}))
+		if err != nil {
+			return
+		}
 	}
 	for cur.Next(ctx) {
 		var month domain.Month

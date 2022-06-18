@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	IMAGE_WIDTH  = 600
-	IMAGE_HEIGHT = 350
+	IMAGE_WIDTH  = 747
+	IMAGE_HEIGHT = 480
 )
 
 type AdvantagePhoto interface {

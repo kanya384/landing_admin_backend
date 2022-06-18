@@ -49,7 +49,6 @@ func (r *repository) Get(ctx context.Context, filter map[string]interface{}) (po
 	}
 
 	cur.Close(ctx)
-
 	return
 }
 

@@ -9,7 +9,7 @@ package plans
 import (
 	"io"
 	"landing_admin_backend/internal/domain"
-	"landing_admin_backend/pkg/memcache"
+	"landing_admin_backend/internal/services/memcache"
 
 	"golang.org/x/net/context"
 )

@@ -9,7 +9,7 @@ package editable
 import (
 	"context"
 	"landing_admin_backend/internal/domain"
-	"landing_admin_backend/pkg/memcache"
+	"landing_admin_backend/internal/services/memcache"
 )
 
 // EditableWithCache implements Editable that is instrumented with logging

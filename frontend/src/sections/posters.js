@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick/lib/slider";
 import { ContentContext } from "../context/contentContext";
-import { useContent } from "../hooks/content.hook";
 
 export const Posters = () => {
   const [nav1, setNav1] = useState();

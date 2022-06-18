@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick/lib/slider";
+import { ContentContext } from "../context/contentContext";
 
 export const HodStr = () => {
+  const content = useContext(ContentContext)
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
+  const [activeYear, setActiveYear] = useState()
+  const [months, setMonths] = useState([])
+  const [showDropDown, setShow] = useState(false)
+  const [activeMonth, setActiveMonth] = useState()
+  const [photos, setPhotos] = useState([])
 
   let settings = {
     slidesToShow: 3,
@@ -38,6 +45,39 @@ export const HodStr = () => {
     infinite: true,
   }
 
+  useEffect(()=>{
+    if (activeYear === undefined) {
+      setActiveYear(content.content.Years[0])
+    }
+  },[content.content])
+
+  useEffect(()=>{
+    if (activeYear!==undefined){
+      let months = []
+      content.content.Months.map((month)=>{
+        if (month.year_id == activeYear.ID) {
+          months.push(month)
+        }
+      })
+      console.log(months)
+      months = months.reverse()
+      setMonths(months)
+      setActiveMonth(months[0])
+    }
+  },[activeYear])
+
+  useEffect(()=>{
+    if (activeMonth!==undefined){
+      let photos = []
+      content.content.Photos.map((photo)=>{
+        if (photo.month_id === activeMonth?.ID) {
+          photos.push(photo.image)
+        }
+      })
+      setPhotos(photos)
+    }
+  },[activeMonth])
+
   return (
     <div className="lvl14 parrallax-scene3-end">
       <div className="wrapper">
@@ -46,29 +86,29 @@ export const HodStr = () => {
           <div className="construction-progress__filters">
             <div className="filter-left">
               <button className="filter-link active">Фото</button>
-              <button className="filter-link">Видео</button>
+              {/*<button className="filter-link">Видео</button>*/}
             </div>
             <div className="filter-right">
               <div className="filter-years">
-                <button className="filter-link active">2021</button>
-                <button className="filter-link">2022</button>
+                {content.content.Years.map((year)=>{
+                  return  <button className={activeYear&& year.ID === activeYear.ID?"filter-link active":"filter-link"}>{year.value}</button>
+                })}
               </div>
               
               <div className="dropdown-filter js-dropdown-filter">
                 <div className="dropdown-filter__label">
-                  <div className="dropdown-filter__label-text">март</div>
+                  <div className="dropdown-filter__label-text" onClick={()=>{setShow(!showDropDown)}}>{activeMonth?.name}</div>
                   <div className="dropdown-filter__arr">
                     <svg width="14" height="9" viewBox="0 0 14 9" xmlns="http://www.w3.org/2000/svg">
                       <path d="M13 1L7 7L1 1" strokeWidth="2"/>
                     </svg>
                   </div>
                 </div>
-                <div className="dropdown-filter__drop">
+                <div className="dropdown-filter__drop" style={{display:showDropDown?"block":"none"}}>
                   <ul className="dropdown-filter__list">
-                    <li><span>март</span></li>
-                    <li><span>апрель</span></li>
-                    <li><span>май</span></li>
-                    <li><span>июнь</span></li>
+                    {months.map((month)=>{
+                      return  <li onClick={()=>{setShow(false); setActiveMonth(month)}}><span>{month.name}</span></li>
+                    })}
                   </ul>
                 </div>
               </div>
@@ -77,10 +117,10 @@ export const HodStr = () => {
           <div className="construction-progress__slider">
             <div className="slider-construction-progress js-slider-construction-progress-wrapper">
               <Slider asNavFor={nav2} ref={(slider1) => setNav1(slider1)} className="slider slider-construction-progress__slider-for js-slider-construction-progress__slider-for" {...settings}>
-                <div className="slide"><img src="img/constr-prog1.png" alt=""/></div>
-                <div className="slide"><img src="img/constr-prog1.png" alt=""/></div>
-                <div className="slide"><img src="img/constr-prog1.png" alt=""/></div>
-                <div className="slide"><img src="img/constr-prog1.png" alt=""/></div>
+              
+                {photos.map((photo)=>{
+                  return  <div className="slide"><img src={process.env.REACT_APP_BACKEND+"store/"+photo} alt=""/></div>
+                })}
 
               </Slider>
               <div className="slider-construction-progress-nav">

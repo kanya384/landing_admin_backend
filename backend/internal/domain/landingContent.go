@@ -1,12 +1,15 @@
 package domain
 
 type LandingContent struct {
-	Advantages  []*Advantage
-	Docs        []*Doc
-	Editables   []*Editable
-	Hod         []Year
-	Plans       []*Plan
-	Posters     []*Poster
-	ProjectInfo []*ProjectInfo
-	Video       []*Video
+	Advantages      []*Advantage
+	AdvantagePhotos []AdvantagePhoto
+	Docs            []*Doc
+	Editables       []*Editable
+	Years           []Year
+	Months          []Month
+	Photos          []HodPhoto
+	Plans           []*Plan
+	Posters         []*Poster
+	ProjectInfo     []*ProjectInfo
+	Video           []*Video
 }

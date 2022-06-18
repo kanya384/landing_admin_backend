@@ -26,10 +26,19 @@ func NewRepository(db *mongo.Database) repos.HodPhotos {
 }
 
 func (r *repository) Get(ctx context.Context, monthID primitive.ObjectID) (hodPhotos []domain.HodPhoto, err error) {
-	cur, err := r.collection.Find(ctx, primitive.M{"month_id": monthID}, options.Find().SetSort(primitive.D{{"order", 1}, {"updated_at", -1}}))
-	if err != nil {
-		return
+	var cur *mongo.Cursor
+	if monthID == primitive.NilObjectID {
+		cur, err = r.collection.Find(ctx, primitive.M{}, options.Find().SetSort(primitive.D{{"order", 1}, {"updated_at", -1}}))
+		if err != nil {
+			return
+		}
+	} else {
+		cur, err = r.collection.Find(ctx, primitive.M{"month_id": monthID}, options.Find().SetSort(primitive.D{{"order", 1}, {"updated_at", -1}}))
+		if err != nil {
+			return
+		}
 	}
+
 	for cur.Next(ctx) {
 		var photo domain.HodPhoto
 		err = cur.Decode(&photo)

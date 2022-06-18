@@ -79,6 +79,7 @@ const reducer = produce((state: AdvantagesState = initialState, action: Advantag
             state.photosList.unshift(action.payload)
             return state;
         case AdvantagesActionTypes.ADVANTAGE_PHOTO_DELETE:
+            console.log(action.payload)
             state.photosList = state.photosList.filter((value) => value.id !== action.payload)
             return state;
         case AdvantagesActionTypes.ADVANTAGE_PHOTO_SORT:

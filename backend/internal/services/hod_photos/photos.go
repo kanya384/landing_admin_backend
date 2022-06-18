@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	IMAGE_WIDTH  = 600
-	IMAGE_HEIGHT = 350
+	IMAGE_WIDTH  = 927
+	IMAGE_HEIGHT = 600
 )
 
 type Photos interface {

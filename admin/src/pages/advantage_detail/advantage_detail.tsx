@@ -10,7 +10,7 @@ import { useTypedSelector } from "../../hooks/use-typed-selector"
 
 export const AdvantageDetail = () => {
   const { id } = useParams()
-  const {getAdvantageById, getAdvantagePhotosByID, addAdvantagePhoto} = useActions()
+  const {getAdvantageById, getAdvantagePhotosByID, addAdvantagePhoto, deleteAdvantagePhotoByID} = useActions()
   const [opened, setOpened] = useState<number|null>(null);
 
   const advantages = useTypedSelector(({ advantages }) => {
@@ -96,7 +96,7 @@ export const AdvantageDetail = () => {
           <DndProvider backend={HTML5Backend}>
             <div className='row g-4'>
               {advantages!.photosList?.map((photo, index)=>{
-                return <Card key={photo.id} card={{ID: photo.id!, Type:1, Title: "", Text: "", Image: "http://localhost:8080/store/"+photo.image!, Index: index, moveCard: moveCard, deleteClick: () => {}, editClick: ()=>{}}} />
+                return <Card key={photo.id} card={{ID: photo.id!, Type:1, Title: "", Text: "", Image: "http://localhost:8080/store/"+photo.image!, Index: index, moveCard: moveCard, deleteClick: () => {deleteAdvantagePhotoByID(photo.id!)}, editClick: ()=>{}}} />
               })}
             </div>
           </DndProvider>

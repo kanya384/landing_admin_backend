@@ -126,11 +126,10 @@ func (h *handlers) Update(params project_info.PatchProjectInfoParams, input inte
 		return project_info.NewPatchProjectInfoBadRequest().WithPayload(&models.ResultResponse{Msg: "wrong user"})
 	}
 
-	projectInfo, err := domain.NewProjectInfo(params.ID, params.Title, params.Anonce, params.Description, "", 0, time.Now(), time.Now(), userID)
+	projectInfo, err := domain.NewProjectInfo(params.ID, params.Title, params.Anonce, params.Description, *params.Photo, 0, time.Now(), time.Now(), userID)
 	if err != nil {
 		return project_info.NewPatchProjectInfoBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating projectInfo"})
 	}
-
 	projectInfoRes, err := h.services.ProjectInfo.Update(ctx, projectInfo, params.File)
 	if err != nil {
 		return project_info.NewPatchProjectInfoBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating projectInfo"})

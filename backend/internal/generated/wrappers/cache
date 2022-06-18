@@ -1,6 +1,6 @@
 import (
 	"io"
-	"landing_admin_backend/pkg/memcache"
+	"landing_admin_backend/internal/services/memcache"
   )
   
   {{ $decorator := (or .Vars.DecoratorName (printf "%sWithCache" .Interface.Name)) }}

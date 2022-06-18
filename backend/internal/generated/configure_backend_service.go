@@ -30,8 +30,8 @@ import (
 	"landing_admin_backend/internal/handlers"
 	mng "landing_admin_backend/internal/repository/mongo"
 	"landing_admin_backend/internal/services"
+	"landing_admin_backend/internal/services/memcache"
 	"landing_admin_backend/pkg/helpers"
-	"landing_admin_backend/pkg/memcache"
 	"landing_admin_backend/pkg/token_manager"
 )
 

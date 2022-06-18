@@ -31,7 +31,7 @@ export const Hod: React.FC = () =>{
   const hod = useTypedSelector(({ hod }) => {
     return hod
   })
-  const { getYears, getMonths, getPhotos, addYear, deleteYear, addMonth, deleteMonth, addPhotos, sortPhotos } = useActions();
+  const { getYears, getMonths, getPhotos, addYear, deleteYear, addMonth, deleteMonth, addPhotos, sortPhotos, deletePhotoHod } = useActions();
   const getMonthID = (monthIn: number) => {
     let monthRes: string = ""
     hod?.monthsList.map((month) => {
@@ -149,7 +149,7 @@ export const Hod: React.FC = () =>{
     setActive((prevValue) => {
       return {
         year: year,
-        month: hod?hod!.monthsList[0].value!:null
+        month: hod?hod!.monthsList.length>0?hod!.monthsList[0].value!:null:null
       }
     })
   }
@@ -215,7 +215,7 @@ export const Hod: React.FC = () =>{
           <DndProvider backend={HTML5Backend}>
             <div className='row g-4'>
               {hod.photosList?.map((photo, index)=>{
-                return <Card key={photo.id} card={{ID: photo.id!, Type:1, Title: "", Text: "", Image: "http://localhost:8080/store/"+photo.image!, Index: index, moveCard: moveCard, deleteClick: () => {}, editClick: ()=>{}}} />
+                return <Card key={photo.id} card={{ID: photo.id!, Type:1, Title: "", Text: "", Image: "http://localhost:8080/store/"+photo.image!, Index: index, moveCard: moveCard, deleteClick: () => {deletePhotoHod(photo.id!)}, editClick: ()=>{}}} />
               })}
             </div>
           </DndProvider>

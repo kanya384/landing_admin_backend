@@ -115,7 +115,7 @@ export const deleteMonth = (monthID: string) => {
       if (resp.status === 200) {
         dispatch({
             type: HodActionTypes.HOD_MONTHS_DELETE,
-            payload: resp.data!.msg!,
+            payload: monthID,
         });
       }
     })
@@ -175,14 +175,14 @@ export const addPhotos = (filesList: any[], monthId: string, callback:(error: st
   }
 }
 
-export const deletePhoto = (photoID: string, callback?:(error: string) => void) => {
+export const deletePhotoHod = (photoID: string, callback?:(error: string) => void) => {
   return async (dispatch: Dispatch<Hod>) => {
     let token = GetTokenFromCookies()
     hodService.photosIdDelete(photoID, {headers: {"Authorization": token}}).then((resp)=>{
       if (resp.status === 200) {
         dispatch({
-            type: HodActionTypes.HOD_MONTHS_DELETE,
-            payload: resp.data!.msg!,
+            type: HodActionTypes.HOD_PHOTOS_DELETE,
+            payload: photoID,
         });
       }
     })

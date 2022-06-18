@@ -5,6 +5,7 @@ import "./card.css"
 import type { Identifier, XYCoord } from 'dnd-core'
 import { ItemTypes } from './itemTypes';
 import YouTube from 'react-youtube'
+import { Trash2 } from 'react-feather'
 
 interface CardProps {
   ID: string,
@@ -116,6 +117,8 @@ export const Card: FC<{card: CardProps}> = (props) => {
             <div>
               <h4 className="card-title text-white">{props.card.Title}</h4>
               <p className="card-text">{props.card.Text}</p>
+              
+              <Trash2 style={{cursor:"pointer"}} onClick={props.card.deleteClick} />
             </div>
           </div>
         </div>)
