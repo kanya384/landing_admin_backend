@@ -81,7 +81,7 @@ func (lc *landingContent) Get(ctx context.Context) (content domain.LandingConten
 	if err != nil {
 		return
 	}
-	plans, err := lc.plans.GetPlans(ctx)
+	plans, err := lc.plans.GetActivePlans(ctx)
 	if err != nil {
 		return
 	}

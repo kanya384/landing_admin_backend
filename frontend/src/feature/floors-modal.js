@@ -25,7 +25,7 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
             </ul>
           </div>
         </div>
-        <div className="modal-flat-map"><img src={`img/floors/liter${liter}/${floor>1?"2-9":1}/floor.png`} alt="" /></div>
+        <div className={"modal-flat-map liter_"+liter+"-floor_"+floor}><img src={`img/floors/liter${liter}/${floor>1?"2-9":1}/floor.png`} alt="" /></div>
         <div className="modal-flat-filter modal-flat-filter--mobile">
           <div className="floor-slider"><div className="floor-slider__title">Этаж</div></div>
           <ul className="entrance-list">

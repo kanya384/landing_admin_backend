@@ -23,6 +23,11 @@ export const Leads: React.FC = () => {
           <div className="col-12 col-md">
             <h1>Панель управления</h1>
           </div>
+          <div className="col col-md-auto">
+            <nav className="nav nav-underline justify-content-end border-0 doc-tab-nav align-items-center" role="tablist">
+            <a className="btn btn-primary" target="_blank" href={"http://localhost:3000/?administarate=y"} style={{width:"100%"}}>Режим редактирования</a>
+            </nav>
+          </div>
         </div>
       </div>
       {leads?.analytics?
@@ -49,7 +54,7 @@ export const Leads: React.FC = () => {
         <div className="row flex-between-center mb-4 g-3">
           <div className="col-auto">
             <h3>График</h3>
-            <p className="text-700 lh-sm mb-0">Распределение заявок по дням</p>
+            <p className="text-700 lh-sm mb-0">Распределение заявок в этом месяце по дням</p>
           </div>
         </div>
         <ResponsiveContainer width='100%' aspect={4.0/1}>

@@ -61,6 +61,25 @@ func ProcessImage(file interface{}, fileStorePath string, IMAGE_WIDTH int, IMAGE
 	return
 }
 
+func SavePlan(file interface{}, fileStorePath string, IMAGE_WIDTH int, IMAGE_HEIGHT int) (filename string, err error) {
+	fileIn, ok := file.(io.ReadCloser)
+	if !ok {
+		return "", errors.New("no file")
+	}
+	defer fileIn.Close()
+
+	body, err := ioutil.ReadAll(fileIn)
+	if err != nil {
+		return "", errors.New("no file")
+	}
+
+	filename, err = SaveFile(body, "tmg.png", fileStorePath)
+	if err != nil {
+		return
+	}
+	return
+}
+
 func ResizeImage(file io.ReadCloser, width int, height int) (image image.Image, err error) {
 	imageIn, err := imaging.Decode(file)
 	if err != nil {

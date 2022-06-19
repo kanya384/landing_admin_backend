@@ -77,7 +77,7 @@ func (s *service) UpdatePlansPhoto(ctx context.Context, file io.Reader, id strin
 		return
 	}
 
-	filename, errIm := helpers.ProcessImage(file, s.cfg.FileStore, IMAGE_WIDTH, IMAGE_HEIGHT)
+	filename, errIm := helpers.SavePlan(file, s.cfg.FileStore, IMAGE_WIDTH, IMAGE_HEIGHT)
 	if errIm == nil {
 		//need to delete old file
 		plan.Image = filename

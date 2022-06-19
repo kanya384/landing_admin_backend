@@ -15,6 +15,7 @@ export const PlanCard: FC<{plan: Plan, btnClick: any}> = (props) => {
         return "Квартира-студия"
     }
   }
+  console.log(props.plan)
   return( <div className='col-sm-6 col-md-4 col-lg-3'>
             <div className="card">
               <img style={{display:"flex", justifyContent: "center"}} className="card-img-top" src={process.env.REACT_APP_BACKEND_URL!+"/store/"+props.plan.image} alt="нет фото" />
@@ -31,6 +32,10 @@ export const PlanCard: FC<{plan: Plan, btnClick: any}> = (props) => {
                     <strong>{(Math.round(props.plan.price!/10000)/100)} млн руб.</strong>
                   </div>
                   <div className="d-flex justify-content-between">
+                    <span>Литер</span>
+                    <span>{props.plan.liter?.replace('ЖК ВЫСОКИЙ БЕРЕГ Литер ', '')}</span>
+                  </div>
+                  <div className="d-flex justify-content-between">
                     <span>Общая площадь</span>
                     <span>{props.plan.area}м<sup>2</sup></span>
                   </div>
@@ -38,6 +43,11 @@ export const PlanCard: FC<{plan: Plan, btnClick: any}> = (props) => {
                     <span>Жилая площадь</span>
                     <span>{props.plan.living_area}м<sup>2</sup></span>
                   </div>
+                  <div className="d-flex justify-content-between">
+                    <span>Этаж</span>
+                    <span>{props.plan.floor}</span>
+                  </div>
+                  
                 </p>
                 
               </div>

@@ -62,15 +62,15 @@ export const Panel = () => {
     
    
     return ( 
-                <React.Fragment>
-                    <section className="edit-panel" style={{display:content.administrate?"flex":"none"}}>
-                        <span className="edit-panel-text">Режим редактирования</span>
-                        <div className="edit-panel-buttons">
-                            <button onClick={exit}>Выйти</button>
-                            <button onClick={storeEditables}>Сохранить</button>
-                        </div>
-                    </section>
-                    <div className="space-bottom" style={{marginTop:"30px"}}></div>
-                </React.Fragment>
+        <React.Fragment>
+            <section className="edit-panel" style={{display:content.administrate?"flex":"none"}}>
+                <span className="edit-panel-text">Режим редактирования</span>
+                <div className="edit-panel-buttons">
+                    <button onClick={exit}>Выйти</button>
+                    <button onClick={storeEditables}>Сохранить</button>
+                </div>
+            </section>
+            <div className="space-bottom" style={{display:content.administrate?"block":"none", marginTop:"30px"}}></div>
+        </React.Fragment>
     )
 }
