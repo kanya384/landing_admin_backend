@@ -1,8 +1,10 @@
+import { EditableText } from "../components/editable-text"
+
 export const Question = () => {
   return ( <div className="lvl15">
       <div className="wrapper">
         <div className="form-ec">
-          <div className="form-ec__title">Если у вас остались вопросы, наши менеджеры вам помогут</div>
+          <div className="form-ec__title"><EditableText id={"62aef61ba26e626025a8d8dd"} defaultText={"Если у вас остались вопросы, наши менеджеры вам помогут"}/></div>
           <div className="form-ec__content">
             <div className="form-ec__input-row">
               <div className="inp-group">

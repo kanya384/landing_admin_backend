@@ -47,7 +47,7 @@ export const HodStr = () => {
 
   useEffect(()=>{
     if (activeYear === undefined) {
-      setActiveYear(content.content.Years[0])
+      setActiveYear(content.content?.Years[0])
     }
   },[content.content])
 
@@ -90,7 +90,7 @@ export const HodStr = () => {
             </div>
             <div className="filter-right">
               <div className="filter-years">
-                {content.content.Years.map((year)=>{
+                {content.content?.Years.map((year)=>{
                   return  <button className={activeYear&& year.ID === activeYear.ID?"filter-link active":"filter-link"}>{year.value}</button>
                 })}
               </div>

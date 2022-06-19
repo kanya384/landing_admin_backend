@@ -10,10 +10,11 @@ import { About } from "./pages/about";
 import { ContentContext } from "./context/contentContext";
 import { useContent } from "./hooks/content.hook";
 import { useEffect } from "react";
+import { Panel } from "./feature/panel";
 
 function App() {
   const { blocks, setBlocks, menuClick, setMenuClick } = useSections()
-  const {content, setContent} = useContent()
+  const {content, setContent, administrate, setAdministrate} = useContent()
 
   useEffect(()=>{
     if (!content) {
@@ -29,10 +30,11 @@ function App() {
 
   return (
     <div className="App container_main">
-       <div className="over">
-        <SectionsContext.Provider value={{ blocks, setBlocks, menuClick, setMenuClick }}>
-          <ContentContext.Provider value={{ content, setContent }}>
-            <Router>
+      <SectionsContext.Provider value={{ blocks, setBlocks, menuClick, setMenuClick }}>
+        <ContentContext.Provider value={{ content, setContent, administrate, setAdministrate }}>
+        <Router>
+          <Panel />
+          <div className="over">
               <Routes>
               <Route path="/about" element={<About />} />
                 <Route path="/promo" element={<Promo />} />
@@ -40,10 +42,11 @@ function App() {
                 <Route path="/plans" element={<Plans />} />
                 <Route path="*" element={<Main />} />
               </Routes>
-            </Router>
-          </ContentContext.Provider>
-        </SectionsContext.Provider>
-      </div>
+            
+          </div>
+          </Router>
+        </ContentContext.Provider>
+      </SectionsContext.Provider>
     </div>
   );
 }

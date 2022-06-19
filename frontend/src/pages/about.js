@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Slider from "react-slick/lib/slider"
 import { AppBar } from "../components/appbar"
+import { EditableText } from "../components/editable-text"
 import { Footer } from "../components/footer"
 
 export const About = () => {
@@ -54,7 +55,7 @@ export const About = () => {
         <div class="about-banner">
           <div class="b-text">
             <div class="about-banner__title">ava group</div>
-            <div class="about-banner__text">Захватывающая история.<br />Вдохновляющее будущее</div>
+            <div class="about-banner__text"><EditableText id={"62aefdb322de07ce5e31751f"} defaultText={"Захватывающая история.<br />Вдохновляющее будущее"}/></div>
           </div>
           <div class="img"><img src="img/about-banner.png" alt="" /></div>
         </div>
@@ -62,53 +63,49 @@ export const About = () => {
           <div class="options-room options-room--about">
             <div class="option-room__description">
               <div class="text">
-                Девелопмент — это развитие. Планируя каждый проект, мы думаем о том, как будут жить, что чувствовать их
-                жители. Мы думаем о создании цельной среды, в которой не нужно тратить лишнего времени на повседневные
-                хлопоты и можно дарить его близким, думать о комфорте, здоровье и детях, безопасности и экологии. Мы
-                заботимся о развитии — росте благополучия и реализации стремлений наших клиентов.
+                <EditableText id={"62aefdb322de07ce5e317520"} defaultText={"Девелопмент — это развитие. Планируя каждый проект, мы думаем о том, как будут жить, что чувствовать их жители. Мы думаем о создании цельной среды, в которой не нужно тратить лишнего времени на повседневные хлопоты и можно дарить его близким, думать о комфорте, здоровье и детях, безопасности и экологии. Мы заботимся о развитии — росте благополучия и реализации стремлений наших клиентов."}/>
               </div>
               <div class="b-download">
-                <a href="#" class="link-download"
-                  ><svg class="svg"><use xlinkHref="img/sprite.svg#circle-download"></use></svg> Пректная декларация<br />ЖК
-                  AVAnta</a
-                >
+                <a href="#" class="link-download">
+                    <svg class="svg"><use xlinkHref="img/sprite.svg#circle-download"></use></svg> Пректная декларация<br />ЖК AVAnta
+                </a>
               </div>
             </div>
             <div class="options-room--about__wrapper">
               <div class="option-room__item-wrap">
                 <div class="option-room__item">
-                  <div class="label">Завершенных проектов</div>
-                  <div class="value">100+</div>
+                  <div class="label"><EditableText id={"62aefdb322de07ce5e317521"} defaultText={"Завершенных проектов"}/></div>
+                  <div class="value"><EditableText id={"62aefdb322de07ce5e317522"} defaultText={"100+"}/></div>
                 </div>
               </div>
               <div class="option-room__item-wrap">
                 <div class="option-room__item">
-                  <div class="label">Семей обрели новый дом</div>
-                  <div class="value">5000</div>
+                  <div class="label"><EditableText id={"62aefdb322de07ce5e317523"} defaultText={"Семей обрели новый дом"}/></div>
+                  <div class="value"><EditableText id={"62aefdb322de07ce5e317524"} defaultText={"5000"}/></div>
                 </div>
               </div>
               <div class="option-room__item-wrap">
                 <div class="option-room__item">
-                  <div class="label">Детских садов и школ построено</div>
-                  <div class="value">42</div>
+                  <div class="label"><EditableText id={"62aefdb322de07ce5e317525"} defaultText={"Детских садов и школ построено"}/></div>
+                  <div class="value"><EditableText id={"62aefdb322de07ce5e317526"} defaultText={"42"}/></div>
                 </div>
               </div>
               <div class="option-room__item-wrap">
                 <div class="option-room__item">
-                  <div class="label">Квадратных метров жилой недвижимости построено</div>
-                  <div class="value">1,2 млн</div>
+                  <div class="label"><EditableText id={"62aefdb322de07ce5e317527"} defaultText={"Квадратных метров жилой недвижимости построено"}/></div>
+                  <div class="value"><EditableText id={"62aefdb322de07ce5e317528"} defaultText={"1,2 млн"}/></div>
                 </div>
               </div>
               <div class="option-room__item-wrap">
                 <div class="option-room__item">
-                  <div class="label">Лет на рынке недвижимости</div>
-                  <div class="value">15+</div>
+                  <div class="label"><EditableText id={"62aefdb322de07ce5e31752a"} defaultText={"Лет на рынке недвижимости"}/></div>
+                  <div class="value"><EditableText id={"62aefdb322de07ce5e317529"} defaultText={"15+"}/></div>
                 </div>
               </div>
               <div class="option-room__item-wrap">
                 <div class="option-room__item">
-                  <div class="label">Сотрудников</div>
-                  <div class="value">1500+</div>
+                  <div class="label"><EditableText id={"62aefdb322de07ce5e31752b"} defaultText={"Сотрудников"}/></div>
+                  <div class="value"><EditableText id={"62aefdb322de07ce5e31752c"} defaultText={"1500+"}/></div>
                 </div>
               </div>
             </div>
@@ -149,9 +146,7 @@ export const About = () => {
                       <div class="description">
                         <div class="num">1</div>
                         <div class="text">
-                          Тщательно оцениваем земельный участок, его экологические характеристики, а также действующую
-                          жилую, социальную, инженерную и транспортную инфраструктуру с учётом потенциала их дальнейшего
-                          развития.
+                          <EditableText id={"62aefdb322de07ce5e31752d"} defaultText={"Тщательно оцениваем земельный участок, его экологические характеристики, а также действующую жилую, социальную, инженерную и транспортную инфраструктуру с учётом потенциала их дальнейшего развития."}/>
                         </div>
                       </div>
                     </div>
@@ -160,9 +155,7 @@ export const About = () => {
                       <div class="description">
                         <div class="num">2</div>
                         <div class="text">
-                          Тщательно оцениваем земельный участок, его экологические характеристики, а также действующую
-                          жилую, социальную, инженерную и транспортную инфраструктуру с учётом потенциала их дальнейшего
-                          развития.
+                          <EditableText id={"62aefdb322de07ce5e31752e"} defaultText={"Тщательно оцениваем земельный участок, его экологические характеристики, а также действующую жилую, социальную, инженерную и транспортную инфраструктуру с учётом потенциала их дальнейшего развития."}/>
                         </div>
                       </div>
                     </div>
@@ -171,9 +164,7 @@ export const About = () => {
                       <div class="description">
                         <div class="num">3</div>
                         <div class="text">
-                          Тщательно оцениваем земельный участок, его экологические характеристики, а также действующую
-                          жилую, социальную, инженерную и транспортную инфраструктуру с учётом потенциала их дальнейшего
-                          развития.
+                          <EditableText id={"62aefdb322de07ce5e31752f"} defaultText={"Тщательно оцениваем земельный участок, его экологические характеристики, а также действующую жилую, социальную, инженерную и транспортную инфраструктуру с учётом потенциала их дальнейшего развития."}/>
                         </div>
                       </div>
                     </div>
@@ -182,9 +173,7 @@ export const About = () => {
                       <div class="description">
                         <div class="num">4</div>
                         <div class="text">
-                          Тщательно оцениваем земельный участок, его экологические характеристики, а также действующую
-                          жилую, социальную, инженерную и транспортную инфраструктуру с учётом потенциала их дальнейшего
-                          развития.
+                          <EditableText id={"62aefdb322de07ce5e317530"} defaultText={"Тщательно оцениваем земельный участок, его экологические характеристики, а также действующую жилую, социальную, инженерную и транспортную инфраструктуру с учётом потенциала их дальнейшего развития."}/>
                         </div>
                       </div>
                     </div>
@@ -195,8 +184,7 @@ export const About = () => {
           </div>
           <div class="about-map">
             <div class="about-map-title">
-              AVA Group — девелопер федерального уровня, реализует свои проекты в 4 городах России: Краснодар, Сочи,
-              Анапа, Москва
+              <EditableText id={"62aefdb322de07ce5e317531"} defaultText={"AVA Group — девелопер федерального уровня, реализует свои проекты в 4 городах России: Краснодар, Сочи, Анапа, Москва"}/>
             </div>
             <div class="map-wrapper">
               <div class="map-img"><img src="img/big-map.svg" alt="" /></div>
@@ -204,7 +192,7 @@ export const About = () => {
           </div>
           <div class="about-form">
             <div class="form-ec">
-              <div class="form-ec__title">Если у вас остались вопросы, наши менеджеры вам помогут</div>
+              <div class="form-ec__title"><EditableText id={"62aefdb322de07ce5e317532"} defaultText={"Если у вас остались вопросы, наши менеджеры вам помогут"}/></div>
               <div class="form-ec__content">
                 <div class="form-ec__input-row">
                   <div class="inp-group">

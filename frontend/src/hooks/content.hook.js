@@ -2,5 +2,7 @@ import {useState} from 'react'
 
 export const useContent = () => {
     const[content, setContent] = useState()
-    return {content, setContent}
+    const [administrate, setAdministrate] = useState(false)
+
+    return {content, setContent, administrate, setAdministrate}
 }

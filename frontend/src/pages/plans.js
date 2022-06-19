@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppBar } from "../components/appbar"
+import { EditableText } from "../components/editable-text";
 import { Footer } from "../components/footer"
 
 export const Plans = () => {
@@ -11,7 +12,7 @@ export const Plans = () => {
   return( <React.Fragment>
       <AppBar />
       <div className="wrapper">
-          <div className="page-title"><h1 className="h1">выбрать квартиру</h1></div>
+          <div className="page-title"><h1 className="h1"><EditableText id={"62aefdb322de07ce5e31751e"} defaultText={"выбрать квартиру"}/></h1></div>
           <div className="content-wrapper">
             <aside className="left-column">
               <div className="filter-left-btn-toggle">

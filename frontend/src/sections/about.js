@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react"
+import { EditableText } from "../components/editable-text";
 import { Modal } from "../components/modals"
 import { ContentContext } from "../context/contentContext";
 
@@ -12,9 +13,9 @@ export const  About = () => {
   return ( <React.Fragment>
           <div className="lvl6">
             <div className="wrapper">
-              <div className="about-title">О проекте</div>
+              <div className="about-title"><EditableText id={"62aef61ba26e626025a8d8ca"} defaultText={"О проекте"}/></div>
               <div className="about-text">
-                3 девятиэтажных дома на Высоком берегу по своему архитектурному облику напоминают волны, среди которых расположится благоустройство и озеленение жилого комплекса, в традиционно высоком исполнении
+                <EditableText id={"62aef61ba26e626025a8d8c9"} defaultText={"3 девятиэтажных дома на Высоком берегу по своему архитектурному облику напоминают волны, среди которых расположится благоустройство и озеленение жилого комплекса, в традиционно высоком исполнении"}/>
               </div>
               <div className="about-info-list">
                 {content.content && content.content.ProjectInfo && content.content.ProjectInfo.map((info) => {

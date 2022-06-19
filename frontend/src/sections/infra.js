@@ -1,8 +1,10 @@
+import { EditableText } from "../components/editable-text"
+
 export const Infra = () => {
   return (
     <div className="lvl13">
       <div className="wrapper">
-        <div className="h-title">Развитая <br />инфраструктура</div>
+        <div className="h-title"><EditableText id={"62aef61ba26e626025a8d8dc"} defaultText={"Развитая <br />инфраструктура"}/></div>
         <div className="map-info">
           <img src="img/map-infrostruktura.png" alt="" />
         </div>

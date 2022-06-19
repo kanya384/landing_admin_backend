@@ -18,6 +18,7 @@ import { Infra } from "../sections/infra";
 import { HodStr } from "../sections/hod_str";
 import { Question } from "../sections/question";
 import { Footer } from "../components/footer";
+import { ContentContext } from "../context/contentContext";
 
 
 export const Loader = () => {
@@ -27,14 +28,14 @@ export const Loader = () => {
     const blocksImports = [
         <Menu />,
         <Posters />,
-        /*<Parallax image={"img/title-bg1.svg"} />,
+        <Parallax image={"img/title-bg1.svg"} />,
         <Properties />,
         <Walks />,
         <Excursion />,
         <About />,
-        <Presentation />,*/
+        <Presentation />,
         <Plans />,
-        /*<HowToBuy />,
+        <HowToBuy />,
         <Parallax image={"img/title-bg2.svg"} />,
         <Video />,
         <Advantages />,
@@ -43,10 +44,11 @@ export const Loader = () => {
         <Parallax image={"img/title-bg3.svg"} />,
         <HodStr />,
         <Question />,
-        <Footer />*/
+        <Footer />
     ]
 
     const loaded = useContext(SectionsContext)
+    const content = useContext(ContentContext)
 
     const LoadBlock = (block) => {
         return <Suspense fallback={<div>Загрузка...</div>}>{block}</Suspense>
@@ -79,6 +81,17 @@ export const Loader = () => {
             window.addEventListener('scroll', handleScroll, true);
         }
     })
+
+    useEffect(()=>{
+
+        if (content.administrate && (loaded.blocks < blocksImports.length)) {
+            let y = window.scrollY
+            loaded.setBlocks(blocksImports.length)
+            setTimeout(()=>{
+                window.scrollTo(0, y)
+            },400)
+        }
+    },[content.administrate])
     return generateHtml()
 
 }

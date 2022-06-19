@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { EditableText } from "../components/editable-text"
 import { Modal } from "../components/modals"
 
 export const Presentation = () => {
@@ -7,7 +8,7 @@ export const Presentation = () => {
     <div className="lvl7">
       <div className="wrapper">
         <div className="form-ec">
-          <div className="form-ec__title">Получите подробную презентацию жилого комплекса</div>
+          <div className="form-ec__title"><EditableText id={"62aef61ba26e626025a8d8cb"} defaultText={"Получите подробную презентацию жилого комплекса"}/></div>
           <div className="form-ec__content">
             <div className="form-ec__input-row">
               <div className="inp-group">

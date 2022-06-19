@@ -1436,7 +1436,7 @@
   position: fixed;
   top: calc(50% - 65px);
   width: 2000px;
-  transition: all 0.1s linear;
+  transition: all 6.0s linear;
   @include qlg {
     width: 1000px;
     top: calc(20% - 0%);
@@ -1445,7 +1445,7 @@
     width: 800px;
   }
   &.img-hidden {
-    transform: translateX(5000px) !important;
+    transform: translateX(3000px) !important;
     @include qlg {
       transform: translateX(2000px) !important;
     }
@@ -1477,7 +1477,7 @@
     width: 800px;
   }
   &.img-hidden {
-    transform: translateX(5000px) !important;
+    transform: translateX(3000px) !important;
     @include qlg {
       transform: translateX(2000px) !important;
     }

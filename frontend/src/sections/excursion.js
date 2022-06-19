@@ -1,8 +1,10 @@
+import { EditableText } from "../components/editable-text"
+
 export const Excursion = () => {
   return ( <div className="lvl5">
       <div className="wrapper">
         <div className="form-ec">
-          <div className="form-ec__title">Экскурсия в жилой комплекс</div>
+          <div className="form-ec__title"><EditableText id={"62aef61ba26e626025a8d8c8"} defaultText={"Экскурсия в жилой комплекс"}/></div>
           <div className="form-ec__content">
             <div className="form-ec__input-row">
               <div className="inp-group">

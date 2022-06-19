@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Modal } from "../components/modals"
 import { Link } from "react-router-dom";
 import Konva from "konva"
+import { EditableText } from "../components/editable-text";
 var stage
 var layer
 
@@ -79,7 +80,7 @@ export const Plans = () => {
 
 		function fitStageIntoParentContainer() {
 			var container = document.querySelector('#paths_plan');
-			var containerWidth = container.offsetWidth;
+			var containerWidth = container?.offsetWidth;
       console.log(containerWidth)
 			var scale = containerWidth / stageWidth;
 			stage.width(stageWidth * scale);
@@ -102,8 +103,8 @@ export const Plans = () => {
     <React.Fragment>
       <div className="lvl8">
         <div className="wrapper">
-          <div className="h-title">Подбор квартиры на 3D-плане</div>
-          <div className="text">Выберите дом и этаж, чтобы посмотреть планировки и узнать цены. Передвигайтесь влево-вправо, ввех и вниз</div>
+          <div className="h-title"><EditableText id={"62af012c2f3ab6f9b4a854da"} defaultText={"Подбор квартиры на 3D-плане"}/></div>
+          <div className="text"><EditableText id={"62af012c2f3ab6f9b4a854db"} defaultText={"Выберите дом и этаж, чтобы посмотреть планировки и узнать цены. Передвигайтесь влево-вправо, ввех и вниз"}/></div>
           <div className="b-3d">
             <img src="img/home3d.jpg" alt="" />
             <div id="paths_plan"></div>
@@ -117,7 +118,7 @@ export const Plans = () => {
                 <path d="M64.5 14.9983L65.2033 15.7092L65.9219 14.9982L65.2032 14.2874L64.5 14.9983ZM51.0509 29.7109L65.2033 15.7092L63.7967 14.2875L49.6443 28.2891L51.0509 29.7109ZM65.2032 14.2874L51.0508 0.289034L49.6444 1.71097L63.7968 15.7093L65.2032 14.2874ZM64.5 13.9983H0.5V15.9983H64.5V13.9983Z" />
               </svg>
               </span>
-              Подбор по параметрам
+			  <EditableText id={"62af012c2f3ab6f9b4a854e6"} defaultText={"Подбор по параметрам"}/>
             </Link>
           </div>
         </div>

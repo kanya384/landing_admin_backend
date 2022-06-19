@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick/lib/slider";
+import { EditableText } from "../components/editable-text";
 import { ContentContext } from "../context/contentContext";
 
 export const Posters = () => {
@@ -46,7 +47,7 @@ export const Posters = () => {
               {posters[index] ? posters[index].title:"Жизнь на высоком берегу"}
             </div>
             <div className="text">
-              Квартиры в Анапе от 5 млн руб.
+              <EditableText id={"62aef61ba26e626025a8d8c7"} defaultText={"Квартиры в Анапе от 5 млн руб."}/>
             </div>
           </div>
           <div className="slider-lvl1">
@@ -82,7 +83,7 @@ export const Posters = () => {
           <div className="lvl-row-small">
             <div className="lvl-row-small__img"><img src="img/img2.svg" alt="" /></div>
             <div className="lvl-row-small__text">
-              В переводе с итальянского AVANTA (avanti) - вперёд. Дома для жизни и отдыха с высоким уровнем комфорта у моря. Так мы видим ещё один шаг вперёд для резидентов нашего жилого комплекса
+              <EditableText id={"62aef61ba26e626025a8d8c6"} defaultText={"В переводе с итальянского AVANTA (avanti) - вперёд. Дома для жизни и отдыха с высоким уровнем комфорта у моря. Так мы видим ещё один шаг вперёд для резидентов нашего жилого комплекса"}/>
             </div>
           </div>
         </div>
