@@ -594,8 +594,18 @@
   &--calculator {
     .form-ec {
       &__input-row {
+        
         .inp-group {
           margin-bottom: 40px;
+          @include qlg {
+            width: 100%;
+          }
+          .btn-submit {
+            @include qlg {
+              margin-left: auto;
+              display: block;
+            }
+          }
         }
       }
     }
@@ -1213,9 +1223,12 @@
     max-width: 513px;
     @include qlg {
       padding-bottom: 40px;
+      padding-right: 24px;
     }
     @include qmd {
       width: 100%;
+      margin: 0 auto;
+      padding-right: 0;
     }
     .title {
       font-size: 40px;
@@ -1224,8 +1237,12 @@
       line-height: 1.2;
       color: $clr-first-primary;
       padding-bottom: 24px;
+      @include qlg {
+        font-size: 28px;
+      }
       @include qmd {
         text-align: center;
+        
       }
       @include qxxs {
         font-size: 36px;
@@ -1234,6 +1251,10 @@
     .bottom-text {
       max-width: 280px;
       padding-bottom: 40px;
+      @include qmd {
+        max-width: 100%;
+        padding-bottom: 0;
+      }
     }
   }
   .podborka-right {
@@ -1246,6 +1267,8 @@
     }
     @include qmd {
       width: 100%;
+      padding-left: 0;
+      padding-bottom: 0;
     }
   }
 }

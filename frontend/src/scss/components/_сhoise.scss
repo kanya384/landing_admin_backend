@@ -78,6 +78,11 @@
 }
 
 .calculator-filter {
+  .form-ec {
+    @include qmd {
+      max-width: 100%;
+    }
+  }
   .filter-item {
     &__floor {
       display: flex;
@@ -104,7 +109,10 @@
       flex-wrap: wrap;
       li {
         width: 150px;
-        padding: 0 0 24px
+        padding: 0 0 24px;
+        @include qxs {
+          width: 137px;
+        }
       }
       
     }
