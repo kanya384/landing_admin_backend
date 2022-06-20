@@ -77,6 +77,40 @@
   }
 }
 
+.calculator-filter {
+  .filter-item {
+    &__floor {
+      display: flex;
+      padding-bottom: 42px;
+      .filter-item {
+        &__title {
+          margin-right: 24px;
+        }
+        &__body {
+          flex: 1 1 auto;
+          padding-right: 36px;
+        }
+      }
+    }
+    &__rooms {
+      max-width: 320px;
+      padding-bottom: 18px;
+    }
+  }
+  .checked-list {
+    
+    &--column-3 {
+      display: flex;
+      flex-wrap: wrap;
+      li {
+        width: 150px;
+        padding: 0 0 24px
+      }
+      
+    }
+  }
+}
+
 
 .listing-choise {
 
