@@ -219,7 +219,10 @@ export const Plans = () => {
                 </div>
               </div>
               <div className="listing-choise">
-                {filtredPlans&&filtredPlans.map((plan)=>{
+                {filtredPlans&&filtredPlans.map((plan, index)=>{
+                  if (index > 20) {
+                    return
+                  }
                   return <div className="choise-item">
                           <div className="choise-item__img"><Link to={"/plans/"+plan.ID}><img src={process.env.REACT_APP_BACKEND+"store/"+plan.image} alt="" /></Link></div>
                           <div className="choise-item__right">
