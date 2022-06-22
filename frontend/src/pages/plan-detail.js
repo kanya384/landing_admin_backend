@@ -3,8 +3,12 @@ import { useParams } from "react-router-dom"
 import { AppBar } from "../components/appbar"
 import { Footer } from "../components/footer"
 import { ContentContext } from "../context/contentContext"
+import { Modal } from "../components/modals";
+import { Form } from "../components/form";
+
 
 export const PlanDetail = () => {
+  const [isOpen, setIsOpen] = useState(false)
   const [flat, setFlat] = useState()
   const content = useContext(ContentContext)
   
@@ -74,27 +78,38 @@ export const PlanDetail = () => {
                 </div>
                 <div className="room-card__info">
                   <div className="room-card__title">Узнать стоимость квартиры на сегодня</div>
-                  <div className="room-card__form form-ec__content">
-                    <div className="form-ec__input-row">
-                      <div className="inp-group">
-                        <div className="inp-group-label">Ваше имя</div>
-                        <input className="input" placeholder="Ваше имя" />
-                      </div>
-                      <div className="inp-group">
-                        <div className="inp-group-label">Номер телефона</div>
-                        <input className="input" placeholder="Номер телефона" />
-                      </div>
-                    </div>
-                    <div className="form-ec__b-btn">
-                      <button className="btn-submit"><span className="btn-submit-text">Узнать стоимость</span></button>
-                    </div>
-                  </div>
+                  <Form fields={[
+                      {
+                        type:"text",
+                        name: "name",
+                        placeholder: "Имя",
+                        required: false,
+                      },
+                      {
+                          type:"text",
+                          name: "phone",
+                          placeholder: "Телефон",
+                          required: true,
+                      },
+                    ]} 
+                    btnTitle={`Узнать стоимость`} 
+                    description={`Узнать стоимость квартиры №${flat?.number}; Литер: ${flat?.liter}; Подъезд: ${flat?.entrance}; Этаж:${flat?.floor}; Кол-во комнат: ${flat?.rooms}; Общая площадь: ${flat?.area}`}
+                    celtype={"getFlat"}
+                    close={()=>{}} 
+                    callback={()=>{setIsOpen(true)}}
+                />
                 </div>
               </div>
             </main>
           </div>
         </div>
         <Footer subfolder={true} />
+        <Modal 
+          success={true}
+          position={window.pageYOffset}
+          opened={isOpen}
+          close = {()=>{setIsOpen(null)}}
+        />
     </React.Fragment>
   )
 }

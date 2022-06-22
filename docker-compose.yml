@@ -11,6 +11,7 @@ services:
     volumes:
       - './data:/data/db'
   backend:
+    image: laurkan/ava_back
     build:
       context: ./backend
     container_name: backend
@@ -31,6 +32,7 @@ services:
       APP_TOKEN_SECRET: ${APP_TOKEN_SECRET}
       APP_CACHE_DURATION: ${APP_CACHE_DURATION}
   frontend:
+    image: laurkan/ava_front
     depends_on:
       - backend
     build:
@@ -42,6 +44,7 @@ services:
       - app-net
     stdin_open: true
   admin:
+    image: laurkan/ava_admin
     depends_on:
       - backend
     build:
@@ -53,6 +56,7 @@ services:
       - app-net
     stdin_open: true
   nginx:
+    image: laurkan/ava_nginx
     depends_on:
       - backend
       - frontend

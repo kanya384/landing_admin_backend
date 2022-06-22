@@ -3,11 +3,14 @@ import { RangeSlider } from "../components/range-slider";
 import React, {useContext, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {ContentContext} from "../context/contentContext";
+import { Form } from "../components/form";
+import { Modal } from "../components/modals";
 
 export const GetPodbor = () => {
   const location = useLocation();
   const content = useContext(ContentContext)
-  const [filtredPlans, setFiltredPlans] = useState()
+  const [isOpen, setIsOpen] = useState(false)
+
   const [filter, setFilter] = useState({
     areaMin: "",
     areaMax: "",
@@ -16,27 +19,6 @@ export const GetPodbor = () => {
     liters: [1,2,3],
     sort: "area",
   })
-  const [showDropDown, setShowDropDown] = useState(false)
-  
-  const filterPlans = () => {
-    let min = filter.areaMin!==""?filter.areaMin:0
-    let max = filter.areaMax!==""?filter.areaMax:999
-    let plans = []
-    content.content?.Plans.map((plan)=> {
-      if (plan.area>=min && plan.area<=max && plan.floor >= filter.floors[0] && plan.floor <= filter.floors[1] && filter.rooms.includes(plan.rooms) && filter.liters.includes(parseInt(plan.liter.replace('ЖК ВЫСОКИЙ БЕРЕГ Литер ',"")))){
-        plans.push(plan)
-      }
-    })
-    
-    setFiltredPlans(sortFlats(filter.sort, plans))
-  }
-  
-  const inputChange = (event) => {
-    setFilter({
-      ...filter,
-      [event.target.name]: event.target.value.replace(",",".")
-    })
-  }
   
   const setFloors = (value) => {
     setFilter({
@@ -108,19 +90,9 @@ export const GetPodbor = () => {
     window.scrollTo(0, 0);
   }, [location]);
   
-  useEffect(()=>{
-    if (content.content?.Plans){
-      setFiltredPlans(content.content?.Plans)
-    }
-  },[content.content?.Plans])
   
-  useEffect(()=>{
-    if (filter){
-      filterPlans()
-    }
-  },[filter])
   return(
-    <div className="lvl12">
+    <div className="lvl12" style={{zIndex: 900000}}>
       <div className="wrapper">
         <div className="podborka-left">
           <div className="title"><EditableText id={"62aef61ba26e626025a8d8da"} defaultText={"Получите подборку свободных квартир с планировками и ценами"}/></div>
@@ -177,21 +149,32 @@ export const GetPodbor = () => {
                 <div className="form-ec form-ec--calculator">
                   <div className="form-ec__content">
                     <div className="form-ec__input-row">
-                      <div className="inp-group">
-                        <div className="inp-group-label">Ваше имя</div>
-                        <input className="input" placeholder="Ваше имя" type="text" />
-                      </div>
-                      <div className="inp-group">
-                        <div className="inp-group-label">Номер телефона</div>
-                        <input className="input" placeholder="Номер телефона" type="text" />
-                      </div>
-                      <div className="inp-group">
-                        <div className="inp-group-label">E-mail</div>
-                        <input className="input" placeholder="E-mail" type="text" />
-                      </div>
-                      <div className="inp-group">
-                        <button className="btn-submit"><span className="btn-submit-text">Отправить</span></button>
-                      </div>
+                      <Form fields={[
+                            {
+                              type:"text",
+                              name: "name",
+                              placeholder: "Имя",
+                              required: false,
+                            },
+                            {
+                                type:"text",
+                                name: "phone",
+                                placeholder: "Телефон",
+                                required: true,
+                            },
+                            {
+                              type:"text",
+                              name: "email",
+                              placeholder: "E-mail",
+                              required: true,
+                            }, 
+                          ]} 
+                          btnTitle={"Отправить"} 
+                          description={`Получить подборку квартир. Этаж:${filter.floors.join("-")}; Кол-во комнат:${filter.rooms.join(",")}; Корпус:${filter.liters.join(",")}`}
+                          celtype={"getPodbor"}
+                          close={()=>{}} 
+                          callback={()=>{setIsOpen(true)}}
+                      />
                     </div>
                     
                   </div>
@@ -202,6 +185,12 @@ export const GetPodbor = () => {
           
         </div>
       </div>
+      <Modal 
+          success={true}
+          position={window.pageYOffset}
+          opened={isOpen}
+          close = {()=>{setIsOpen(null)}}
+        />
     </div>
   )
 }

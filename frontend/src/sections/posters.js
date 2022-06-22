@@ -18,6 +18,7 @@ export const Posters = () => {
     dots: false,
     arrows: true,
     arrows: false,
+    lazyLoad:true,
     beforeChange: (current, next) => setIndex(next)
   }
 
@@ -52,11 +53,11 @@ export const Posters = () => {
           </div>
           <div className="slider-lvl1">
             <div className="slider-horiz js-slider-hor-wrapper">
-              <Slider asNavFor={nav2} ref={(slider1) => setNav1(slider1)} className="slider slider-lvl1__slider-for js-slider-hor__slider-for" {...settings}>
-                {posters.length>0 ?posters.map((poster)=>{
+              {posters.length>0 ?<Slider asNavFor={nav2} ref={(slider1) => setNav1(slider1)} className="slider slider-lvl1__slider-for js-slider-hor__slider-for" {...settings}>
+                {posters.map((poster)=>{
                   return <div className="slide"><img src={process.env.REACT_APP_BACKEND+"store/"+ poster.photo} alt="" /></div>
-                }):""}
-              </Slider>
+                })}
+              </Slider>:""}
               <div className="slider-horiz-nav">
                 <div className="arr-up" onClick={()=>nav1.slickPrev()}>
                   <svg width="14" height="19" viewBox="0 0 14 19" xmlns="http://www.w3.org/2000/svg">

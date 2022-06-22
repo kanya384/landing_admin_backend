@@ -229,6 +229,7 @@ export const Plans = () => {
                             <div className="choise-item__header">
                               <div className="choise-item__title"><a href="#">{plan.rooms}-комн, {plan.area} м²</a></div>
                               <div className="choise-item__floor">{plan.floor} этаж из 9</div>
+                              <div className="choise-item__floor">{plan.entrance} подьезд</div>
                             </div>
                             <div className="choise-item__bottom">
                               <div className="choise-item__link-pdf"><a href="#" className="link-pdf">Скачать в PDF</a></div>

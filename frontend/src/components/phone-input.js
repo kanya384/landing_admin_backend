@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const PhoneInput = () => {
+export const PhoneInput = (alt) => {
     const [phone, setPhone] = useState("")
     const phoneChange = (e) => {
         
@@ -60,6 +60,12 @@ export const PhoneInput = () => {
                 setPhone('');
             }
         }
+    }
+    if (alt) {
+        return <div className="inp-group">
+        <div className="inp-group-label">Телефон</div>
+        <input className="input" placeholder="Телефон" name="phone" onChange={phoneChange} value={phone} type="text" />
+    </div>
     }
     return ( <div className="form-ec__input-row">
                 <div className="inp-group">

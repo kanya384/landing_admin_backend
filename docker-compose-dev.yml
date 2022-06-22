@@ -11,8 +11,7 @@ services:
     volumes:
       - './data:/data/db'
   backend:
-    build:
-      context: ./backend
+    image: laurkan/ava_back
     container_name: backend
     networks:
       - app-net
@@ -20,6 +19,8 @@ services:
       - ./backend/file_store:/file_store
       - ./vars:/vars
     restart: always
+    ports:
+      - "8080:8080"
     environment:
       APP_PORT: ${APP_PORT}
       APP_DSN: ${APP_DSN}
@@ -30,15 +31,3 @@ services:
       APP_REFRESH_TOKEN_TTL: ${APP_REFRESH_TOKEN_TTL}
       APP_TOKEN_SECRET: ${APP_TOKEN_SECRET}
       APP_CACHE_DURATION: ${APP_CACHE_DURATION}
-  nginx:
-    depends_on:
-      - backend
-    restart: always
-    networks:
-      - app-net
-    build:
-      dockerfile: Dockerfile
-      context: ./nginx
-    ports:
-      - "80:80"
-

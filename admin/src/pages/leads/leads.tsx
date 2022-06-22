@@ -34,7 +34,7 @@ export const Leads: React.FC = () => {
       <div className="card-body">
         <div className="row align-items-center g-4">
           <div className="col-12 col-md-auto">
-            <div className="d-flex align-items-center"><img src="assets/img/icons/illustrations/4.png" alt="" width="46" height="46" />
+            <div className="d-flex align-items-center"><img src="/admin/assets/img/icons/illustrations/4.png" alt="" width="46" height="46" />
               <div className="ms-3">
                 <h4 className="mb-0">{leads.analytics.today_count?leads.analytics.today_count:0} шт</h4>
                 <p className="text-800 fs--1 mb-0">Количество заявок за сегодня</p>
@@ -42,7 +42,7 @@ export const Leads: React.FC = () => {
             </div>
           </div>
           <div className="col-12 col-md-auto">
-            <div className="d-flex align-items-center"><img src="assets/img/icons/illustrations/2.png" alt="" width="46" height="46" />
+            <div className="d-flex align-items-center"><img src="/admin/assets/img/icons/illustrations/2.png" alt="" width="46" height="46" />
               <div className="ms-3">
                 <h4 className="mb-0">{leads.analytics.month_count?leads.analytics.month_count:0} шт</h4>
                 <p className="text-800 fs--1 mb-0">Количество заявок в этом месяце</p>

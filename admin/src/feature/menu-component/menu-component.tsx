@@ -17,7 +17,7 @@ const MenuComponent = () => {
             </button>
             <a className="navbar-brand me-1 me-sm-3" href="../../index.html">
               <div className="d-flex justify-content-center">
-                  <img src="assets/img/icons/logo.png" alt="phoenix" width="105" />
+                  <img src="/admin/assets/img/icons/logo.png" alt="phoenix" width="105" />
               </div>
             </a>
           </div>

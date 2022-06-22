@@ -28,23 +28,23 @@ export const Loader = () => {
     const blocksImports = [
         <Menu />,
         <Posters />,
-        /*<Parallax image={"img/title-bg1.svg"} />,
+        <Parallax image={"img/title-bg1.svg"} />,
         <Properties />,
         <Walks />,
         <Excursion />,
         <About />,
-        <Presentation />,*/
+        <Presentation />,
         <Plans />,
-        /*<HowToBuy />,
+        <HowToBuy />,
         <Parallax image={"img/title-bg2.svg"} />,
         <Video />,
-        <Advantages />,*/
+        <Advantages />,
         <GetPodbor />,
-        /*<Infra />,
+        <Infra />,
         <Parallax image={"img/title-bg3.svg"} />,
         <HodStr />,
         <Question />,
-        <Footer />*/
+        <Footer />
     ]
 
     const loaded = useContext(SectionsContext)

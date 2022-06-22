@@ -98,7 +98,7 @@ export const HowToBuy = () => {
                 }, 
             ]}
             btnTitle={"Получить расчет"}
-            celtype={"getIpot"}
+            celtype={"getRassr"}
             opened={modalType===1}
             close = {()=>{setModalType(null)}}
           />

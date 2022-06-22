@@ -1,0 +1,414 @@
+.modal-flat-map {
+    max-width: 1136px;
+    width: 100%;
+    position: relative;
+  }
+  .flat-room {
+    background: rgba(0,0,0, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10%;
+    height: 100%;
+    cursor: pointer;
+    display: block;
+    &:before {
+      width: 64px;
+      height: 64px;
+      content: "";
+      top: calc(50% - 32px);
+      left: calc(50% - 32px);
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(2, 82, 148, .9)  url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxOSAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExIDFMMTcgN00xNyA3TDExIDEzTTE3IDdMMCA3IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+Cg==") 50% 50% no-repeat;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.3s ease;
+      @include qmd {
+        display: none;
+      }
+    }
+    &:hover {
+      &:before {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  
+  }
+  .lit-flat {
+    position: relative;
+  }
+  .lit1__flat-1__1 {
+    .flat-room {
+      &_1 {
+        width: 28%;
+        &:before {
+          margin-top: 25%;
+          margin-left: 14%
+        }
+      }
+      &_2 {
+        height: 35%;
+        left: 7%;
+        width: 27%;
+        transform: rotate(-45deg);
+        &:before {
+          margin-top: 3%;
+          margin-left: -12%;
+          transform: rotate(45deg);
+        }
+        .flat-room_before {
+          position: absolute;
+          top: 36%;
+          left: 24%;
+          width: 60%;
+          height: 100%;
+  
+          transform: rotate(45deg);
+        }
+      }
+      &_3 {
+        height: 41%;
+        left: 33%;
+        width: 20%;
+      }
+      &_4 {
+        width: 20%;
+        left: 53%;
+        height: 41%;
+      }
+      &_5 {
+        width: 21%;
+        left:73%;
+        height: 49%;
+      }
+      &_6 {
+        width: 27%;
+        left:73%;
+        top: 49%;
+        height: 49%;
+      }
+      &_7 {
+        width: 15%;
+        top: 49%;
+        left: 58%;
+        height: 49%;
+      }
+      &_8 {
+        width: 20%;
+        top: 49%;
+        left: 28%;
+        height: 49%;
+        
+      }
+    }
+  }
+  
+  .lit1__flat-1__2-9 {
+    .flat-room {
+      top: 3%;
+      &_1 {
+        width: 28%;
+        &:before {
+          margin-top: 16%;
+          margin-left: 14%
+        }
+      }
+      &_2 {
+        height: 35%;
+        left: 8%;
+        top: 4%;
+        width: 27%;
+        transform: rotate(-45deg);
+        &:before {
+          margin-top: 3%;
+          margin-left: -12%;
+          transform: rotate(45deg);
+        }
+        .flat-room_before {
+          position: absolute;
+          top: 36%;
+          left: 24%;
+          width: 60%;
+          height: 100%;
+          transform: rotate(45deg);
+        }
+      }
+      &_3 {
+        height: 41%;
+        left: 33%;
+        width: 20%;
+      }
+      &_4 {
+        width: 20%;
+        left: 53%;
+        height: 41%;
+      }
+      &_5 {
+        width: 22%;
+        left:72%;
+        height: 49%;
+      }
+      &_6 {
+        width: 27%;
+        left:73%;
+        top: 52%;
+        height: 49%;
+      }
+      &_7 {
+        width: 15%;
+        top: 52%;
+        left: 58%;
+        height: 49%;
+      }
+      &_8 {
+        width: 20%;
+        top: 52%;
+        left: 28%;
+        height: 49%;
+      }
+    }
+  }
+  
+  .lit2__flat-1__1 {
+    .flat-room {
+      top: 3%;
+      &_1 {
+        width: 20%;
+        left: 2%;
+        height: 69%;
+      }
+      &_2 {
+        width: 27%;
+        left: 22%;
+        height: 38%;
+      }
+      &_3 {
+        width: 28%;
+        left: 49%;
+        height: 38%;
+      }
+      &_4 {
+        width: 20%;
+        left: 77%;
+        top: 14%;
+        height: 59%;
+      }
+      &_5 {
+        width: 29%;
+        left: 56%;
+        height: 45%;
+        top: 49%;
+      }
+      &_6 {
+        width: 29%;
+        left: 13%;
+        height: 45%;
+        top: 49%;
+      }
+      &_7 {
+        width: 29%;
+        left: 2%;
+        height: 45%;
+        top: 49%;
+      }
+    }
+  }
+  
+  .lit2__flat-1__2-9 {
+    .flat-room {
+      top: 3%;
+      &_1 {
+        width: 20%;
+        left: 2%;
+        height: 69%;
+        top: 15%;
+      }
+      &_2 {
+        width: 27%;
+        left: 22%;
+        height: 44%;
+      }
+      &_3 {
+        width: 28%;
+        left: 49%;
+        height: 44%;
+      }
+      &_4 {
+        width: 20%;
+        left: 77%;
+        top: 16%;
+        height: 69%;
+      }
+      &_5 {
+        width: 29%;
+        left: 56%;
+        height: 43%;
+        top: 56%;
+      }
+      &_6 {
+        width: 29%;
+        left: 13%;
+        height: 45%;
+        top: 56%;
+      }
+      &_7 {
+        width: 29%;
+        left: 2%;
+        height: 45%;
+        top: 49%;
+      }
+      
+    }
+  }
+  
+  .lit3__flat-1__1 {
+    .flat-room {
+      top: 3%;
+      &_1 {
+        width: 28%;
+        &:before {
+          margin-top: 16%;
+          margin-left: 14%
+        }
+      }
+      &_2 {
+        height: 35%;
+        left: 8%;
+        top: 4%;
+        width: 27%;
+        transform: rotate(-45deg);
+        &:before {
+          margin-top: 3%;
+          margin-left: -12%;
+          transform: rotate(45deg);
+        }
+        .flat-room_before {
+          position: absolute;
+          top: 36%;
+          left: 24%;
+          width: 60%;
+          height: 100%;
+          transform: rotate(45deg);
+        }
+      }
+      &_3 {
+        height: 41%;
+        left: 33%;
+        width: 20%;
+      }
+      &_4 {
+        width: 20%;
+        left: 53%;
+        height: 41%;
+      }
+      &_5 {
+        width: 22%;
+        left:72%;
+        height: 46%;
+      }
+      &_6 {
+        width: 27%;
+        left:73%;
+        top: 49%;
+        height: 40%;
+      }
+      &_7 {
+        width: 15%;
+        top: 49%;
+        left: 58%;
+        height: 38%;
+        .flat-room_before {
+          position: absolute;
+          top: 24%;
+          width: 130%;
+          left: 0;
+          bottom: 0;
+        }
+      }
+      &_8 {
+        width: 20%;
+        top: 49%;
+        left: 28%;
+        height: 38%;
+      }
+    }
+  }
+  
+  
+  
+  .lit3__flat-2__2-9 {
+    .flat-room {
+      top: 3%;
+      
+      &_1 {
+        width: 28%;
+        &:before {
+          margin-top: 16%;
+          margin-left: 14%
+        }
+      }
+      &_2 {
+        height: 35%;
+        left: 8%;
+        top: 4%;
+        width: 27%;
+        transform: rotate(-45deg);
+        &:before {
+          margin-top: 3%;
+          margin-left: -12%;
+          transform: rotate(45deg);
+        }
+        .flat-room_before {
+          position: absolute;
+          top: 36%;
+          left: 24%;
+          width: 60%;
+          height: 100%;
+          transform: rotate(45deg);
+        }
+      }
+      &_3 {
+        height: 41%;
+        left: 33%;
+        width: 20%;
+      }
+      &_4 {
+        width: 20%;
+        left: 53%;
+        height: 41%;
+      }
+      &_5 {
+        width: 22%;
+        left:72%;
+        height: 50%;
+      }
+      &_6 {
+        width: 27%;
+        left:73%;
+        top: 53%;
+        height: 44%;
+      }
+      &_7 {
+        width: 15%;
+        top: 53%;
+        left: 58%;
+        height: 38%;
+        .flat-room_before {
+          position: absolute;
+          top: 27%;
+          width: 130%;
+          left: 0;
+          bottom: 0;
+        }
+      }
+      &_8 {
+        width: 20%;
+        top: 53%;
+        left: 28%;
+        height: 38%;
+      }
+    }
+  }
+  

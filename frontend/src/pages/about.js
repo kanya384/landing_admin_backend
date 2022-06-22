@@ -3,11 +3,14 @@ import Slider from "react-slick/lib/slider"
 import { AppBar } from "../components/appbar"
 import { EditableText } from "../components/editable-text"
 import { Footer } from "../components/footer"
+import { Modal } from "../components/modals"
+import { Form } from "../components/form";
 
 export const About = () => {
 
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
+  const [isOpen, setIsOpen] = useState(false)
 
   let settings = {
     slidesToShow: 3,
@@ -194,25 +197,38 @@ export const About = () => {
             <div class="form-ec">
               <div class="form-ec__title"><EditableText id={"62aefdb322de07ce5e317532"} defaultText={"Если у вас остались вопросы, наши менеджеры вам помогут"}/></div>
               <div class="form-ec__content">
-                <div class="form-ec__input-row">
-                  <div class="inp-group">
-                    <div class="inp-group-label">Ваше имя</div>
-                    <input class="input" placeholder="Ваше имя" />
-                  </div>
-                  <div class="inp-group">
-                    <div class="inp-group-label">Номер телефона</div>
-                    <input class="input" placeholder="Номер телефона" />
-                  </div>
-                </div>
-                <div class="form-ec__b-btn">
-                  <button class="btn-submit"><span class="btn-submit-text">Отправить</span></button>
-                </div>
+                  <Form fields={[
+                      {
+                        type:"text",
+                        name: "name",
+                        placeholder: "Имя",
+                        required: false,
+                      },
+                      {
+                          type:"text",
+                          name: "phone",
+                          placeholder: "Телефон",
+                          required: true,
+                      },
+                    ]} 
+                    btnTitle={"Отправить"} 
+                    description={`Задать вопрос менеджеру`}
+                    celtype={"getQuestionAbout"}
+                    close={()=>{}} 
+                    callback={()=>{setIsOpen(true)}}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
       <Footer />
+      <Modal 
+          success={true}
+          position={window.pageYOffset}
+          opened={isOpen}
+          close = {()=>{setIsOpen(null)}}
+        />
     </React.Fragment>
   )
 }
