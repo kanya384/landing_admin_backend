@@ -32,7 +32,7 @@ const Router: React.FC = () => {
     return (
       <main className="main">
         <div className="container-fluid px-0">
-        <BrowserRouter>
+        <BrowserRouter basename="/admin">
           <MenuComponent />
           <NavbarComponent />
             <div className="content pt-5">

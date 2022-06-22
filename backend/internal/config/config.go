@@ -16,7 +16,6 @@ type Config struct {
 	TokenTTL           time.Duration
 	RefreshTokenTTL    time.Duration
 	TokenSecret        string
-	RedisURL           string
 	LogFile            string        `envconfig:"default=./vars/logs/main.log"`
 	FileStore          string        `envconfig:"default=./file_store"`
 	RequestMaxDuration time.Duration `envconfig:"default=30s"`

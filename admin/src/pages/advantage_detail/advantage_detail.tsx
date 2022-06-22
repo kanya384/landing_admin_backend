@@ -96,7 +96,7 @@ export const AdvantageDetail = () => {
           <DndProvider backend={HTML5Backend}>
             <div className='row g-4'>
               {advantages!.photosList?.map((photo, index)=>{
-                return <Card key={photo.id} card={{ID: photo.id!, Type:1, Title: "", Text: "", Image: "http://localhost:8080/store/"+photo.image!, Index: index, moveCard: moveCard, deleteClick: () => {deleteAdvantagePhotoByID(photo.id!)}, editClick: ()=>{}}} />
+                return <Card key={photo.id} card={{ID: photo.id!, Type:1, Title: "", Text: "", Image: "/api/store/"+photo.image!, Index: index, moveCard: moveCard, deleteClick: () => {deleteAdvantagePhotoByID(photo.id!)}, editClick: ()=>{}}} />
               })}
             </div>
           </DndProvider>

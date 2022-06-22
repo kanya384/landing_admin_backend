@@ -40,6 +40,7 @@ func SetValueToCookies(w http.ResponseWriter, name string, value string, ttl tim
 		Value:   value,
 		Expires: time.Now().Add(ttl),
 		Secure:  secured,
+		Path:    "/",
 	})
 }
 

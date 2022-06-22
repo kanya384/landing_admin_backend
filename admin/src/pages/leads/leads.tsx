@@ -25,7 +25,7 @@ export const Leads: React.FC = () => {
           </div>
           <div className="col col-md-auto">
             <nav className="nav nav-underline justify-content-end border-0 doc-tab-nav align-items-center" role="tablist">
-            <a className="btn btn-primary" target="_blank" href={"http://localhost:3000/?administarate=y"} style={{width:"100%"}}>Режим редактирования</a>
+            <a className="btn btn-primary" target="_blank" href={process.env.REACT_APP_BACKEND_URL?.replace("/api","/?administarate=y")} style={{width:"100%"}}>Режим редактирования</a>
             </nav>
           </div>
         </div>

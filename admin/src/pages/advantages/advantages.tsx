@@ -104,7 +104,7 @@ export const Advantages: React.FC = () => {
       </div>
       <DndProvider backend={HTML5Backend}>
         {advantages?.advantagesList.map((advantage, index)=>{
-          return <Card key={advantage.id} card={{ID: advantage.id!, Type:2, Title: advantage.title!, Text: advantage.description!, Image: "http://localhost:8080/store/", date: advantage.updatedAt, Index: index, click:()=>{ navigate(`${advantage.id}`, { replace: false })}, moveCard: ()=>{}, deleteClick: () => {deleteAdvantage(advantage.id!)}, editClick:()=>{setUpdateFrom({id: advantage.id!, title: advantage.title!, description: advantage.description!, order: !advantage.order?0:advantage.order!, updatedAt: advantage.updatedAt!}); setUpdateFormError(""); setOpened(1)}, }}/>
+          return <Card key={advantage.id} card={{ID: advantage.id!, Type:2, Title: advantage.title!, Text: advantage.description!, Image: "/api/store/", date: advantage.updatedAt, Index: index, click:()=>{ navigate(`${advantage.id}`, { replace: false })}, moveCard: ()=>{}, deleteClick: () => {deleteAdvantage(advantage.id!)}, editClick:()=>{setUpdateFrom({id: advantage.id!, title: advantage.title!, description: advantage.description!, order: !advantage.order?0:advantage.order!, updatedAt: advantage.updatedAt!}); setUpdateFormError(""); setOpened(1)}, }}/>
         })}
       </ DndProvider>
       <Popups Forms={popups} Opened={opened} Toggle={()=>{setOpened(null)}} />

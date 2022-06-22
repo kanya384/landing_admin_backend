@@ -13,6 +13,8 @@ export APP_CACHE_DURATION
 
 up:
 	@docker-compose up -d & disown
+up-dev:
+	@docker-compose -f docker-compose-dev.yml up -d & disown
 run:
 	@cd backend && go run cmd/app/main.go
 #@swagger generate server -f ./api/openapi/openapi.yaml --server-package=./internal/generated -A "backend-service"

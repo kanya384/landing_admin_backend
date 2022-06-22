@@ -171,7 +171,7 @@ export const ProjectInfos: React.FC = () =>  {
           <DndProvider backend={HTML5Backend}>
               <div className='row g-4'>
                 {projectInfos?.projectInfoList.map((projectInfo, index)=>{
-                  return <Card key={projectInfo.id} card={{ID: projectInfo.id!, Type:0, Title: projectInfo.title!, Text: projectInfo.anonce!, Image: "http://localhost:8080/store/"+projectInfo.photo!, Index: index, moveCard: moveCard, deleteClick: () => {deleteProjectInfo(projectInfo.id!)}, editClick:()=>{setUpdateForm({id:projectInfo.id!, title:projectInfo.title!, anonce:projectInfo.anonce!, description:projectInfo.description!,  photo:projectInfo.photo!, order: !projectInfo.order?0:projectInfo.order!, file:null}); setUpdateFormError(""); setOpened(1)}}}/>
+                  return <Card key={projectInfo.id} card={{ID: projectInfo.id!, Type:0, Title: projectInfo.title!, Text: projectInfo.anonce!, Image: "/api/store/"+projectInfo.photo!, Index: index, moveCard: moveCard, deleteClick: () => {deleteProjectInfo(projectInfo.id!)}, editClick:()=>{setUpdateForm({id:projectInfo.id!, title:projectInfo.title!, anonce:projectInfo.anonce!, description:projectInfo.description!,  photo:projectInfo.photo!, order: !projectInfo.order?0:projectInfo.order!, file:null}); setUpdateFormError(""); setOpened(1)}}}/>
                 })}
               </div>
           </ DndProvider>

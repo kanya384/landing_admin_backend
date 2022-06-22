@@ -106,7 +106,7 @@ export const Videos: React.FC = () => {
         <DndProvider backend={HTML5Backend}>
             <div className='row g-4 justify-content-center'>
               {videos?.videoList.map((video, index)=>{
-                return <Card key={video.id} card={{ID: video.id!, Type:3, Title: "", Text: "", Image: "http://localhost:8080/store/"+video.preview, url:video.url, Index: index, moveCard: () =>{}, deleteClick: () => {deleteVideo(video.id!)}, editClick:()=>{setUpdateFrom({id:video.id!, url:video.url!, file:null}); setFormError(""); setOpened(1)}}}/>
+                return <Card key={video.id} card={{ID: video.id!, Type:3, Title: "", Text: "", Image: "/api/store/"+video.preview, url:video.url, Index: index, moveCard: () =>{}, deleteClick: () => {deleteVideo(video.id!)}, editClick:()=>{setUpdateFrom({id:video.id!, url:video.url!, file:null}); setFormError(""); setOpened(1)}}}/>
               })}
             </div>
         </ DndProvider>

@@ -5,7 +5,6 @@ WORKDIR /app
 # Copy all files from current directory to working dir in image
 COPY . .
 # install node modules and build assets
-
 ARG REACT_APP_BACKEND_URL
 
 ENV REACT_APP_BACKEND_URL $REACT_APP_BACKEND_URL
@@ -20,5 +19,6 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 # Copy static assets from builder stage
 COPY --from=builder /app/build .
+COPY --from=builder /app/nginx.conf /etc/nginx/nginx.conf
 # Containers run nginx with global directives and daemon off
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

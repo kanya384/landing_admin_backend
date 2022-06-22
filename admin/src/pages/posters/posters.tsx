@@ -135,7 +135,7 @@ export const Posters: React.FC = () =>  {
           <DndProvider backend={HTML5Backend}>
               <div className='row g-4'>
                 {posters?.postersList.map((poster, index)=>{
-                  return <Card key={poster.id} card={{ID: poster.id!, Type:0, Title: poster.title!, Text: "", Image: "http://localhost:8080/store/"+poster.photo!, Index: index, moveCard: moveCard, deleteClick: () => {deletePoster(poster.id!)}, editClick:()=>{setUpdateForm({id:poster.id!, title:poster.title!, photo:poster.photo!, order: !poster.order?0:poster.order!, file:null}); setUpdateFormError(""); setOpened(1)}}}/>
+                  return <Card key={poster.id} card={{ID: poster.id!, Type:0, Title: poster.title!, Text: "", Image: "/api/store/"+poster.photo!, Index: index, moveCard: moveCard, deleteClick: () => {deletePoster(poster.id!)}, editClick:()=>{setUpdateForm({id:poster.id!, title:poster.title!, photo:poster.photo!, order: !poster.order?0:poster.order!, file:null}); setUpdateFormError(""); setOpened(1)}}}/>
                 })}
               </div>
           </ DndProvider>

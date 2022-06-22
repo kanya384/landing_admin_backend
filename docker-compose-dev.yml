@@ -30,33 +30,9 @@ services:
       APP_REFRESH_TOKEN_TTL: ${APP_REFRESH_TOKEN_TTL}
       APP_TOKEN_SECRET: ${APP_TOKEN_SECRET}
       APP_CACHE_DURATION: ${APP_CACHE_DURATION}
-  frontend:
-    depends_on:
-      - backend
-    build:
-      context: ./frontend
-      args:
-        REACT_APP_BACKEND_URL: ${REACT_APP_BACKEND_URL}
-    container_name: frontend
-    networks:
-      - app-net
-    stdin_open: true
-  admin:
-    depends_on:
-      - backend
-    build:
-      context: ./admin
-      args:
-        REACT_APP_BACKEND_URL: ${REACT_APP_BACKEND_URL}
-    container_name: admin
-    networks:
-      - app-net
-    stdin_open: true
   nginx:
     depends_on:
       - backend
-      - frontend
-      - admin
     restart: always
     networks:
       - app-net
