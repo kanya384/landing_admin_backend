@@ -12,6 +12,29 @@ services:
       - 27017:27017
     volumes:
       - './data:/data/db'
+  api:
+    build:
+      context: ./backend
+    container_name: backend
+    networks:
+      - app-net
+    ports:
+      - 8080:8090
+    volumes:
+      - ./backend/file_store:/file_store
+      - ./vars:/vars
+    restart: always
+    environment:
+      APP_PORT: ${APP_PORT}
+      APP_DSN: ${APP_DSN}
+      APP_SERVICE_NAME: ${APP_SERVICE_NAME}
+      APP_LOG_LEVEL: ${APP_LOG_LEVEL}
+      APP_SALT: ${APP_SALT}
+      APP_TOKEN_TTL: ${APP_TOKEN_TTL}
+      APP_REFRESH_TOKEN_TTL: ${APP_REFRESH_TOKEN_TTL}
+      APP_TOKEN_SECRET: ${APP_TOKEN_SECRET}
+      APP_REDIS_URL: ${APP_REDIS_URL}
+      APP_CACHE_DURATION: ${APP_CACHE_DURATION}
   #redis:
   #  container_name: redis
   #  image: redis:4.0-alpine
