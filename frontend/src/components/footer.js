@@ -1,11 +1,32 @@
 import { EditableText } from "./editable-text"
+import { YMaps, Map, ZoomControl, Placemark } from 'react-yandex-maps';
 
 export const Footer = ({subfolder}) => {
   return (<footer className="footer">
       <div className="wrapper">
           <div className="footer-row">
               <div className="footer-left">
-                  <div className="footer-map"><img src={subfolder?"../../img/contact-map.svg":"img/contact-map.svg"} alt="" /></div>
+                  <div className="footer-map" style={{width:"100%", height: 368, display:"block", position: "relative", }}>
+                        <YMaps>
+                                <Map defaultState={{ center: [44.876247, 37.322943], zoom: 15, controls: [] }} style={{ width: "100%", height: "100%", position: "absolute" }}  >
+                                    <ZoomControl options={{ float: 'left' }} />
+                                    <Placemark geometry={[44.876247, 37.322943]}
+                                                options={{
+                                                    iconLayout: 'default#image',
+                                                    hideIconOnBalloonOpen: false,
+                                                    iconImageSize: [50, 50],
+                                                    iconImageOffset: [-50, -72],
+                                                    cursor: 'default',
+                                                    iconShadow: true,
+                                                    balloonclose: true,
+                                                    iconImageHref: "img/icon-map-ava.svg",
+                                                }}
+                                                
+                                            />
+                                    
+                                </Map>
+                        </YMaps>
+                  </div>
                   <div className="footer-logo"><a href=""><img src={subfolder?"../../img/foot-logo.svg":"img/foot-logo.svg"} alt="" /></a></div>
               </div>
               <div className="footer-right">
