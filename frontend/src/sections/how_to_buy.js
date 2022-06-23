@@ -4,6 +4,8 @@ import { Modal } from "../components/modals"
 
 export const HowToBuy = () => {
   const [modalType, setModalType] = useState(false)
+  const [percent, setPercent] = useState(30)
+  const [srok, setSrok] = useState(10)
   return (
     <React.Fragment>
         <div className="lvl9">
@@ -56,10 +58,30 @@ export const HowToBuy = () => {
         </div>
         <Modal
             title={"рассчитать ипотеку"}
-            subtitle={"Уникальные ипотечные программы и специальные условия от ведущих банков.<br /> Всего один шаг, и квартира- Ваша."}
+            subtitle={"Уникальные ипотечные программы и специальные условия от ведущих банков.<br /> Всего один шаг, и квартира- ваша."}
             classes={"modal-mortgage-calculation"}
             position={window.pageYOffset}
             fields={[
+                {
+                  type:"slider",
+                  title: "Первый взнос",
+                  min: 20,
+                  max: 50,
+                  step: 5,
+                  value: percent,
+                  callback: (srok, val)=>{setPercent(val)},
+                  postfix: ["%"],
+                },
+                {
+                  type:"slider",
+                  title: "Срок",
+                  min: 5,
+                  max: 30,
+                  step: 5,
+                  value: srok,
+                  callback: (srok, val)=>{setSrok(val)},
+                  postfix: ["год", "года", "лет"],
+                },
                 {
                     type:"text",
                     name: "name",
@@ -73,6 +95,7 @@ export const HowToBuy = () => {
                     required: true,
                 }, 
             ]}
+            description={`Рассчитать ипотеку; Срок:${srok}; Первый взнос:${percent}`}
             btnTitle={"Получить расчет"}
             celtype={"getIpot"}
             opened={modalType===0}
@@ -80,7 +103,7 @@ export const HowToBuy = () => {
           />
         <Modal
             title={"рассчитать рассрочку"}
-            subtitle={"Уникальные ипотечные программы и специальные условия от ведущих банков.<br /> Всего один шаг, и квартира- Ваша."}
+            //subtitle={"Уникальные ипотечные программы и специальные условия от ведущих банков.<br /> Всего один шаг, и квартира- Ваша."}
             classes={"modal-mortgage-calculation"}
             position={window.pageYOffset}
             fields={[

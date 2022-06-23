@@ -1,6 +1,7 @@
 import React from "react"
 import { useSendForm } from "../hooks/send-from.hook"
 import { PhoneInput } from "./phone-input"
+import { RangeSliderPopup } from "./range-slider-popup"
 
 export const Form = ({fields, description, btnTitle, celtype, close, callback}) => {
     const sendForm = useSendForm()
@@ -31,7 +32,7 @@ export const Form = ({fields, description, btnTitle, celtype, close, callback}) 
     }
     return ( <form className={"form-ec"}>
                 <div className="form-ec__content">
-                    {fields.map(({name, title, type, placeholder}) => {
+                    {fields.map(({name, title, type, placeholder, min, max, step, postfix, value, callback}) => {
                         if (name==="phone") {
                             return <PhoneInput />
                         }
@@ -44,6 +45,21 @@ export const Form = ({fields, description, btnTitle, celtype, close, callback}) 
                                         <div className="inp-group input-group-x2__col">
                                             <div className="inp-group-label">Минуты</div>
                                             <input className="input dop-info-time" data={":"} placeholder="00 мин" />
+                                        </div>
+                                    </div>
+                        }
+                        if (type === "slider") {
+                            return <div className="form-ec__input-row">  
+                                        <div className="inp-group">
+                                            {title}
+                                            <RangeSliderPopup 
+                                                value={value}
+                                                min={min}
+                                                max={max}
+                                                step={step}
+                                                callback={callback}
+                                                postfix={postfix}
+                                            />
                                         </div>
                                     </div>
                         }
