@@ -35,7 +35,9 @@ export const Posters = () => {
     if (posters.length === 0 && content.content !== undefined) {
       setPosters(content.content.Posters)
       setIndex(0)
-      setTimeout(()=>nav1.slickNext(),200)
+      if (nav1){
+        setTimeout(()=>nav1.slickNext(),200)
+      }
     }
   },[content])
  

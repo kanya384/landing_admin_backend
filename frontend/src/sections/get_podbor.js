@@ -169,7 +169,7 @@ export const GetPodbor = () => {
                               required: true,
                             }, 
                           ]} 
-                          btnTitle={"Отправить"} 
+                          btnTitle={"Получить подборку"} 
                           description={`Получить подборку квартир. Этаж:${filter.floors.join("-")}; Кол-во комнат:${filter.rooms.join(",")}; Корпус:${filter.liters.join(",")}`}
                           celtype={"getPodbor"}
                           close={()=>{}} 

@@ -4,25 +4,26 @@ import { PhoneInput } from "./phone-input"
 
 export const Form = ({fields, description, btnTitle, celtype, close, callback}) => {
     const sendForm = useSendForm()
-    if (celtype=="getPodbor" || celtype=="getExcursion" || celtype === "getQuestionAbout"|| celtype == "getFlat" || celtype == "getPresentation" || celtype == "getQuestion") {
+    if (celtype=="getPodbor" || celtype=="getExcursion" || celtype === "getQuestionAbout"|| celtype == "getFlat" || celtype == "getPresentation" || celtype == "getQuestion" ) {
         return  <React.Fragment>
                     <form className={celtype == "getFlat"?"room-card__form":"form-ec__content"}>
                         <div className="form-ec__input-row">
-                            {fields.map(({name, title, placeholder}) => {
+                            {fields.map(({name, title, type, placeholder}) => {
                                 if (name==="phone") {
                                     return <PhoneInput alt={true} />
                                 }
+                                
                                 return <div className="inp-group">
                                         <div className="inp-group-label">{title}</div>
                                         <input className="input" placeholder={placeholder} name={name} type="text" />
                                     </div>
                             })}
                             <input type="hidden" className="text" value={description} />
-                            {celtype=="getPodbor"?<div class={celtype=="getPodbor"?"inp-group":"form-ec__b-btn"}>
-                                <button class="btn-submit" celtype={celtype} onClick={(e) => sendForm.sendForm(e, callback)}><span class="btn-submit-text">Отправить</span></button>
+                            {celtype=="getPodbor"?<div className={celtype=="getPodbor"?"inp-group":"form-ec__b-btn"}>
+                                <button className="btn-submit" celtype={celtype} onClick={(e) => sendForm.sendForm(e, callback)}><span className="btn-submit-text">{btnTitle}</span></button>
                             </div>:""}
                         </div>
-                        {celtype!=="getPodbor"?<div class="form-ec__b-btn"><button class="btn-submit" celtype={celtype} onClick={(e) => sendForm.sendForm(e, callback)}><span class="btn-submit-text">{btnTitle}</span></button></div>:""}
+                        {celtype!=="getPodbor"?<div className="form-ec__b-btn"><button className="btn-submit" celtype={celtype} onClick={(e) => sendForm.sendForm(e, callback)}><span className="btn-submit-text">{btnTitle}</span></button></div>:""}
                     </form>
 
                 </React.Fragment>
@@ -30,9 +31,21 @@ export const Form = ({fields, description, btnTitle, celtype, close, callback}) 
     }
     return ( <form className={"form-ec"}>
                 <div className="form-ec__content">
-                    {fields.map(({name, title, placeholder}) => {
+                    {fields.map(({name, title, type, placeholder}) => {
                         if (name==="phone") {
                             return <PhoneInput />
+                        }
+                        if (type === "time") {
+                            return <div className="form-ec__input-row">
+                                        <div className="inp-group input-group-x2__col">
+                                            <div className="inp-group-label">Часы</div>
+                                            <input className="input dop-info-time" data={"Час"} placeholder="18 ч" />
+                                        </div>
+                                        <div className="inp-group input-group-x2__col">
+                                            <div className="inp-group-label">Минуты</div>
+                                            <input className="input dop-info-time" data={":"} placeholder="00 мин" />
+                                        </div>
+                                    </div>
                         }
                         return <div className="form-ec__input-row">  
                                 <div className="inp-group">

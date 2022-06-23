@@ -24,7 +24,7 @@ export const Excursion = () => {
                         required: true,
                     },
                   ]} 
-                  btnTitle={"Отправить"} 
+                  btnTitle={"Записаться"} 
                   description={`Экскурсия в жилой комплекс`}
                   celtype={"getExcursion"}
                   close={()=>{}} 

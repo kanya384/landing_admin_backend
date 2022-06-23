@@ -125,6 +125,18 @@ export const useSendForm = () => {
           if (el.value.length !== 0 && el.getAttribute('data') !== null)
               text += ';' + el.getAttribute('data') + ':' + el.value
       })
+      let time = ""
+      form.querySelectorAll('.dop-info-time').forEach((el) => {
+        if (el.value.length !== 0 && el.getAttribute('data') !== null)
+            if(time!="") {
+                time +=":"
+            }
+            time += el.value
+           
+      })
+      if (time!==""){
+        text += '; Удобное время для звонка: ' + time
+      }
       form.querySelectorAll('[name="dop-info"]').forEach((el) => {
           if (el.value.length !== 0)
               text += '; ' + el.value

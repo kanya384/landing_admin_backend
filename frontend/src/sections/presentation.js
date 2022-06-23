@@ -25,7 +25,7 @@ export const Presentation = () => {
                         required: true,
                     },
                   ]} 
-                  btnTitle={"Отправить"} 
+                  btnTitle={"Получить презентацию"} 
                   description={`Получить подробную презентацию жилого комплекса`}
                   celtype={"getPresentation"}
                   close={()=>{}} 
@@ -45,29 +45,3 @@ export const Presentation = () => {
     </React.Fragment>
   )
 }
-
-/*<Modal 
-      title={"получить презентацию"}
-      position={window.pageYOffset}
-      classes={"modal-get-present"}
-      fields={[
-          {
-              type:"text",
-              name: "name",
-              placeholder: "Имя",
-              required: false,
-          },
-          {
-              type:"text",
-              name: "phone",
-              placeholder: "Телефон",
-              required: true,
-          }, 
-      ]}
-      btnTitle={"Отправить"}
-      celtype={"getPresentation"}
-      image ={"img/get-present-bg.jpg"}
-      imageMobile={"img/get-present-bg-mobile.jpg"}
-      opened={isOpen}
-      close = {()=>{setModalState(null)}}
-    />*/
