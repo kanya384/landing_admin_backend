@@ -69,6 +69,7 @@ func (s *service) GetAnalytics(ctx context.Context) (analytics domain.Analytics,
 }
 
 func (s *service) Create(ctx context.Context, lead domain.Lead) (err error) {
+	//send lead to crm
 	return s.repository.Leads.Create(ctx, lead)
 }
 

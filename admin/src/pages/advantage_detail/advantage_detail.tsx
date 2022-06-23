@@ -29,10 +29,12 @@ export const AdvantageDetail = () => {
   },[])
 
   const sendFormallback = (error: string) => {
+    console.log(error)
     if (error!==""){
       setError(error)
     } else {
       setOpened(null);
+      setPhotosForm(photosForm=>({photos:[]}))
     }
   }
 

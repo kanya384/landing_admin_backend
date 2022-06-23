@@ -131,6 +131,7 @@ export const addAdvantagePhoto = (filesList: any[], advantageID: string, callbac
                 type: AdvantagesActionTypes.ADVANTAGE_PHOTO_NEW,
                 payload: resp.data!,
             });
+            callback("")
           }
         }).catch((e)=>{})
       })
