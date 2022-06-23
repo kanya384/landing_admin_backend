@@ -941,7 +941,7 @@ export const Infra = () => {
     <div className="lvl13">
       <div className="wrapper">
         <div className="h-title"><EditableText id={"62aef61ba26e626025a8d8dc"} defaultText={"Развитая <br />инфраструктура"}/></div>
-        <div className="map-info" style={{width:"100%", height: 704, display:"block", position: "relative", }}>
+        <div className="map-info" style={{width:"100%", height: 704, display:"block", position: "relative", overflow: "hidden" }}>
             <YMaps>
                     <Map defaultState={{ center: [44.887186, 37.320944], zoom: 15, controls: [] }} style={{ width: "100%", height: "100%", position: "absolute" }}  >
                         <ZoomControl options={{ float: 'left' }} />

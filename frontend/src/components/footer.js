@@ -6,7 +6,7 @@ export const Footer = ({subfolder}) => {
       <div className="wrapper">
           <div className="footer-row">
               <div className="footer-left">
-                  <div className="footer-map" style={{width:"100%", height: 368, display:"block", position: "relative", }}>
+                  <div className="footer-map" style={{width:"100%", height: 368, display:"block", position: "relative", overflow: "hidden" }}>
                         <YMaps>
                                 <Map defaultState={{ center: [44.876247, 37.322943], zoom: 15, controls: [] }} style={{ width: "100%", height: "100%", position: "absolute" }}  >
                                     <ZoomControl options={{ float: 'left' }} />
