@@ -52,3 +52,5 @@ export const Footer = ({subfolder}) => {
   </footer>
   )
 }
+
+export default Footer

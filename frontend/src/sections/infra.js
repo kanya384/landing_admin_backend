@@ -1012,3 +1012,5 @@ export const Infra = () => {
     </div>
   )
 }
+
+export default Infra

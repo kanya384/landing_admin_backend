@@ -1,8 +1,13 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useLocation } from "react-router-dom";
 import { AppBar } from "../components/appbar"
 import { Footer } from "../components/footer"
 
 export const Promo = () => {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   return (
     <React.Fragment>
       <AppBar />
@@ -119,3 +124,5 @@ export const Promo = () => {
     </React.Fragment>
   )
 }
+
+export default Promo

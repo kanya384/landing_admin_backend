@@ -59,7 +59,6 @@ export const HodStr = () => {
           months.push(month)
         }
       })
-      console.log(months)
       months = months.reverse()
       setMonths(months)
       setActiveMonth(months[0])
@@ -151,3 +150,5 @@ export const HodStr = () => {
     </div>
   )
 }
+
+export default HodStr

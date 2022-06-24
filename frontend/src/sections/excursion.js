@@ -44,3 +44,5 @@ export const Excursion = () => {
     </React.Fragment>
   )
 }
+
+export default Excursion

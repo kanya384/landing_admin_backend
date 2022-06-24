@@ -120,3 +120,5 @@ export const PlanDetail = () => {
     </React.Fragment>
   )
 }
+
+export default PlanDetail

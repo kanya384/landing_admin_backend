@@ -81,7 +81,6 @@ export const Plans = () => {
 		function fitStageIntoParentContainer() {
 			var container = document.querySelector('#paths_plan');
 			var containerWidth = container?.offsetWidth;
-      console.log(containerWidth)
 			var scale = containerWidth / stageWidth;
 			stage.width(stageWidth * scale);
 			stage.height(stageHeight * scale);
@@ -181,3 +180,5 @@ export const Plans = () => {
     </React.Fragment>
   )
 }
+
+export default Plans

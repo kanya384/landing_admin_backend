@@ -10,6 +10,7 @@ export const Plans = () => {
   const location = useLocation();
   const content = useContext(ContentContext)
   const [filtredPlans, setFiltredPlans] = useState()
+  const [showParams, setShowParams] = useState()
   const [filter, setFilter] = useState({
     areaMin: "",
     areaMax: "",
@@ -128,9 +129,9 @@ export const Plans = () => {
           <div className="content-wrapper">
             <aside className="left-column">
               <div className="filter-left-btn-toggle">
-                <div className="btn-toggle-filter js-btn-toggle-filter">Развернуть параметры</div>
+                <div className="btn-toggle-filter js-btn-toggle-filter" onClick={()=>{setShowParams(!showParams)}}>{showParams?"Свернуть параметры":"Развернуть параметры"}</div>
               </div>
-              <div className="filter-left js-filter-left-toggle">
+              <div className="filter-left js-filter-left-toggle" style={{display:showParams?"block":"none"}}>
                 <div className="filter-item">
                   <div className="filter-item__title">Площадь, м²</div>
                   <div className="filter-item__body">
@@ -247,3 +248,5 @@ export const Plans = () => {
     </React.Fragment>
   )
 }
+
+export default Plans

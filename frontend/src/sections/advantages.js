@@ -36,3 +36,5 @@ export const Advantages = () => {
           </div>
   )
 }
+
+export default Advantages

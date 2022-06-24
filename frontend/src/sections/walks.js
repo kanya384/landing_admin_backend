@@ -50,3 +50,5 @@ export const Walks = () => {
         </React.Fragment>
   )
 }
+
+export default Walks

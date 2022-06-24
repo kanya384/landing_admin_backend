@@ -178,3 +178,5 @@ export const HowToBuy = () => {
     </React.Fragment>
   )
 }
+
+export default HowToBuy

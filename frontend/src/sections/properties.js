@@ -48,3 +48,5 @@ export const Properties = () => {
     </React.Fragment>
   )
 } 
+
+export default Properties

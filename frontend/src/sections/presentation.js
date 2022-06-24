@@ -45,3 +45,5 @@ export const Presentation = () => {
     </React.Fragment>
   )
 }
+
+export default Presentation

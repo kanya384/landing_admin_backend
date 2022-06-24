@@ -1,7 +1,7 @@
 import { EditableText } from "../components/editable-text"
 import { RangeSlider } from "../components/range-slider";
 import React, {useContext, useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {ContentContext} from "../context/contentContext";
 import { Form } from "../components/form";
 import { Modal } from "../components/modals";
@@ -185,6 +185,19 @@ export const GetPodbor = () => {
           
         </div>
       </div>
+      <div className="wrapper">
+        <div className="b-link-row">
+            <Link to="/promo" className="lnk-params js-open-modal-flat">
+              <span className="lnk-params__ico">
+              <svg className="ico" width="66" height="30" viewBox="0 0 66 30"
+                    xmlns="http://www.w3.org/2000/svg">
+                <path d="M64.5 14.9983L65.2033 15.7092L65.9219 14.9982L65.2032 14.2874L64.5 14.9983ZM51.0509 29.7109L65.2033 15.7092L63.7967 14.2875L49.6443 28.2891L51.0509 29.7109ZM65.2032 14.2874L51.0508 0.289034L49.6444 1.71097L63.7968 15.7093L65.2032 14.2874ZM64.5 13.9983H0.5V15.9983H64.5V13.9983Z" />
+              </svg>
+              </span>
+              <EditableText id={"62af012c2f3ab6f9b4a854dc"} defaultText={"И еще множество причин жить на юге"}/>
+            </Link>
+        </div>
+      </div>
       <Modal 
           success={true}
           position={window.pageYOffset}
@@ -194,3 +207,5 @@ export const GetPodbor = () => {
     </div>
   )
 }
+
+export default GetPodbor

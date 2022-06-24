@@ -232,3 +232,5 @@ export const About = () => {
     </React.Fragment>
   )
 }
+
+export default About

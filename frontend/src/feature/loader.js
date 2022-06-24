@@ -1,28 +1,27 @@
 import React, { Suspense, useEffect, useContext } from "react"
 import { SectionsContext } from "../context/sectionsContext"
 import { Menu } from '../sections/menu';
-import {Properties} from "../sections/properties";
 import "../scss/style.scss"
 import { Posters } from "../sections/posters";
-import { Walks } from "../sections/walks";
-import { Excursion } from "../sections/excursion";
 import { About } from "../sections/about";
-import { Presentation } from "../sections/presentation";
-import { Plans } from "../sections/plans";
-import { HowToBuy } from "../sections/how_to_buy";
 import { Parallax } from "../components/parallax";
-import { Video } from "../sections/video";
-import { Advantages } from "../sections/advantages";
-import { GetPodbor } from "../sections/get_podbor";
-import { Infra } from "../sections/infra";
-import { HodStr } from "../sections/hod_str";
-import { Question } from "../sections/question";
-import { Footer } from "../components/footer";
 import { ContentContext } from "../context/contentContext";
 
 
 export const Loader = () => {
-    //const Location = React.lazy(() => import("./location"))
+    const Properties = React.lazy(() => import("../sections/properties"))
+    const Walks = React.lazy(() => import("../sections/walks"))
+    const Excursion = React.lazy(() => import("../sections/excursion"))
+    const Presentation = React.lazy(() => import("../sections/presentation"))
+    const Plans = React.lazy(() => import("../sections/plans"))
+    const HowToBuy = React.lazy(() => import("../sections/how_to_buy"))
+    const Video = React.lazy(() => import("../sections/video"))
+    const Advantages = React.lazy(() => import("../sections/advantages"))
+    const GetPodbor = React.lazy(() => import("../sections/get_podbor"))
+    const Infra = React.lazy(() => import("../sections/infra"))
+    const HodStr = React.lazy(() => import("../sections/hod_str"))
+    const Question = React.lazy(() => import("../sections/question"))
+    const Footer = React.lazy(() => import("../components/footer"))
 
 
     const blocksImports = [

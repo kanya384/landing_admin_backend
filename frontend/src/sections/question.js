@@ -43,3 +43,5 @@ export const Question = () => {
     </React.Fragment>
   )
 }
+
+export default Question
