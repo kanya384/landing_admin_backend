@@ -1,5 +1,5 @@
 .lvl1 {
-  padding-bottom: 160px;
+  padding-bottom: 80px;
   @include qlg {
     padding-bottom: 80px;
   }
@@ -471,8 +471,8 @@
       display: block;
       .lvl-row {
         display: block;
-        margin-left: 0;
-        margin-right: 0;
+        // margin-left: 0;
+        // margin-right: 0;
       }
     }
 
@@ -593,6 +593,8 @@
   max-width: 572px;
   margin: 0 auto;
   &--calculator {
+    padding-left: 16px;
+    padding-right: 16px;
     .form-ec {
       &__input-row {
         
@@ -994,7 +996,7 @@
 }
 
 .lvl9 {
-  padding-bottom: 160px;
+  padding-bottom: 40px;
   @include qmd {
     padding-bottom: 60px;
   }
@@ -1320,7 +1322,7 @@
 }
 
 .lvl13 {
-  padding-bottom: 160px;
+  padding-bottom: 80px;
   @include qlg {
     padding-bottom: 80px;
   }
@@ -1510,26 +1512,34 @@
 .fake-img {
   padding-bottom: 160px;
   opacity: 0;
-  min-height: 70vh;
+  height: 290px;
   @include qlg {
-    min-height: 30vh;
+    height: 150px;
+    padding-bottom: 80px;
   }
 }
+
+
 .js-parrallax {
   position: relative;
 }
 .parralax-img1 {
   z-index: -1;
-  position: fixed;
-  top: calc(50% - 65px);
+  position: absolute;
+  margin-left: 1000px;
+  top: calc(50% - 105px);
   width: 2000px;
   transition: all 6.0s linear;
   @include qlg {
     width: 1000px;
-    top: calc(20% - 0%);
+    top: 0;
+    margin-left: 1755px;
   }
   @include qmd {
     width: 800px;
+  }
+  @include qsm {
+    margin-left: 1900px;
   }
   &.img-hidden {
     transform: translateX(3000px) !important;
@@ -1547,6 +1557,29 @@
   }
   &.active {
 
+  }
+}
+
+.imgtitle-bg2svg {
+  .parralax-img1 {
+    margin-left: 820px;
+    @include qlg {
+      margin-left: 1660px;
+    }
+    @include qsm {
+      margin-left: 1825px;
+    }
+  }
+}
+.imgtitle-bg3svg {
+  .parralax-img1 {
+    margin-left: 990px;
+    @include qlg {
+      margin-left: 1618px;
+    }
+    @include qsm {
+      margin-left: 1905px;
+    }
   }
 }
 
