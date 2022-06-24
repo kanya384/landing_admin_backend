@@ -183,8 +183,11 @@ body {
   vertical-align: top;
   font-weight: 700;
   padding-bottom: 2px;
+  border: none;
   border-bottom: 2px solid $clr-first-primary;
   text-decoration: none;
+  background: none;
+  cursor: pointer;
   &:hover {
     border-color: rgba(255,255,255, 0);
     color: $clr-first-primary;

@@ -67,3 +67,27 @@
     }
   }
 }
+
+
+.btn-submit {
+  background: url(../img/arr-link.svg) 0 50% no-repeat;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  padding-left: 98px;
+  transition: all 0.3s ease;
+  &:hover {
+    background-position: 25px 50%;
+    color: $clr-first-primary;
+    .btn-submit-text {
+      border-color: rgba(0,0,0,0);
+    }
+  }
+  &-text {
+    display: inline-block;
+    vertical-align: top;
+    padding: 8px 0;
+    border-bottom: 2px solid #0CA5E6
+  }
+}

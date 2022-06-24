@@ -106,8 +106,37 @@ export const Plans = () => {
           <div className="h-title"><EditableText id={"62af012c2f3ab6f9b4a854da"} defaultText={"Подбор квартиры на 3D-плане"}/></div>
           <div className="text"><EditableText id={"62af012c2f3ab6f9b4a854db"} defaultText={"Выберите дом и этаж, чтобы посмотреть планировки и узнать цены. Передвигайтесь влево-вправо, ввех и вниз"}/></div>
           <div className="b-3d">
-            <img src="img/home3d.jpg" alt="" />
-            <div id="paths_plan"></div>
+			  <div className="b-3d__container">
+				  <img src="img/home3d.jpg" alt="" />
+				  <div className="plan-float-label plan-float-label__1">
+					  <div className="liter">
+						  литер 1
+						  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+							  <path d="M12.501 4.5L18.501 10.5M18.501 10.5L12.501 16.5M18.501 10.5L1.50098 10.5" stroke="white" stroke-width="2"/>
+						  </svg>
+					  </div>
+					  <div className="date">3 кв. 2023</div>
+				  </div>
+				  <div className="plan-float-label plan-float-label__2">
+					  <div className="liter">
+						  литер 2
+						  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+							  <path d="M12.501 4.5L18.501 10.5M18.501 10.5L12.501 16.5M18.501 10.5L1.50098 10.5" stroke="white" stroke-width="2"/>
+						  </svg>
+					  </div>
+					  <div className="date">3 кв. 2023</div>
+				  </div>
+				  <div className="plan-float-label plan-float-label__3">
+					  <div className="liter">
+						  литер 3
+						  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+							  <path d="M12.501 4.5L18.501 10.5M18.501 10.5L12.501 16.5M18.501 10.5L1.50098 10.5" stroke="white" stroke-width="2"/>
+						  </svg>
+					  </div>
+					  <div className="date">3 кв. 2023</div>
+				  </div>
+				  <div id="paths_plan"></div>
+			  </div>
           </div>
           
           <div className="b-link-row">
@@ -123,7 +152,7 @@ export const Plans = () => {
           </div>
         </div>
       </div>
-      <Modal 
+      <Modal
         title={`Планировки литера ${selectedLiter}`}
         position={window.pageYOffset}
         classes={"modal-flat"}
@@ -140,7 +169,7 @@ export const Plans = () => {
                 name: "phone",
                 placeholder: "Телефон",
                 required: true,
-            }, 
+            },
         ]}
         btnTitle={"Отправить"}
         celtype={"getPresentation"}

@@ -77,6 +77,22 @@
       max-width: 100%;
       padding-left: 0;
     }
+    &-price {
+      font-size: 40px;
+      padding-bottom: 18px;
+      font-weight: 500;
+      @include qmd {
+        font-size: 36px;
+      }
+      @include qsm {
+        font-size: 34px;
+      }
+    }
+    &-text {
+      color: $clr-first-primary;
+      font-weight: 500;
+      padding-bottom: 36px;
+    }
   }
   &__title {
     font-size: 40px;
@@ -85,8 +101,15 @@
     text-transform: uppercase;
     padding-bottom: 64px;
     color: $clr-first-primary;
+    @include qxl {
+      font-size: 36px;
+    }
     @include qmd {
       text-align: center;
+      font-size: 34px;
+    }
+    @include qsm {
+      font-size: 28px;
     }
   }
   &__form {

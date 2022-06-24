@@ -73,6 +73,12 @@
       @include qlg {
         font-size: 40px;
       }
+      @include qsm {
+        font-size: 32px;
+      }
+      @include qxxs {
+        font-size: 28px;
+      }
     }
   }
   &-text-right {
@@ -189,8 +195,11 @@
       padding-bottom: 40px;
       margin: 0;
     }
+    @include qsm {
+      font-size: 32px;
+    }
     @include qxxs {
-      font-size: 36px;
+      font-size: 28px;
     }
   }
   &-filter {

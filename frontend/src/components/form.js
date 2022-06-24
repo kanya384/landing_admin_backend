@@ -49,10 +49,10 @@ export const Form = ({fields, description, btnTitle, celtype, close, callback}) 
                                     </div>
                         }
                         if (type === "slider") {
-                            return <div className="form-ec__input-row">  
+                            return <div className="form-ec__input-row">
                                         <div className="inp-group">
                                             {title}
-                                            <RangeSliderPopup 
+                                            <RangeSliderPopup
                                                 value={value}
                                                 min={min}
                                                 max={max}
@@ -63,7 +63,7 @@ export const Form = ({fields, description, btnTitle, celtype, close, callback}) 
                                         </div>
                                     </div>
                         }
-                        return <div className="form-ec__input-row">  
+                        return <div className="form-ec__input-row">
                                 <div className="inp-group">
                                     <div className="inp-group-label">{title}</div>
                                     <input className="input" placeholder={placeholder} name={name} />
