@@ -26,6 +26,7 @@ import (
 	"landing_admin_backend/internal/generated/operations/plans"
 	"landing_admin_backend/internal/generated/operations/posters"
 	"landing_admin_backend/internal/generated/operations/project_info"
+	"landing_admin_backend/internal/generated/operations/settings"
 	"landing_admin_backend/internal/generated/operations/titles"
 	"landing_admin_backend/internal/generated/operations/video"
 	"landing_admin_backend/internal/handlers"
@@ -173,7 +174,14 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	api.ProjectInfoPostProjectInfoOrdersHandler = project_info.PostProjectInfoOrdersHandlerFunc(handlers.ProjectInfo.ProjectInfoOrdersChange)
 
 	/* titles*/
-	api.TitlesGetTitlesHandler = titles.GetTitlesHandlerFunc()
+	api.TitlesGetTitlesHandler = titles.GetTitlesHandlerFunc(handlers.Titles.Get)
+	api.TitlesPutTitlesHandler = titles.PutTitlesHandlerFunc(handlers.Titles.Create)
+	api.TitlesPatchTitlesHandler = titles.PatchTitlesHandlerFunc(handlers.Titles.Update)
+	api.TitlesDeleteTitlesIDHandler = titles.DeleteTitlesIDHandlerFunc(handlers.Titles.Delete)
+
+	/* settings */
+	api.SettingsGetSettingsHandler = settings.GetSettingsHandlerFunc(handlers.Settings.Get)
+	api.SettingsPutSettingsHandler = settings.PutSettingsHandlerFunc(handlers.Settings.Create)
 
 	http.FileServer(http.Dir("file_store"))
 

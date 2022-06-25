@@ -59,6 +59,8 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 	posters := posters.NewPostersWithCache(posters.NewPostersWithLogrus(posters.NewService(repository, cfg), logger), cache)
 	projectInfo := project_info.NewProjectInfoWithCache(project_info.NewProjectInfoWithLogrus(project_info.NewService(repository, cfg), logger), cache)
 	advantagePhotos := advantage_photo.NewAdvantagePhotoWithLogrus(advantage_photo.NewService(repository, cfg), logger)
+	titles := titles.NewTitleWithLogrus(titles.NewTitleWithCache(titles.NewService(repository, cfg), cache), logger)
+	settings := settings.NewSettingsWithLogrus(settings.NewSettingsWithCache(settings.NewService(repository, cfg), cache), logger)
 	return &Services{
 		Auth:           auth.NewAuthWithLogrus(auth.NewService(repository, tokenManager), logger),
 		Users:          users.NewUsersWithLogrus(users.NewService(repository), logger),
@@ -75,5 +77,7 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 		Editable:       editables,
 		LandingContent: landing_content.NewLandingContentWithCache(landing_content.NewLandingContent(advantages, docs, editables, years, months, hodPhotos, plans, posters, video, projectInfo, advantagePhotos), cache),
 		ProjectInfo:    projectInfo,
+		Titles:         titles,
+		Settings:       settings,
 	}
 }

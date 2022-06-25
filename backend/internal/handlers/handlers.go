@@ -14,6 +14,8 @@ import (
 	"landing_admin_backend/internal/handlers/plans"
 	"landing_admin_backend/internal/handlers/posters"
 	"landing_admin_backend/internal/handlers/project_info"
+	"landing_admin_backend/internal/handlers/settings"
+	"landing_admin_backend/internal/handlers/titles"
 	"landing_admin_backend/internal/handlers/users"
 	video "landing_admin_backend/internal/handlers/videos"
 	"landing_admin_backend/internal/handlers/years"
@@ -36,6 +38,8 @@ type Handlers struct {
 	Editable        editable.Handlers
 	Content         content.Handlers
 	ProjectInfo     project_info.Handlers
+	Titles          titles.Handlers
+	Settings        settings.Handlers
 }
 
 func NewHandlers(services *services.Services, cfg *config.Config) *Handlers {
@@ -55,5 +59,7 @@ func NewHandlers(services *services.Services, cfg *config.Config) *Handlers {
 		Editable:        editable.NewHandlers(services),
 		Content:         content.NewHandlers(services),
 		ProjectInfo:     project_info.NewHandlers(services),
+		Titles:          titles.NewHandlers(services),
+		Settings:        settings.NewHandlers(services),
 	}
 }

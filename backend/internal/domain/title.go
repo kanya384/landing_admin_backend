@@ -9,3 +9,21 @@ type Title struct {
 	DesktopTitle string             `bson:"desktop_title" json:"desktop_title"`
 	MobileTitle  string             `bson:"mobile_title" json:"mobile_title"`
 }
+
+func NewTitle(id string, tagName string, tagValue string, desktopTitle string, mobileTitle string) (title Title, err error) {
+	title = Title{
+		TagName:      tagName,
+		TagValue:     tagValue,
+		DesktopTitle: desktopTitle,
+		MobileTitle:  mobileTitle,
+	}
+	if id == "" {
+		title.ID = primitive.NewObjectID()
+	} else {
+		title.ID, err = primitive.ObjectIDFromHex(id)
+		if err != nil {
+			return
+		}
+	}
+	return
+}

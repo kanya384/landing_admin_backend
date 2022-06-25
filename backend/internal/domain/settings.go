@@ -7,3 +7,19 @@ type Setting struct {
 	Name  string             `bson:"name" json:"name"`
 	Value interface{}        `bson:"value" json:"value"`
 }
+
+func NewSetting(id string, name string, value interface{}) (setting Setting, err error) {
+	setting = Setting{
+		Name:  name,
+		Value: value,
+	}
+	if id == "" {
+		setting.ID = primitive.NewObjectID()
+	} else {
+		setting.ID, err = primitive.ObjectIDFromHex(id)
+		if err != nil {
+			return
+		}
+	}
+	return
+}
