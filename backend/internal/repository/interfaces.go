@@ -106,3 +106,18 @@ type ProjectInfo interface {
 	UpdateOrder(ctx context.Context, id primitive.ObjectID, order int) (err error)
 	Delete(ctx context.Context, prjectInfoID primitive.ObjectID) (err error)
 }
+
+type Settings interface {
+	Get(ctx context.Context) (settings []*domain.Setting, err error)
+	GetByID(ctx context.Context, settingID primitive.ObjectID) (setting *domain.Setting, err error)
+	Create(ctx context.Context, setting domain.Setting) (err error)
+	Update(ctx context.Context, setting domain.Setting) (err error)
+}
+
+type Title interface {
+	Get(ctx context.Context) (titles []*domain.Title, err error)
+	GetByTag(ctx context.Context, tagName string, tagValue string) (title *domain.Title, err error)
+	Create(ctx context.Context, title domain.Title) (err error)
+	Update(ctx context.Context, title domain.Title) (err error)
+	Delete(ctx context.Context, titleID primitive.ObjectID) (err error)
+}

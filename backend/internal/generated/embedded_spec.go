@@ -2057,6 +2057,255 @@ func init() {
         }
       }
     },
+    "/settings": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "settings"
+        ],
+        "summary": "get settings list",
+        "responses": {
+          "200": {
+            "description": "returns settings list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Setting"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "settings"
+        ],
+        "summary": "create setting",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/titles": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "titles"
+        ],
+        "summary": "get titles list",
+        "responses": {
+          "200": {
+            "description": "returns titles list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Title"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "titles"
+        ],
+        "summary": "create title",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "titles"
+        ],
+        "summary": "update title",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/titles/{id}": {
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "titles"
+        ],
+        "summary": "delete titles by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String id titles to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete titles success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/users": {
       "put": {
         "security": [
@@ -2910,6 +3159,20 @@ func init() {
         }
       }
     },
+    "Setting": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      }
+    },
     "SwapItem": {
       "type": "object",
       "properties": {
@@ -2929,6 +3192,26 @@ func init() {
         },
         "second": {
           "$ref": "#/definitions/SwapItem"
+        }
+      }
+    },
+    "Title": {
+      "type": "object",
+      "properties": {
+        "desktopTitle": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "mobileTitle": {
+          "type": "string"
+        },
+        "tagName": {
+          "type": "string"
+        },
+        "tagValue": {
+          "type": "string"
         }
       }
     },
@@ -5038,6 +5321,255 @@ func init() {
         }
       }
     },
+    "/settings": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "settings"
+        ],
+        "summary": "get settings list",
+        "responses": {
+          "200": {
+            "description": "returns settings list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Setting"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "settings"
+        ],
+        "summary": "create setting",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/titles": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "titles"
+        ],
+        "summary": "get titles list",
+        "responses": {
+          "200": {
+            "description": "returns titles list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Title"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "titles"
+        ],
+        "summary": "create title",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "titles"
+        ],
+        "summary": "update title",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request success",
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/titles/{id}": {
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "titles"
+        ],
+        "summary": "delete titles by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String id titles to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete titles success",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/users": {
       "put": {
         "security": [
@@ -5891,6 +6423,20 @@ func init() {
         }
       }
     },
+    "Setting": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      }
+    },
     "SwapItem": {
       "type": "object",
       "properties": {
@@ -5910,6 +6456,26 @@ func init() {
         },
         "second": {
           "$ref": "#/definitions/SwapItem"
+        }
+      }
+    },
+    "Title": {
+      "type": "object",
+      "properties": {
+        "desktopTitle": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "mobileTitle": {
+          "type": "string"
+        },
+        "tagName": {
+          "type": "string"
+        },
+        "tagValue": {
+          "type": "string"
         }
       }
     },

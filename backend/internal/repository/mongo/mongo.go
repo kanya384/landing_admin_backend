@@ -12,6 +12,8 @@ import (
 	"landing_admin_backend/internal/repository/mongo/plans"
 	"landing_admin_backend/internal/repository/mongo/posters"
 	"landing_admin_backend/internal/repository/mongo/project_info"
+	"landing_admin_backend/internal/repository/mongo/settings"
+	"landing_admin_backend/internal/repository/mongo/title"
 	"landing_admin_backend/internal/repository/mongo/users"
 	"landing_admin_backend/internal/repository/mongo/video"
 	"landing_admin_backend/internal/repository/mongo/years"
@@ -34,5 +36,7 @@ func Setup(db *mongo.Database) *repository.Repository {
 		Leads:          leads.NewRepository(db),
 		Editable:       editable.NewRepository(db),
 		ProjectInfo:    project_info.NewRepository(db),
+		Title:          title.NewRepository(db),
+		Settings:       settings.NewRepository(db),
 	}
 }

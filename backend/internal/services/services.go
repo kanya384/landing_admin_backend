@@ -16,6 +16,8 @@ import (
 	"landing_admin_backend/internal/services/plans"
 	"landing_admin_backend/internal/services/posters"
 	"landing_admin_backend/internal/services/project_info"
+	"landing_admin_backend/internal/services/settings"
+	"landing_admin_backend/internal/services/titles"
 	"landing_admin_backend/internal/services/users"
 	"landing_admin_backend/internal/services/video"
 	"landing_admin_backend/internal/services/years"
@@ -40,6 +42,8 @@ type Services struct {
 	Editable       editable.Editable
 	LandingContent landing_content.LandingContent
 	ProjectInfo    project_info.ProjectInfo
+	Titles         titles.Title
+	Settings       settings.Settings
 }
 
 func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus.Entry, cache memcache.Cache) *Services {

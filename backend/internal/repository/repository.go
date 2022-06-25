@@ -14,4 +14,6 @@ type Repository struct {
 	Video
 	Leads
 	Editable
+	Title
+	Settings
 }

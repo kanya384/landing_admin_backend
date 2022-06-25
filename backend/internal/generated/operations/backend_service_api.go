@@ -7,6 +7,7 @@ package operations
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"strings"
 
@@ -28,6 +29,8 @@ import (
 	"landing_admin_backend/internal/generated/operations/plans"
 	"landing_admin_backend/internal/generated/operations/posters"
 	"landing_admin_backend/internal/generated/operations/project_info"
+	"landing_admin_backend/internal/generated/operations/settings"
+	"landing_admin_backend/internal/generated/operations/titles"
 	"landing_admin_backend/internal/generated/operations/video"
 )
 
@@ -49,7 +52,10 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		APIKeyAuthenticator: security.APIKeyAuth,
 		BearerAuthenticator: security.BearerAuth,
 
-		JSONConsumer:          runtime.JSONConsumer(),
+		JSONConsumer: runtime.JSONConsumer(),
+		MultipartJSONConsumer: runtime.ConsumerFunc(func(r io.Reader, target interface{}) error {
+			return errors.NotImplemented("multipartJson consumer has not yet been implemented")
+		}),
 		MultipartformConsumer: runtime.DiscardConsumer,
 
 		JSONProducer: runtime.JSONProducer(),
@@ -77,6 +83,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		ProjectInfoDeleteProjectInfoPojectInfoIDHandler: project_info.DeleteProjectInfoPojectInfoIDHandlerFunc(func(params project_info.DeleteProjectInfoPojectInfoIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project_info.DeleteProjectInfoPojectInfoID has not yet been implemented")
+		}),
+		TitlesDeleteTitlesIDHandler: titles.DeleteTitlesIDHandlerFunc(func(params titles.DeleteTitlesIDParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation titles.DeleteTitlesID has not yet been implemented")
 		}),
 		VideoDeleteVideoIDHandler: video.DeleteVideoIDHandlerFunc(func(params video.DeleteVideoIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation video.DeleteVideoID has not yet been implemented")
@@ -129,6 +138,12 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		ProjectInfoGetProjectInfoPojectInfoIDHandler: project_info.GetProjectInfoPojectInfoIDHandlerFunc(func(params project_info.GetProjectInfoPojectInfoIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project_info.GetProjectInfoPojectInfoID has not yet been implemented")
 		}),
+		SettingsGetSettingsHandler: settings.GetSettingsHandlerFunc(func(params settings.GetSettingsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.GetSettings has not yet been implemented")
+		}),
+		TitlesGetTitlesHandler: titles.GetTitlesHandlerFunc(func(params titles.GetTitlesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation titles.GetTitles has not yet been implemented")
+		}),
 		VideoGetVideoHandler: video.GetVideoHandlerFunc(func(params video.GetVideoParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation video.GetVideo has not yet been implemented")
 		}),
@@ -152,6 +167,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		ProjectInfoPatchProjectInfoHandler: project_info.PatchProjectInfoHandlerFunc(func(params project_info.PatchProjectInfoParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project_info.PatchProjectInfo has not yet been implemented")
+		}),
+		TitlesPatchTitlesHandler: titles.PatchTitlesHandlerFunc(func(params titles.PatchTitlesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation titles.PatchTitles has not yet been implemented")
 		}),
 		VideoPatchVideoHandler: video.PatchVideoHandlerFunc(func(params video.PatchVideoParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation video.PatchVideo has not yet been implemented")
@@ -210,6 +228,12 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		ProjectInfoPutProjectInfoHandler: project_info.PutProjectInfoHandlerFunc(func(params project_info.PutProjectInfoParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project_info.PutProjectInfo has not yet been implemented")
 		}),
+		SettingsPutSettingsHandler: settings.PutSettingsHandlerFunc(func(params settings.PutSettingsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation settings.PutSettings has not yet been implemented")
+		}),
+		TitlesPutTitlesHandler: titles.PutTitlesHandlerFunc(func(params titles.PutTitlesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation titles.PutTitles has not yet been implemented")
+		}),
 		PutUsersHandler: PutUsersHandlerFunc(func(params PutUsersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation PutUsers has not yet been implemented")
 		}),
@@ -257,6 +281,9 @@ type BackendServiceAPI struct {
 	// JSONConsumer registers a consumer for the following mime types:
 	//   - application/json
 	JSONConsumer runtime.Consumer
+	// MultipartJSONConsumer registers a consumer for the following mime types:
+	//   - multipart/json
+	MultipartJSONConsumer runtime.Consumer
 	// MultipartformConsumer registers a consumer for the following mime types:
 	//   - multipart/form-data
 	MultipartformConsumer runtime.Consumer
@@ -288,6 +315,8 @@ type BackendServiceAPI struct {
 	PostersDeletePostersPosterIDHandler posters.DeletePostersPosterIDHandler
 	// ProjectInfoDeleteProjectInfoPojectInfoIDHandler sets the operation handler for the delete project info poject info ID operation
 	ProjectInfoDeleteProjectInfoPojectInfoIDHandler project_info.DeleteProjectInfoPojectInfoIDHandler
+	// TitlesDeleteTitlesIDHandler sets the operation handler for the delete titles ID operation
+	TitlesDeleteTitlesIDHandler titles.DeleteTitlesIDHandler
 	// VideoDeleteVideoIDHandler sets the operation handler for the delete video ID operation
 	VideoDeleteVideoIDHandler video.DeleteVideoIDHandler
 	// HodDeleteYearsIDHandler sets the operation handler for the delete years ID operation
@@ -322,6 +351,10 @@ type BackendServiceAPI struct {
 	ProjectInfoGetProjectInfoHandler project_info.GetProjectInfoHandler
 	// ProjectInfoGetProjectInfoPojectInfoIDHandler sets the operation handler for the get project info poject info ID operation
 	ProjectInfoGetProjectInfoPojectInfoIDHandler project_info.GetProjectInfoPojectInfoIDHandler
+	// SettingsGetSettingsHandler sets the operation handler for the get settings operation
+	SettingsGetSettingsHandler settings.GetSettingsHandler
+	// TitlesGetTitlesHandler sets the operation handler for the get titles operation
+	TitlesGetTitlesHandler titles.GetTitlesHandler
 	// VideoGetVideoHandler sets the operation handler for the get video operation
 	VideoGetVideoHandler video.GetVideoHandler
 	// HodGetYearsHandler sets the operation handler for the get years operation
@@ -338,6 +371,8 @@ type BackendServiceAPI struct {
 	PostersPatchPostersHandler posters.PatchPostersHandler
 	// ProjectInfoPatchProjectInfoHandler sets the operation handler for the patch project info operation
 	ProjectInfoPatchProjectInfoHandler project_info.PatchProjectInfoHandler
+	// TitlesPatchTitlesHandler sets the operation handler for the patch titles operation
+	TitlesPatchTitlesHandler titles.PatchTitlesHandler
 	// VideoPatchVideoHandler sets the operation handler for the patch video operation
 	VideoPatchVideoHandler video.PatchVideoHandler
 	// HodPatchYearsHandler sets the operation handler for the patch years operation
@@ -376,6 +411,10 @@ type BackendServiceAPI struct {
 	PostersPutPostersHandler posters.PutPostersHandler
 	// ProjectInfoPutProjectInfoHandler sets the operation handler for the put project info operation
 	ProjectInfoPutProjectInfoHandler project_info.PutProjectInfoHandler
+	// SettingsPutSettingsHandler sets the operation handler for the put settings operation
+	SettingsPutSettingsHandler settings.PutSettingsHandler
+	// TitlesPutTitlesHandler sets the operation handler for the put titles operation
+	TitlesPutTitlesHandler titles.PutTitlesHandler
 	// PutUsersHandler sets the operation handler for the put users operation
 	PutUsersHandler PutUsersHandler
 	// VideoPutVideoHandler sets the operation handler for the put video operation
@@ -454,6 +493,9 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.JSONConsumer == nil {
 		unregistered = append(unregistered, "JSONConsumer")
 	}
+	if o.MultipartJSONConsumer == nil {
+		unregistered = append(unregistered, "MultipartJSONConsumer")
+	}
 	if o.MultipartformConsumer == nil {
 		unregistered = append(unregistered, "MultipartformConsumer")
 	}
@@ -489,6 +531,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.ProjectInfoDeleteProjectInfoPojectInfoIDHandler == nil {
 		unregistered = append(unregistered, "project_info.DeleteProjectInfoPojectInfoIDHandler")
+	}
+	if o.TitlesDeleteTitlesIDHandler == nil {
+		unregistered = append(unregistered, "titles.DeleteTitlesIDHandler")
 	}
 	if o.VideoDeleteVideoIDHandler == nil {
 		unregistered = append(unregistered, "video.DeleteVideoIDHandler")
@@ -541,6 +586,12 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.ProjectInfoGetProjectInfoPojectInfoIDHandler == nil {
 		unregistered = append(unregistered, "project_info.GetProjectInfoPojectInfoIDHandler")
 	}
+	if o.SettingsGetSettingsHandler == nil {
+		unregistered = append(unregistered, "settings.GetSettingsHandler")
+	}
+	if o.TitlesGetTitlesHandler == nil {
+		unregistered = append(unregistered, "titles.GetTitlesHandler")
+	}
 	if o.VideoGetVideoHandler == nil {
 		unregistered = append(unregistered, "video.GetVideoHandler")
 	}
@@ -564,6 +615,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.ProjectInfoPatchProjectInfoHandler == nil {
 		unregistered = append(unregistered, "project_info.PatchProjectInfoHandler")
+	}
+	if o.TitlesPatchTitlesHandler == nil {
+		unregistered = append(unregistered, "titles.PatchTitlesHandler")
 	}
 	if o.VideoPatchVideoHandler == nil {
 		unregistered = append(unregistered, "video.PatchVideoHandler")
@@ -622,6 +676,12 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.ProjectInfoPutProjectInfoHandler == nil {
 		unregistered = append(unregistered, "project_info.PutProjectInfoHandler")
 	}
+	if o.SettingsPutSettingsHandler == nil {
+		unregistered = append(unregistered, "settings.PutSettingsHandler")
+	}
+	if o.TitlesPutTitlesHandler == nil {
+		unregistered = append(unregistered, "titles.PutTitlesHandler")
+	}
 	if o.PutUsersHandler == nil {
 		unregistered = append(unregistered, "PutUsersHandler")
 	}
@@ -671,6 +731,8 @@ func (o *BackendServiceAPI) ConsumersFor(mediaTypes []string) map[string]runtime
 		switch mt {
 		case "application/json":
 			result["application/json"] = o.JSONConsumer
+		case "multipart/json":
+			result["multipart/json"] = o.MultipartJSONConsumer
 		case "multipart/form-data":
 			result["multipart/form-data"] = o.MultipartformConsumer
 		}
@@ -765,6 +827,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
+	o.handlers["DELETE"]["/titles/{id}"] = titles.NewDeleteTitlesID(o.context, o.TitlesDeleteTitlesIDHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
 	o.handlers["DELETE"]["/video/{id}"] = video.NewDeleteVideoID(o.context, o.VideoDeleteVideoIDHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
@@ -833,6 +899,14 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/settings"] = settings.NewGetSettings(o.context, o.SettingsGetSettingsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/titles"] = titles.NewGetTitles(o.context, o.TitlesGetTitlesHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/video"] = video.NewGetVideo(o.context, o.VideoGetVideoHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -862,6 +936,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
 	o.handlers["PATCH"]["/projectInfo"] = project_info.NewPatchProjectInfo(o.context, o.ProjectInfoPatchProjectInfoHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
+	o.handlers["PATCH"]["/titles"] = titles.NewPatchTitles(o.context, o.TitlesPatchTitlesHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
@@ -938,6 +1016,14 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/projectInfo"] = project_info.NewPutProjectInfo(o.context, o.ProjectInfoPutProjectInfoHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/settings"] = settings.NewPutSettings(o.context, o.SettingsPutSettingsHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/titles"] = titles.NewPutTitles(o.context, o.TitlesPutTitlesHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

@@ -1523,6 +1523,158 @@ paths:
           description: 'Bad request'
         '500':
           description: 'Internal Server Error'
+  /titles:
+    get:
+      summary: "get titles list"
+      security:
+        - Token: []
+      tags:
+        - titles
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns titles list'
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/Title'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    put:
+      summary: "create title"
+      security:
+        - Token: []
+      consumes:
+        - multipart/json
+      produces:
+        - application/json
+      tags:
+        - titles
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/Title'
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Title'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    patch:
+      summary: "update title"
+      security:
+        - Token: []
+      consumes:
+        - multipart/json
+      produces:
+        - application/json
+      tags:
+        - titles
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/Title'
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Title'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /titles/{id}:
+    delete:
+      summary: "delete titles by id"
+      security:
+        - Token: []
+      tags:
+        - titles
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: String id titles to delete
+      responses:
+        '200':
+          description: 'delete titles success'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+  /settings:
+    get:
+      summary: "get settings list"
+      security:
+        - Token: []
+      tags:
+        - settings
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns settings list'
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/Setting'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    put:
+      summary: "create setting"
+      security:
+        - Token: []
+      consumes:
+        - multipart/json
+      produces:
+        - application/json
+      tags:
+        - settings
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/Setting'
+      responses:
+        '200':
+          description: 'Request success'
+          schema:
+            $ref: '#/definitions/Setting'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object
@@ -1886,3 +2038,25 @@ definitions:
         format: date-time
       modifiedBy:
         type: string
+  Title:
+    type: object
+    properties:
+      id:
+        type: string
+      tagName:
+        type: string
+      tagValue:
+        type: string
+      desktopTitle:
+        type: string
+      mobileTitle:
+        type: string
+  Setting:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      value:
+        type: object
