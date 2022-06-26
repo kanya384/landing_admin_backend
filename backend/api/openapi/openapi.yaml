@@ -1552,7 +1552,7 @@ paths:
       security:
         - Token: []
       consumes:
-        - multipart/json
+        - application/json
       produces:
         - application/json
       tags:
@@ -1578,7 +1578,7 @@ paths:
       security:
         - Token: []
       consumes:
-        - multipart/json
+        - application/json
       produces:
         - application/json
       tags:

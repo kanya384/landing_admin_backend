@@ -34,81 +34,139 @@ export const Titles: React.FC = () => {
       setOpened(null);
     }
   }
-  const { getTitles, addNewTitle, updateTitle } = useActions()
+  const { getTitles, addNewTitle, updateTitle, deleteTitles } = useActions()
   const popups = [
     {
       title: "Добавить тайтл",
       stateAction: setAddFrom,
-      sendAction: () =>{addNewTitle(addForm.id, addForm.tagName, addForm.tagValue, addForm.desktopTitle, addForm.mobileTitle, titlesCallback)},
+      sendAction: () =>{addNewTitle(addForm, titlesCallback)},
       error: error,
       fields: [
         {
+          title: "Заголовок для десктоп версии",
+          type: "text", 
+          placeholder: "Введите заголовок", 
+          name: "desktopTitle", 
+          isError: false, 
+          value:addForm.desktopTitle,
+        },
+        {
+          title: "Заголовок для моб. версии",
+          type: "text", 
+          placeholder: "Введите заголовок", 
+          name: "mobileTitle", 
+          isError: false, 
+          value:addForm.mobileTitle,
+        },
+        {
           title: "Тег",
           type: "select", 
-          placeholder: "Введите заголовок", 
-          name: "title", 
+          placeholder: "Выберите метку подмены", 
+          name: "tagName", 
           isError: false,
           value:addForm!.tagName,
-          options:[
+          fields:[
             {
               name: "utm_medium",
-              value: "utm_medium"
+              value: "utm_medium", 
+              type: 1,
             },
             {
               name: "utm_content",
-              value: "utm_content"
+              value: "utm_content",
+              type: 1,
             },
             {
               name: "utm_term",
-              value: "utm_term"
+              value: "utm_term",
+              type: 1,
             },
             {
               name: "utm_campaign",
-              value: "utm_campaign"
+              value: "utm_campaign",
+              type: 1,
             },
             {
               name: "utm_source",
-              value: "utm_source"
+              value: "utm_source",
+              type: 1,
             }
           ],
+        },
+        {
+          title: "Значение подмены",
+          type: "text", 
+          placeholder: "Введите значение подмены", 
+          name: "tagValue", 
+          isError: false, 
+          value:addForm!.tagValue,
         },
       ],
     },
     {
       title: "Редактировать документ",
       stateAction: setUpdateForm,
-      sendAction: ()=>{updateTitle(updateForm.id, updateForm.tagName, updateForm.tagValue, updateForm.desktopTitle, updateForm.mobileTitle, titlesCallback)},
+      sendAction: ()=>{updateTitle(updateForm, titlesCallback)},
       error: error,
       fields: [
         {
+          title: "Заголовок для десктоп версии",
+          type: "text", 
+          placeholder: "Введите заголовок", 
+          name: "desktopTitle", 
+          isError: false, 
+          value:updateForm.desktopTitle,
+        },
+        {
+          title: "Заголовок для моб. версии",
+          type: "text", 
+          placeholder: "Введите заголовок", 
+          name: "mobileTitle", 
+          isError: false, 
+          value:updateForm.mobileTitle,
+        },
+        {
           title: "Тег",
           type: "select", 
-          placeholder: "Введите заголовок", 
-          name: "title", 
-          isError: false, 
+          placeholder: "Выберите метку подмены", 
+          name: "tagName", 
+          isError: false,
           value:updateForm!.tagName,
-          options:[
+          fields:[
             {
               name: "utm_medium",
-              value: "utm_medium"
+              value: "utm_medium", 
+              type: 1,
             },
             {
               name: "utm_content",
-              value: "utm_content"
+              value: "utm_content",
+              type: 1,
             },
             {
               name: "utm_term",
-              value: "utm_term"
+              value: "utm_term",
+              type: 1,
             },
             {
               name: "utm_campaign",
-              value: "utm_campaign"
+              value: "utm_campaign",
+              type: 1,
             },
             {
               name: "utm_source",
-              value: "utm_source"
+              value: "utm_source",
+              type: 1,
             }
           ],
+        },
+        {
+          title: "Значение подмены",
+          type: "text", 
+          placeholder: "Введите значение подмены", 
+          name: "tagValue", 
+          isError: false, 
+          value:updateForm!.tagValue,
         },
       ],
     }
@@ -143,11 +201,12 @@ export const Titles: React.FC = () => {
             <th scope="col">Подмена для моб. версии</th>
             <th scope="col">Метка подмены</th>
             <th scope="col">Значение метки</th>
+            <th scope="col">Действия</th>
           </tr>
         </thead>
         <tbody>
           {titles?.titleList.map((title, index) => {
-            return <TableItem title={title} index={index+1} editAction={()=>{setUpdateForm({id: title.id!, tagName: title.tagName!, tagValue: title.tagValue!, desktopTitle: title.desktopTitle!, mobileTitle: title.mobileTitle!}); setOpened(1)}} deleteAction={()=>{}} />
+            return <TableItem title={title} index={index+1} editAction={()=>{setUpdateForm({id: title.id!, tagName: title.tagName!, tagValue: title.tagValue!, desktopTitle: title.desktopTitle!, mobileTitle: title.mobileTitle!}); setOpened(1)}} deleteAction={()=>{deleteTitles(title.id!)}} />
           })} 
         </tbody>
       </table>

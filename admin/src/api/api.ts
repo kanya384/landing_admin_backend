@@ -5384,15 +5384,11 @@ export const TitlesApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @summary update title
-         * @param {string} [id] 
-         * @param {string} [tagName] 
-         * @param {string} [tagValue] 
-         * @param {string} [desktopTitle] 
-         * @param {string} [mobileTitle] 
+         * @param {Title} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        titlesPatch: async (id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        titlesPatch: async (params?: Title, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/titles`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5404,39 +5400,18 @@ export const TitlesApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-            const localVarFormParams = new URLSearchParams();
 
             // authentication Token required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
 
-            if (id !== undefined) { 
-                localVarFormParams.set('id', id as any);
-            }
     
-            if (tagName !== undefined) { 
-                localVarFormParams.set('tagName', tagName as any);
-            }
-    
-            if (tagValue !== undefined) { 
-                localVarFormParams.set('tagValue', tagValue as any);
-            }
-    
-            if (desktopTitle !== undefined) { 
-                localVarFormParams.set('desktopTitle', desktopTitle as any);
-            }
-    
-            if (mobileTitle !== undefined) { 
-                localVarFormParams.set('mobileTitle', mobileTitle as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'application/x-www-form-urlencoded';
-    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams.toString();
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5446,15 +5421,11 @@ export const TitlesApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @summary create title
-         * @param {string} [id] 
-         * @param {string} [tagName] 
-         * @param {string} [tagValue] 
-         * @param {string} [desktopTitle] 
-         * @param {string} [mobileTitle] 
+         * @param {Title} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        titlesPut: async (id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        titlesPut: async (params?: Title, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/titles`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5466,39 +5437,18 @@ export const TitlesApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-            const localVarFormParams = new URLSearchParams();
 
             // authentication Token required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
 
-            if (id !== undefined) { 
-                localVarFormParams.set('id', id as any);
-            }
     
-            if (tagName !== undefined) { 
-                localVarFormParams.set('tagName', tagName as any);
-            }
-    
-            if (tagValue !== undefined) { 
-                localVarFormParams.set('tagValue', tagValue as any);
-            }
-    
-            if (desktopTitle !== undefined) { 
-                localVarFormParams.set('desktopTitle', desktopTitle as any);
-            }
-    
-            if (mobileTitle !== undefined) { 
-                localVarFormParams.set('mobileTitle', mobileTitle as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'application/x-www-form-urlencoded';
-    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams.toString();
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5539,31 +5489,23 @@ export const TitlesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary update title
-         * @param {string} [id] 
-         * @param {string} [tagName] 
-         * @param {string} [tagValue] 
-         * @param {string} [desktopTitle] 
-         * @param {string} [mobileTitle] 
+         * @param {Title} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async titlesPatch(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Title>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.titlesPatch(id, tagName, tagValue, desktopTitle, mobileTitle, options);
+        async titlesPatch(params?: Title, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Title>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.titlesPatch(params, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @summary create title
-         * @param {string} [id] 
-         * @param {string} [tagName] 
-         * @param {string} [tagValue] 
-         * @param {string} [desktopTitle] 
-         * @param {string} [mobileTitle] 
+         * @param {Title} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async titlesPut(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Title>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.titlesPut(id, tagName, tagValue, desktopTitle, mobileTitle, options);
+        async titlesPut(params?: Title, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Title>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.titlesPut(params, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -5598,30 +5540,22 @@ export const TitlesApiFactory = function (configuration?: Configuration, basePat
         /**
          * 
          * @summary update title
-         * @param {string} [id] 
-         * @param {string} [tagName] 
-         * @param {string} [tagValue] 
-         * @param {string} [desktopTitle] 
-         * @param {string} [mobileTitle] 
+         * @param {Title} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        titlesPatch(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: any): AxiosPromise<Title> {
-            return localVarFp.titlesPatch(id, tagName, tagValue, desktopTitle, mobileTitle, options).then((request) => request(axios, basePath));
+        titlesPatch(params?: Title, options?: any): AxiosPromise<Title> {
+            return localVarFp.titlesPatch(params, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary create title
-         * @param {string} [id] 
-         * @param {string} [tagName] 
-         * @param {string} [tagValue] 
-         * @param {string} [desktopTitle] 
-         * @param {string} [mobileTitle] 
+         * @param {Title} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        titlesPut(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: any): AxiosPromise<Title> {
-            return localVarFp.titlesPut(id, tagName, tagValue, desktopTitle, mobileTitle, options).then((request) => request(axios, basePath));
+        titlesPut(params?: Title, options?: any): AxiosPromise<Title> {
+            return localVarFp.titlesPut(params, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5659,33 +5593,25 @@ export class TitlesApi extends BaseAPI {
     /**
      * 
      * @summary update title
-     * @param {string} [id] 
-     * @param {string} [tagName] 
-     * @param {string} [tagValue] 
-     * @param {string} [desktopTitle] 
-     * @param {string} [mobileTitle] 
+     * @param {Title} [params] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TitlesApi
      */
-    public titlesPatch(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: AxiosRequestConfig) {
-        return TitlesApiFp(this.configuration).titlesPatch(id, tagName, tagValue, desktopTitle, mobileTitle, options).then((request) => request(this.axios, this.basePath));
+    public titlesPatch(params?: Title, options?: AxiosRequestConfig) {
+        return TitlesApiFp(this.configuration).titlesPatch(params, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary create title
-     * @param {string} [id] 
-     * @param {string} [tagName] 
-     * @param {string} [tagValue] 
-     * @param {string} [desktopTitle] 
-     * @param {string} [mobileTitle] 
+     * @param {Title} [params] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TitlesApi
      */
-    public titlesPut(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: AxiosRequestConfig) {
-        return TitlesApiFp(this.configuration).titlesPut(id, tagName, tagValue, desktopTitle, mobileTitle, options).then((request) => request(this.axios, this.basePath));
+    public titlesPut(params?: Title, options?: AxiosRequestConfig) {
+        return TitlesApiFp(this.configuration).titlesPut(params, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

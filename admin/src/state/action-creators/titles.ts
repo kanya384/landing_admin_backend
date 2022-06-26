@@ -35,14 +35,14 @@ export const getTitles = () => {
   }
 }
 
-export const addNewTitle = (id: string | undefined, tagName: string, tagValue: string, desktopTitle: string, mobileTitle: string, callback: (error: string) => void) => {
+export const addNewTitle = (title: Title, callback: (error: string) => void) => {
   return async (dispatch: Dispatch<TitlesAction>) => {
-    if (!tagName || ! tagValue || !desktopTitle || !mobileTitle) {
+    if (!title.tagName || ! title.tagValue || !title.desktopTitle || !title.mobileTitle) {
       callback("не все поля заполненны")
       return
     }
     let token = GetTokenFromCookies()
-    titlesService.titlesPut(id, tagName, tagValue, desktopTitle, mobileTitle, {headers: {"Authorization": token}}).then((resp) => {
+    titlesService.titlesPut(title, {headers: {"Authorization": token}}).then((resp) => {
       if (resp.status === 200) {
         dispatch({
           type: TitlesActionTypes.TITLES_NEW,
@@ -56,15 +56,15 @@ export const addNewTitle = (id: string | undefined, tagName: string, tagValue: s
   }
 }
 
-export const updateTitle = (id: string | undefined, tagName: string, tagValue: string, desktopTitle: string, mobileTitle: string, callback: (error: string) => void) => {
+export const updateTitle = (title: Title, callback: (error: string) => void) => {
   return async (dispatch: Dispatch<TitlesAction>) => {
-    if (!tagName || ! tagValue || !desktopTitle || !mobileTitle) {
+    if (!title.tagName || ! title.tagValue || !title.desktopTitle || !title.mobileTitle) {
       callback("не все поля заполненны")
       return
     }
 
     let token = GetTokenFromCookies()
-    titlesService.titlesPatch(id, tagName, tagValue, desktopTitle, mobileTitle, {headers: {"Authorization": token}}).then((resp) => {
+    titlesService.titlesPatch(title, {headers: {"Authorization": token}}).then((resp) => {
       if (resp.status === 200) {
         dispatch({
           type: TitlesActionTypes.TITLES_UPDATE,

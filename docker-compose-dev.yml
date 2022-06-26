@@ -11,7 +11,8 @@ services:
     volumes:
       - './data:/data/db'
   backend:
-    image: laurkan/ava_back
+    build:
+      context: ./backend
     container_name: backend
     networks:
       - app-net

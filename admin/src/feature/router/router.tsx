@@ -15,6 +15,7 @@ import { Doc } from "../../pages/docs"
 import { Videos } from "../../pages/videos"
 import { Leads } from "../../pages/leads"
 import { ProjectInfos } from "../../pages/projectInfos"
+import { Titles } from "../../pages/titles"
 
 const Router: React.FC = () => {
   const auths = useTypedSelector(({ auths }) => {
@@ -39,6 +40,7 @@ const Router: React.FC = () => {
               <Routes>
                 <Route path="/" element={<Leads />} />
                 <Route path="/project-info" element={<ProjectInfos />} />
+                <Route path="/titles" element={<Titles />} />
                 <Route path="/video" element={<Videos />} />
                 <Route path="/docs" element={<Doc />} />
                 <Route path="/plans" element={<Plans />} />

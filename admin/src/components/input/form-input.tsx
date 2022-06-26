@@ -11,7 +11,7 @@ export interface InputProps {
   isError: boolean,
   stateAction?: React.Dispatch<any>,
   ref?: React.MutableRefObject<any>,
-  fields?:{value:number, name:string, type:number}[],
+  fields?:{value:number | string, name:string, type:number}[],
 }
 
 export const FormInput: React.FC<InputProps> = (props:InputProps) => {

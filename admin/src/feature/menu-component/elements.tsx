@@ -33,6 +33,13 @@ const elements: MenuItem[] = [
     divider: true,
   },
   {
+    name: 'Подмены',
+    icon:  <Grid size={ICON_SIZE} />,
+    url: "/titles",
+    children: [],
+    divider: false
+  },
+  {
     name: 'Постеры',
     icon:  <Layers size={ICON_SIZE} />,
     url: "/posters",
