@@ -8,6 +8,7 @@ export const Posters = () => {
   const [nav2, setNav2] = useState();
   const [posters, setPosters] = useState([])
   const [index, setIndex] = useState(0)
+  const [title, setTitle] = useState("")
 
   const content = useContext(ContentContext)
   
@@ -40,6 +41,36 @@ export const Posters = () => {
       }
     }
   },[content])
+
+  const getUtms = (paths) => {
+    let utm = {}
+    if (paths.split('&').length > 0) {
+        let params = paths.split('&')
+        params.forEach((param) => {
+            param = param.split('=')
+            if (param[0] === "utm_medium" || param[0] === "utm_content" || param[0] === "utm_campaign" || param[0] === "utm_term" || param[0] === "utm_source") {
+                utm = { ...utm, [param[0]]: param[1] }
+            }
+        })
+    }
+    return utm
+}
+
+  useEffect(()=>{
+    if ( content.content){
+      let url = window.location.toString().split("?")
+      if (url.length > 1) {
+        let utms = getUtms(url[1])
+        content.content.Title.map((title)=>{
+          if (Object.keys(utms).includes(title.tag_name)){
+            if ( utms[title.tag_name] === title.tag_value) {
+              setTitle(title.desktop_title)
+            }
+          }
+        })
+      }
+    }
+  }, [content.content])
  
 
   return <div className="lvl1">
@@ -47,7 +78,7 @@ export const Posters = () => {
         <div className="row-lvl">
           <div className="slide-text">
             <div className="title">
-              {posters[index] ? posters[index].title:"Жизнь на высоком берегу"}
+              {posters[index]?index==0&&title!=""?title:posters[index].title:"Жизнь на высоком берегу"}
             </div>
             <div className="text">
               <EditableText id={"62aef61ba26e626025a8d8c7"} defaultText={"Квартиры в Анапе от 5 млн руб."}/>
