@@ -2,6 +2,7 @@ package helpers
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"encoding/csv"
 	"errors"
 	"fmt"
@@ -143,4 +144,10 @@ func ConfigureLogger(serviceName string, logLevel uint32, file *os.File) (*logru
 	//log.AddHook(hook)
 
 	return log.WithField("service_name", "backend"), nil
+}
+
+func GenerateHashPassword(password string, salt string) string {
+	hash := sha256.New()
+	hash.Write([]byte(password))
+	return fmt.Sprintf("%x", hash.Sum([]byte(salt)))
 }

@@ -2,8 +2,10 @@ package users
 
 import (
 	"context"
+	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/domain"
 	"landing_admin_backend/internal/repository"
+	"landing_admin_backend/pkg/helpers"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -17,11 +19,13 @@ type Users interface {
 
 type service struct {
 	repository *repository.Repository
+	cfg        *config.Config
 }
 
-func NewService(repository *repository.Repository) Users {
+func NewService(repository *repository.Repository, cfg *config.Config) Users {
 	return &service{
 		repository: repository,
+		cfg:        cfg,
 	}
 }
 
@@ -30,6 +34,7 @@ func (s *service) Get(ctx context.Context) (users []*domain.UserInfo, err error)
 }
 
 func (s *service) Create(ctx context.Context, user domain.User) (err error) {
+	user.Pass = helpers.GenerateHashPassword(user.Pass, s.cfg.Salt)
 	return s.repository.Users.Create(ctx, user)
 }
 

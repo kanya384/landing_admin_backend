@@ -62,8 +62,8 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 	titles := titles.NewTitleWithLogrus(titles.NewTitleWithCache(titles.NewService(repository, cfg), cache), logger)
 	settings := settings.NewSettingsWithLogrus(settings.NewSettingsWithCache(settings.NewService(repository, cfg), cache), logger)
 	return &Services{
-		Auth:           auth.NewAuthWithLogrus(auth.NewService(repository, tokenManager), logger),
-		Users:          users.NewUsersWithLogrus(users.NewService(repository), logger),
+		Auth:           auth.NewAuthWithLogrus(auth.NewService(repository, tokenManager, cfg), logger),
+		Users:          users.NewUsersWithLogrus(users.NewService(repository, cfg), logger),
 		Posters:        posters,
 		Years:          years,
 		Months:         months,
