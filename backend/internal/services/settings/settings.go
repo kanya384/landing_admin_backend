@@ -30,10 +30,10 @@ func (s *service) Get(ctx context.Context) (settings []*domain.Setting, err erro
 
 func (s *service) CreateOrUpdate(ctx context.Context, setting domain.Setting) (settingRes *domain.Setting, err error) {
 	_, err = s.repository.Settings.GetByID(ctx, setting.ID)
+	settingRes = &setting
 	if err != nil {
 		err = s.repository.Settings.Create(ctx, setting)
 		return
 	}
-	settingRes = &setting
 	return settingRes, s.repository.Settings.Update(ctx, setting)
 }

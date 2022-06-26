@@ -40,9 +40,10 @@ func (h *handlers) Get(params settings.GetSettingsParams, input interface{}) mid
 
 	for _, setting := range settings {
 		settingsInp := models.Setting{
-			ID:    setting.ID.Hex(),
-			Name:  setting.Name,
-			Value: int64(setting.Value),
+			ID:          setting.ID.Hex(),
+			Name:        setting.Name,
+			Description: setting.Description,
+			Value:       int64(setting.Value),
 		}
 
 		settingsRes = append(settingsRes, &settingsInp)
@@ -66,9 +67,10 @@ func (h *handlers) Create(params operations.PutSettingsParams, input interface{}
 	}
 
 	settingRes := models.Setting{
-		ID:    res.ID.Hex(),
-		Name:  res.Name,
-		Value: int64(res.Value),
+		ID:          res.ID.Hex(),
+		Name:        res.Name,
+		Description: res.Description,
+		Value:       int64(res.Value),
 	}
 
 	return operations.NewPutSettingsOK().WithPayload(&settingRes)

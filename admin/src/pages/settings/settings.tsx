@@ -36,12 +36,12 @@ export const Settings: React.FC = () => {
       setOpened(null);
     }
   }
-  const { getSettings, addUpdateSetting} = useActions()
+  const { getSettings, addSetting, updateSetting} = useActions()
   const popups = [
     {
       title: "Добавить параметр",
       stateAction: setAddFrom,
-      sendAction: () =>{addUpdateSetting(addForm, titlesCallback)},
+      sendAction: () =>{addSetting(addForm, titlesCallback)},
       error: error,
       fields: [
         {
@@ -84,27 +84,47 @@ export const Settings: React.FC = () => {
     },
     {
         title: "Редактировать параметр",
-        stateAction: setAddFrom,
-        sendAction: () =>{addUpdateSetting(updateForm, titlesCallback)},
+        stateAction: setUpdateForm,
+        sendAction: () =>{updateSetting(updateForm, titlesCallback)},
         error: error,
         fields: [
-          {
-            title: "Заголовок для моб. версии",
-            type: "text", 
-            placeholder: "Введите заголовок", 
-            name: "name", 
-            isError: false, 
-            value:addForm.name,
-          },
-          {
-              title: "Заголовок для моб. версии",
+            {
+                title: "Описание параметра",
+                type: "text", 
+                placeholder: "Введите описание", 
+                name: "description", 
+                isError: false, 
+                value:updateForm.description,
+            },
+            {
+              title: "Имя параметра (анг)",
               type: "text", 
-              placeholder: "Введите заголовок", 
-              name: "value", 
+              placeholder: "Введите имя параметра", 
+              name: "name", 
               isError: false, 
-              value:addForm.value,
-          },
-        ],
+              value:updateForm.name,
+            },
+            {
+              title: "Значение параметра",
+              type: "select", 
+              placeholder: "Выберите значение параметра", 
+              name: "value", 
+              isError: false,
+              value:updateForm!.value,
+              fields:[
+                {
+                  name: "Да",
+                  value: 1, 
+                  type: 0,
+                },
+                {
+                  name: "Нет",
+                  value: 0,
+                  type: 0,
+                },
+              ],
+            },
+          ],
       },
   ]
   const settings = useTypedSelector(({ settings }) => {
@@ -120,7 +140,7 @@ export const Settings: React.FC = () => {
       <div className="card-header p-4 border-300 bg-soft">
         <div className="row g-3 justify-content-between align-items-center">
           <div className="col-12 col-md">
-            <h1>Настройки</h1>
+            <h1>Параметры приложения</h1>
           </div>
           <div className="col col-md-auto">
               <nav className="nav nav-underline justify-content-end border-0 doc-tab-nav align-items-center" role="tablist">

@@ -35,9 +35,9 @@ export const getSettings = () => {
   }
 }
 
-export const addUpdateSetting = (setting: Setting, callback: (error: string) => void) => {
+export const addSetting = (setting: Setting, callback: (error: string) => void) => {
   return async (dispatch: Dispatch<SettingsAction>) => {
-    if (!setting.name || ! setting.value) {
+    if (!setting.name || (!setting.value && setting.value!==0)) {
       callback("не все поля заполненны")
       return
     }
@@ -45,7 +45,28 @@ export const addUpdateSetting = (setting: Setting, callback: (error: string) => 
     settingsService.settingsPut(setting, {headers: {"Authorization": token}}).then((resp) => {
       if (resp.status === 200) {
         dispatch({
-          type: SettingsActionTypes.SETTINGS_CREATE_UPDATE,
+          type: SettingsActionTypes.SETTINGS_CREATE,
+          payload: resp.data,
+        });
+        callback("")
+      } else {
+        callback("ошибка при добавлении")
+      }
+    })
+  }
+}
+
+export const updateSetting = (setting: Setting, callback: (error: string) => void) => {
+  return async (dispatch: Dispatch<SettingsAction>) => {
+    if (!setting.name || (!setting.value && setting.value!==0)) {
+      callback("не все поля заполненны")
+      return
+    }
+    let token = GetTokenFromCookies()
+    settingsService.settingsPut(setting, {headers: {"Authorization": token}}).then((resp) => {
+      if (resp.status === 200) {
+        dispatch({
+          type: SettingsActionTypes.SETTINGS_UPDATE,
           payload: resp.data,
         });
         callback("")

@@ -28,11 +28,14 @@ const reducer = produce((state: SettingsState = initialState, action: SettingsAc
       state.loading = false;
       state.error = action.payload;
       return
-    case SettingsActionTypes.SETTINGS_CREATE_UPDATE:
+    case SettingsActionTypes.SETTINGS_CREATE:
+        state.settingsList.unshift(action.payload)
+        return state;
+    case SettingsActionTypes.SETTINGS_UPDATE:
       for (let i=0; i<state.settingsList.length; i++) {
-        /*if (state.settingsList[i].id === action.payload.id) {
+        if (state.settingsList[i].id === action.payload.id) {
           state.settingsList[i] = action.payload
-        }*/
+        }
       }
       return state;
     default:

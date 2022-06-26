@@ -5,7 +5,7 @@ import "go.mongodb.org/mongo-driver/bson/primitive"
 type Setting struct {
 	ID          primitive.ObjectID `bson:"_id"`
 	Name        string             `bson:"name" json:"name"`
-	Description string             `bson:"description" josn:"description"`
+	Description string             `bson:"description" json:"description"`
 	Value       int                `bson:"value" json:"value"`
 }
 

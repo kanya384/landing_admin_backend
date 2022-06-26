@@ -15,8 +15,13 @@ export interface SettingsSuccess {
   payload: Setting[],
 }
 
-export interface SettingsCreateUpdate {
-  type: SettingsActionTypes.SETTINGS_CREATE_UPDATE,
+export interface SettingsCreate {
+  type: SettingsActionTypes.SETTINGS_CREATE,
+  payload: Setting,
+}
+
+export interface SettingsUpdate {
+  type: SettingsActionTypes.SETTINGS_UPDATE,
   payload: Setting,
 }
 
@@ -24,4 +29,5 @@ export type SettingsAction =
   | SettingsRequestSend
   | SettingsError
   | SettingsSuccess
-  | SettingsCreateUpdate
+  | SettingsCreate
+  | SettingsUpdate

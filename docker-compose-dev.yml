@@ -10,6 +10,8 @@ services:
       - app-net
     volumes:
       - './data:/data/db'
+    ports:
+      - "27017:27017"
   backend:
     build:
       context: ./backend

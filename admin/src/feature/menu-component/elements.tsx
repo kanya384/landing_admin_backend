@@ -1,4 +1,4 @@
-import { Layers, Tool, Layout, Youtube, Grid, BookOpen, Server, MessageCircle, RefreshCw, Settings } from 'react-feather';
+import { Layers, Tool, Layout, Youtube, Grid, BookOpen, Server, MessageCircle, RefreshCw, Settings, LogOut } from 'react-feather';
 
 interface MenuItem {
   name: string;
@@ -26,34 +26,12 @@ const elements: MenuItem[] = [
     divider: false
   },
   {
-    name: "Параметры",
-    icon: null,
-    url: null,
-    children: null,
-    divider: true,
-  },
-  {
-    name: 'Подмены',
-    icon:  <RefreshCw size={ICON_SIZE} />,
-    url: "/titles",
-    children: [],
-    divider: false
-  },
-  {
-    name: 'Настройки',
-    icon:  <Settings size={ICON_SIZE} />,
-    url: "/settings",
-    children: [],
-    divider: false
-  },
-  {
     name: "Контент",
     icon: null,
     url: null,
     children: null,
     divider: true,
   },
-  
   {
     name: 'Постеры',
     icon:  <Layers size={ICON_SIZE} />,
@@ -100,6 +78,48 @@ const elements: MenuItem[] = [
     name: 'Документация',
     icon:  <BookOpen size={ICON_SIZE} />,
     url: "/docs",
+    children: [],
+    divider: false
+  },
+  {
+    name: "Настройки",
+    icon: null,
+    url: null,
+    children: null,
+    divider: true,
+  },
+  {
+    name: 'Подмены',
+    icon:  <RefreshCw size={ICON_SIZE} />,
+    url: "/titles",
+    children: [],
+    divider: false
+  },
+  {
+    name: 'Параметры',
+    icon:  <Settings size={ICON_SIZE} />,
+    url: "/settings",
+    children: [],
+    divider: false
+  },
+  {
+    name: "",
+    icon: null,
+    url: null,
+    children: null,
+    divider: true,
+  },
+  {
+    name: "",
+    icon: null,
+    url: null,
+    children: null,
+    divider: true,
+  },
+  {
+    name: 'Выход',
+    icon:  <LogOut size={ICON_SIZE} />,
+    url: "/logout",
     children: [],
     divider: false
   },
