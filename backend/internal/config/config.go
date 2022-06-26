@@ -19,6 +19,10 @@ type Config struct {
 	LogFile            string        `envconfig:"default=./vars/logs/main.log"`
 	FileStore          string        `envconfig:"default=./file_store"`
 	RequestMaxDuration time.Duration `envconfig:"default=30s"`
+	FtpHost            string
+	FtpLogin           string
+	FtpPass            string
+	FtpPath            string
 }
 
 func InitConfig(prefix string) (*Config, error) {
