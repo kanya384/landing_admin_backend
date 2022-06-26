@@ -75,7 +75,7 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 		Docs:           docs,
 		Leads:          leads.NewLeadsWithLogrus(leads.NewService(repository, cfg), logger),
 		Editable:       editables,
-		LandingContent: landing_content.NewLandingContentWithCache(landing_content.NewLandingContent(advantages, docs, editables, years, months, hodPhotos, plans, posters, video, projectInfo, advantagePhotos), cache),
+		LandingContent: landing_content.NewLandingContentWithCache(landing_content.NewLandingContent(advantages, docs, editables, years, months, hodPhotos, plans, posters, video, projectInfo, advantagePhotos, titles, settings), cache),
 		ProjectInfo:    projectInfo,
 		Titles:         titles,
 		Settings:       settings,

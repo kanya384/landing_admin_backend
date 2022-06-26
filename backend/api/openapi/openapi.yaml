@@ -2015,6 +2015,14 @@ definitions:
         type: array
         items:
             $ref: '#/definitions/Video'
+      titles:
+        type: array
+        items:
+          $ref: '#/definitions/Title'
+      settings:
+        type: array
+        items:
+          $ref: '#/definitions/Setting'
   ProjectInfo:
     type: object
     properties:

@@ -224,6 +224,18 @@ export interface Content {
      * @memberof Content
      */
     'video'?: Array<Video>;
+    /**
+     * 
+     * @type {Array<Title>}
+     * @memberof Content
+     */
+    'titles'?: Array<Title>;
+    /**
+     * 
+     * @type {Array<Setting>}
+     * @memberof Content
+     */
+    'settings'?: Array<Setting>;
 }
 /**
  * 

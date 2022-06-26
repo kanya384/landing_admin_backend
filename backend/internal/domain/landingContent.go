@@ -12,4 +12,6 @@ type LandingContent struct {
 	Posters         []*Poster
 	ProjectInfo     []*ProjectInfo
 	Video           []*Video
+	Setting         []*Setting
+	Title           []*Title
 }

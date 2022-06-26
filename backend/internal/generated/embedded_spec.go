@@ -2835,6 +2835,18 @@ func init() {
             "$ref": "#/definitions/Poster"
           }
         },
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Setting"
+          }
+        },
+        "titles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Title"
+          }
+        },
         "video": {
           "type": "array",
           "items": {
@@ -6100,6 +6112,18 @@ func init() {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Poster"
+          }
+        },
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Setting"
+          }
+        },
+        "titles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Title"
           }
         },
         "video": {

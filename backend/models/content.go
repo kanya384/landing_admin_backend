@@ -37,6 +37,12 @@ type Content struct {
 	// posters
 	Posters []*Poster `json:"posters"`
 
+	// settings
+	Settings []*Setting `json:"settings"`
+
+	// titles
+	Titles []*Title `json:"titles"`
+
 	// video
 	Video []*Video `json:"video"`
 }
@@ -66,6 +72,14 @@ func (m *Content) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePosters(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSettings(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTitles(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -235,6 +249,58 @@ func (m *Content) validatePosters(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Content) validateSettings(formats strfmt.Registry) error {
+	if swag.IsZero(m.Settings) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Settings); i++ {
+		if swag.IsZero(m.Settings[i]) { // not required
+			continue
+		}
+
+		if m.Settings[i] != nil {
+			if err := m.Settings[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("settings" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("settings" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Content) validateTitles(formats strfmt.Registry) error {
+	if swag.IsZero(m.Titles) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Titles); i++ {
+		if swag.IsZero(m.Titles[i]) { // not required
+			continue
+		}
+
+		if m.Titles[i] != nil {
+			if err := m.Titles[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("titles" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("titles" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *Content) validateVideo(formats strfmt.Registry) error {
 	if swag.IsZero(m.Video) { // not required
 		return nil
@@ -286,6 +352,14 @@ func (m *Content) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 	}
 
 	if err := m.contextValidatePosters(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSettings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTitles(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -409,6 +483,46 @@ func (m *Content) contextValidatePosters(ctx context.Context, formats strfmt.Reg
 					return ve.ValidateName("posters" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("posters" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Content) contextValidateSettings(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Settings); i++ {
+
+		if m.Settings[i] != nil {
+			if err := m.Settings[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("settings" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("settings" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Content) contextValidateTitles(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Titles); i++ {
+
+		if m.Titles[i] != nil {
+			if err := m.Titles[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("titles" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("titles" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

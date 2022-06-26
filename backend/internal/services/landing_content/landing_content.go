@@ -12,6 +12,8 @@ import (
 	"landing_admin_backend/internal/services/plans"
 	"landing_admin_backend/internal/services/posters"
 	"landing_admin_backend/internal/services/project_info"
+	"landing_admin_backend/internal/services/settings"
+	"landing_admin_backend/internal/services/titles"
 	"landing_admin_backend/internal/services/video"
 	"landing_admin_backend/internal/services/years"
 
@@ -34,9 +36,11 @@ type landingContent struct {
 	posters         posters.Posters
 	projectInfo     project_info.ProjectInfo
 	video           video.Video
+	title           titles.Title
+	settings        settings.Settings
 }
 
-func NewLandingContent(advantages advantages.Advantages, docs docs.Docs, editables editable.Editable, years years.Years, months months.Months, hodPhotos hod_photos.Photos, plans plans.Plans, posters posters.Posters, video video.Video, projectInfo project_info.ProjectInfo, advantagePhotos advantage_photo.AdvantagePhoto) LandingContent {
+func NewLandingContent(advantages advantages.Advantages, docs docs.Docs, editables editable.Editable, years years.Years, months months.Months, hodPhotos hod_photos.Photos, plans plans.Plans, posters posters.Posters, video video.Video, projectInfo project_info.ProjectInfo, advantagePhotos advantage_photo.AdvantagePhoto, title titles.Title, settings settings.Settings) LandingContent {
 	return &landingContent{
 		advantages:      advantages,
 		docs:            docs,
@@ -49,6 +53,8 @@ func NewLandingContent(advantages advantages.Advantages, docs docs.Docs, editabl
 		projectInfo:     projectInfo,
 		video:           video,
 		advantagePhotos: advantagePhotos,
+		title:           title,
+		settings:        settings,
 	}
 }
 
@@ -99,6 +105,16 @@ func (lc *landingContent) Get(ctx context.Context) (content domain.LandingConten
 		return
 	}
 
+	settings, err := lc.settings.Get(ctx)
+	if err != nil {
+		return
+	}
+
+	titles, err := lc.title.Get(ctx)
+	if err != nil {
+		return
+	}
+
 	return domain.LandingContent{
 		Advantages:      advantages,
 		AdvantagePhotos: advantagePhoto,
@@ -111,5 +127,7 @@ func (lc *landingContent) Get(ctx context.Context) (content domain.LandingConten
 		Posters:         posters,
 		Video:           video,
 		ProjectInfo:     projectInfo,
+		Setting:         settings,
+		Title:           titles,
 	}, err
 }

@@ -11,6 +11,7 @@ export const PlanDetail = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [flat, setFlat] = useState()
   const content = useContext(ContentContext)
+  const [showPrices, setShowPrices] = useState(false)
   
   let { id } = useParams();
   useEffect(()=>{
@@ -24,6 +25,16 @@ export const PlanDetail = () => {
       }
     })
   },[id, content.content])
+
+  useEffect(()=>{
+    if ( content.content){
+      content.content.Setting.map((setting)=>{
+        if (setting.name == "showPrices") {
+          setShowPrices(setting.value == 1)
+        }
+      })
+    }
+  }, [content.content])
   return (
     <React.Fragment>
       <AppBar subfolder={true} />
@@ -77,14 +88,13 @@ export const PlanDetail = () => {
                   <span><img src={process.env.REACT_APP_BACKEND+"store/"+flat?.image} alt="" /></span>
                 </div>
                 <div className="room-card__info">
-                  <div className="room-card__info-header">
+                  {showPrices?<div className="room-card__info-header">
                     <div className="room-card__info-price">54 000 000 р.</div>
                     <div className="room-card__info-text">
                       Остались вопросы? <br/>
                       Наши менеджеры помогут Вам!
                     </div>
-                  </div>
-                  {/* <div className="room-card__title">Узнать стоимость квартиры на сегодня</div> */ }
+                  </div>:<div className="room-card__title">Узнать стоимость квартиры на сегодня</div>}
                   <Form fields={[
                       {
                         type:"text",

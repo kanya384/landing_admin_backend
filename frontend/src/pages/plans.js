@@ -19,6 +19,7 @@ export const Plans = () => {
     liters: [1,2,3],
     sort: "area",
   })
+  const [showPrices, setShowPrices] = useState(false)
   const [showDropDown, setShowDropDown] = useState(false)
 
   const filterPlans = () => {
@@ -122,6 +123,16 @@ export const Plans = () => {
       filterPlans()
     }
   },[filter])
+
+  useEffect(()=>{
+    if ( content.content){
+      content.content.Setting.map((setting)=>{
+        if (setting.name == "showPrices") {
+          setShowPrices(setting.value == 1)
+        }
+      })
+    }
+  }, [content.content])
   return( <React.Fragment>
       <AppBar />
       <div className="wrapper">
@@ -131,7 +142,7 @@ export const Plans = () => {
               <div className="filter-left-btn-toggle">
                 <div className="btn-toggle-filter js-btn-toggle-filter" onClick={()=>{setShowParams(!showParams)}}>{showParams?"Свернуть параметры":"Развернуть параметры"}</div>
               </div>
-              <div className="filter-left js-filter-left-toggle" style={{display:showParams?"block":"none"}}>
+              <div className="filter-left js-filter-left-toggle" style={{display:showParams?"block":""}} > 
                 <div className="filter-item">
                   <div className="filter-item__title">Площадь, м²</div>
                   <div className="filter-item__body">
@@ -231,7 +242,7 @@ export const Plans = () => {
                               <div className="choise-item__title"><a href="#">{plan.rooms}-комн, {plan.area} м²</a></div>
                               <div className="choise-item__floor">{plan.floor} этаж из 9</div>
                               <div className="choise-item__floor">{plan.entrance} подьезд</div>
-                              <div className="choise-item__price">1 000 000 руб.</div>
+                              {showPrices?<div className="choise-item__price">{plan.price?Intl.NumberFormat().format(plan.price):""} руб.</div>:""}
                             </div>
                             <div className="choise-item__bottom">
                               <div className="choise-item__link-pdf"><a href="#" className="link-pdf">Скачать в PDF</a></div>
