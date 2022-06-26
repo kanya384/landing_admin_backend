@@ -10,7 +10,6 @@
 //
 //  Consumes:
 //    - application/json
-//    - multipart/json
 //    - multipart/form-data
 //
 //  Produces:

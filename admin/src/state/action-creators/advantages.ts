@@ -1,4 +1,4 @@
-import { Advantage, AdvantagesApi, Configuration } from "../../api"
+import { Advantage,  AdvantagesApi,  Configuration } from "../../api"
 import { AdvantageAction } from "../actions"
 import { Dispatch } from "react";
 import { AdvantagesActionTypes } from "../action-types";

@@ -1654,7 +1654,7 @@ paths:
       security:
         - Token: []
       consumes:
-        - multipart/json
+        - application/json
       produces:
         - application/json
       tags:
@@ -2058,5 +2058,7 @@ definitions:
         type: string
       name:
         type: string
+      description:
+        type: string
       value:
-        type: object
+        type: integer

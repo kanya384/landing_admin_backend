@@ -17,6 +17,9 @@ import (
 // swagger:model Setting
 type Setting struct {
 
+	// description
+	Description string `json:"description,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -24,7 +27,7 @@ type Setting struct {
 	Name string `json:"name,omitempty"`
 
 	// value
-	Value interface{} `json:"value,omitempty"`
+	Value int64 `json:"value,omitempty"`
 }
 
 // Validate validates this setting

@@ -2102,7 +2102,7 @@ func init() {
           }
         ],
         "consumes": [
-          "multipart/json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -2184,7 +2184,7 @@ func init() {
           }
         ],
         "consumes": [
-          "multipart/json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -2227,7 +2227,7 @@ func init() {
           }
         ],
         "consumes": [
-          "multipart/json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -3162,6 +3162,9 @@ func init() {
     "Setting": {
       "type": "object",
       "properties": {
+        "description": {
+          "type": "string"
+        },
         "id": {
           "type": "string"
         },
@@ -3169,7 +3172,7 @@ func init() {
           "type": "string"
         },
         "value": {
-          "type": "object"
+          "type": "integer"
         }
       }
     },
@@ -5366,7 +5369,7 @@ func init() {
           }
         ],
         "consumes": [
-          "multipart/json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -5448,7 +5451,7 @@ func init() {
           }
         ],
         "consumes": [
-          "multipart/json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -5491,7 +5494,7 @@ func init() {
           }
         ],
         "consumes": [
-          "multipart/json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -6426,6 +6429,9 @@ func init() {
     "Setting": {
       "type": "object",
       "properties": {
+        "description": {
+          "type": "string"
+        },
         "id": {
           "type": "string"
         },
@@ -6433,7 +6439,7 @@ func init() {
           "type": "string"
         },
         "value": {
-          "type": "object"
+          "type": "integer"
         }
       }
     },

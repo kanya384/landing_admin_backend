@@ -797,10 +797,16 @@ export interface Setting {
     'name'?: string;
     /**
      * 
-     * @type {object}
+     * @type {string}
      * @memberof Setting
      */
-    'value'?: object;
+    'description'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Setting
+     */
+    'value'?: number;
 }
 /**
  * 
@@ -5155,13 +5161,11 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary create setting
-         * @param {string} [id] 
-         * @param {string} [name] 
-         * @param {object} [value] 
+         * @param {Setting} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        settingsPut: async (id?: string, name?: string, value?: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        settingsPut: async (params?: Setting, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/settings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5173,31 +5177,18 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-            const localVarFormParams = new URLSearchParams();
 
             // authentication Token required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
 
-            if (id !== undefined) { 
-                localVarFormParams.set('id', id as any);
-            }
     
-            if (name !== undefined) { 
-                localVarFormParams.set('name', name as any);
-            }
-    
-            if (value !== undefined) { 
-                localVarFormParams.set('value', value as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'application/x-www-form-urlencoded';
-    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams.toString();
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5227,14 +5218,12 @@ export const SettingsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary create setting
-         * @param {string} [id] 
-         * @param {string} [name] 
-         * @param {object} [value] 
+         * @param {Setting} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async settingsPut(id?: string, name?: string, value?: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Setting>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.settingsPut(id, name, value, options);
+        async settingsPut(params?: Setting, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Setting>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.settingsPut(params, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -5259,14 +5248,12 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary create setting
-         * @param {string} [id] 
-         * @param {string} [name] 
-         * @param {object} [value] 
+         * @param {Setting} [params] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        settingsPut(id?: string, name?: string, value?: object, options?: any): AxiosPromise<Setting> {
-            return localVarFp.settingsPut(id, name, value, options).then((request) => request(axios, basePath));
+        settingsPut(params?: Setting, options?: any): AxiosPromise<Setting> {
+            return localVarFp.settingsPut(params, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5292,15 +5279,13 @@ export class SettingsApi extends BaseAPI {
     /**
      * 
      * @summary create setting
-     * @param {string} [id] 
-     * @param {string} [name] 
-     * @param {object} [value] 
+     * @param {Setting} [params] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettingsApi
      */
-    public settingsPut(id?: string, name?: string, value?: object, options?: AxiosRequestConfig) {
-        return SettingsApiFp(this.configuration).settingsPut(id, name, value, options).then((request) => request(this.axios, this.basePath));
+    public settingsPut(params?: Setting, options?: AxiosRequestConfig) {
+        return SettingsApiFp(this.configuration).settingsPut(params, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

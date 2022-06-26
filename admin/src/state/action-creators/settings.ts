@@ -1,5 +1,5 @@
 import { Dispatch } from "react"
-import { Configuration, SettingsApi } from "../../api"
+import {  Configuration, Setting, SettingsApi } from "../../api"
 import { GetTokenFromCookies } from "../../utils"
 import { SettingsActionTypes } from "../action-types"
 import { SettingsAction } from "../actions"
@@ -31,6 +31,27 @@ export const getSettings = () => {
         type: SettingsActionTypes.SETTINGS_ERROR,
         payload: SETTINGS_ERROR,
       })
+    })
+  }
+}
+
+export const addUpdateSetting = (setting: Setting, callback: (error: string) => void) => {
+  return async (dispatch: Dispatch<SettingsAction>) => {
+    if (!setting.name || ! setting.value) {
+      callback("не все поля заполненны")
+      return
+    }
+    let token = GetTokenFromCookies()
+    settingsService.settingsPut(setting, {headers: {"Authorization": token}}).then((resp) => {
+      if (resp.status === 200) {
+        dispatch({
+          type: SettingsActionTypes.SETTINGS_CREATE_UPDATE,
+          payload: resp.data,
+        });
+        callback("")
+      } else {
+        callback("ошибка при добавлении")
+      }
     })
   }
 }

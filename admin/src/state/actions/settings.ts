@@ -17,7 +17,7 @@ export interface SettingsSuccess {
 
 export interface SettingsCreateUpdate {
   type: SettingsActionTypes.SETTINGS_CREATE_UPDATE,
-  payload: string,
+  payload: Setting,
 }
 
 export type SettingsAction =

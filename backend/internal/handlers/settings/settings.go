@@ -42,7 +42,7 @@ func (h *handlers) Get(params settings.GetSettingsParams, input interface{}) mid
 		settingsInp := models.Setting{
 			ID:    setting.ID.Hex(),
 			Name:  setting.Name,
-			Value: setting.Value,
+			Value: int64(setting.Value),
 		}
 
 		settingsRes = append(settingsRes, &settingsInp)
@@ -55,7 +55,7 @@ func (h *handlers) Create(params operations.PutSettingsParams, input interface{}
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*30)
 	defer cancel()
 
-	setting, err := domain.NewSetting(params.Params.ID, params.Params.Name, params.Params.Value)
+	setting, err := domain.NewSetting(params.Params.ID, params.Params.Name, params.Params.Description, int(params.Params.Value))
 	if err != nil {
 		return operations.NewPutSettingsBadRequest()
 	}
@@ -68,7 +68,7 @@ func (h *handlers) Create(params operations.PutSettingsParams, input interface{}
 	settingRes := models.Setting{
 		ID:    res.ID.Hex(),
 		Name:  res.Name,
-		Value: res.Value,
+		Value: int64(res.Value),
 	}
 
 	return operations.NewPutSettingsOK().WithPayload(&settingRes)

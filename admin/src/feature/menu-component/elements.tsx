@@ -1,4 +1,4 @@
-import { Layers, Tool, Layout, Youtube, Grid, BookOpen, Server, MessageCircle } from 'react-feather';
+import { Layers, Tool, Layout, Youtube, Grid, BookOpen, Server, MessageCircle, RefreshCw, Settings } from 'react-feather';
 
 interface MenuItem {
   name: string;
@@ -26,7 +26,7 @@ const elements: MenuItem[] = [
     divider: false
   },
   {
-    name: "Контент",
+    name: "Параметры",
     icon: null,
     url: null,
     children: null,
@@ -34,11 +34,26 @@ const elements: MenuItem[] = [
   },
   {
     name: 'Подмены',
-    icon:  <Grid size={ICON_SIZE} />,
+    icon:  <RefreshCw size={ICON_SIZE} />,
     url: "/titles",
     children: [],
     divider: false
   },
+  {
+    name: 'Настройки',
+    icon:  <Settings size={ICON_SIZE} />,
+    url: "/settings",
+    children: [],
+    divider: false
+  },
+  {
+    name: "Контент",
+    icon: null,
+    url: null,
+    children: null,
+    divider: true,
+  },
+  
   {
     name: 'Постеры',
     icon:  <Layers size={ICON_SIZE} />,

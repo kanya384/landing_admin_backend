@@ -7,7 +7,6 @@ package operations
 
 import (
 	"fmt"
-	"io"
 	"net/http"
 	"strings"
 
@@ -52,10 +51,7 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		APIKeyAuthenticator: security.APIKeyAuth,
 		BearerAuthenticator: security.BearerAuth,
 
-		JSONConsumer: runtime.JSONConsumer(),
-		MultipartJSONConsumer: runtime.ConsumerFunc(func(r io.Reader, target interface{}) error {
-			return errors.NotImplemented("multipartJson consumer has not yet been implemented")
-		}),
+		JSONConsumer:          runtime.JSONConsumer(),
 		MultipartformConsumer: runtime.DiscardConsumer,
 
 		JSONProducer: runtime.JSONProducer(),
@@ -281,9 +277,6 @@ type BackendServiceAPI struct {
 	// JSONConsumer registers a consumer for the following mime types:
 	//   - application/json
 	JSONConsumer runtime.Consumer
-	// MultipartJSONConsumer registers a consumer for the following mime types:
-	//   - multipart/json
-	MultipartJSONConsumer runtime.Consumer
 	// MultipartformConsumer registers a consumer for the following mime types:
 	//   - multipart/form-data
 	MultipartformConsumer runtime.Consumer
@@ -492,9 +485,6 @@ func (o *BackendServiceAPI) Validate() error {
 
 	if o.JSONConsumer == nil {
 		unregistered = append(unregistered, "JSONConsumer")
-	}
-	if o.MultipartJSONConsumer == nil {
-		unregistered = append(unregistered, "MultipartJSONConsumer")
 	}
 	if o.MultipartformConsumer == nil {
 		unregistered = append(unregistered, "MultipartformConsumer")
@@ -731,8 +721,6 @@ func (o *BackendServiceAPI) ConsumersFor(mediaTypes []string) map[string]runtime
 		switch mt {
 		case "application/json":
 			result["application/json"] = o.JSONConsumer
-		case "multipart/json":
-			result["multipart/json"] = o.MultipartJSONConsumer
 		case "multipart/form-data":
 			result["multipart/form-data"] = o.MultipartformConsumer
 		}
