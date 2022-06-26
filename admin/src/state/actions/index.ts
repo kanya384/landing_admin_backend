@@ -6,3 +6,5 @@ export * from './plans'
 export * from './videos'
 export * from './leads'
 export * from './project_infos'
+export * from "./titles"
+export * from "./settings"

@@ -7,3 +7,5 @@ export * from './docs';
 export * from './videos';
 export * from './leads'
 export * from './projectInfos'
+export * from './settings'
+export * from './titles'

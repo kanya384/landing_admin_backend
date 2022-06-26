@@ -780,6 +780,31 @@ export interface ResultResponse {
 /**
  * 
  * @export
+ * @interface Setting
+ */
+export interface Setting {
+    /**
+     * 
+     * @type {string}
+     * @memberof Setting
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Setting
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof Setting
+     */
+    'value'?: object;
+}
+/**
+ * 
+ * @export
  * @interface SwapItem
  */
 export interface SwapItem {
@@ -814,6 +839,43 @@ export interface SwapStruct {
      * @memberof SwapStruct
      */
     'second'?: SwapItem;
+}
+/**
+ * 
+ * @export
+ * @interface Title
+ */
+export interface Title {
+    /**
+     * 
+     * @type {string}
+     * @memberof Title
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Title
+     */
+    'tagName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Title
+     */
+    'tagValue'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Title
+     */
+    'desktopTitle'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Title
+     */
+    'mobileTitle'?: string;
 }
 /**
  * 
@@ -5047,6 +5109,583 @@ export class ProjectInfoApi extends BaseAPI {
      */
     public projectInfoPut(file: any, title: string, anonce: string, description: string, options?: AxiosRequestConfig) {
         return ProjectInfoApiFp(this.configuration).projectInfoPut(file, title, anonce, description, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * SettingsApi - axios parameter creator
+ * @export
+ */
+export const SettingsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary get settings list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        settingsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/settings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create setting
+         * @param {string} [id] 
+         * @param {string} [name] 
+         * @param {object} [value] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        settingsPut: async (id?: string, name?: string, value?: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/settings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new URLSearchParams();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (id !== undefined) { 
+                localVarFormParams.set('id', id as any);
+            }
+    
+            if (name !== undefined) { 
+                localVarFormParams.set('name', name as any);
+            }
+    
+            if (value !== undefined) { 
+                localVarFormParams.set('value', value as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'application/x-www-form-urlencoded';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams.toString();
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SettingsApi - functional programming interface
+ * @export
+ */
+export const SettingsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SettingsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary get settings list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async settingsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Setting>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.settingsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create setting
+         * @param {string} [id] 
+         * @param {string} [name] 
+         * @param {object} [value] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async settingsPut(id?: string, name?: string, value?: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Setting>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.settingsPut(id, name, value, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * SettingsApi - factory interface
+ * @export
+ */
+export const SettingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SettingsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary get settings list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        settingsGet(options?: any): AxiosPromise<Array<Setting>> {
+            return localVarFp.settingsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create setting
+         * @param {string} [id] 
+         * @param {string} [name] 
+         * @param {object} [value] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        settingsPut(id?: string, name?: string, value?: object, options?: any): AxiosPromise<Setting> {
+            return localVarFp.settingsPut(id, name, value, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SettingsApi - object-oriented interface
+ * @export
+ * @class SettingsApi
+ * @extends {BaseAPI}
+ */
+export class SettingsApi extends BaseAPI {
+    /**
+     * 
+     * @summary get settings list
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsApi
+     */
+    public settingsGet(options?: AxiosRequestConfig) {
+        return SettingsApiFp(this.configuration).settingsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create setting
+     * @param {string} [id] 
+     * @param {string} [name] 
+     * @param {object} [value] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsApi
+     */
+    public settingsPut(id?: string, name?: string, value?: object, options?: AxiosRequestConfig) {
+        return SettingsApiFp(this.configuration).settingsPut(id, name, value, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * TitlesApi - axios parameter creator
+ * @export
+ */
+export const TitlesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary get titles list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        titlesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/titles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary delete titles by id
+         * @param {string} id String id titles to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        titlesIdDelete: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('titlesIdDelete', 'id', id)
+            const localVarPath = `/titles/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary update title
+         * @param {string} [id] 
+         * @param {string} [tagName] 
+         * @param {string} [tagValue] 
+         * @param {string} [desktopTitle] 
+         * @param {string} [mobileTitle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        titlesPatch: async (id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/titles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new URLSearchParams();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (id !== undefined) { 
+                localVarFormParams.set('id', id as any);
+            }
+    
+            if (tagName !== undefined) { 
+                localVarFormParams.set('tagName', tagName as any);
+            }
+    
+            if (tagValue !== undefined) { 
+                localVarFormParams.set('tagValue', tagValue as any);
+            }
+    
+            if (desktopTitle !== undefined) { 
+                localVarFormParams.set('desktopTitle', desktopTitle as any);
+            }
+    
+            if (mobileTitle !== undefined) { 
+                localVarFormParams.set('mobileTitle', mobileTitle as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'application/x-www-form-urlencoded';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams.toString();
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create title
+         * @param {string} [id] 
+         * @param {string} [tagName] 
+         * @param {string} [tagValue] 
+         * @param {string} [desktopTitle] 
+         * @param {string} [mobileTitle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        titlesPut: async (id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/titles`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new URLSearchParams();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (id !== undefined) { 
+                localVarFormParams.set('id', id as any);
+            }
+    
+            if (tagName !== undefined) { 
+                localVarFormParams.set('tagName', tagName as any);
+            }
+    
+            if (tagValue !== undefined) { 
+                localVarFormParams.set('tagValue', tagValue as any);
+            }
+    
+            if (desktopTitle !== undefined) { 
+                localVarFormParams.set('desktopTitle', desktopTitle as any);
+            }
+    
+            if (mobileTitle !== undefined) { 
+                localVarFormParams.set('mobileTitle', mobileTitle as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'application/x-www-form-urlencoded';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams.toString();
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TitlesApi - functional programming interface
+ * @export
+ */
+export const TitlesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TitlesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary get titles list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async titlesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Title>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.titlesGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary delete titles by id
+         * @param {string} id String id titles to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async titlesIdDelete(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.titlesIdDelete(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary update title
+         * @param {string} [id] 
+         * @param {string} [tagName] 
+         * @param {string} [tagValue] 
+         * @param {string} [desktopTitle] 
+         * @param {string} [mobileTitle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async titlesPatch(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Title>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.titlesPatch(id, tagName, tagValue, desktopTitle, mobileTitle, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create title
+         * @param {string} [id] 
+         * @param {string} [tagName] 
+         * @param {string} [tagValue] 
+         * @param {string} [desktopTitle] 
+         * @param {string} [mobileTitle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async titlesPut(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Title>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.titlesPut(id, tagName, tagValue, desktopTitle, mobileTitle, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * TitlesApi - factory interface
+ * @export
+ */
+export const TitlesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TitlesApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary get titles list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        titlesGet(options?: any): AxiosPromise<Array<Title>> {
+            return localVarFp.titlesGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary delete titles by id
+         * @param {string} id String id titles to delete
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        titlesIdDelete(id: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.titlesIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary update title
+         * @param {string} [id] 
+         * @param {string} [tagName] 
+         * @param {string} [tagValue] 
+         * @param {string} [desktopTitle] 
+         * @param {string} [mobileTitle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        titlesPatch(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: any): AxiosPromise<Title> {
+            return localVarFp.titlesPatch(id, tagName, tagValue, desktopTitle, mobileTitle, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create title
+         * @param {string} [id] 
+         * @param {string} [tagName] 
+         * @param {string} [tagValue] 
+         * @param {string} [desktopTitle] 
+         * @param {string} [mobileTitle] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        titlesPut(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: any): AxiosPromise<Title> {
+            return localVarFp.titlesPut(id, tagName, tagValue, desktopTitle, mobileTitle, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TitlesApi - object-oriented interface
+ * @export
+ * @class TitlesApi
+ * @extends {BaseAPI}
+ */
+export class TitlesApi extends BaseAPI {
+    /**
+     * 
+     * @summary get titles list
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TitlesApi
+     */
+    public titlesGet(options?: AxiosRequestConfig) {
+        return TitlesApiFp(this.configuration).titlesGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary delete titles by id
+     * @param {string} id String id titles to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TitlesApi
+     */
+    public titlesIdDelete(id: string, options?: AxiosRequestConfig) {
+        return TitlesApiFp(this.configuration).titlesIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update title
+     * @param {string} [id] 
+     * @param {string} [tagName] 
+     * @param {string} [tagValue] 
+     * @param {string} [desktopTitle] 
+     * @param {string} [mobileTitle] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TitlesApi
+     */
+    public titlesPatch(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: AxiosRequestConfig) {
+        return TitlesApiFp(this.configuration).titlesPatch(id, tagName, tagValue, desktopTitle, mobileTitle, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create title
+     * @param {string} [id] 
+     * @param {string} [tagName] 
+     * @param {string} [tagValue] 
+     * @param {string} [desktopTitle] 
+     * @param {string} [mobileTitle] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TitlesApi
+     */
+    public titlesPut(id?: string, tagName?: string, tagValue?: string, desktopTitle?: string, mobileTitle?: string, options?: AxiosRequestConfig) {
+        return TitlesApiFp(this.configuration).titlesPut(id, tagName, tagValue, desktopTitle, mobileTitle, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
