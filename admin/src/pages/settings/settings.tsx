@@ -10,23 +10,23 @@ export const Settings: React.FC = () => {
     id: string,
     name: string,
     description: string,
-    value: any,
+    value: number,
   }>({
     id: "",
     name: "",
     description: "",
-    value: "",
+    value: 0,
   })
   const [updateForm, setUpdateForm] = useState<{
     id: string,
     name: string,
     description: string,
-    value: any,
+    value: number,
   }>({
     id: "",
     name: "",
     description: "",
-    value: "",
+    value: 0,
   })
   const [error, setError] = useState("")
   const titlesCallback = (error: string) => {
@@ -61,12 +61,24 @@ export const Settings: React.FC = () => {
           value:addForm.name,
         },
         {
-            title: "Значение параметра",
-            type: "text", 
-            placeholder: "Введите значение параметра", 
-            name: "value", 
-            isError: false, 
-            value:addForm.value,
+          title: "Значение параметра",
+          type: "select", 
+          placeholder: "Выберите значение параметра", 
+          name: "value", 
+          isError: false,
+          value:addForm!.value,
+          fields:[
+            {
+              name: "Да",
+              value: 1, 
+              type: 0,
+            },
+            {
+              name: "Нет",
+              value: 0,
+              type: 0,
+            },
+          ],
         },
       ],
     },
