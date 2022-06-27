@@ -51,7 +51,7 @@ export const Form = ({fields, description, btnTitle, celtype, close, callback}) 
                         if (type === "slider") {
                             return <div className="form-ec__input-row">
                                         <div className="inp-group">
-                                            {title}
+                                            <div className="inp-group__title">{title}</div>
                                             <RangeSliderPopup
                                                 value={value}
                                                 min={min}
