@@ -41,11 +41,28 @@
         width: 100%;
         margin-bottom: 40px;
       }
+      .inp-group__title {
+        font-weight: 500;
+        padding-bottom: 8px;
+      }
+      .PrivateValueLabel-label-10 {
+        font-size: 14px !important;
+      }
       .input-group-x2__col {
         width: 50%;
       }
       .form-ec__b-btn {
         padding-top: 24px;
+      }
+      .form-ec {
+        &__input-row {
+          .inp-group {
+          
+          }
+          .MuiSlider-root {
+            margin-left: 0;
+          }
+        }
       }
     }
     &--bg {
@@ -208,11 +225,15 @@
     min-width: 352px;
     @include qlg {
       display: none;
+      min-width: 250px;
     }
     &--mobile {
       display: none;
       @include qlg {
         display: block;
+      }
+      .MuiSlider-root {
+        margin-left: 0;
       }
     }
 

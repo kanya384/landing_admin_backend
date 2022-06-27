@@ -36,7 +36,10 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
           </div>
         </div>
         <div className="modal-flat-filter modal-flat-filter--mobile">
-          <div className="floor-slider"><div className="floor-slider__title">Этаж</div></div>
+          <div className="floor-slider">
+            <div className="floor-slider__title">Этаж</div>
+            <RangeSlider value={floor} setValue={(floor) => setFloor(floor)} min={1} max={9} />
+          </div>
           <ul className="entrance-list">
             <li className="entrance-item">подьезд 1</li>
             <li className="entrance-item active">подьезд 2</li>
