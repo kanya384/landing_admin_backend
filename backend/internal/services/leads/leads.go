@@ -1,9 +1,13 @@
 package leads
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
+	"fmt"
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/domain"
+	"net/http"
 	"time"
 
 	"landing_admin_backend/internal/repository"
@@ -70,9 +74,71 @@ func (s *service) GetAnalytics(ctx context.Context) (analytics domain.Analytics,
 
 func (s *service) Create(ctx context.Context, lead domain.Lead) (err error) {
 	//send lead to crm
-	return s.repository.Leads.Create(ctx, lead)
+	err = s.repository.Leads.Create(ctx, lead)
+	if err != nil {
+		return
+	}
+	err = s.sendLeadToCrm(lead)
+	return
 }
 
 func (s *service) Delete(ctx context.Context, leadID primitive.ObjectID) (err error) {
 	return s.repository.Leads.Delete(ctx, leadID)
+}
+
+func (s *service) sendLeadToCrm(lead domain.Lead) (err error) {
+	//TODO: добавить Источник (заполняется по таблице соответствия меток utm_source и источников, приложим отдельно)
+	//TODO: добавить Рекламное агентство (заполняется согласно таблице соответствия меток utm_source, приложим отдельно) UF_CRM_1648203203
+	body := map[string]interface{}{
+		"fields": map[string]interface{}{
+			"TITLE": fmt.Sprintf(`Заявка с сайта %s`, s.cfg.AppHost),
+			"NAME":  lead.Name,
+			"PHONE": map[string]interface{}{
+				"n0": map[string]string{
+					"VALUE":      lead.Phone,
+					"VALUE_TYPE": "WORK",
+				},
+			},
+			"EMAIL": map[string]interface{}{
+				"n0": map[string]string{
+					"VALUE":      lead.Email,
+					"VALUE_TYPE": "WORK",
+				},
+			},
+			"COMMENTS":          lead.Text,
+			"ASSIGNED_BY_ID":    4134,
+			"UF_CRM_1520270491": lead.Roistat,
+			"UTM_SOURCE":        lead.Utm_source,
+			"UTM_MEDIUM":        lead.Utm_medium,
+			"UTM_CONTENT":       lead.Utm_content,
+			"UTM_CAMPAIGN":      lead.Utm_campaign,
+			"UTM_TERM":          lead.Utm_term,
+			"UF_CRM_1648203203": map[string]interface{}{
+				"n0": map[string]string{
+					"VALUE":      s.cfg.AppHost,
+					"VALUE_TYPE": "WORK",
+				},
+			},
+			"UF_CRM_1648126761": 4054, //объект
+			"UF_CRM_1593781584": 2773, //направление,
+		},
+		"params": map[string]interface{}{
+			"REGISTER_SONET_EVENT": "Y",
+		},
+	}
+
+	fmt.Println(body)
+	jsonData, err := json.Marshal(body)
+
+	if err != nil {
+		return err
+	}
+	resp, err := http.Post(s.cfg.BitrixHook+"crm.lead.add.json", "application/json", bytes.NewBuffer(jsonData))
+	if err != nil {
+		return err
+	}
+	var res map[string]interface{}
+	json.NewDecoder(resp.Body).Decode(&res)
+	fmt.Println(res)
+	return nil
 }

@@ -9,6 +9,7 @@ import (
 
 type Config struct {
 	Port               int
+	AppHost            string
 	DSN                string
 	ServiceName        string
 	LogLevel           uint32
@@ -23,6 +24,7 @@ type Config struct {
 	FtpLogin           string
 	FtpPass            string
 	FtpPath            string
+	BitrixHook         string
 }
 
 func InitConfig(prefix string) (*Config, error) {

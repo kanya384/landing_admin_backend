@@ -14,6 +14,8 @@ export APP_FTP_HOST
 export APP_FTP_LOGIN
 export APP_FTP_PASS
 export APP_FTP_PATH
+export APP_BITRIX_HOOK
+export APP_APP_HOST
 
 up:
 	@docker-compose up -d & disown
