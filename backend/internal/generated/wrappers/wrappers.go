@@ -26,3 +26,6 @@ package wrappers
 //go:generate gowrap gen -p ../../services/project_info -i ProjectInfo -t ./cache -o ../../services/project_info/project_info_with_cache.go
 //go:generate gowrap gen -p ../../services/settings -i Settings -t ./cache -o ../../services/settings/settings_with_cache.go
 //go:generate gowrap gen -p ../../services/titles -i Titles -t ./cache -o ../../services/titles/titles_with_cache.go
+//go:generate gowrap gen -p ../../services/hod_photos -i Photos -t ./cache -o ../../services/hod_photos/hod_photos_with_cache.go
+//go:generate gowrap gen -p ../../services/months -i Months -t ./cache -o ../../services/months/months_with_cache.go
+//go:generate gowrap gen -p ../../services/years -i Years -t ./cache -o ../../services/years/years_with_cache.go
