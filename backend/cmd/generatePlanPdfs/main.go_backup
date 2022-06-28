@@ -1,0 +1,155 @@
+package main
+
+import (
+	"context"
+	"fmt"
+	"landing_admin_backend/internal/config"
+	"landing_admin_backend/internal/domain"
+	"landing_admin_backend/internal/services"
+	"landing_admin_backend/internal/services/memcache"
+	"landing_admin_backend/pkg/helpers"
+	"os"
+	"strconv"
+	"strings"
+
+	mng "landing_admin_backend/internal/repository/mongo"
+
+	"github.com/leekchan/accounting"
+	"github.com/unidoc/unipdf/v3/common/license"
+	"github.com/unidoc/unipdf/v3/creator"
+	"github.com/unidoc/unipdf/v3/model"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+)
+
+func main() {
+	cfg, err := config.InitConfig("APP")
+	if err != nil {
+		panic(fmt.Sprintf("error initializing config %s", err))
+	}
+
+	file, err := os.OpenFile(cfg.LogFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		panic(fmt.Sprintf("error opening log file config %s", err))
+	}
+	defer file.Close()
+
+	logger, err := helpers.ConfigureLogger(cfg.ServiceName, cfg.LogLevel, file)
+	if err != nil {
+		panic(fmt.Sprintf("error initializing logger %s", err))
+	}
+
+	clientOptions := options.Client().ApplyURI(cfg.DSN)
+	client, err := mongo.Connect(context.TODO(), clientOptions)
+	if err != nil {
+		logger.Panic("error connection to mongo", err, nil)
+	}
+
+	cache := memcache.New()
+
+	repository := mng.Setup(client.Database("public"))
+	services := services.Setup(cfg, repository, logger, cache)
+
+	plans, err := services.Plans.GetPlans(context.Background())
+	if err != nil {
+		logger.Panic("ошибка получения планировок", err, nil)
+	}
+
+	f, err := os.Open("./cmd/generatePlanPdfs/template.pdf")
+	if err != nil {
+		fmt.Println(err)
+		logger.Panic("ошибка открытия pdf", err, nil)
+	}
+	defer f.Close()
+
+	template, err := model.NewPdfReader(f)
+	if err != nil {
+		fmt.Println(err)
+		logger.Panic("ошибка чтения pdf", err, nil)
+	}
+
+	for _, plan := range plans {
+		generatePdfPlan(plan, template)
+		break
+	}
+
+}
+
+func init() {
+	// Make sure to load your metered License API key prior to using the library.
+	// If you need a key, you can sign up and create a free one at https://cloud.unidoc.io
+	err := license.SetMeteredKey(`bb44cf593cc9e457b4cc178f9baf9e44f78543eb37963db15ce4144e7cf3884a`)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func generatePdfPlan(plan *domain.Plan, template *model.PdfReader) (err error) {
+	numPages, err := template.GetNumPages()
+	if err != nil {
+		return err
+	}
+	createPdf := creator.New()
+
+	planImg, err := createPdf.NewImageFromFile("./file_store/" + plan.Image)
+	if err != nil {
+		return err
+	}
+	planImg.ScaleToWidth(1300)
+	planImg.SetPos(200, 100)
+
+	for i := 0; i < numPages; i++ {
+		page, err := template.GetPage(i + 1)
+		if err != nil {
+			return err
+		}
+
+		err = createPdf.AddPage(page)
+		if err != nil {
+			return err
+		}
+
+		font, err := model.NewCompositePdfFontFromTTFFile("./cmd/generatePlanPdfs/font/Geometria.ttf")
+		if err != nil {
+			panic(err)
+		}
+
+		if i == 1 {
+			_ = createPdf.Draw(planImg)
+			text := createPdf.NewParagraph(strings.Replace(plan.Liter, "ЖК ВЫСОКИЙ БЕРЕГ Литер", "", 1))
+			text.SetFont(font)
+			text.SetPos(335, 1622)
+			text.SetFontSize(26)
+			_ = createPdf.Draw(text)
+
+			text.SetText("1 квартал 2023")
+			text.SetPos(375, 1695)
+			_ = createPdf.Draw(text)
+
+			text.SetText(strconv.Itoa(plan.Floor))
+			text.SetPos(375, 1765)
+			_ = createPdf.Draw(text)
+
+			text.SetText(fmt.Sprintf("%.2f", plan.LivingArea))
+			text.SetPos(425, 1835)
+			_ = createPdf.Draw(text)
+
+			text.SetText(fmt.Sprintf("%.2f", plan.Area))
+			text.SetPos(435, 1905)
+			_ = createPdf.Draw(text)
+
+			ac := accounting.Accounting{Symbol: "", Precision: 0, Thousand: " "}
+			text.SetText(ac.FormatMoney(plan.Price) + " руб.")
+			text.SetPos(400, 1975)
+			_ = createPdf.Draw(text)
+
+			/*text.SetText(ac.FormatMoney(plan.Price) + " ₽")
+			text.SetPos(600, 2045)
+			_ = createPdf.Draw(text)*/
+		}
+
+	}
+
+	err = createPdf.WriteToFile("./cmd/generatePlanPdfs/" + plan.ID + ".pdf")
+	return err
+}
