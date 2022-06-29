@@ -936,14 +936,23 @@ export const Infra = () => {
       location: [44.882121, 37.305335],
     },
 
+    {
+      icon:'img/icon-map-ava.svg',
+      type: "ava",
+      hint:'ЖК "Аванта"', 
+      location: [44.876247, 37.322943],
+    },
+
   ]
+
+  
   return (
     <div className="lvl13">
       <div className="wrapper">
         <div className="h-title"><EditableText id={"62aef61ba26e626025a8d8dc"} defaultText={"Развитая <br />инфраструктура"}/></div>
-        <div className="map-info" style={{width:"100%", height: 704, display:"block", position: "relative", overflow: "hidden" }}>
+        <div className="map-info" style={{width:"100%", height: 704, display:"block", position: "relative",  overflow:"hidden"}}>
             <YMaps>
-                    <Map defaultState={{ center: [44.887186, 37.320944], zoom: 15, controls: [] }} style={{ width: "100%", height: "100%", position: "absolute" }}  >
+                    <Map defaultState={{ center: [44.876247, 37.322943], zoom: 15, controls: [] }} style={{ width: "100%", height: "100%", position: "absolute" }}  >
                         <ZoomControl options={{ float: 'left' }} />
                         {icons.map((icon)=>{
                           return <Placemark geometry={icon.location}

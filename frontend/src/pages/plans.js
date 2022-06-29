@@ -245,7 +245,7 @@ export const Plans = () => {
                               {showPrices?<div className="choise-item__price">{plan.price?Intl.NumberFormat().format(plan.price):""} руб.</div>:""}
                             </div>
                             <div className="choise-item__bottom">
-                              <div className="choise-item__link-pdf"><a href="#" className="link-pdf">Скачать в PDF</a></div>
+                              <div className="choise-item__link-pdf"><a href={"/api/store/pdfs/"+plan.ID+".pdf"} target="_blank" className="link-pdf">Скачать в PDF</a></div>
                               <div className="choise-item__more"><Link className="link-bb" to={"/plans/"+plan.ID}>узнать стоимость</Link></div>
                             </div>
                           </div>

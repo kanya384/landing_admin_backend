@@ -50,7 +50,7 @@ export const Loader = () => {
     const content = useContext(ContentContext)
 
     const LoadBlock = (block) => {
-        return <Suspense fallback={<div>Загрузка...</div>}>{block}</Suspense>
+        return <Suspense fallback={<div>...</div>}>{block}</Suspense>
     }
 
     const generateHtml = () => {

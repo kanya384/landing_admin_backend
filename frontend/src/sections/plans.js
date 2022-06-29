@@ -107,7 +107,7 @@ export const Plans = () => {
           <div className="b-3d">
 			  <div className="b-3d__container">
 				  <img src="img/home3d.jpg" alt="" />
-				  <div className="plan-float-label plan-float-label__1">
+				  <div className="plan-float-label plan-float-label__1" onClick={()=>{setLiter(1); setModalState(true)}}>
 					  <div className="liter">
 						  литер 1
 						  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +116,7 @@ export const Plans = () => {
 					  </div>
 					  <div className="date">3 кв. 2023</div>
 				  </div>
-				  <div className="plan-float-label plan-float-label__2">
+				  <div className="plan-float-label plan-float-label__2" onClick={()=>{setLiter(1); setModalState(true)}}>
 					  <div className="liter">
 						  литер 2
 						  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -125,7 +125,7 @@ export const Plans = () => {
 					  </div>
 					  <div className="date">3 кв. 2023</div>
 				  </div>
-				  <div className="plan-float-label plan-float-label__3">
+				  <div className="plan-float-label plan-float-label__3" onClick={()=>{setLiter(1); setModalState(true)}}>
 					  <div className="liter">
 						  литер 3
 						  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

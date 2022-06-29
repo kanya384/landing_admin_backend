@@ -10,9 +10,13 @@ export const Video = () => {
               <div className="wrapper">
                 <div className="b-video">
                   <div className="b-text"><EditableText id={"62aef61ba26e626025a8d8d9"} defaultText={"Да, это Краснодарский край и его жемчужина - Анапа. Этот город ассоциируется с релаксом и праздником. Даже городская администрация находится рядом с пляжем"}/></div>
-                  {content.content?<LightgalleryProvider>
-                    <LightgalleryItem group={"video"} src={content.content.Video[0].url}>
+                  <LightgalleryProvider
+                    thumbnail={false}
+                  >
+                  {content.content?.Video[0]?
+                   
                     <a href="#" className="b-video-player" onClick={(e)=>{e.preventDefault()}}>
+                    <LightgalleryItem group={Date.now()} src={content.content.Video[0].url} thumb={""}>
                       <span className="play">
                         <svg width="30" height="40" viewBox="0 0 30 40" xmlns="http://www.w3.org/2000/svg">
                           <path d="M30 20L1.73794e-07 40L1.92225e-06 -1.31134e-06L30 20Z" />
@@ -24,9 +28,11 @@ export const Video = () => {
                       <span className="label">
                         <span>Смотреть видео</span>
                       </span>
+                      </LightgalleryItem>
                     </a>
-                    </LightgalleryItem>
-                  </LightgalleryProvider>:""}
+                    
+                  :""}
+                  </LightgalleryProvider>
                 </div>
               </div>
             </div>
