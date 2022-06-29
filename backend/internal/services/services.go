@@ -13,6 +13,7 @@ import (
 	"landing_admin_backend/internal/services/leads"
 	"landing_admin_backend/internal/services/memcache"
 	"landing_admin_backend/internal/services/months"
+	"landing_admin_backend/internal/services/pdf_generator"
 	"landing_admin_backend/internal/services/plans"
 	"landing_admin_backend/internal/services/posters"
 	"landing_admin_backend/internal/services/project_info"
@@ -44,6 +45,7 @@ type Services struct {
 	ProjectInfo    project_info.ProjectInfo
 	Titles         titles.Title
 	Settings       settings.Settings
+	PdfGenerator   pdf_generator.PdfGenerator
 }
 
 func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus.Entry, cache memcache.Cache) *Services {
@@ -60,7 +62,8 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 	projectInfo := project_info.NewProjectInfoWithCache(project_info.NewProjectInfoWithLogrus(project_info.NewService(repository, cfg), logger), cache)
 	advantagePhotos := advantage_photo.NewAdvantagePhotoWithLogrus(advantage_photo.NewService(repository, cfg), logger)
 	titles := titles.NewTitleWithLogrus(titles.NewTitleWithCache(titles.NewService(repository, cfg), cache), logger)
-	settings := settings.NewSettingsWithLogrus(settings.NewSettingsWithCache(settings.NewService(repository, cfg), cache), logger)
+	pdfGenerator := pdf_generator.NewPdfGenerator(plans)
+	settings := settings.NewSettingsWithLogrus(settings.NewSettingsWithCache(settings.NewService(repository, cfg, pdfGenerator), cache), logger)
 	return &Services{
 		Auth:           auth.NewAuthWithLogrus(auth.NewService(repository, tokenManager, cfg), logger),
 		Users:          users.NewUsersWithLogrus(users.NewService(repository, cfg), logger),
@@ -79,5 +82,6 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 		ProjectInfo:    projectInfo,
 		Titles:         titles,
 		Settings:       settings,
+		PdfGenerator:   pdfGenerator,
 	}
 }

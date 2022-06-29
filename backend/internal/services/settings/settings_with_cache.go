@@ -48,3 +48,8 @@ func (_d SettingsWithCache) Get(ctx context.Context) (settings []*domain.Setting
 	_d.cache.Set("Settings", res)
 	return res, err
 }
+
+// GetByName implements Settings
+func (_d SettingsWithCache) GetByName(ctx context.Context, name string) (setting *domain.Setting, err error) {
+	return _d._base.GetByName(ctx, name)
+}

@@ -63,3 +63,22 @@ func (_d SettingsWithLogrus) Get(ctx context.Context) (settings []*domain.Settin
 	}()
 	return _d._base.Get(ctx)
 }
+
+// GetByName implements Settings
+func (_d SettingsWithLogrus) GetByName(ctx context.Context, name string) (setting *domain.Setting, err error) {
+	_d._log.WithFields(logrus.Fields(map[string]interface{}{
+		"ctx":  ctx,
+		"name": name})).Debug("SettingsWithLogrus: calling GetByName")
+	defer func() {
+		if err != nil {
+			_d._log.WithFields(logrus.Fields(map[string]interface{}{
+				"setting": setting,
+				"err":     err})).Error("SettingsWithLogrus: method GetByName returned an error")
+		} else {
+			_d._log.WithFields(logrus.Fields(map[string]interface{}{
+				"setting": setting,
+				"err":     err})).Debug("SettingsWithLogrus: method GetByName finished")
+		}
+	}()
+	return _d._base.GetByName(ctx, name)
+}

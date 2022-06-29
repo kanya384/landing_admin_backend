@@ -25,7 +25,7 @@ func NewRepository(db *mongo.Database) repos.Plans {
 }
 
 func (r *repository) Get(ctx context.Context, filter map[string]interface{}) (plans []*domain.Plan, err error) {
-	cur, err := r.collection.Find(ctx, primitive.M{}, options.Find().SetSort(primitive.D{{"status", -1}, {"rooms", 1}}))
+	cur, err := r.collection.Find(ctx, filter, options.Find().SetSort(primitive.D{{"status", -1}, {"rooms", 1}}))
 	if err != nil {
 		return
 	}

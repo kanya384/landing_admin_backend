@@ -110,6 +110,7 @@ type ProjectInfo interface {
 type Settings interface {
 	Get(ctx context.Context) (settings []*domain.Setting, err error)
 	GetByID(ctx context.Context, settingID primitive.ObjectID) (setting *domain.Setting, err error)
+	GetByName(ctx context.Context, name string) (setting *domain.Setting, err error)
 	Create(ctx context.Context, setting domain.Setting) (err error)
 	Update(ctx context.Context, setting domain.Setting) (err error)
 }

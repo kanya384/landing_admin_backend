@@ -55,6 +55,14 @@ func (r *repository) GetByID(ctx context.Context, settingID primitive.ObjectID) 
 	return
 }
 
+func (r *repository) GetByName(ctx context.Context, name string) (setting *domain.Setting, err error) {
+	err = r.collection.FindOne(ctx, primitive.M{"name": name}).Decode(&setting)
+	if err != nil && err.Error() == "mongo: no documents in result" {
+		return setting, errors.New(domain.ErrNoFieldWithID)
+	}
+	return
+}
+
 func (r *repository) Create(ctx context.Context, setting domain.Setting) (err error) {
 	_, err = r.collection.InsertOne(ctx, &setting)
 	return

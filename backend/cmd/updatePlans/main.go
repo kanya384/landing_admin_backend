@@ -62,6 +62,17 @@ func main() {
 		logger.Panic("error updating file", err, nil)
 	}
 
+	//update pdf files
+	setting, err := services.Settings.GetByName(context.Background(), "remont_square_price")
+	price := 0
+	if err == nil {
+		price = setting.Value
+	}
+	err = services.PdfGenerator.GeneratePdfs(context.Background(), price)
+	if err == nil {
+		fmt.Println("success")
+	}
+
 	ftp.CloseConnection()
 
 }
