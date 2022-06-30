@@ -29,8 +29,9 @@ function App() {
 
   return (
     <div className="App container_main">
+      <ContentContext.Provider value={{ content, setContent, administrate, setAdministrate }}>
       <SectionsContext.Provider value={{ blocks, setBlocks, menuClick, setMenuClick }}>
-        <ContentContext.Provider value={{ content, setContent, administrate, setAdministrate }}>
+        
         <Router>
           <Panel />
           <div className="over">
@@ -43,8 +44,9 @@ function App() {
               </Routes>
           </div>
           </Router>
-        </ContentContext.Provider>
+        
       </SectionsContext.Provider>
+      </ContentContext.Provider>
     </div>
   );
 }

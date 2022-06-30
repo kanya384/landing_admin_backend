@@ -1,10 +1,13 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom";
 import { AppBar } from "../components/appbar"
 import { Footer } from "../components/footer"
+import { Form } from "../components/form";
+import { Modal } from "../components/modals";
 
 export const Promo = () => {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false)
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
@@ -100,27 +103,39 @@ export const Promo = () => {
                   <div class="form-ec__title">захотелось жить у моря?</div>
                   <div class="form-ec__text">Заполните форму ниже, и наш менеджер свяжется с вами!</div>
                 </div>
-                <div class="form-ec__content">
-                  <div class="form-ec__input-row">
-                    <div class="inp-group">
-                      <div class="inp-group-label">Ваше имя</div>
-                      <input class="input" placeholder="Ваше имя" />
-                    </div>
-                    <div class="inp-group">
-                      <div class="inp-group-label">Номер телефона</div>
-                      <input class="input" placeholder="Номер телефона" />
-                    </div>
-                  </div>
-                  <div class="form-ec__b-btn">
-                    <button class="btn-submit"><span class="btn-submit-text">Отправить</span></button>
-                  </div>
-                </div>
+                <Form fields={[
+                      {
+                        type:"text",
+                        name: "name",
+                        placeholder: "Имя",
+                        required: false,
+                      },
+                      {
+                          type:"text",
+                          name: "phone",
+                          placeholder: "Телефон",
+                          required: true,
+                      },
+                    ]}
+                    btnTitle={"Отправить"}
+                    description={`Узнать подробнее (страница причины жить на юге)`}
+                    celtype={"getPromo"}
+                    close={()=>{}}
+                    callback={()=>{setIsOpen(true)}}
+                  />
               </div>
             </main>
+            <Modal 
+              success={true}
+              position={window.pageYOffset}
+              opened={isOpen}
+              close = {()=>{setIsOpen(null)}}
+            />
           </div>
         </div>
       </div>
       <Footer />
+      
     </React.Fragment>
   )
 }

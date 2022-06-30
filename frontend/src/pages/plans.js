@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
+import InfiniteScroll from "react-infinite-scroller";
 import { Link, useLocation } from "react-router-dom";
 import { AppBar } from "../components/appbar"
 import { EditableText } from "../components/editable-text";
@@ -21,6 +22,7 @@ export const Plans = () => {
   })
   const [showPrices, setShowPrices] = useState(false)
   const [showDropDown, setShowDropDown] = useState(false)
+  const [showCount, setShowCount] = useState(10)
 
   const filterPlans = () => {
     let min = filter.areaMin!==""?filter.areaMin:0
@@ -31,7 +33,7 @@ export const Plans = () => {
         plans.push(plan)
       }
     })
-    
+    setShowCount(10)
     setFiltredPlans(sortFlats(filter.sort, plans))
   }
 
@@ -231,8 +233,14 @@ export const Plans = () => {
                 </div>
               </div>
               <div className="listing-choise">
+              <InfiniteScroll
+                  pageStart={0}
+                  loadMore={()=>{setShowCount(showCount+10)}}
+                  hasMore={filtredPlans&&filtredPlans.length>showCount}
+                  loader={<div className="loader" key={0}>Loading ...</div>}
+              >
                 {filtredPlans&&filtredPlans.map((plan, index)=>{
-                  if (index > 20) {
+                  if (index > showCount) {
                     return
                   }
                   return <div className="choise-item">
@@ -246,11 +254,13 @@ export const Plans = () => {
                             </div>
                             <div className="choise-item__bottom">
                               <div className="choise-item__link-pdf"><a href={"/api/store/pdfs/"+plan.ID+".pdf"} target="_blank" className="link-pdf">Скачать в PDF</a></div>
-                              <div className="choise-item__more"><Link className="link-bb" to={"/plans/"+plan.ID}>узнать стоимость</Link></div>
+                              <div className="choise-item__more"><Link className="link-bb" to={"/plans/"+plan.ID}>{showPrices?"подробнее":"узнать стоимость"}</Link></div>
                             </div>
                           </div>
                         </div>
                 })}
+              </InfiniteScroll>
+                
               </div>
             </main>
           </div>

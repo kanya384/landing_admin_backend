@@ -89,7 +89,7 @@ export const PlanDetail = () => {
                 </div>
                 <div className="room-card__info">
                   {showPrices?<div className="room-card__info-header">
-                    <div className="room-card__info-price">54 000 000 р.</div>
+                    <div className="room-card__info-price">{flat?.price?Intl.NumberFormat().format(flat?.price):""} р.</div>
                     <div className="room-card__info-text">
                       Остались вопросы? <br/>
                       Наши менеджеры помогут Вам!
@@ -109,12 +109,12 @@ export const PlanDetail = () => {
                           required: true,
                       },
                     ]}
-                    btnTitle={`Узнать стоимость`}
+                    btnTitle={showPrices?"Оставить заявку":`Узнать стоимость`}
                     description={`Узнать стоимость квартиры №${flat?.number}; Литер: ${flat?.liter}; Подъезд: ${flat?.entrance}; Этаж:${flat?.floor}; Кол-во комнат: ${flat?.rooms}; Общая площадь: ${flat?.area}`}
                     celtype={"getFlat"}
                     close={()=>{}}
                     callback={()=>{setIsOpen(true)}}
-                />
+                  />
                 </div>
               </div>
             </main>

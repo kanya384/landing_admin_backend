@@ -3,7 +3,7 @@ const fs = require('fs')
 
 fs.readFile('./build/index.html', 'utf8', (err, data) => {
   //data = data.replaceAll('"/static', '"static')
-  let script = ""
+  /*let script = ""
   let style = ""
   let i = data.indexOf('script defer="defer" src="') + 'script defer="defer" src="'.length;
   while (data[i] != '"') {
@@ -26,7 +26,7 @@ fs.readFile('./build/index.html', 'utf8', (err, data) => {
         fs.writeFileSync("./build/index.html", data)
       });
     })
-  })
+  })*/
   
 })
 

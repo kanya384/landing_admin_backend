@@ -67,22 +67,6 @@ export const useSendForm = () => {
       try {
           VK.Goal('lead')
       } catch (e) { }
-
-      fetch("fd_log/lrcnt_react.php", {})
-          .then(data => data.ok && data.json())
-          .then(response => {
-              data = { ...data, ...response }
-              const requestOptions = {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                      "Access-Control-Allow-Origin": "*",
-                  },
-                  body: JSON.stringify(data)
-              };
-              fetch("main/ajax.php", requestOptions)
-                  .then(data => data.ok)
-          });
   }
 
   const sendForm = (e, callback) => {
@@ -152,7 +136,7 @@ export const useSendForm = () => {
               senddata = { ...senddata, email: email }
           }
           const requestOptions = {
-              method: 'POST',
+              method: 'PUT',
               headers: {
                   'Content-Type': 'application/json',
                   "Access-Control-Allow-Origin": "*",
@@ -164,11 +148,11 @@ export const useSendForm = () => {
           })
           callback()
           console.log(senddata)
-          /*fetch("fd_log/ajax.php", requestOptions)
+          fetch(process.env.REACT_APP_BACKEND+"/lead", requestOptions)
               .then(data => data.ok)
               .then(response => {
                   showAlert(senddata, celtype)
-              });*/
+              });
       }
   }
   return { sendForm }

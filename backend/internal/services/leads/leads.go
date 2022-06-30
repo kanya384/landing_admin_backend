@@ -119,8 +119,10 @@ func (s *service) sendLeadToCrm(lead domain.Lead) (err error) {
 					"VALUE_TYPE": "WORK",
 				},
 			},
-			"UF_CRM_1648126761": 4054, //объект
-			"UF_CRM_1593781584": 2773, //направление,
+			"UF_CRM_1648126761":    4054, //объект
+			"UF_CRM_1593781584":    2773, //направление,
+			"UF_CRM_1647362562853": 3874, //MediaProNet
+			"SOURCE_ID":            caseSource(lead.Utm_source),
 		},
 		"params": map[string]interface{}{
 			"REGISTER_SONET_EVENT": "Y",
@@ -141,4 +143,19 @@ func (s *service) sendLeadToCrm(lead domain.Lead) (err error) {
 	json.NewDecoder(resp.Body).Decode(&res)
 	fmt.Println(res)
 	return nil
+}
+
+func caseSource(source string) interface{} {
+	list := map[string]interface{}{
+		"vkmpn-avanta":    11, //ВК
+		"yandex.direct":   8,  //Директ
+		"uzhedoma-avanta": 9673052727,
+		"kvalto-avanta":   9673052733,
+		"rendv":           9673052726,
+	}
+	val, ok := list[source]
+	if !ok {
+		val = "WEBFORM" //по умолчанию заявка с сайта
+	}
+	return val
 }

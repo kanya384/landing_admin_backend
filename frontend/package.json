@@ -8,9 +8,6 @@
     "@emotion/styled": "^11.9.3",
     "@material-ui/core": "^4.12.4",
     "@mui/material": "^5.8.4",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "html-react-parser": "^1.4.14",
     "iconv": "^3.0.1",
@@ -18,6 +15,7 @@
     "konva": "^8.3.9",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-infinite-scroller": "^1.2.6",
     "react-is-visible": "^1.2.0",
     "react-lightgallery": "^0.9.0",
     "react-router-dom": "^6.3.0",
@@ -25,14 +23,12 @@
     "react-slick": "^0.29.0",
     "react-textarea-autosize": "^8.3.4",
     "react-yandex-maps": "^4.6.0",
-    "reactstrap": "^9.1.1",
     "sass": "^1.52.2",
-    "slick-slider": "^1.8.2",
-    "web-vitals": "^2.1.4"
+    "slick-slider": "^1.8.2"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && node ./src/paths.js",
+    "build": "react-scripts build && ./src/optimize",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

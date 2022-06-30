@@ -5,7 +5,7 @@ import { RangeSliderPopup } from "./range-slider-popup"
 
 export const Form = ({fields, description, btnTitle, celtype, close, callback}) => {
     const sendForm = useSendForm()
-    if (celtype=="getPodbor" || celtype=="getExcursion" || celtype === "getQuestionAbout"|| celtype == "getFlat" || celtype == "getPresentation" || celtype == "getQuestion" ) {
+    if (celtype=="getPodbor" || celtype=="getExcursion" || celtype === "getQuestionAbout" || celtype === "getPromo"|| celtype == "getFlat" || celtype == "getPresentation" || celtype == "getQuestion" ) {
         return  <React.Fragment>
                     <form className={celtype == "getFlat"?"room-card__form":"form-ec__content"}>
                         <div className="form-ec__input-row">

@@ -115,7 +115,7 @@ export const Posters = () => {
             </div>
           </div>
           <div className="lvl-row-small">
-            <div className="lvl-row-small__img"><img src="img/img2.svg" alt="" /></div>
+            <div className="lvl-row-small__img"><img src="img/img2.jpg" alt="" /></div>
             <div className="lvl-row-small__text">
               <EditableText id={"62aef61ba26e626025a8d8c6"} defaultText={"В переводе с итальянского AVANTA (avanti) - вперёд. Дома для жизни и отдыха с высоким уровнем комфорта у моря. Так мы видим ещё один шаг вперёд для резидентов нашего жилого комплекса"}/>
             </div>

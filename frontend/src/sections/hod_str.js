@@ -129,13 +129,11 @@ export const HodStr = () => {
                   </svg>
                 </div>
                 <div className="nav-build">
-                  <Slider asNavFor={nav1} ref={(slider2) => setNav2(slider2)} className={"slider-construction-progress__slider-nav js-slider-construction-progress__slider-nav"} {...settings2}>
-
-                    <div className="slider-nav-item"><span>01</span></div>
-                    <div className="slider-nav-item"><span>02</span></div>
-                    <div className="slider-nav-item"><span>03</span></div>
-                    <div className="slider-nav-item"><span>04</span></div>
-                  </Slider>
+                  {photos.length>0?<Slider asNavFor={nav1} ref={(slider2) => setNav2(slider2)} className={"slider-construction-progress__slider-nav js-slider-construction-progress__slider-nav"} {...settings2}>
+                    {[...Array(photos.length).keys()].map((val) => {
+                      return  <div className="slider-nav-item"><span>{(val+1)<10?"0"+(val+1):(val+1)}</span></div>
+                    })}
+                  </Slider>:""}
                 </div>
                 <div className="arr-right" onClick={()=> nav2.slickNext()}>
                   <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
