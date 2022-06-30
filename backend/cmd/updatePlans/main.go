@@ -45,6 +45,7 @@ func main() {
 	if len(files) == 0 {
 		os.Exit(0)
 	}
+	fmt.Println(len(files))
 
 	clientOptions := options.Client().ApplyURI(cfg.DSN)
 	client, err := mongo.Connect(context.TODO(), clientOptions)
@@ -59,6 +60,7 @@ func main() {
 
 	err = services.Plans.ProcessPlans(context.Background(), files)
 	if err != nil {
+		fmt.Println(err)
 		logger.Panic("error updating file", err, nil)
 	}
 

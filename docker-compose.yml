@@ -19,6 +19,7 @@ services:
       - app-net
     volumes:
       - ./backend/file_store:/file_store
+      - ./backend/generatePlanPdfs:/cmd/generatePlanPdfs
       - ./vars:/vars
     restart: always
     environment:

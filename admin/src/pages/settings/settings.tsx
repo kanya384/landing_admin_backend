@@ -62,23 +62,11 @@ export const Settings: React.FC = () => {
         },
         {
           title: "Значение параметра",
-          type: "select", 
-          placeholder: "Выберите значение параметра", 
+          type: "number", 
+          placeholder: "Введите значение параметра", 
           name: "value", 
-          isError: false,
+          isError: false, 
           value:addForm!.value,
-          fields:[
-            {
-              name: "Да",
-              value: 1, 
-              type: 0,
-            },
-            {
-              name: "Нет",
-              value: 0,
-              type: 0,
-            },
-          ],
         },
       ],
     },
@@ -106,23 +94,11 @@ export const Settings: React.FC = () => {
             },
             {
               title: "Значение параметра",
-              type: "select", 
-              placeholder: "Выберите значение параметра", 
+              type: "number", 
+              placeholder: "Введите значение параметра", 
               name: "value", 
-              isError: false,
+              isError: false, 
               value:updateForm!.value,
-              fields:[
-                {
-                  name: "Да",
-                  value: 1, 
-                  type: 0,
-                },
-                {
-                  name: "Нет",
-                  value: 0,
-                  type: 0,
-                },
-              ],
             },
           ],
       },

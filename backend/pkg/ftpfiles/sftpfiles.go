@@ -67,13 +67,13 @@ func (f *sftpFiles) GetFiles() (entries [][]string, err error) {
 func (f *sftpFiles) CloseConnection() (err error) {
 
 	// удаляем обработанные файлы
-	files, err := f.client.ReadDir(f.pathToFiles)
+	/*files, err := f.client.ReadDir(f.pathToFiles)
 	if err != nil {
 		return
 	}
 	for _, file := range files {
 		f.client.Remove(f.pathToFiles + "/" + file.Name())
-	}
+	}*/
 
 	//закрываем соединение
 	err = f.client.Close()

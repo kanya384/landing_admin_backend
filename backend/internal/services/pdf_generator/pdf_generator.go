@@ -42,7 +42,7 @@ func (g *pdfGenerator) GeneratePdfs(ctx context.Context, price int) (err error) 
 		if plan.Status {
 			err = generatePdfPlan(plan, remontPrice)
 			if err != nil {
-				fmt.Println(plan.Image)
+				fmt.Println(err)
 			}
 		}
 	}

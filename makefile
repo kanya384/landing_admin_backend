@@ -24,7 +24,7 @@ up-dev:
 run:
 	@cd backend && go run cmd/app/main.go
 updatePlans:
-	@cd backend && go run cmd/updatePlans/main.go
+	@docker-compose run --rm backend /go/bin/updatePlans
 generate-pdfs:
 	@cd backend && go run cmd/generatePlanPdfs/main.go
 make-font:
