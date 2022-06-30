@@ -61,6 +61,23 @@
           }
           .MuiSlider-root {
             margin-left: 0;
+            @include qmd {
+              margin-left: 15px;
+              margin-right: 15px;
+              width: auto;
+              display: block;
+              .MuiSlider-thumb {
+                width: 36px;
+                height: 36px;
+              }
+              .MuiSlider-valueLabel span {
+                width: 36px;
+                height: 36px;
+                top: 28px;
+                left: 1px;
+                font-size: 15px;
+              }
+            }
           }
         }
       }
