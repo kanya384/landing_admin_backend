@@ -12,8 +12,6 @@ services:
       - './data:/data/db'
   backend:
     image: laurkan/ava_back
-    build:
-      context: ./backend
     container_name: backend
     networks:
       - app-net
@@ -42,10 +40,6 @@ services:
     image: laurkan/ava_admin
     depends_on:
       - backend
-    build:
-      context: ./admin
-      args:
-        REACT_APP_BACKEND_URL: ${REACT_APP_BACKEND_URL}
     container_name: admin
     networks:
       - app-net
@@ -54,10 +48,6 @@ services:
     image: laurkan/ava_front
     depends_on:
       - backend
-    build:
-      context: ./frontend
-      args:
-        REACT_APP_BACKEND_URL: ${REACT_APP_BACKEND_URL}
     container_name: frontend
     networks:
       - app-net
@@ -77,5 +67,4 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "80:80"
-  
 
