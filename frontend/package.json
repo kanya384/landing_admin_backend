@@ -39,6 +39,9 @@
     ],
     "rules": {
       "no-undef": 0
+    },
+    "globals": {
+      "contentTemplate": true
     }
   },
   "browserslist": {

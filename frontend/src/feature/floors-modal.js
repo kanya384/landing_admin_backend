@@ -1,11 +1,25 @@
+import { useContext, useEffect } from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { RangeSlider } from "../components/range-slider"
+import { ContentContext } from "../context/contentContext"
 import { flatIDs } from "./flat-ids"
 
 export const FloorsModal = ({title, classes, liter, opened, close}) => {
+  
   const [entrance, setEntrance] = useState(0)
   const [floor, setFloor] = useState(1)
+  const [flatAllIDs, setAllFlatIds] = useState([])
+  const content = useContext(ContentContext)
+  useEffect(()=>{
+    if (content.content.Plans) {
+      const ids = []
+      content.content.Plans.map((flat)=>{
+        ids.push(flat.ID)
+      })
+      setAllFlatIds(ids)
+    }
+  },[content.content])
   return (
     <div className={opened?`modal-full ${classes} open`:`modal-full ${classes}`}  >
       <div className="modal-full__close js-close-modal" onClick={()=>close()}>
@@ -32,7 +46,9 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
           <div id={"lit"+liter+"__flat-"+floor} className={floor>1?"lit"+liter+"__flat-1__2-9":"lit"+liter+"__flat-1__"+floor}>
             <img src={`img/entrances/${entrance+1}/${floor>1?"2-9":1}/floor.png`} alt="" />
             {flatIDs[`liter${liter}`] && flatIDs[`liter${liter}`][`floor${floor}`] && flatIDs[`liter${liter}`][`floor${floor}`][`entrance${entrance+1}`]?.map((id, index) => {
-              return  <Link to={"/plans/"+id}><div class={`flat-room flat-room_${index+1}`} ><div class="flat-room_before"></div></div></Link>
+              if (id !=="0" && flatAllIDs.includes(id)){
+                return  <Link to={"/plans/"+id}><div class={`flat-room flat-room_${index+1}`} ><div class="flat-room_before"></div></div></Link>
+              }
             })}
           </div>
         </div>

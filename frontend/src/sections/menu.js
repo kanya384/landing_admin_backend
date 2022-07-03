@@ -51,7 +51,7 @@ export const Menu = () => {
             </a>
           </div>
           <div className="header-phone">
-            <div className="phone">+7 987 654-32-10</div>
+            <div className="phone roistat-phone">+7 987 654-32-10</div>
             <a href="#" className="btn-recall" onClick={(e)=>{e.preventDefault(); setIsOpen(true)}}>Заказать звонок</a>
           </div>
           

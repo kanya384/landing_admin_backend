@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Slider from "react-slick/lib/slider";
 import { EditableText } from "../components/editable-text";
 import { ContentContext } from "../context/contentContext";
+import { SectionsContext } from "../context/sectionsContext";
 
 export const Posters = () => {
   const [nav1, setNav1] = useState();
@@ -10,7 +11,10 @@ export const Posters = () => {
   const [index, setIndex] = useState(0)
   const [title, setTitle] = useState("")
 
+  const [showSliders, setShowSliders] = useState(false)
+
   const content = useContext(ContentContext)
+  const loaded = useContext(SectionsContext)
   
   const settings = {
     slidesToShow: 1,
@@ -71,6 +75,12 @@ export const Posters = () => {
       }
     }
   }, [content.content])
+
+  useEffect(()=>{
+    if (loaded.blocks>3) {
+      setShowSliders(true)
+    }
+  }, [loaded.blocks, setShowSliders])
  
 
   return <div className="lvl1">
@@ -86,11 +96,11 @@ export const Posters = () => {
           </div>
           <div className="slider-lvl1">
             <div className="slider-horiz js-slider-hor-wrapper">
-              {posters.length>0 ?<Slider asNavFor={nav2} ref={(slider1) => setNav1(slider1)} className="slider slider-lvl1__slider-for js-slider-hor__slider-for" {...settings}>
+              {posters.length>0 ?showSliders?<Slider asNavFor={nav2} ref={(slider1) => setNav1(slider1)} className="slider slider-lvl1__slider-for js-slider-hor__slider-for" {...settings}>
                 {posters.map((poster)=>{
                   return <div className="slide"><img src={process.env.REACT_APP_BACKEND+"store/"+ poster.photo} alt="" /></div>
                 })}
-              </Slider>:""}
+              </Slider>:<div className="slide" onMouseEnter={()=>{setShowSliders(true)}}><img src={process.env.REACT_APP_BACKEND+"store/"+ posters[0].photo} alt="" /></div>:""}
               <div className="slider-horiz-nav">
                 <div className="arr-up" onClick={()=>nav1.slickPrev()}>
                   <svg width="14" height="19" viewBox="0 0 14 19" xmlns="http://www.w3.org/2000/svg">
@@ -99,11 +109,17 @@ export const Posters = () => {
                 </div>
                 <div className="nav-build">
                   <ul className="slider-lvl1__slider-nav js-slider-hor__slider-nav">
-                    <Slider asNavFor={nav1} ref={(slider2) => setNav2(slider2)} {...settings2}>
+                    {showSliders?<Slider asNavFor={nav1} ref={(slider2) => setNav2(slider2)} {...settings2}>
                       {Array.from(Array(posters.length).keys()).map((index)=>{
                           return <li className="slider-nav-item"><span>{index+1<10?"0"+(index+1):index+1}</span></li>
                       })}
-                    </Slider>
+                    </Slider>:<React.Fragment>
+                        {Array.from(Array(posters.length).keys()).map((index, i)=>{
+                          if (i<3){
+                            return <li onMouseEnter={()=>{setShowSliders(true)}} className="slider-nav-item"><span>{index+1<10?"0"+(index+1):index+1}</span></li>
+                          }
+                        })}
+                      </React.Fragment>}
                   </ul>
                 </div>
                 <div className="arr-down" onClick={()=>nav1.slickNext()}>

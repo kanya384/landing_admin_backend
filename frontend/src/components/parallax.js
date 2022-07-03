@@ -18,7 +18,7 @@ export const Parallax = ({image}) => {
   },[isVisible])
 
   return (<section ref={nodeRef} id={id} className={"js-parrallax parrallax-scene1 "+id}>
-            <div className="fake-img fake-img1" ><img src={image} alt="" /></div>
+            <div className="fake-img fake-img1" ><img src={loaded.blocks>3?image:""} alt="" /></div>
             <div key={id} className={translate==3000?"":"parralax-img1"} style={{position: "absolute", transform: `translateX(${translate}px)`}}><img src={loaded.blocks>3?image:""} alt="" /></div>
           </section>
   )

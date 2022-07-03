@@ -17,14 +17,18 @@ function App() {
 
   useEffect(()=>{
     if (!content) {
-      fetch(process.env.REACT_APP_BACKEND+"/content")
-        .then((response) => {
-          return response.json()
-        })
-        .then((data) => {
-          setContent(data)
-        });
-    }
+      if (typeof contentTemplate !== 'undefined') {
+        setContent(contentTemplate)
+      } else {
+        fetch(process.env.REACT_APP_BACKEND+"/content")
+          .then((response) => {
+            return response.json()
+          })
+          .then((data) => {
+            setContent(data)
+          });
+        }
+      }
   },[])
 
   return (
