@@ -55,13 +55,16 @@ func (s *service) ProcessPlans(ctx context.Context, records [][]string) (err err
 		plans = append(plans, plan)
 	}
 	for _, plan := range plans {
-		_, err := s.repository.Plans.GetByID(ctx, plan.ID)
+		planToUpdate, err := s.repository.Plans.GetByID(ctx, plan.ID)
 		if err != nil {
 			err = s.repository.Plans.Create(ctx, plan)
 			if err != nil {
 				return err
 			}
 		} else {
+			if plan.Image == "" && planToUpdate.Image != "" {
+				plan.Image = planToUpdate.Image
+			}
 			err = s.repository.Plans.Update(ctx, plan)
 			if err != nil {
 				return err

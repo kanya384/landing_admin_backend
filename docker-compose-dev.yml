@@ -3,40 +3,54 @@ networks:
   app-net:
     driver: bridge
 services:
-  mongodb:
-    image: mongo
-    restart: always
-    networks:
-      - app-net
-    volumes:
-      - './data:/data/db'
-    ports:
-      - "27017:27017"
-  backend:
+  #mongodb:
+  #  image: mongo
+  #  restart: always
+  #  networks:
+  #    - app-net
+  #  volumes:
+  #    - './data:/data/db'
+  #  ports:
+  #    - "27017:27017"
+  frontend:
+    image: laurkan/ava_front
     build:
-      context: ./backend
-    container_name: backend
+      context: ./frontend
+      args:
+        REACT_APP_BACKEND_URL: ${REACT_APP_BACKEND_URL}
+    container_name: frontend
     networks:
       - app-net
-    volumes:
-      - ./backend/file_store:/file_store
-      - ./vars:/vars
-    restart: always
+    stdin_open: true
     ports:
       - "8080:8080"
     environment:
-      APP_PORT: ${APP_PORT}
-      APP_DSN: ${APP_DSN}
-      APP_SERVICE_NAME: ${APP_SERVICE_NAME}
-      APP_LOG_LEVEL: ${APP_LOG_LEVEL}
-      APP_SALT: ${APP_SALT}
-      APP_TOKEN_TTL: ${APP_TOKEN_TTL}
-      APP_REFRESH_TOKEN_TTL: ${APP_REFRESH_TOKEN_TTL}
-      APP_TOKEN_SECRET: ${APP_TOKEN_SECRET}
-      APP_CACHE_DURATION: ${APP_CACHE_DURATION}
-      APP_FTP_HOST: ${APP_FTP_HOST}
-      APP_FTP_LOGIN: ${APP_FTP_LOGIN}
-      APP_FTP_PASS: ${APP_FTP_PASS}
-      APP_FTP_PATH: ${APP_FTP_PATH}
-      APP_BITRIX_HOOK: ${APP_BITRIX_HOOK}
       APP_APP_HOST: ${APP_APP_HOST}
+  #backend:
+  #  build:
+  #    context: ./backend
+  #  container_name: backend
+  #  networks:
+  #    - app-net
+  #  volumes:
+  #    - ./backend/file_store:/file_store
+  #    - ./vars:/vars
+  #  restart: always
+  #  ports:
+  #    - "8080:8080"
+  #  environment:
+  #    APP_PORT: ${APP_PORT}
+  #    APP_DSN: ${APP_DSN}
+  #    APP_SERVICE_NAME: ${APP_SERVICE_NAME}
+  #    APP_LOG_LEVEL: ${APP_LOG_LEVEL}
+  #    APP_SALT: ${APP_SALT}
+  #    APP_TOKEN_TTL: ${APP_TOKEN_TTL}
+  #    APP_REFRESH_TOKEN_TTL: ${APP_REFRESH_TOKEN_TTL}
+  #    APP_TOKEN_SECRET: ${APP_TOKEN_SECRET}
+  #    APP_CACHE_DURATION: ${APP_CACHE_DURATION}
+  #    APP_FTP_HOST: ${APP_FTP_HOST}
+  #    APP_FTP_LOGIN: ${APP_FTP_LOGIN}
+  #    APP_FTP_PASS: ${APP_FTP_PASS}
+  #    APP_FTP_PATH: ${APP_FTP_PATH}
+  #    APP_BITRIX_HOOK: ${APP_BITRIX_HOOK}
+  #    APP_APP_HOST: ${APP_APP_HOST}

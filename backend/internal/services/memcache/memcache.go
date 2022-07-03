@@ -3,6 +3,8 @@ package memcache
 
 import (
 	"errors"
+	"landing_admin_backend/internal/config"
+	"net/http"
 	"sync"
 	"time"
 )
@@ -19,6 +21,7 @@ type cache struct {
 	mu      sync.RWMutex
 	items   map[string]Item
 	content map[string]interface{}
+	cfg     *config.Config
 }
 
 type Item struct {
@@ -26,9 +29,10 @@ type Item struct {
 	Created time.Time
 }
 
-func New() Cache {
+func New(cfg *config.Config) Cache {
 	return &cache{
 		items: make(map[string]Item),
+		cfg:   cfg,
 	}
 }
 
@@ -60,6 +64,11 @@ func (c *cache) Delete(key string) error {
 
 	delete(c.items, key)
 	c.content = nil
+	go func() {
+		//updates cache on landing
+		time.Sleep(time.Second * 2)
+		http.Get("http://" + c.cfg.AppHost + "/update")
+	}()
 	return nil
 }
 

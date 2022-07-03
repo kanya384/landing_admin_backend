@@ -53,7 +53,7 @@ func main() {
 		logger.Panic("error connection to mongo", err, nil)
 	}
 
-	cache := memcache.New()
+	cache := memcache.New(cfg)
 
 	repository := mng.Setup(client.Database("public"))
 	services := services.Setup(cfg, repository, logger, cache)

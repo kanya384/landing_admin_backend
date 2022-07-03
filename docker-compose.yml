@@ -50,6 +50,8 @@ services:
     networks:
       - app-net
     stdin_open: true
+    environment:
+      APP_APP_HOST: ${APP_APP_HOST}
   admin:
     image: laurkan/ava_admin
     depends_on:

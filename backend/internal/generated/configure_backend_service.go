@@ -85,7 +85,7 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	}
 
 	repository := mng.Setup(client.Database("public"))
-	cache := memcache.New()
+	cache := memcache.New(cfg)
 	services := services.Setup(cfg, repository, logger, cache)
 	handlers := handlers.NewHandlers(services, cfg)
 	api.PostLoginHandler = operations.PostLoginHandlerFunc(handlers.Auth.Authenticate)
