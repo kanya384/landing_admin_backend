@@ -3,12 +3,12 @@ import { SectionsContext } from "../context/sectionsContext"
 import { Menu } from '../sections/menu';
 import "../scss/style.scss"
 import { Posters } from "../sections/posters";
-import { About } from "../sections/about";
 import { Parallax } from "../components/parallax";
 import { ContentContext } from "../context/contentContext";
 
 
 export const Loader = () => {
+    const About = React.lazy(() => import("../sections/about"))
     const Properties = React.lazy(() => import("../sections/properties"))
     const Walks = React.lazy(() => import("../sections/walks"))
     const Excursion = React.lazy(() => import("../sections/excursion"))

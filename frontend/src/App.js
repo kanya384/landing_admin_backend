@@ -35,7 +35,6 @@ function App() {
     <div className="App container_main">
       <ContentContext.Provider value={{ content, setContent, administrate, setAdministrate }}>
       <SectionsContext.Provider value={{ blocks, setBlocks, menuClick, setMenuClick }}>
-        
         <Router>
           <Panel />
           <div className="over">
@@ -47,7 +46,7 @@ function App() {
                 <Route path="*" element={<Suspense  fallback={<div>Загрузка...</div>}><Main /></Suspense>} />
               </Routes>
           </div>
-          </Router>
+        </Router>
         
       </SectionsContext.Provider>
       </ContentContext.Provider>

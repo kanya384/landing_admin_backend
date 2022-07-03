@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"sync"
 
+	"github.com/gin-contrib/gzip"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
@@ -33,6 +34,7 @@ func NewHandlers(router *gin.Engine, appHost string) Handlers {
 
 func (h *handlers) Registry() {
 	h.router.LoadHTMLFiles("./build/index.html")
+	h.router.Use(gzip.Gzip(gzip.DefaultCompression))
 
 	h.router.GET("/", h.HandleSite)
 	h.router.GET("/update/", h.UpdateContent)

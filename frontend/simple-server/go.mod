@@ -3,6 +3,7 @@ module simple-server
 go 1.17
 
 require (
+	github.com/gin-contrib/gzip v0.0.5
 	github.com/gin-contrib/static v0.0.1
 	github.com/gin-gonic/gin v1.8.1
 	github.com/vrischmann/envconfig v1.3.0
