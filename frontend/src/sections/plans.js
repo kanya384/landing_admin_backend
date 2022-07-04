@@ -114,7 +114,7 @@ export const Plans = () => {
 							  <path d="M12.501 4.5L18.501 10.5M18.501 10.5L12.501 16.5M18.501 10.5L1.50098 10.5" stroke="white" stroke-width="2"/>
 						  </svg>
 					  </div>
-					  <div className="date">3 кв. 2023</div>
+					  <div className="date">1 кв. 2023</div>
 				  </div>
 				  <div className="plan-float-label plan-float-label__2" onClick={()=>{setLiter(1); setModalState(true)}}>
 					  <div className="liter">
@@ -123,7 +123,7 @@ export const Plans = () => {
 							  <path d="M12.501 4.5L18.501 10.5M18.501 10.5L12.501 16.5M18.501 10.5L1.50098 10.5" stroke="white" stroke-width="2"/>
 						  </svg>
 					  </div>
-					  <div className="date">3 кв. 2023</div>
+					  <div className="date">1 кв. 2023</div>
 				  </div>
 				  <div className="plan-float-label plan-float-label__3" onClick={()=>{setLiter(1); setModalState(true)}}>
 					  <div className="liter">
@@ -132,7 +132,7 @@ export const Plans = () => {
 							  <path d="M12.501 4.5L18.501 10.5M18.501 10.5L12.501 16.5M18.501 10.5L1.50098 10.5" stroke="white" stroke-width="2"/>
 						  </svg>
 					  </div>
-					  <div className="date">3 кв. 2023</div>
+					  <div className="date">1 кв. 2023</div>
 				  </div>
 				  <div id="paths_plan"></div>
 			  </div>
