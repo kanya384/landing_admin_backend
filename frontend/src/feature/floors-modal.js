@@ -12,7 +12,7 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
   const [flatAllIDs, setAllFlatIds] = useState([])
   const content = useContext(ContentContext)
   useEffect(()=>{
-    if (content.content.Plans) {
+    if (content.content && content.content.Plans) {
       const ids = []
       content.content.Plans.map((flat)=>{
         ids.push(flat.ID)
@@ -43,7 +43,7 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
           </div>
         </div>
         <div className={"modal-flat-map"}>
-          <div id={"lit"+liter+"__flat-"+floor} className={floor>1?"lit"+liter+"__flat-1__2-9":"lit"+liter+"__flat-1__"+floor}>
+          <div id={"lit"+liter+"__flat-"+floor} className={floor>1?"lit"+(entrance+1)+"__flat-1__2-9":"lit"+(entrance+1)+"__flat-1__"+floor}>
             <img src={`img/entrances/${entrance+1}/${floor>1?"2-9":1}/floor.png`} alt="" />
             {flatIDs[`liter${liter}`] && flatIDs[`liter${liter}`][`floor${floor}`] && flatIDs[`liter${liter}`][`floor${floor}`][`entrance${entrance+1}`]?.map((id, index) => {
               if (id !=="0" && flatAllIDs.includes(id)){

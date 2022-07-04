@@ -247,7 +247,7 @@ export const Plans = () => {
                           <div className="choise-item__img"><Link to={"/plans/"+plan.ID}><img src={process.env.REACT_APP_BACKEND+"store/"+plan.image} alt="" /></Link></div>
                           <div className="choise-item__right">
                             <div className="choise-item__header">
-                              <div className="choise-item__title"><a href="#">{plan.rooms}-комн, {plan.area} м²</a></div>
+                              <div className="choise-item__title"><Link to={"/plans/"+plan.ID}>{plan.rooms}-комн, {plan.area} м²</Link></div>
                               <div className="choise-item__floor">{plan.floor} этаж из 9</div>
                               <div className="choise-item__floor">{plan.entrance} подьезд</div>
                               {showPrices?<div className="choise-item__price">{plan.price?Intl.NumberFormat().format(plan.price):""} руб.</div>:""}

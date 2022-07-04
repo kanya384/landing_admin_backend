@@ -1,10 +1,10 @@
-import React, { Suspense, useEffect, useContext } from "react"
+import React, { Suspense, useEffect, useContext, useState } from "react"
 import { SectionsContext } from "../context/sectionsContext"
 import { Menu } from '../sections/menu';
 import "../scss/style.scss"
 import { Posters } from "../sections/posters";
 import { Parallax } from "../components/parallax";
-import { ContentContext } from "../context/contentContext";
+//import { ContentContext } from "../context/contentContext";
 
 
 export const Loader = () => {
@@ -47,27 +47,14 @@ export const Loader = () => {
     ]
 
     const loaded = useContext(SectionsContext)
-    const content = useContext(ContentContext)
+    const [drawed, setDrawed] = useState([])
+    //const content = useContext(ContentContext)
 
     const LoadBlock = (block) => {
         return <Suspense fallback={<div>...</div>}>{block}</Suspense>
     }
 
-    const generateHtml = () => {
-        let toDraw = []
-        for (let i = 0; i < loaded.blocks; i++) {
-            toDraw.push(LoadBlock(blocksImports[i]))
-        }
-        return (
-
-            <div className="blocks" data={loaded.menuClick ? "true" : ""}>
-                {toDraw.map((block) =>
-                    block
-                )}
-            </div>
-
-        )
-    }
+   
     const handleScroll = (event) => {
         if (loaded.blocks < blocksImports.length) {
             loaded.setBlocks(blocksImports.length)
@@ -82,15 +69,18 @@ export const Loader = () => {
     })
 
     useEffect(()=>{
-
-        if (content.administrate && (loaded.blocks < blocksImports.length)) {
-            let y = window.scrollY
-            loaded.setBlocks(blocksImports.length)
-            setTimeout(()=>{
-                window.scrollTo(0, y)
-            },400)
+        if (loaded.blocks> drawed.length) {
+            let toDraw = []
+            for (let i = 0; i < loaded.blocks; i++) {
+                toDraw.push(LoadBlock(blocksImports[i]))
+            }
+            setDrawed([...toDraw])
         }
-    },[content.administrate])
-    return generateHtml()
+    },[loaded.blocks])
+    return <div className="blocks" data={loaded.menuClick ? "true" : ""}>
+    {drawed.map((block) =>
+         block
+    )}
+</div>
 
 }

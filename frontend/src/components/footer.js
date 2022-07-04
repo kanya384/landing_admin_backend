@@ -36,7 +36,7 @@ export const Footer = ({subfolder}) => {
                           <strong><EditableText id={"62aefdb322de07ce5e31751a"} defaultText={"г. Анапа, <br />ул. Крылова, 13К1"}/></strong>
                       </div>
                       <div className="b-col b-col--phone">
-                          <strong><EditableText id={"62aefdb322de07ce5e31751b"} defaultText={"+7 (987) 654-32-10"}/></strong>
+                          <strong><a href="tel:+79876543210" className="roistat-phone">+7 (987) 654-32-10</a></strong>
                       </div>
                       <div className="b-col b-col--time">
                         <EditableText id={"62aefdb322de07ce5e31751c"} defaultText={"пн-пт с 9:00 до 18:00, <br /> сб-вс с 10:00 до 16:00"}/>

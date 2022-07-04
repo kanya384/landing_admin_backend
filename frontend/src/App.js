@@ -6,7 +6,7 @@ import { ContentContext } from "./context/contentContext";
 import { useContent } from "./hooks/content.hook";
 import React, { Suspense, useEffect } from "react";
 import { Panel } from "./feature/panel";
-
+ 
 function App() {
   const { blocks, setBlocks, menuClick, setMenuClick } = useSections()
   const {content, setContent, administrate, setAdministrate} = useContent()
@@ -33,23 +33,22 @@ function App() {
 
   return (
     <div className="App container_main">
-      <ContentContext.Provider value={{ content, setContent, administrate, setAdministrate }}>
       <SectionsContext.Provider value={{ blocks, setBlocks, menuClick, setMenuClick }}>
-        <Router>
-          <Panel />
-          <div className="over">
-              <Routes>
-              <Route path="/about" element={<Suspense  fallback={<div>Загрузка...</div>}><About /></Suspense>} />
-                <Route path="/promo" element={<Suspense  fallback={<div>Загрузка...</div>}><Promo /></Suspense>} />
-                <Route path="/plans/:id" element={<Suspense  fallback={<div>Загрузка...</div>}><PlanDetail /></Suspense>} />
-                <Route path="/plans" element={<Suspense  fallback={<div>Загрузка...</div>}><Plans /></Suspense>} />
-                <Route path="*" element={<Suspense  fallback={<div>Загрузка...</div>}><Main /></Suspense>} />
-              </Routes>
-          </div>
-        </Router>
-        
+            <Router>
+              <ContentContext.Provider value={{ content, setContent, administrate, setAdministrate }}>
+              <Panel />
+              <div className="over">
+                  <Routes>
+                    <Route path="/about" element={<Suspense  fallback={<div>Загрузка...</div>}><About /></Suspense>} />
+                    <Route path="/promo" element={<Suspense  fallback={<div>Загрузка...</div>}><Promo /></Suspense>} />
+                    <Route path="/plans/:id" element={<Suspense  fallback={<div>Загрузка...</div>}><PlanDetail /></Suspense>} />
+                    <Route path="/plans" element={<Suspense  fallback={<div>Загрузка...</div>}><Plans /></Suspense>} />
+                    <Route path="*" element={<Main />} />
+                  </Routes>
+              </div>
+              </ContentContext.Provider>
+            </Router>
       </SectionsContext.Provider>
-      </ContentContext.Provider>
     </div>
   );
 }

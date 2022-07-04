@@ -1,3 +1,4 @@
+<div data-marquiz-id="623db63e231077003f67c602"></div>
 setTimeout(()=>{
   (function(w, d, s, h, id) {
     w.roistatProjectId = id; w.roistatHost = h;
@@ -24,5 +25,29 @@ setTimeout(()=>{
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-MN38KG8');
+
+
+  (function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '623db63e231077003f67c602', buttonText: 'Получите подборку квартир', bgColor: '#0054dd', textColor: '#ffffff', rounded: true, shadow: 'rgba(0, 84, 221, 0.5)', blicked: true, fixed: 'left'})
+  setTimeout(()=>{
+    (function(w, d, s, o){
+      var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
+        if (document.readyState !== 'loading') Marquiz.init(o);
+        else document.addEventListener("DOMContentLoaded", function() {
+          Marquiz.init(o);
+        });
+      };
+      d.head.insertBefore(j, d.head.firstElementChild);
+    })(window, document, 'script', {
+        host: '//quiz.marquiz.ru',
+        region: 'eu',
+        id: '623db63e231077003f67c602',
+        autoOpen: 30,
+        autoOpenFreq: 'once',
+        openOnExit: false,
+        disableOnMobile: true
+      }
+    );
+  },100)
+  
 
 }, 3000)

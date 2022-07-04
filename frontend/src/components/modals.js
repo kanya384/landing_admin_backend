@@ -48,7 +48,7 @@ export const Modal = ({title, subtitle, classes, liter, success, description, fi
               <div className="modal-header">
                 <div className="modal-header__title h1">{title}</div>
                 {subtitle?<div className="modal-text-right">{parse(subtitle)}</div>:""}
-                <div className="modal-image"><img src={imageMobile} alt="" /></div>
+                {imageMobile?<div className="modal-image"><img src={imageMobile} alt="" /></div>:""}
               </div>
               {fields.length>0?<div className="modal-content">
                 <Form fields={fields} btnTitle={btnTitle} description={description} celtype={celtype} close={() => {setShowSuccess(true)}} />

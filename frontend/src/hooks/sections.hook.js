@@ -1,4 +1,5 @@
-import {useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
+import { ContentContext } from '../context/contentContext'
 
 export const useSections = () => {
     const[blocks, setBlocks_] = useState(3)
@@ -6,5 +7,6 @@ export const useSections = () => {
     const setBlocks = (count) =>{
         setBlocks_(count)
     }
+    
     return {blocks, setBlocks, menuClick, setMenuClick}
 }

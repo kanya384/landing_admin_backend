@@ -94,7 +94,7 @@ export const Menu = () => {
             },
             
           ]} 
-        btnTitle={"Отправить"} 
+        btnTitle={"Заказать звонок"} 
         description={`Заказать обратный звонок`}
         celtype={"getCall"}
         close={()=>{setIsOpen(false)}} 

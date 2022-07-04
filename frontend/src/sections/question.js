@@ -24,7 +24,7 @@ export const Question = () => {
                       required: true,
                   },
                 ]} 
-                btnTitle={"Задать вопрос"} 
+                btnTitle={"Получить консультацию"} 
                 description={`Задать вопрос менеджеру`}
                 celtype={"getQuestion"}
                 close={()=>{}} 

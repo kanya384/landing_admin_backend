@@ -1,16 +1,17 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import Slider from "react-slick/lib/slider"
 import { AppBar } from "../components/appbar"
 import { EditableText } from "../components/editable-text"
 import { Footer } from "../components/footer"
 import { Modal } from "../components/modals"
 import { Form } from "../components/form";
+import { ContentContext } from "../context/contentContext"
 
 export const About = () => {
-
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
   const [isOpen, setIsOpen] = useState(false)
+  const content = useContext(ContentContext)
 
   let settings = {
     slidesToShow: 3,
@@ -40,17 +41,6 @@ export const About = () => {
     focusOnSelect: true,
     infinite: true,
   }
-  /*
-  $('.js-slider-about__slider-for').slick({
-        asNavFor: $('.js-slider-about-wrapper .js-slider-about__slider-nav'),
-       
-    });
-    $('.js-slider-about__slider-nav').slick({
-       
-        
-    });
-  
-  */
   return (
     <React.Fragment>
       <AppBar />
@@ -69,9 +59,13 @@ export const About = () => {
                 <EditableText id={"62aefdb322de07ce5e317520"} defaultText={"Девелопмент — это развитие. Планируя каждый проект, мы думаем о том, как будут жить, что чувствовать их жители. Мы думаем о создании цельной среды, в которой не нужно тратить лишнего времени на повседневные хлопоты и можно дарить его близким, думать о комфорте, здоровье и детях, безопасности и экологии. Мы заботимся о развитии — росте благополучия и реализации стремлений наших клиентов."}/>
               </div>
               <div class="b-download">
-                <a href="#" class="link-download">
-                    <svg class="svg"><use xlinkHref="img/sprite.svg#circle-download"></use></svg> Пректная декларация<br />ЖК AVAnta
-                </a>
+                {
+                  content.content.Docs.map((doc)=>{
+                    return <a target="_blank" href={process.env.REACT_APP_BACKEND+"store/"+doc.file} class="link-download">
+                            <svg class="svg"><use xlinkHref="img/sprite.svg#circle-download"></use></svg> {doc.title}
+                        </a>
+                  })
+                }
               </div>
             </div>
             <div class="options-room--about__wrapper">
@@ -154,7 +148,7 @@ export const About = () => {
                       </div>
                     </div>
                     <div class="slide">
-                      <div class="img"><img src="img/about-slide.png" alt="" /></div>
+                      <div class="img"><img src="img/about-slide2.jpg" alt="" /></div>
                       <div class="description">
                         <div class="num">2</div>
                         <div class="text">
@@ -163,7 +157,7 @@ export const About = () => {
                       </div>
                     </div>
                     <div class="slide">
-                      <div class="img"><img src="img/about-slide.png" alt="" /></div>
+                      <div class="img"><img src="img/about-slide3.jpg" alt="" /></div>
                       <div class="description">
                         <div class="num">3</div>
                         <div class="text">
@@ -172,11 +166,20 @@ export const About = () => {
                       </div>
                     </div>
                     <div class="slide">
-                      <div class="img"><img src="img/about-slide.png" alt="" /></div>
+                      <div class="img"><img src="img/about-slide4.jpg" alt="" /></div>
                       <div class="description">
                         <div class="num">4</div>
                         <div class="text">
                           <EditableText id={"62aefdb322de07ce5e317530"} defaultText={"Тщательно оцениваем земельный участок, его экологические характеристики, а также действующую жилую, социальную, инженерную и транспортную инфраструктуру с учётом потенциала их дальнейшего развития."}/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slide">
+                      <div class="img"><img src="img/about-slide5.jpg" alt="" /></div>
+                      <div class="description">
+                        <div class="num">5</div>
+                        <div class="text">
+                          <EditableText id={"62af012c2f3ab6f9b4a854dd"} defaultText={"Тщательно оцениваем земельный участок, его экологические характеристики, а также действующую жилую, социальную, инженерную и транспортную инфраструктуру с учётом потенциала их дальнейшего развития."}/>
                         </div>
                       </div>
                     </div>

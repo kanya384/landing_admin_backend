@@ -95,8 +95,8 @@ export const HodStr = () => {
               </div>
               
               <div className="dropdown-filter js-dropdown-filter">
-                <div className="dropdown-filter__label">
-                  <div className="dropdown-filter__label-text" onClick={()=>{setShow(!showDropDown)}}>{activeMonth?.name}</div>
+                <div className="dropdown-filter__label" onClick={()=>{setShow(!showDropDown)}}>
+                  <div className="dropdown-filter__label-text">{activeMonth?.name}</div>
                   <div className="dropdown-filter__arr">
                     <svg width="14" height="9" viewBox="0 0 14 9" xmlns="http://www.w3.org/2000/svg">
                       <path d="M13 1L7 7L1 1" strokeWidth="2"/>
