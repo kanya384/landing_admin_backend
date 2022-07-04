@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "/admin",
-  "proxy": "http://dev.жкаванта.рф:8090/api",
+  "proxy": "http://dev.жкаванта.рф/api",
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.4.26",
     "@testing-library/jest-dom": "^5.16.4",

@@ -72,7 +72,7 @@ export const editDoc = (file: any, id: string, title: string,  callback:(error: 
     docsService.docPatch(id, title, file, {headers: {"Authorization": token}}).then((resp)=> {
       if (resp.status === 200) {
         dispatch({
-          type: DocsActionTypes.DOCS_NEW,
+          type: DocsActionTypes.DOCS_UPDATE,
           payload: resp.data,
         });
         callback("")
@@ -81,5 +81,19 @@ export const editDoc = (file: any, id: string, title: string,  callback:(error: 
       }
     })
     
+  }
+}
+
+export const deleteDoc = (id: string) => {
+  return async (dispatch: Dispatch<DocAction>) => {
+    let token = GetTokenFromCookies()
+    docsService.docIdDelete(id, {headers: {"Authorization": token}}).then((resp)=>{
+      if (resp.status === 200) {
+        dispatch({
+          type: DocsActionTypes.DOCS_DELETE,
+          payload: id,
+        });
+      }
+    })
   }
 }

@@ -1,4 +1,3 @@
-<div data-marquiz-id="623db63e231077003f67c602"></div>
 setTimeout(()=>{
   (function(w, d, s, h, id) {
     w.roistatProjectId = id; w.roistatHost = h;

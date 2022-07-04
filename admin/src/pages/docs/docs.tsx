@@ -27,7 +27,7 @@ export const Doc: React.FC = () => {
       setOpened(null);
     }
   }
-  const { getDocs, addNewDoc, editDoc } = useActions()
+  const { getDocs, addNewDoc, editDoc, deleteDoc } = useActions()
   const popups = [
     {
       title: "Добавить документ",
@@ -110,7 +110,7 @@ export const Doc: React.FC = () => {
         </thead>
         <tbody>
           {docs?.docsList.map((doc, index) => {
-            return <TableItem doc={doc} index={index+1} editAction={()=>{setUpdateForm({id: doc.id!, title: doc.title!, file: doc.file!}); setOpened(1)}} deleteAction={()=>{}} />
+            return <TableItem doc={doc} index={index+1} editAction={()=>{setUpdateForm({id: doc.id!, title: doc.title!, file: doc.file!}); setOpened(1)}} deleteAction={()=>{deleteDoc(doc.id!)}} />
           })} 
         </tbody>
       </table>

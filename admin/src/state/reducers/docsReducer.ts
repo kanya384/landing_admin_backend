@@ -31,6 +31,13 @@ const reducer = produce((state: DocsState = initialState, action: DocAction) =>{
     case DocsActionTypes.DOCS_NEW:
       state.docsList.unshift(action.payload)
       return state;
+    case DocsActionTypes.DOCS_UPDATE:
+      for (let i=0; i<state.docsList.length; i++) {
+        if (state.docsList[i].id === action.payload.id) {
+          state.docsList[i] = action.payload
+        }
+      }
+      return state;
     case DocsActionTypes.DOCS_DELETE:
       state.docsList = state.docsList.filter((value) => value.id !== action.payload)
       return state;
