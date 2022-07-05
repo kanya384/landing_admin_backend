@@ -12,12 +12,9 @@ export const GetPodbor = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const [filter, setFilter] = useState({
-    areaMin: "",
-    areaMax: "",
     floors: [1,9],
-    rooms: [1,2,3],
-    liters: [1,2,3],
-    sort: "area",
+    rooms: [],
+    remont: "",
   })
   
   const setFloors = (value) => {
@@ -45,44 +42,10 @@ export const GetPodbor = () => {
     }
   }
   
-  const setLiters = (event) => {
-    let liter = parseInt(event.currentTarget.getAttribute("liter"))
-    if (event.target.checked && !filter.liters.includes(liter)) {
-      setFilter({
-        ...filter,
-        liters: [
-          ...filter.liters,
-          liter
-        ]
-      })
-    } else {
-      setFilter({
-        ...filter,
-        liters: filter.liters.filter(liters => liter!=liters)
-      })
-    }
-  }
-  
-  const resetFilter = (e) => {
+  const setRemont = (event) => {
     setFilter({
-      areaMin: "",
-      areaMax: "",
-      floors: [1,9],
-      rooms: [1,2,3],
-      liters: [1,2,3],
-    })
-  }
-  
-  const sortFlats = (filedName, flats) => {
-    
-    return flats.sort((a,b)=>{
-      if (a[filedName] > b[filedName]) {
-        return 1;
-      }
-      if (a[filedName] < b[filedName]) {
-        return -1;
-      }
-      return 0;
+      ...filter,
+      remont: event.currentTarget.getAttribute("remont")
     })
   }
   
@@ -119,9 +82,9 @@ export const GetPodbor = () => {
                         <span className="label">1-комн.</span></label>
                     </li>
                     <li>
-                      <label className="inp-checkbox"><input id="ck2" type="checkbox" liter={1} onChange={setLiters} checked={filter.liters.includes(1)} />
+                      <label className="inp-checkbox"><input id="ck2" type="checkbox" remont={"Черновая отделка"} onChange={setRemont} checked={filter.remont==="Черновая отделка"} />
                         <svg className="svg checked"><use xlinkHref="img/sprite.svg#checked"></use></svg>
-                        <span className="label">Корпус 1</span></label>
+                        <span className="label">Черновая отделка</span></label>
                     </li>
                     <li>
                       <label className="inp-checkbox"><input type="checkbox" rooms={2} onChange={setRooms} checked={filter.rooms.includes(2)} />
@@ -129,9 +92,9 @@ export const GetPodbor = () => {
                         <span className="label">2-комн.</span></label>
                     </li>
                     <li>
-                      <label className="inp-checkbox"><input type="checkbox" liter={2} onChange={setLiters} checked={filter.liters.includes(2)}/>
+                      <label className="inp-checkbox"><input type="checkbox" remont={"White Box"} onChange={setRemont} checked={filter.remont==="White Box"}/>
                         <svg className="svg checked"><use xlinkHref="img/sprite.svg#checked"></use></svg>
-                        <span className="label">Корпус 2</span></label>
+                        <span className="label">White Box</span></label>
                     </li>
                     <li>
                       <label className="inp-checkbox"><input type="checkbox" rooms={3} onChange={setRooms} checked={filter.rooms.includes(3)} />
@@ -139,9 +102,9 @@ export const GetPodbor = () => {
                         <span className="label">3-комн.</span></label>
                     </li>
                     <li>
-                      <label className="inp-checkbox"><input type="checkbox" liter={3} onChange={setLiters} checked={filter.liters.includes(3)} />
+                      <label className="inp-checkbox"><input type="checkbox" remont={"Готовый ремонт"} onChange={setRemont} checked={filter.remont==="Готовый ремонт"}  />
                         <svg className="svg checked"><use xlinkHref="img/sprite.svg#checked"></use></svg>
-                        <span className="label">Корпус 3</span></label>
+                        <span className="label">Готовый ремонт</span></label>
                     </li>
                   </ul>
                 </div>
@@ -171,7 +134,7 @@ export const GetPodbor = () => {
                             }, 
                           ]} 
                           btnTitle={"Получить подборку"} 
-                          description={`Получить подборку квартир. Этаж:${filter.floors.join("-")}; Кол-во комнат:${filter.rooms.join(",")}; Корпус:${filter.liters.join(",")}`}
+                          description={`Получить подборку квартир. Этаж:${filter.floors.join("-")}; Кол-во комнат:${filter.rooms.join(",")}; Ремонт:${filter.remont}`}
                           celtype={"getPodbor"}
                           close={()=>{}} 
                           callback={()=>{setIsOpen(true)}}
