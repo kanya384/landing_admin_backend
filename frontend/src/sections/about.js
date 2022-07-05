@@ -38,7 +38,6 @@ export const  About = () => {
             fields={[]}
             celtype={""}
             image ={"img/news-img.svg"}
-            imageMobile={"img/news-mobile.svg"}
             opened={isOpen}
             close = {()=>{setModalState(null)}}
         />
