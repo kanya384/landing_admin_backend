@@ -34,7 +34,7 @@
         padding-bottom: 15px;
         line-height: 1.2;
       }
-      @include qxxs {
+      @include qsm {
         font-size: 28px;
       }
     }
@@ -499,7 +499,7 @@
         padding-bottom: 24px;
         line-height: 1.2;
       }
-      @include qxxs {
+      @include qsm {
         font-size: 28px;
       }
     }
@@ -635,7 +635,7 @@
       line-height: 1.2;
       padding-bottom: 40px;
     }
-    @include qxxs {
+    @include qsm {
       font-size: 28px;
     }
   }
@@ -700,7 +700,7 @@
       padding-bottom: 24px;
       width: 100%;
     }
-    @include qxxs {
+    @include qsm {
       font-size: 28px;
     }
   }
@@ -877,7 +877,7 @@
     @include qmd {
       width: 100%;
     }
-    @include qxxs {
+    @include qsm {
       font-size: 28px;
     }
   }
@@ -1052,7 +1052,7 @@
         @include qmd {
           padding-bottom: 40px;
         }
-        @include qxxs {
+        @include qsm {
           font-size: 28px;
         }
       }
@@ -1191,6 +1191,9 @@
         height: auto;
         width: 100%;
       }
+      @include qsm {
+        left: -10px
+      }
       &:hover {
         background: $clr-first-primary;
         color: #fff;
@@ -1278,7 +1281,7 @@
     @include qlg {
       padding-bottom: 24px;
     }
-    @include qxxs {
+    @include qsm {
       font-size: 28px;
     }
   }
@@ -1289,6 +1292,9 @@
   padding-bottom: 80px;
   .wrapper {
     display: flex;
+    @include qlg {
+      padding-top: 40px;
+    }
     @include qmd {
       flex-wrap: wrap;
     }
@@ -1325,7 +1331,7 @@
         text-align: center;
         
       }
-      @include qxxs {
+      @include qsm {
         font-size: 28px;
       }
     }
@@ -1369,7 +1375,7 @@
     @include qlg {
       padding-bottom: 40px;
     }
-    @include qxxs {
+    @include qsm {
       font-size: 28px;
     }
   }
@@ -1420,7 +1426,7 @@
       padding: 0 0 40px;
       line-height: 1.2;
       text-transform: uppercase;
-      @include qxxs {
+      @include qsm {
         font-size: 28px;
       }
     }

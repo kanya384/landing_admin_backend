@@ -77,6 +77,10 @@
   font-weight: 700;
   padding-left: 98px;
   transition: all 0.3s ease;
+  @include qsm {
+    padding-left: 70px;
+    background-size: 50px auto;
+  }
   &:hover {
     background-position: 25px 50%;
     color: $clr-first-primary;

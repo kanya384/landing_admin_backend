@@ -5,7 +5,7 @@
   background: #fff;
   @include qxl {
     position: fixed;
-    z-index: 90;
+    z-index: 5555555;
     top: 0;
     left: 23px;
     width: auto;
@@ -209,4 +209,12 @@ body.active_m #hamburger-icon {
 }
 .active_m .navigation {
   display: block;
+  @include qxl {
+    padding-top: 20px;
+    border-top: 1px solid $clr-first-primary;
+    top: 100px;
+  }
+  @include qmd {
+    top: 80px;
+  }
 }

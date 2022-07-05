@@ -58,7 +58,7 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
             <RangeSlider value={floor} setValue={(floor) => setFloor(floor)} min={1} max={9} />
           </div>
           <ul className="entrance-list">
-            <li lassName={entrance==0?"entrance-item active":"entrance-item"} onClick={()=>setEntrance(0)}>подьезд 1</li>
+            <li className={entrance==0?"entrance-item active":"entrance-item"} onClick={()=>setEntrance(0)}>подьезд 1</li>
             <li className={entrance==1?"entrance-item active":"entrance-item"} onClick={()=>setEntrance(1)}>подьезд 2</li>
             <li className={entrance==2?"entrance-item active":"entrance-item"} onClick={()=>setEntrance(2)}>подьезд 3</li>
           </ul>
