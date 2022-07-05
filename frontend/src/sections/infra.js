@@ -952,7 +952,7 @@ export const Infra = () => {
         <div className="h-title"><EditableText id={"62aef61ba26e626025a8d8dc"} defaultText={"Развитая <br />инфраструктура"}/></div>
         <div className="map-info" style={{width:"100%", height: 704, display:"block", position: "relative",  overflow:"hidden"}}>
             <YMaps>
-                    <Map defaultState={{ center: [44.876247, 37.322943], zoom: 15, controls: [] }} style={{ width: "100%", height: "100%", position: "absolute" }}  >
+                    <Map defaultState={{ center: [44.876247, 37.322943], zoom: 16, controls: [] }} style={{ width: "100%", height: "100%", position: "absolute" }}  >
                         <ZoomControl options={{ float: 'left' }} />
                         {icons.map((icon)=>{
                           return <Placemark geometry={icon.location}

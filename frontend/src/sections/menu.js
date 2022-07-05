@@ -66,7 +66,7 @@ export const Menu = () => {
             <li><a onClick={clickMenu} href="lvl2">Инфраструктура</a></li>
             <li><a onClick={clickMenu} href="lvl8">Планировки и цены</a></li>
             <li><a onClick={clickMenu} href="lvl9">Способы покупки</a></li>
-            <li><Link to="/about">О застройщике</Link></li>
+            <li><Link to={"/about"+window.location.search}>О застройщике</Link></li>
             <li><a onClick={clickMenu} href="footer">Контакты</a></li>
           </ul>
         </nav>

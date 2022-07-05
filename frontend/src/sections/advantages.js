@@ -39,7 +39,7 @@ export const Advantages = () => {
             </div>
             <div className="wrapper">
           <div className="b-link-row">
-              <Link to="/promo" className="lnk-params js-open-modal-flat">
+              <Link to={"/promo"+window.location.search} className="lnk-params js-open-modal-flat">
                 <span className="lnk-params__ico">
                 <svg className="ico" width="66" height="30" viewBox="0 0 66 30"
                       xmlns="http://www.w3.org/2000/svg">

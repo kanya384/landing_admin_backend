@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { RangeSlider } from "../components/range-slider"
 import { ContentContext } from "../context/contentContext"
 import { flatIDs } from "./flat-ids"
@@ -11,6 +11,7 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
   const [floor, setFloor] = useState(1)
   const [flatAllIDs, setAllFlatIds] = useState([])
   const content = useContext(ContentContext)
+  const [searchParams, setSearchParams] = useSearchParams();
   useEffect(()=>{
     if (content.content && content.content.Plans) {
       const ids = []
@@ -20,6 +21,35 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
       setAllFlatIds(ids)
     }
   },[content.content])
+
+  useEffect(()=>{
+    setTimeout(()=>{
+        if (searchParams.get("entrance")) {
+				  setEntrance(parseInt(searchParams.get("entrance")))
+        }
+        if (searchParams.get("floor")) {
+				  setFloor(parseInt(searchParams.get("floor")))
+        }
+        if (searchParams.get("floor")) {
+          try{
+              searchParams.delete("entrance")
+              searchParams.delete("floor")
+              searchParams.delete("liter")
+              setSearchParams(searchParams)
+              setTimeout(()=>{
+                window.scrollTo({
+                  top: document.querySelector(".lvl8").offsetTop,
+                })
+              },[500])
+             
+          } catch(e){
+            console.log(e)
+          }
+        }
+      }, [500])
+    },[])
+    
+    
   return (
     <div className={opened?`modal-full ${classes} open`:`modal-full ${classes}`}  >
       <div className="modal-full__close js-close-modal" onClick={()=>close()}>
@@ -47,7 +77,7 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
             <img src={`img/entrances/${entrance+1}/${floor>1?"2-9":1}/floor.png`} alt="" />
             {flatIDs[`liter${liter}`] && flatIDs[`liter${liter}`][`floor${floor}`] && flatIDs[`liter${liter}`][`floor${floor}`][`entrance${entrance+1}`]?.map((id, index) => {
               if (id !=="0" && flatAllIDs.includes(id)){
-                return  <Link to={"/plans/"+id}><div class={`flat-room flat-room_${index+1}`} ><div class="flat-room_before"></div></div></Link>
+                return  <Link to={"/plans/"+id+window.location.search+`&liter=${liter}&floor=${floor}&entrance=${entrance}`}><div class={`flat-room flat-room_${index+1}`} ><div class="flat-room_before"></div></div></Link>
               }
             })}
           </div>

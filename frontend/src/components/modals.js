@@ -12,7 +12,7 @@ export const Modal = ({title, subtitle, classes, liter, success, description, fi
     return <div className={opened?`modal-full ${classes} open`:`modal-full ${classes}`} style={{zIndex:90000}}>
               <div className="modal-full__close js-close-modal" onClick={()=>close()}>
                 <div className="close-icon" >
-                  <svg className="svg"><use xlinkHref="img/sprite.svg#close"></use></svg>
+                  <svg className="svg"><path d="M22 2L12 12M12 12L2 22M12 12L22 22M12 12L2 2" stroke-width="4"></path></svg>
                 </div>
               </div>
               <div className={"modal-centered modal-centered--form modal-centered--bg"}>

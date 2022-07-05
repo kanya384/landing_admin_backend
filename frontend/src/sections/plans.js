@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Modal } from "../components/modals"
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Konva from "konva"
 import { EditableText } from "../components/editable-text";
 var stage
@@ -11,6 +11,7 @@ export const Plans = () => {
   const [isOpen, setModalState] = useState(false)
   const [hovered, setHovered] = useState(false)
   const [selectedLiter, setLiter] = useState()
+  const [searchParams, setSearchParams] = useSearchParams();
   const paths = [
 		{
 			name: 'paths_plan1',
@@ -96,6 +97,19 @@ export const Plans = () => {
 		window.addEventListener('resize', fitStageIntoParentContainer);
 	})
 
+	useEffect(()=>{
+		console.log()
+        if (searchParams.get("liter")) {
+            setTimeout(()=>{
+                window.scrollTo({
+                    top: document.querySelector(".lvl8").offsetTop,
+                })
+				setLiter(searchParams.get("liter"))
+				setModalState(true)
+            }, 0)
+        }
+    },[])
+
 
 
   return (
@@ -139,7 +153,7 @@ export const Plans = () => {
           </div>
           
           <div className="b-link-row">
-            <Link to="/plans" className="lnk-params js-open-modal-flat">
+            <Link to={"/plans"+window.location.search} className="lnk-params js-open-modal-flat">
               <span className="lnk-params__ico">
               <svg className="ico" width="66" height="30" viewBox="0 0 66 30"
                     xmlns="http://www.w3.org/2000/svg">
