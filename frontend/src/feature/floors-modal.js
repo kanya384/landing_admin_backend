@@ -77,7 +77,7 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
             <img src={`img/entrances/${entrance+1}/${floor>1?"2-9":1}/floor.png`} alt="" />
             {flatIDs[`liter${liter}`] && flatIDs[`liter${liter}`][`floor${floor}`] && flatIDs[`liter${liter}`][`floor${floor}`][`entrance${entrance+1}`]?.map((id, index) => {
               if (id !=="0" && flatAllIDs.includes(id)){
-                return  <Link to={"/plans/"+id+window.location.search+`&liter=${liter}&floor=${floor}&entrance=${entrance}`}><div class={`flat-room flat-room_${index+1}`} ><div class="flat-room_before"></div></div></Link>
+                return  <Link to={window.location.search!==""?"/plans/"+id+window.location.search+`&liter=${liter}&floor=${floor}&entrance=${entrance}`:"/plans/"+id+`?liter=${liter}&floor=${floor}&entrance=${entrance}`}><div class={`flat-room flat-room_${index+1}`} ><div class="flat-room_before"></div></div></Link>
               }
             })}
           </div>
