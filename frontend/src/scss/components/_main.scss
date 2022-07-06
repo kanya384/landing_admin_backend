@@ -824,6 +824,9 @@
       @include qmd {
         line-height: 1.2;
       }
+      @include qxs {
+        font-size: 24px;
+      }
     }
     .text {
       font-weight: 500;
