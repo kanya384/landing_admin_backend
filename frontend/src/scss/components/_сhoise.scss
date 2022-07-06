@@ -3,6 +3,11 @@
   @include qxl {
     padding-bottom: 40px;
   }
+  @include qmd {
+    .h1 {
+      font-size: 30px;
+    }
+  }
 }
 .filter-left-btn-toggle {
   .btn-toggle-filter {
@@ -99,7 +104,7 @@
       }
     }
     &__rooms {
-      max-width: 320px;
+      max-width: 620px;
       padding-bottom: 18px;
     }
   }
@@ -108,8 +113,10 @@
     &--column-3 {
       display: flex;
       flex-wrap: wrap;
+      width: 100%;
       li {
-        width: 150px;
+        width: 50%;
+        max-width: 250px;
         padding: 0 0 24px;
         @include qxs {
           width: 137px;

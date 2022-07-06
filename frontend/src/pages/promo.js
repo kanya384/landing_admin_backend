@@ -54,7 +54,7 @@ export const Promo = () => {
                     </div>
                   </div>
                   <div class="b-text">
-                    <div class="title">Пляж станицы Благовещен-ской</div>
+                    <div class="title">Пляж станицы Благовещенской</div>
                     <div class="text">
                       Это одно из самых популярных мест отдыха под Анапой. Сюда едут со всей страны: обычные туристы,
                       любители отдохнуть дикарем, дайверы, сёрферы и кайтеры. Здесь можно принимать солнечные ванны или
@@ -125,7 +125,7 @@ export const Promo = () => {
                   />
               </div>
             </main>
-            <Modal 
+            <Modal
               success={true}
               position={window.pageYOffset}
               opened={isOpen}

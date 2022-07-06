@@ -1214,6 +1214,9 @@
       
       &:hover .img:after {
         box-shadow: inset 0 0 100px #0ca5e6;
+        @include qmd {
+          display: none;
+        }
       }
       .img {
         display: block;
@@ -1553,8 +1556,12 @@
   opacity: 0;
   height: 290px;
   @include qlg {
-    height: 150px;
-    padding-bottom: 80px;
+    height: auto;
+    padding-bottom: 50px;
+    opacity: 1;
+  }
+  @include qmd {
+  
   }
 }
 
@@ -1573,12 +1580,16 @@
     width: 1000px;
     top: 0;
     margin-left: 1755px;
+    display: none;
   }
   @include qmd {
     width: 800px;
+    transform: none;
+    
   }
   @include qsm {
-    margin-left: 1900px;
+
+    margin-left: 0;
   }
   &.img-hidden {
     transform: translateX(3000px) !important;

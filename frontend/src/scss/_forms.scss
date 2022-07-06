@@ -4,6 +4,8 @@
   cursor: pointer;
   font-weight: 500;
   line-height: 1.2;
+  display: inline-block;
+  vertical-align: top;
   input {
     position: absolute;
     opacity: 0;
@@ -79,11 +81,14 @@
   transition: all 0.3s ease;
   @include qsm {
     padding-left: 70px;
-    background-size: 50px auto;
+    background-size: 48px auto;
   }
   &:hover {
     background-position: 25px 50%;
     color: $clr-first-primary;
+    @include qsm {
+      background-position: 10px 50%;
+    }
     .btn-submit-text {
       border-color: rgba(0,0,0,0);
     }
