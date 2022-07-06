@@ -1,15 +1,14 @@
 .header {
   padding: 25px 23px;
-  position: relative;
-  margin: 0 -23px;
+  margin: 0 ;
   background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5555555;
   @include qxl {
-    position: fixed;
-    z-index: 5555555;
-    top: 0;
-    left: 23px;
-    width: auto;
-    right: 23px;
+
   }
   &--inside {
     border-bottom: 1px solid #000;

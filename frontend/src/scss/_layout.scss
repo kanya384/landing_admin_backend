@@ -20,11 +20,11 @@ a:hover { text-decoration:none;}
   min-height:100%;
   overflow: hidden;
   position: relative;
-  padding: 0 23px;
+  padding: 150px 23px 0;
   display: flex;
   flex-direction: column;
   @include qxl {
-    padding-top: 95px;
+    padding-top: 135px;
   }
 }
 
@@ -192,4 +192,17 @@ body {
     border-color: rgba(255,255,255, 0);
     color: $clr-first-primary;
   }
+}
+.MuiSlider-thumb {
+  width: 40px !important;
+  height: 40px !important;
+  margin-top: -19px !important;
+}
+.MuiSlider-valueLabel span {
+  top: 27px !important;
+  left: 3px !important;
+  font-weight: 400 !important;
+  width: 40px !important;
+  height: 40px !important;
+  line-height: 40px !important;
 }

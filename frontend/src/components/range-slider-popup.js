@@ -2,12 +2,12 @@ import Slider from '@material-ui/core/Slider';
 import { styled } from '@mui/material/styles';
 
 export const RangeSliderPopup = ({step, min, max, value, postfix, callback}) => {
-	const num_word = (value, words) => {  
-		value = Math.abs(value) % 100; 
+	const num_word = (value, words) => {
+		value = Math.abs(value) % 100;
 		var num = value % 10;
-		if(value > 10 && value < 20) return words[2]; 
+		if(value > 10 && value < 20) return words[2];
 		if(num > 1 && num < 5) return words[1];
-		if(num == 1) return words[0]; 
+		if(num == 1) return words[0];
 		return words[2];
 	}
     return ( <CustomSlider
@@ -38,11 +38,11 @@ const CustomSlider = styled(Slider)({
 		backgroundColor: "transparent !important",
 		position: "absolute",
         color: "#fff",
-		width: "28px",
-		height: "28px",
-		lineHeight: "28px",
-		fontSize: "16px",
-		fontWeight: 250,
+		width: "40px",
+		height: "40px",
+		lineHeight: "40px",
+		fontSize: "15px",
+		fontWeight: 400,
 		top: 26,
 		left: 0,
 		textAlign: "center",
@@ -52,15 +52,15 @@ const CustomSlider = styled(Slider)({
 		'&:before': {
 			display: 'none',
 		},
-		width: "28px",
-		height: "28px",
+		width: "40px",
+		height: "40px",
 		textAlign: "center",
-		fontSize: "16px",
+		fontSize: "15px",
 		color: "#fff",
-		fontWeight: 250,
+		fontWeight: 400,
 		lineHeight: "56px",
 		marginLeft: "-14px",
-		marginTop: "-15px",
+		marginTop: "-17px",
 		cursor: "pointer",
 		boxShadow: "0 0 0 10px transparent !important",
 	},
