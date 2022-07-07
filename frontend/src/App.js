@@ -8,7 +8,7 @@ import React, { Suspense, useEffect } from "react";
 import { Panel } from "./feature/panel";
  
 function App() {
-  const { blocks, setBlocks, menuClick, setMenuClick } = useSections()
+  const { blocks, setBlocks, menuClick, setMenuClick, showPlan, setShowPlan } = useSections()
   const {content, setContent, administrate, setAdministrate} = useContent()
   const PlanDetail = React.lazy(() => import("./pages/plan-detail"))
   const Plans = React.lazy(() => import("./pages/plans"))
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div className="App container_main">
-      <SectionsContext.Provider value={{ blocks, setBlocks, menuClick, setMenuClick }}>
+      <SectionsContext.Provider value={{ blocks, setBlocks, menuClick, setMenuClick, showPlan, setShowPlan }}>
             <Router>
               <ContentContext.Provider value={{ content, setContent, administrate, setAdministrate }}>
               <Panel />

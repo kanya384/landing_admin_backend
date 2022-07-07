@@ -1,13 +1,18 @@
+import { useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SectionsContext } from "../context/sectionsContext";
 
-export const AppBar = ({subfolder}) => {
+export const AppBar = ({subfolder, stateBack}) => {
   const navigate = useNavigate();
+  const sections = useContext(SectionsContext)
   const backClick = (e) => {
     e.preventDefault(); 
-    navigate(-1); 
-    let location = window.location.search; 
-    if (location.indexOf('liter')!==-1){
-      setTimeout(()=>{window.location.search=location},100)
+    console.log(sections.showPlan)
+    if (sections.showPlan){
+      sections.setShowPlan(false)
+    } else {
+      navigate(-1);
     }
   }
   

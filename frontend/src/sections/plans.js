@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { Modal } from "../components/modals"
+import React, { useContext, useEffect, useState } from "react"
+import { Modal as ModalC } from "../components/modals"
 import { Link, useSearchParams } from "react-router-dom";
 import Konva from "konva"
 import { EditableText } from "../components/editable-text";
@@ -97,18 +97,6 @@ export const Plans = () => {
 		window.addEventListener('resize', fitStageIntoParentContainer);
 	})
 
-	useEffect(()=>{
-		console.log()
-        if (searchParams.get("liter")) {
-            setTimeout(()=>{
-                window.scrollTo({
-                    top: document.querySelector(".lvl8").offsetTop,
-                })
-				setLiter(searchParams.get("liter"))
-				setModalState(true)
-            }, 0)
-        }
-    },[])
 
 
 
@@ -165,7 +153,7 @@ export const Plans = () => {
           </div>
         </div>
       </div>
-      <Modal
+      <ModalC
         title={`Планировки литера ${selectedLiter}`}
         position={window.pageYOffset}
         classes={"modal-flat"}

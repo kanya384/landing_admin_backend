@@ -7,4 +7,6 @@ export const SectionsContext = createContext({
     setBlocks: noop(),
     menuClick: false,
     setMenuClick: noop(),
+    showPlan: false,
+    setShowPlan: noop(),
 })

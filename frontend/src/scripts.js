@@ -26,7 +26,7 @@ setTimeout(()=>{
   })(window,document,'script','dataLayer','GTM-MN38KG8');
 
 
-  (function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '623db63e231077003f67c602', buttonText: 'Получите подборку квартир', bgColor: '#0054dd', textColor: '#ffffff', rounded: true, shadow: 'rgba(0, 84, 221, 0.5)', blicked: true, fixed: 'left'})
+  (function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '623db63e231077003f67c602', buttonText: 'Получите подборку квартир', bgColor: '#0ca5e6', textColor: '#ffffff', rounded: true, shadow: 'rgba(0, 84, 221, 0.5)', blicked: true, fixed: 'left'})
   setTimeout(()=>{
     (function(w, d, s, o){
       var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {

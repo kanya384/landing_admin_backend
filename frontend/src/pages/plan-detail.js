@@ -7,7 +7,7 @@ import { Modal } from "../components/modals";
 import { Form } from "../components/form";
 
 
-export const PlanDetail = () => {
+export const PlanDetail = ({ident}) => {
   const [isOpen, setIsOpen] = useState(false)
   const [flat, setFlat] = useState()
   const content = useContext(ContentContext)
@@ -17,14 +17,13 @@ export const PlanDetail = () => {
   useEffect(()=>{
     
     content.content?.Plans.forEach((flat)=>{
-      if (flat.ID === id) {
+      if (flat.ID === id || ident === flat.ID) {
         setFlat(flat)
         window.scrollTo(0,0)
-        console.log(flat)
         return
       }
     })
-  },[id, content.content])
+  },[id, content.content, ident])
 
   useEffect(()=>{
     if ( content.content){
@@ -35,9 +34,12 @@ export const PlanDetail = () => {
       })
     }
   }, [content.content])
+
+
+
   return (
     <React.Fragment>
-      <AppBar subfolder={true} />
+      <AppBar subfolder={true} stateBack={ident?true:false} />
       <div className="wrapper">
           <div className="page-title"><h1 className="h1">{flat?.rooms === 1?"однокомнатная":flat?.rooms === 2?"двухкомнатная":"трехкомнатная"} квартира №{flat?.number}</h1></div>
           <div className="content-wrapper">

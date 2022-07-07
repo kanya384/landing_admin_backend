@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Link, useSearchParams } from "react-router-dom"
 import { RangeSlider } from "../components/range-slider"
 import { ContentContext } from "../context/contentContext"
+import { SectionsContext } from "../context/sectionsContext"
 import { flatIDs } from "./flat-ids"
 
 export const FloorsModal = ({title, classes, liter, opened, close}) => {
@@ -11,6 +12,7 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
   const [floor, setFloor] = useState(1)
   const [flatAllIDs, setAllFlatIds] = useState([])
   const content = useContext(ContentContext)
+  const sections = useContext(SectionsContext)
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(()=>{
     if (content.content && content.content.Plans) {
@@ -48,6 +50,10 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
         }
       }, [500])
     },[])
+
+  const flatClick = (id)=>{
+    sections.setShowPlan(id)
+  }
     
     
   return (
@@ -77,7 +83,7 @@ export const FloorsModal = ({title, classes, liter, opened, close}) => {
             <img src={`img/entrances/${entrance+1}/${floor>1?"2-9":1}/floor.png`} alt="" />
             {flatIDs[`liter${liter}`] && flatIDs[`liter${liter}`][`floor${floor}`] && flatIDs[`liter${liter}`][`floor${floor}`][`entrance${entrance+1}`]?.map((id, index) => {
               if (id !=="0" && flatAllIDs.includes(id)){
-                return  <Link to={window.location.search!==""?"/plans/"+id+window.location.search+`&liter=${liter}&floor=${floor}&entrance=${entrance}`:"/plans/"+id+`?liter=${liter}&floor=${floor}&entrance=${entrance}`}><div class={`flat-room flat-room_${index+1}`} ><div class="flat-room_before"></div></div></Link>
+                return  <div class={`flat-room flat-room_${index+1}`} onClick={()=>flatClick(id)}><div class="flat-room_before"></div></div>// <Link to={"/plans/"+id+window.location.search}></Link>
               }
             })}
           </div>

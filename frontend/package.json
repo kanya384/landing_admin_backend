@@ -23,6 +23,7 @@
     "react-slick": "^0.29.0",
     "react-textarea-autosize": "^8.3.4",
     "react-yandex-maps": "^4.6.0",
+    "reactstrap": "^9.1.1",
     "sass": "^1.52.2",
     "slick-slider": "^1.8.2"
   },
