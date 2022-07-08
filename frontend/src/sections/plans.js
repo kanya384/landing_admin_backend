@@ -100,7 +100,7 @@ export const Plans = () => {
 	const scrollBack = () => {
 		window.scrollTo({
 			top: document.querySelector(".lvl8").offsetTop,
-			behavior: "smooth"
+			//behavior: "smooth"
 		})
 	}
 
@@ -182,7 +182,7 @@ export const Plans = () => {
         image ={"img/get-present-bg.svg"}
         imageMobile={"img/get-present-bg-mobile.svg"}
         opened={isOpen}
-        close = {()=>{scrollBack(); setModalState(null)}}
+        close = {()=>{scrollBack(); setTimeout(()=>setModalState(null),100)}}
       />
     </React.Fragment>
   )
