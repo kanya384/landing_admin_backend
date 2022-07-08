@@ -173,11 +173,11 @@ export const Plans = () => {
                 <div className="filter-item">
                   <div className="filter-item__body">
                     <ul className="checked-list">
-                      <li>
+                      {/*<li>
                         <label className="inp-checkbox"><input id="ck1" type="checkbox" rooms={1} onChange={setRooms} checked={filter.rooms.includes(1)} />
                           <svg className="svg checked"><use xlinkHref="img/sprite.svg#checked"></use></svg>
                           <span className="label">1-комн.</span></label>
-                      </li>
+                      </li>*/}
                       <li>
                         <label className="inp-checkbox"><input id="ck2" type="checkbox" liter={1} onChange={setLiters} checked={filter.liters.includes(1)} />
                           <svg className="svg checked"><use xlinkHref="img/sprite.svg#checked"></use></svg>

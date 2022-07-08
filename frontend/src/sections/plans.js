@@ -97,7 +97,12 @@ export const Plans = () => {
 		window.addEventListener('resize', fitStageIntoParentContainer);
 	})
 
-
+	const scrollBack = () => {
+		window.scrollTo({
+			top: document.querySelector(".lvl8").offsetTop,
+			behavior: "smooth"
+		})
+	}
 
 
   return (
@@ -177,7 +182,7 @@ export const Plans = () => {
         image ={"img/get-present-bg.svg"}
         imageMobile={"img/get-present-bg-mobile.svg"}
         opened={isOpen}
-        close = {()=>{setModalState(null)}}
+        close = {()=>{scrollBack(); setModalState(null)}}
       />
     </React.Fragment>
   )

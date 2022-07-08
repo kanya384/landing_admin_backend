@@ -76,11 +76,11 @@ export const GetPodbor = () => {
               <div className="filter-item filter-item__rooms">
                 <div className="filter-item__body">
                   <ul className="checked-list checked-list--column-3">
-                    <li>
+                    {/*<li>
                       <label className="inp-checkbox"><input id="ck1" type="checkbox" rooms={1} onChange={setRooms} checked={filter.rooms.includes(1)} />
                         <svg className="svg checked"><use xlinkHref="img/sprite.svg#checked"></use></svg>
                         <span className="label">1-комн.</span></label>
-                    </li>
+                    </li>*/}
                     <li>
                       <label className="inp-checkbox"><input id="ck2" type="checkbox" remont={"Черновая отделка"} onChange={setRemont} checked={filter.remont==="Черновая отделка"} />
                         <svg className="svg checked"><use xlinkHref="img/sprite.svg#checked"></use></svg>
