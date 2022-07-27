@@ -64,7 +64,7 @@ export const HowToBuy = () => {
             fields={[
                 {
                   type:"slider",
-                  title: "Первый взнос",
+                  title: "Первоначальный",
                   min: 20,
                   max: 50,
                   step: 5,
@@ -93,9 +93,9 @@ export const HowToBuy = () => {
                     name: "phone",
                     placeholder: "Телефон",
                     required: true,
-                }, 
+                },
             ]}
-            description={`Рассчитать ипотеку; Срок:${srok}; Первый взнос:${percent}`}
+            description={`Рассчитать ипотеку; Срок:${srok}; Первоначальный взнос:${percent}`}
             btnTitle={"Получить расчет"}
             celtype={"getIpot"}
             opened={modalType===0}
@@ -118,7 +118,7 @@ export const HowToBuy = () => {
                     name: "phone",
                     placeholder: "Телефон",
                     required: true,
-                }, 
+                },
             ]}
             btnTitle={"Получить расчет"}
             celtype={"getRassr"}
@@ -142,7 +142,7 @@ export const HowToBuy = () => {
                     name: "phone",
                     placeholder: "Телефон",
                     required: true,
-                }, 
+                },
             ]}
             btnTitle={"Получить консультацию"}
             celtype={"getMatKap"}
@@ -167,7 +167,7 @@ export const HowToBuy = () => {
                     name: "phone",
                     placeholder: "Телефон",
                     required: true,
-                }, 
+                },
             ]}
             btnTitle={"Получить консультацию"}
             celtype={"getVoenIpot"}
