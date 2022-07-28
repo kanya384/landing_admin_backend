@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import { Form } from "../components/form"
 import { Modal } from "../components/modals"
+import { ContentContext } from "../context/contentContext"
 import { SectionsContext } from "../context/sectionsContext"
 
 export const Menu = () => {
   const blocks = useContext(SectionsContext)
+  const content = useContext(ContentContext)
   const [showMobile, setShowMobile] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
@@ -43,7 +45,7 @@ export const Menu = () => {
 
   return(
     <React.Fragment>
-      <header className="header">
+      <header className="header" style={{marginTop: content.administrate?"40px":"0px"}}>
         <div className="wrapper">
           <div className="logo">
             <a href="#">
