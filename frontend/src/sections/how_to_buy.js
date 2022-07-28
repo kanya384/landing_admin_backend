@@ -64,7 +64,7 @@ export const HowToBuy = () => {
             fields={[
                 {
                   type:"slider",
-                  title: "Первоначальный",
+                  title: "Первоначальный взнос",
                   min: 20,
                   max: 50,
                   step: 5,
