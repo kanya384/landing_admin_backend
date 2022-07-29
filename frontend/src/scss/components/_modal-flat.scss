@@ -109,6 +109,13 @@
     padding-bottom: 40px;
     width: 100%;
     position: relative;
+    &__date {
+      font-size: 14px;
+      font-weight: 500;
+      color: #000;
+      opacity: .5;
+      margin-bottom: 38px;
+    }
     &__title {
       padding-bottom: 40px;
       @include qlg {
