@@ -10,6 +10,7 @@ import leadsReducer from './leadsReducer';
 import projectInfosReducer from './projectInfosReducer';
 import settingsReducer from './settingsReducer';
 import titlesReducer from './titlesReducer';
+import actionsReducer from './actionsReducer';
 
 const reducers = combineReducers({
     auths: authsReducer,
@@ -23,6 +24,7 @@ const reducers = combineReducers({
     projectInfos: projectInfosReducer,
     settings: settingsReducer,
     titles: titlesReducer,
+    actions: actionsReducer,
 })
 
 export default reducers;

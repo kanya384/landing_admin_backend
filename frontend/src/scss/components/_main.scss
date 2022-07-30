@@ -55,29 +55,29 @@
       margin-bottom: 40px;
     }
   }
-  .lvl-row-small {
-    display: flex;
-    padding: 0 25px;
-    min-width: 100%;
-    &__img {
-      @include qmd {
-        display: none;
-      }
+}
+.lvl-row-small {
+  display: flex;
+  padding: 0 25px;
+  min-width: 100%;
+  &__img {
+    @include qmd {
+      display: none;
     }
-    &__text {
-      line-height: 1.6;
-      font-weight: 500;
-      padding-left: 113px;
-      padding-top: 160px;
-      max-width: 410px;
-      @include qlg {
-        padding-top: 60px;
-        padding-left: 40px;
-      }
-      @include qmd {
-        padding-top: 0;
-        padding-left: 0;
-      }
+  }
+  &__text {
+    line-height: 1.6;
+    font-weight: 500;
+    padding-left: 113px;
+    padding-top: 160px;
+    max-width: 410px;
+    @include qlg {
+      padding-top: 60px;
+      padding-left: 40px;
+    }
+    @include qmd {
+      padding-top: 0;
+      padding-left: 0;
     }
   }
 }
@@ -1277,19 +1277,19 @@
   @include qmd {
     padding-bottom: 40px;
   }
-  .lvl-title {
-    font-size: 40px;
-    font-weight: 500;
-    margin: 0;
-    padding: 0 0 80px;
-    line-height: 1.2;
-    text-transform: uppercase;
-    @include qlg {
-      padding-bottom: 24px;
-    }
-    @include qsm {
-      font-size: 28px;
-    }
+}
+.lvl-title {
+  font-size: 40px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0 0 80px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  @include qlg {
+    padding-bottom: 24px;
+  }
+  @include qsm {
+    font-size: 28px;
   }
 }
 
@@ -1530,12 +1530,12 @@
 
 .lvl14 {
   overflow: hidden;
-  padding-bottom: 80px;
+  padding-bottom: 120px;
   @include qlg {
-    padding-bottom: 40px;
+    padding-bottom: 60px;
   }
 }
-.lvl1, lvl2 {
+.lvl1, .lvl2 {
   // backdrop-filter: blur(4px);
 }
 .lvl1,
@@ -1717,4 +1717,142 @@
     left: -2000px;
   }
   
+}
+
+
+
+.lvl-stock {
+  padding-bottom: 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.slider-stock {
+  .slide {
+    padding-right: 25px;
+  }
+  &-nav {
+    padding-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 30px;
+    .arr-right {
+      margin-left: 35px;
+      cursor: pointer;
+    }
+    .arr-left {
+      cursor: pointer;
+    }
+  }
+}
+.stock-item {
+  max-width: 353px;
+  padding-bottom: 40px;
+  @include qsm {
+    display: flex;
+  }
+  &__img {
+    margin-bottom: 22px;
+    overflow: hidden;
+    height: 220px;
+    @include qsm {
+      min-width: 25%;
+      max-width: 25%;
+      height: auto;
+      margin-bottom: 0;
+    }
+    img {
+      transition: all 0.8s ease;
+      
+    }
+    &:hover {
+      img {
+        transform: scale(1.2);
+        @include qsm {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+  &__title {
+    padding-bottom: 22px;
+    font-size: 20px;
+    font-weight: 500;
+    @include qsm {
+      font-size: 16px;
+      padding-bottom: 8px;
+      line-height: 1.2;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        color: $clr-first-primary;
+      }
+    }
+  }
+  &__data {
+    color: #000;
+    opacity: .5;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  &__right {
+    @include qsm {
+      flex: 1 1 auto;
+      padding-left: 16px;
+    }
+  }
+}
+
+
+.lvl-investing {
+  padding-bottom: 160px;
+  position: relative;
+  z-index: 1;
+  @include qlg {
+    padding-bottom: 80px;
+  }
+  @include qmd {
+    padding-bottom: 60px;
+  }
+  .lvl-row-small {
+    padding: 0;
+    @include qsm {
+      display: block;
+    }
+    
+  }
+  .about-info-item {
+    flex-direction: row-reverse;
+    @include qmd {
+      flex-wrap: wrap;
+      
+    }
+    .b-text {
+      width: 50%;
+      max-width: 470px;
+      margin-right: auto;
+      @include qmd {
+        width: 100%;
+        max-width: 100%;
+      }
+      .title {
+        font-size: 40px;
+        @include qmd {
+          font-size: 28px;
+        }
+      }
+    }
+    .img {
+      width: 50%;
+      max-width: 50%;
+      @include qmd {
+        width: 100%;
+        max-width: 100%;
+        order: 1;
+      }
+    }
+  }
 }

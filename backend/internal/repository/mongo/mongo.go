@@ -2,6 +2,7 @@ package mongo
 
 import (
 	"landing_admin_backend/internal/repository"
+	"landing_admin_backend/internal/repository/mongo/actions"
 	"landing_admin_backend/internal/repository/mongo/advantage_photo"
 	"landing_admin_backend/internal/repository/mongo/advantages"
 	"landing_admin_backend/internal/repository/mongo/docs"
@@ -38,5 +39,6 @@ func Setup(db *mongo.Database) *repository.Repository {
 		ProjectInfo:    project_info.NewRepository(db),
 		Title:          title.NewRepository(db),
 		Settings:       settings.NewRepository(db),
+		Action:         actions.NewRepository(db),
 	}
 }
