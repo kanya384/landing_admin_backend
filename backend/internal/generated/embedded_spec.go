@@ -138,8 +138,7 @@ func init() {
             "type": "file",
             "description": "The file to upload",
             "name": "file",
-            "in": "formData",
-            "required": true
+            "in": "formData"
           },
           {
             "type": "string",
@@ -3136,6 +3135,12 @@ func init() {
     "Content": {
       "type": "object",
       "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Action"
+          }
+        },
         "advantages": {
           "type": "array",
           "items": {
@@ -3760,8 +3765,7 @@ func init() {
             "type": "file",
             "description": "The file to upload",
             "name": "file",
-            "in": "formData",
-            "required": true
+            "in": "formData"
           },
           {
             "type": "string",
@@ -6758,6 +6762,12 @@ func init() {
     "Content": {
       "type": "object",
       "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Action"
+          }
+        },
         "advantages": {
           "type": "array",
           "items": {

@@ -53,13 +53,16 @@ func (h *handlers) Create(params actions.PutActionsParams, input interface{}) mi
 		return actions.NewPutActionsBadRequest().WithPayload(&models.ResultResponse{Msg: "error creating action"})
 	}
 	resAction := models.Action{
-		ID:         actionRes.ID.Hex(),
-		Title:      actionRes.Title,
-		CreatedAt:  strfmt.DateTime(actionRes.CreatedAt),
-		UpdatedAt:  strfmt.DateTime(actionRes.UpdateAt),
-		Order:      int64(actionRes.Order),
-		Photo:      actionRes.Photo,
-		ModifiedBy: actionRes.ModifiedBy.Hex(),
+		ID:          actionRes.ID.Hex(),
+		Title:       actionRes.Title,
+		Description: actionRes.Description,
+		Preview:     actionRes.Preview,
+		Date:        actionRes.Date,
+		CreatedAt:   strfmt.DateTime(actionRes.CreatedAt),
+		UpdatedAt:   strfmt.DateTime(actionRes.UpdateAt),
+		Order:       int64(actionRes.Order),
+		Photo:       actionRes.Photo,
+		ModifiedBy:  actionRes.ModifiedBy.Hex(),
 	}
 	return actions.NewPutActionsOK().WithPayload(&resAction)
 }
@@ -89,13 +92,16 @@ func (h *handlers) Update(params actions.PatchActionsParams, input interface{}) 
 	}
 
 	actionRes := &models.Action{
-		ID:         action.ID.Hex(),
-		Photo:      action.Photo,
-		Title:      action.Title,
-		Order:      int64(action.Order),
-		ModifiedBy: action.ModifiedBy.Hex(),
-		CreatedAt:  strfmt.DateTime(action.CreatedAt),
-		UpdatedAt:  strfmt.DateTime(action.UpdateAt),
+		ID:          action.ID.Hex(),
+		Photo:       action.Photo,
+		Title:       action.Title,
+		Description: action.Description,
+		Preview:     action.Preview,
+		Date:        action.Date,
+		Order:       int64(action.Order),
+		ModifiedBy:  action.ModifiedBy.Hex(),
+		CreatedAt:   strfmt.DateTime(action.CreatedAt),
+		UpdatedAt:   strfmt.DateTime(action.UpdateAt),
 	}
 
 	fmt.Println(actionRes)
@@ -126,13 +132,16 @@ func (h *handlers) Get(params actions.GetActionsParams) middleware.Responder {
 	actionsListResponse := models.GetActionsResponse{}
 	for _, pst := range actionsList {
 		postIns := models.Action{
-			ID:         pst.ID.Hex(),
-			Title:      pst.Title,
-			Photo:      pst.Photo,
-			ModifiedBy: pst.ModifiedBy.Hex(),
-			Order:      int64(pst.Order),
-			UpdatedAt:  strfmt.DateTime(pst.UpdateAt),
-			CreatedAt:  strfmt.DateTime(pst.CreatedAt),
+			ID:          pst.ID.Hex(),
+			Title:       pst.Title,
+			Description: pst.Description,
+			Preview:     pst.Preview,
+			Date:        pst.Date,
+			Photo:       pst.Photo,
+			ModifiedBy:  pst.ModifiedBy.Hex(),
+			Order:       int64(pst.Order),
+			UpdatedAt:   strfmt.DateTime(pst.UpdateAt),
+			CreatedAt:   strfmt.DateTime(pst.CreatedAt),
 		}
 		actionsListResponse = append(actionsListResponse, &postIns)
 	}
@@ -154,13 +163,16 @@ func (h *handlers) GetActionById(params actions.GetActionsActionIDParams, input 
 		return actions.NewDeleteActionsActionIDBadRequest()
 	}
 	res := models.Action{
-		ID:         action.ID.Hex(),
-		Title:      action.Title,
-		Photo:      action.Photo,
-		Order:      int64(action.Order),
-		CreatedAt:  strfmt.DateTime(action.CreatedAt),
-		UpdatedAt:  strfmt.DateTime(action.UpdateAt),
-		ModifiedBy: action.ModifiedBy.Hex(),
+		ID:          action.ID.Hex(),
+		Title:       action.Title,
+		Description: action.Description,
+		Preview:     action.Preview,
+		Date:        action.Date,
+		Photo:       action.Photo,
+		Order:       int64(action.Order),
+		CreatedAt:   strfmt.DateTime(action.CreatedAt),
+		UpdatedAt:   strfmt.DateTime(action.UpdateAt),
+		ModifiedBy:  action.ModifiedBy.Hex(),
 	}
 	return actions.NewGetActionsActionIDOK().WithPayload(&res)
 }

@@ -103,7 +103,7 @@ export const Actions: React.FC = () =>  {
             placeholder: "Введите до какого числа действует акция", 
             name: "date", 
             isError: false, 
-            value:addForm.date,
+            value:updateForm.date,
           },
           {
             title: "Тайтл",
@@ -111,7 +111,7 @@ export const Actions: React.FC = () =>  {
             placeholder: "Введите заголовок", 
             name: "title", 
             isError: false, 
-            value:addForm.title,
+            value:updateForm.title,
           },
           {
             title: "Описание",
@@ -119,7 +119,7 @@ export const Actions: React.FC = () =>  {
             placeholder: "Введите описание", 
             name: "description", 
             isError: false, 
-            value:addForm.description,
+            value:updateForm.description,
           },
           {
             title: "Индекс",
@@ -172,7 +172,7 @@ export const Actions: React.FC = () =>  {
           <DndProvider backend={HTML5Backend}>
               <div className='row g-4'>
                 {actions?.actionsList.map((action, index)=>{
-                  return <Card key={action.id} card={{ID: action.id!, Type:0, Title: action.title!, Text: "", Image: "/api/store/"+action.photo!, Index: index, moveCard: moveCard, deleteClick: () => {deleteAction(action.id!)}, editClick:()=>{setUpdateForm({id:action.id!, title:action.title!, description: action.description!, date: action.date!, preview: action.preview!, photo:action.photo!, order: !action.order?0:action.order!, file:null}); setUpdateFormError(""); setOpened(1)}}}/>
+                  return <Card key={action.id} card={{ID: action.id!, Type:0, Title: action.title!, Text: action.description!, Image: "/api/store/"+action.preview!, Index: index, moveCard: moveCard, deleteClick: () => {deleteAction(action.id!)}, editClick:()=>{setUpdateForm({id:action.id!, title:action.title!, description: action.description!, date: action.date!, preview: action.preview!, photo:action.photo!, order: !action.order?0:action.order!, file:null}); setUpdateFormError(""); setOpened(1)}}}/>
                 })}
               </div>
           </ DndProvider>

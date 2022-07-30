@@ -17,6 +17,7 @@ import (
 
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/generated/operations"
+	"landing_admin_backend/internal/generated/operations/actions"
 	"landing_admin_backend/internal/generated/operations/advantages"
 	"landing_admin_backend/internal/generated/operations/content"
 	"landing_admin_backend/internal/generated/operations/docs"
@@ -103,6 +104,14 @@ func configureAPI(api *operations.BackendServiceAPI) http.Handler {
 	api.PostersGetPostersPosterIDHandler = posters.GetPostersPosterIDHandlerFunc(handlers.Poster.GetPosterById)
 	api.PostersDeletePostersPosterIDHandler = posters.DeletePostersPosterIDHandlerFunc(handlers.Poster.Delete)
 	api.PostersPostPostersOrdersHandler = posters.PostPostersOrdersHandlerFunc(handlers.Poster.PostersOrdersChange)
+
+	/* Actions handlers */
+	api.ActionsPutActionsHandler = actions.PutActionsHandlerFunc(handlers.Actions.Create)
+	api.ActionsGetActionsHandler = actions.GetActionsHandlerFunc(handlers.Actions.Get)
+	api.ActionsPatchActionsHandler = actions.PatchActionsHandlerFunc(handlers.Actions.Update)
+	api.ActionsGetActionsActionIDHandler = actions.GetActionsActionIDHandlerFunc(handlers.Actions.GetActionById)
+	api.ActionsDeleteActionsActionIDHandler = actions.DeleteActionsActionIDHandlerFunc(handlers.Actions.Delete)
+	api.ActionsPostActionsOrdersHandler = actions.PostActionsOrdersHandlerFunc(handlers.Actions.ActionsOrdersChange)
 
 	/* hod handlers*/
 	/* years*/

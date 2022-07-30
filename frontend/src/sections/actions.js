@@ -1,6 +1,7 @@
-import React, { useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import Slider from "react-slick/lib/slider";
 import { Modal } from "../components/modals"
+import { ContentContext } from "../context/contentContext";
 
 export const Actions = () => {
     const [nav1, setNav1] = useState();
@@ -12,10 +13,13 @@ export const Actions = () => {
         img: "",
     })
 
+    const [actions, setActions] = useState([])
+
+    const content = useContext(ContentContext)
+
     const [isOpen, setModalState] = useState(null)
 
     let settings = {
-        slidesToShow: 3,
         slidesToScroll: 1,
         dots: false,
         // variableWidth: true,
@@ -40,15 +44,6 @@ export const Actions = () => {
             },
         ]
     }
-    
-    let settings2 = {
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        dots: false,
-        arrows: false,
-        vertical: false,
-        infinity: true,
-    }
 
     let infoTest = {
         date: "До 22 августа",
@@ -56,84 +51,32 @@ export const Actions = () => {
         description: "<p>Отделка первого этажа выполнена клинкерной плиткой, со 2 по 9 этаж вентилируемый фасад с использованием крупно-форматных алюминиевых кассет и декоративными вставками. Для сохранения единого фасадного стиля в процессе эксплуатации используются металлические корзины для кондиционеров, а также остекление лоджий профилем в стиль фасада.</p><p>Много естественного света в подъездах обеспечат большие стеклянные двери премиум-сегмента.</p>",
     } 
 
+    useEffect(()=>{
+        if (actions.length === 0 && content.content !== undefined) {
+          setActions(content.content.Action)
+          if (nav1){
+            setTimeout(()=>nav1.slickNext(),200)
+          }
+        }
+      },[content])
+
     return <React.Fragment>
         <div className="lvl-stock">
             <div className="wrapper">
                 <h2 className="lvl-title">акции</h2>
                 <div className="slider-stock js-slider-stock-wrapper">
-                <Slider asNavFor={nav2} ref={(slider1) => setNav1(slider1)} className="slider slider-stock__slider-for js-slider-stock__slider-for" {...settings}>
-                    <div className="slide">
-                        <div className="stock-item" onClick={(e) => {e.preventDefault();  setInfo(infoTest); setModalState(true)}}>
-                            <div className="stock-item__img"><a href="#"><img src="img/akcii1.png" alt=""/></a></div>
-                            <div className="stock-item__right">
-                            <div className="stock-item__title"><a href="#">Акция «Весна в Красной Поляне»</a></div>
-                            <div className="stock-item__data">До 22 августа</div>
+                <Slider asNavFor={nav2} ref={(slider1) => setNav1(slider1)} className="slider slider-stock__slider-for js-slider-stock__slider-for" {...settings} slidesToShow={actions.length>3?3:actions.length}>
+                    {actions.map((action)=>{
+                        return <div className="slide">
+                            <div className="stock-item" onClick={(e) => {e.preventDefault();  setInfo(action); setModalState(true)}}>
+                                <div className="stock-item__img"><a href="/" onClick={(e)=>{e.preventDefault()}}><img src={process.env.REACT_APP_BACKEND+"store/"+ action.preview} alt=""/></a></div>
+                                <div className="stock-item__right">
+                                <div className="stock-item__title"><a href="/" onClick={(e)=>{e.preventDefault()}}>{action.title}</a></div>
+                                <div className="stock-item__data">{action.date}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="slide">
-                        <div className="stock-item">
-                            <div className="stock-item__img"><a href="#"><img src="img/akcii1.png" alt=""/></a></div>
-                            <div className="stock-item__right">
-                                <div className="stock-item__title"><a href="#">Рассрочка на квартиры в Сочи и в Челябинске</a></div>
-                                <div className="stock-item__data">До 22 августа</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="slide">
-                        <div className="stock-item">
-                            <div className="stock-item__img"><a href="#"><img src="img/akcii3.png" alt=""/></a></div>
-                            <div className="stock-item__right">
-                                <div className="stock-item__title"><a href="#">Акция «Весна в Красной Поляне»</a></div>
-                                <div className="stock-item__data">До 22 августа</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="slide">
-                        <div className="stock-item">
-                            <div className="stock-item__img"><a href="#"><img src="img/akcii2.png" alt=""/></a></div>
-                            <div className="stock-item__right">
-                                <div className="stock-item__title"><a href="#">Рассрочка на квартиры в Сочи и в Челябинске</a></div>
-                                <div className="stock-item__data">До 22 августа</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="slide">
-                        <div className="stock-item">
-                            <div className="stock-item__img"><a href="#"><img src="img/akcii3.png" alt=""/></a></div>
-                            <div className="stock-item__right">
-                                <div className="stock-item__title"><a href="#">Акция «Весна в Красной Поляне»</a></div>
-                                <div className="stock-item__data">До 22 августа</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="slide">
-                        <div className="stock-item">
-                            <div className="stock-item__img"><a href="#"><img src="img/akcii2.png" alt=""/></a></div>
-                            <div className="stock-item__right">
-                                <div className="stock-item__title"><a href="#">Рассрочка на квартиры в Сочи и в Челябинске</a></div>
-                                <div className="stock-item__data">До 22 августа</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="slide">
-                        <div className="stock-item">
-                            <div className="stock-item__img"><a href="#"><img src="img/akcii3.png" alt=""/></a></div>
-                            <div className="stock-item__right">
-                                <div className="stock-item__title"><a href="#">Акция «Весна в Красной Поляне»</a></div>
-                                <div className="stock-item__data">До 22 августа</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="slide">
-                        <div className="stock-item">
-                            <div className="stock-item__img"><a href="#"><img src="img/akcii1.png" alt=""/></a></div>
-                            <div className="stock-item__right">
-                                <div className="stock-item__title"><a href="#">Акция «Весна в Красной Поляне»</a></div>
-                                <div className="stock-item__data">До 22 августа</div>
-                            </div>
-                        </div>
-                    </div>
+                    })}
                 </Slider>
                 <div className="slider-stock-nav">
                     <div className="arr-left" onClick={()=>nav1.slickPrev()}>
@@ -158,7 +101,7 @@ export const Actions = () => {
             position={window.pageYOffset}
             fields={[]}
             celtype={""}
-            image ={"img/action_big.png"}
+            image={process.env.REACT_APP_BACKEND+"store/"+ info.photo}
             opened={isOpen}
             close = {()=>{setModalState(null)}}
         />

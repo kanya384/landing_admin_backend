@@ -63,6 +63,32 @@ func ProcessImage(file interface{}, fileStorePath string, IMAGE_WIDTH int, IMAGE
 	return
 }
 
+func ProcessImages(file interface{}, fileStorePath string, IMAGE_WIDTH int, IMAGE_HEIGHT int, IMAGE_WIDTH_1 int, IMAGE_HEIGHT_1 int) (filename string, filename2 string, err error) {
+	fileIn, ok := file.(io.ReadCloser)
+	if !ok {
+		return "", "", errors.New("no file")
+	}
+	defer fileIn.Close()
+	imageIn, err := imaging.Decode(fileIn)
+	if err != nil {
+		fmt.Println(err)
+	}
+	image1 := imaging.Fill(imageIn, IMAGE_WIDTH, IMAGE_HEIGHT, imaging.Center, imaging.Lanczos)
+	image2 := imaging.Fill(imageIn, IMAGE_WIDTH_1, IMAGE_HEIGHT_1, imaging.Center, imaging.Lanczos)
+	if err != nil {
+		return "", "", err
+	}
+	filename, err = SaveImageFile(image1, "tmg.jpg", fileStorePath)
+	if err != nil {
+		return
+	}
+	filename2, err = SaveImageFile(image2, "tmg.jpg", fileStorePath)
+	if err != nil {
+		return
+	}
+	return filename, filename2, err
+}
+
 func SavePlan(file interface{}, fileStorePath string, IMAGE_WIDTH int, IMAGE_HEIGHT int) (filename string, err error) {
 	fileIn, ok := file.(io.ReadCloser)
 	if !ok {

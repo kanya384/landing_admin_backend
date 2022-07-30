@@ -3,6 +3,7 @@ package actions
 import (
 	"context"
 	"errors"
+	"fmt"
 	"landing_admin_backend/internal/domain"
 	repos "landing_admin_backend/internal/repository"
 
@@ -64,7 +65,10 @@ func (r *repository) Create(ctx context.Context, action domain.Action) (err erro
 	return
 }
 func (r *repository) Update(ctx context.Context, action domain.Action) (err error) {
-	result, err := r.collection.UpdateOne(ctx, primitive.M{"_id": action.ID}, primitive.D{{Key: "$set", Value: primitive.M{"title": action.Title, "photo": action.Photo, "order": action.Order, "updated_at": action.UpdateAt, "modified_by": action.ModifiedBy}}})
+	fmt.Println(action.Preview)
+	fmt.Println(action.Photo)
+	result, err := r.collection.UpdateOne(ctx, primitive.M{"_id": action.ID}, primitive.D{{Key: "$set", Value: primitive.M{"title": action.Title, "description": action.Description, "date": action.Date, "photo": action.Photo, "preview": action.Preview, "order": action.Order, "updated_at": action.UpdateAt, "modified_by": action.ModifiedBy}}})
+	fmt.Println(err)
 	switch true {
 	case result.MatchedCount == 0:
 		return errors.New(domain.ErrNoFieldWithID)

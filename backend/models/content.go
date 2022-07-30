@@ -19,6 +19,9 @@ import (
 // swagger:model Content
 type Content struct {
 
+	// actions
+	Actions []*Action `json:"actions"`
+
 	// advantages
 	Advantages []*Advantage `json:"advantages"`
 
@@ -50,6 +53,10 @@ type Content struct {
 // Validate validates this content
 func (m *Content) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateActions(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateAdvantages(formats); err != nil {
 		res = append(res, err)
@@ -90,6 +97,32 @@ func (m *Content) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Content) validateActions(formats strfmt.Registry) error {
+	if swag.IsZero(m.Actions) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Actions); i++ {
+		if swag.IsZero(m.Actions[i]) { // not required
+			continue
+		}
+
+		if m.Actions[i] != nil {
+			if err := m.Actions[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("actions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("actions" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -331,6 +364,10 @@ func (m *Content) validateVideo(formats strfmt.Registry) error {
 func (m *Content) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateActions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateAdvantages(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -370,6 +407,26 @@ func (m *Content) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Content) contextValidateActions(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Actions); i++ {
+
+		if m.Actions[i] != nil {
+			if err := m.Actions[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("actions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("actions" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

@@ -2,6 +2,7 @@ package actions
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/domain"
@@ -48,28 +49,29 @@ func (s *service) GetByID(ctx context.Context, id primitive.ObjectID) (action do
 }
 
 func (s *service) Create(ctx context.Context, action domain.Action, file io.ReadCloser) (actionRes domain.Action, err error) {
-	filename, err := helpers.ProcessImage(file, s.cfg.FileStore, IMAGE_WIDTH, IMAGE_HEIGHT)
+	photo, preview, err := helpers.ProcessImages(file, s.cfg.FileStore, IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_PREVIEW_WIDTH, IMAGE_PREVIEW_HEIGHT)
 	if err != nil {
 		return
 	}
-	preview, err := helpers.ProcessImage(file, s.cfg.FileStore, IMAGE_PREVIEW_WIDTH, IMAGE_PREVIEW_HEIGHT)
-	if err != nil {
-		return
-	}
-	action.Photo = filename
+
+	action.Photo = photo
 	action.Preview = preview
-	actionRes = action
+
 	err = s.repository.Action.Create(context.Background(), action)
-	return
+	return action, err
 }
 
 func (s *service) Update(ctx context.Context, action domain.Action, file interface{}) (actionRes domain.Action, err error) {
-	filename, errIm := helpers.ProcessImage(file, s.cfg.FileStore, IMAGE_WIDTH, IMAGE_HEIGHT)
-	preview, errIm2 := helpers.ProcessImage(file, s.cfg.FileStore, IMAGE_PREVIEW_WIDTH, IMAGE_PREVIEW_HEIGHT)
-	if errIm == nil && errIm2 == nil {
-		action.Photo = filename
+	photo, preview, errIm := helpers.ProcessImages(file, s.cfg.FileStore, IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_PREVIEW_WIDTH, IMAGE_PREVIEW_HEIGHT)
+	if err != nil {
+		return
+	}
+
+	if errIm == nil {
+		action.Photo = photo
 		action.Preview = preview
 	}
+	fmt.Println(action)
 	err = s.repository.Action.Update(ctx, action)
 	actionRes = action
 	return

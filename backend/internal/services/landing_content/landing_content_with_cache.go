@@ -37,6 +37,7 @@ func (_d LandingContentWithCache) Get(ctx context.Context) (content domain.Landi
 			Video:           contentCache["Video"].([]*domain.Video),
 			Setting:         contentCache["Settings"].([]*domain.Setting),
 			Title:           contentCache["Titles"].([]*domain.Title),
+			Action:          contentCache["Action"].([]*domain.Action),
 		}
 		return
 	}
@@ -59,6 +60,7 @@ func (_d LandingContentWithCache) Get(ctx context.Context) (content domain.Landi
 		"Video":            content.Video,
 		"Settings":         content.Setting,
 		"Titles":           content.Title,
+		"Action":           content.Action,
 	}
 	_d.cache.SetAppContent(cacheContent)
 	return

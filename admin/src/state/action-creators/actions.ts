@@ -90,7 +90,7 @@ export const updateAction = (action: Action, callback:(error: string) => void, f
       callback("не все поля заполненны")
       return
     }
-    actionsService.actionsPatch(file, action.id!, action.title!, action.description!, action.date!, action.order!, action.photo, action.preview, {headers: {"Authorization": token}}).then((resp)=>{
+    actionsService.actionsPatch(action.id!, action.title!, action.description!, action.date!, action.order!, file, action.photo!, action.preview!,  {headers: {"Authorization": token}}).then((resp)=>{
       if (resp.status === 200) {
         dispatch({
           type: ActionsActionTypes.ACTIONS_UPDATE,

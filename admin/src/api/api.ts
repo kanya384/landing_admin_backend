@@ -299,6 +299,12 @@ export interface Content {
     'titles'?: Array<Title>;
     /**
      * 
+     * @type {Array<Action>}
+     * @memberof Content
+     */
+    'actions'?: Array<Action>;
+    /**
+     * 
      * @type {Array<Setting>}
      * @memberof Content
      */
@@ -1206,20 +1212,18 @@ export const ActionsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary update action
-         * @param {any} file The file to upload
          * @param {string} id 
          * @param {string} title 
          * @param {string} description 
          * @param {string} date 
          * @param {number} order 
+         * @param {any} [file] The file to upload
          * @param {string} [photo] 
          * @param {string} [preview] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        actionsPatch: async (file: any, id: string, title: string, description: string, date: string, order: number, photo?: string, preview?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'file' is not null or undefined
-            assertParamExists('actionsPatch', 'file', file)
+        actionsPatch: async (id: string, title: string, description: string, date: string, order: number, file?: any, photo?: string, preview?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('actionsPatch', 'id', id)
             // verify required parameter 'title' is not null or undefined
@@ -1413,19 +1417,19 @@ export const ActionsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary update action
-         * @param {any} file The file to upload
          * @param {string} id 
          * @param {string} title 
          * @param {string} description 
          * @param {string} date 
          * @param {number} order 
+         * @param {any} [file] The file to upload
          * @param {string} [photo] 
          * @param {string} [preview] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async actionsPatch(file: any, id: string, title: string, description: string, date: string, order: number, photo?: string, preview?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Action>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.actionsPatch(file, id, title, description, date, order, photo, preview, options);
+        async actionsPatch(id: string, title: string, description: string, date: string, order: number, file?: any, photo?: string, preview?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Action>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.actionsPatch(id, title, description, date, order, file, photo, preview, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1494,19 +1498,19 @@ export const ActionsApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary update action
-         * @param {any} file The file to upload
          * @param {string} id 
          * @param {string} title 
          * @param {string} description 
          * @param {string} date 
          * @param {number} order 
+         * @param {any} [file] The file to upload
          * @param {string} [photo] 
          * @param {string} [preview] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        actionsPatch(file: any, id: string, title: string, description: string, date: string, order: number, photo?: string, preview?: string, options?: any): AxiosPromise<Action> {
-            return localVarFp.actionsPatch(file, id, title, description, date, order, photo, preview, options).then((request) => request(axios, basePath));
+        actionsPatch(id: string, title: string, description: string, date: string, order: number, file?: any, photo?: string, preview?: string, options?: any): AxiosPromise<Action> {
+            return localVarFp.actionsPatch(id, title, description, date, order, file, photo, preview, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1581,20 +1585,20 @@ export class ActionsApi extends BaseAPI {
     /**
      * 
      * @summary update action
-     * @param {any} file The file to upload
      * @param {string} id 
      * @param {string} title 
      * @param {string} description 
      * @param {string} date 
      * @param {number} order 
+     * @param {any} [file] The file to upload
      * @param {string} [photo] 
      * @param {string} [preview] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ActionsApi
      */
-    public actionsPatch(file: any, id: string, title: string, description: string, date: string, order: number, photo?: string, preview?: string, options?: AxiosRequestConfig) {
-        return ActionsApiFp(this.configuration).actionsPatch(file, id, title, description, date, order, photo, preview, options).then((request) => request(this.axios, this.basePath));
+    public actionsPatch(id: string, title: string, description: string, date: string, order: number, file?: any, photo?: string, preview?: string, options?: AxiosRequestConfig) {
+        return ActionsApiFp(this.configuration).actionsPatch(id, title, description, date, order, file, photo, preview, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

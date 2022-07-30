@@ -1747,7 +1747,7 @@ paths:
         - in: formData
           name: file
           type: file
-          required: true
+          required: false
           description: The file to upload
         - in: formData
           name: id
@@ -2212,6 +2212,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Title'
+      actions:
+        type: array
+        items:
+          $ref: '#/definitions/Action'
       settings:
         type: array
         items:
