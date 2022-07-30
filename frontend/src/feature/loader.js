@@ -21,6 +21,8 @@ export const Loader = () => {
     const Infra = React.lazy(() => import("../sections/infra"))
     const HodStr = React.lazy(() => import("../sections/hod_str"))
     const Question = React.lazy(() => import("../sections/question"))
+    const Actions = React.lazy(() => import("../sections/actions"))
+    const Investment = React.lazy(() => import("../sections/investment"))
     const Footer = React.lazy(() => import("../components/footer"))
 
 
@@ -32,6 +34,7 @@ export const Loader = () => {
         <Walks />,
         <Excursion />,
         <About />,
+        <Actions />,
         <Presentation />,
         <Plans />,
         <HowToBuy />,
@@ -42,6 +45,7 @@ export const Loader = () => {
         <Infra />,
         <Parallax image={"img/title-bg3.svg"} />,
         <HodStr />,
+        <Investment />,
         <Question />,
         <Footer />
     ]

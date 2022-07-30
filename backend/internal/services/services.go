@@ -3,6 +3,7 @@ package services
 import (
 	"landing_admin_backend/internal/config"
 	"landing_admin_backend/internal/repository"
+	"landing_admin_backend/internal/services/actions"
 	"landing_admin_backend/internal/services/advantage_photo"
 	"landing_admin_backend/internal/services/advantages"
 	"landing_admin_backend/internal/services/auth"
@@ -44,6 +45,7 @@ type Services struct {
 	LandingContent landing_content.LandingContent
 	ProjectInfo    project_info.ProjectInfo
 	Titles         titles.Title
+	Actions        actions.Actions
 	Settings       settings.Settings
 	PdfGenerator   pdf_generator.PdfGenerator
 }
@@ -64,6 +66,7 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 	titles := titles.NewTitleWithLogrus(titles.NewTitleWithCache(titles.NewService(repository, cfg), cache), logger)
 	pdfGenerator := pdf_generator.NewPdfGenerator(plans)
 	settings := settings.NewSettingsWithLogrus(settings.NewSettingsWithCache(settings.NewService(repository, cfg, pdfGenerator), cache), logger)
+	actions := actions.NewActionsWithLogrus(actions.NewActionsWithCache(actions.NewService(repository, cfg), cache), logger)
 	return &Services{
 		Auth:           auth.NewAuthWithLogrus(auth.NewService(repository, tokenManager, cfg), logger),
 		Users:          users.NewUsersWithLogrus(users.NewService(repository, cfg), logger),
@@ -78,10 +81,11 @@ func Setup(cfg *config.Config, repository *repository.Repository, logger *logrus
 		Docs:           docs,
 		Leads:          leads.NewLeadsWithLogrus(leads.NewService(repository, cfg), logger),
 		Editable:       editables,
-		LandingContent: landing_content.NewLandingContentWithCache(landing_content.NewLandingContent(advantages, docs, editables, years, months, hodPhotos, plans, posters, video, projectInfo, advantagePhotos, titles, settings), cache),
+		LandingContent: landing_content.NewLandingContentWithCache(landing_content.NewLandingContent(advantages, docs, editables, years, months, hodPhotos, plans, posters, video, projectInfo, advantagePhotos, titles, settings, actions), cache),
 		ProjectInfo:    projectInfo,
 		Titles:         titles,
 		Settings:       settings,
 		PdfGenerator:   pdfGenerator,
+		Actions:        actions,
 	}
 }

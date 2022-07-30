@@ -3,6 +3,7 @@ package landing_content
 import (
 	"context"
 	"landing_admin_backend/internal/domain"
+	"landing_admin_backend/internal/services/actions"
 	"landing_admin_backend/internal/services/advantage_photo"
 	"landing_admin_backend/internal/services/advantages"
 	"landing_admin_backend/internal/services/docs"
@@ -38,9 +39,10 @@ type landingContent struct {
 	video           video.Video
 	title           titles.Title
 	settings        settings.Settings
+	actions         actions.Actions
 }
 
-func NewLandingContent(advantages advantages.Advantages, docs docs.Docs, editables editable.Editable, years years.Years, months months.Months, hodPhotos hod_photos.Photos, plans plans.Plans, posters posters.Posters, video video.Video, projectInfo project_info.ProjectInfo, advantagePhotos advantage_photo.AdvantagePhoto, title titles.Title, settings settings.Settings) LandingContent {
+func NewLandingContent(advantages advantages.Advantages, docs docs.Docs, editables editable.Editable, years years.Years, months months.Months, hodPhotos hod_photos.Photos, plans plans.Plans, posters posters.Posters, video video.Video, projectInfo project_info.ProjectInfo, advantagePhotos advantage_photo.AdvantagePhoto, title titles.Title, settings settings.Settings, actions actions.Actions) LandingContent {
 	return &landingContent{
 		advantages:      advantages,
 		docs:            docs,
@@ -55,6 +57,7 @@ func NewLandingContent(advantages advantages.Advantages, docs docs.Docs, editabl
 		advantagePhotos: advantagePhotos,
 		title:           title,
 		settings:        settings,
+		actions:         actions,
 	}
 }
 
@@ -115,6 +118,11 @@ func (lc *landingContent) Get(ctx context.Context) (content domain.LandingConten
 		return
 	}
 
+	actions, err := lc.actions.Get(ctx, map[string]interface{}{"active": true})
+	if err != nil {
+		return
+	}
+
 	return domain.LandingContent{
 		Advantages:      advantages,
 		AdvantagePhotos: advantagePhoto,
@@ -129,5 +137,6 @@ func (lc *landingContent) Get(ctx context.Context) (content domain.LandingConten
 		ProjectInfo:     projectInfo,
 		Setting:         settings,
 		Title:           titles,
+		Action:          actions,
 	}, err
 }

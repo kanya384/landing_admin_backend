@@ -29,6 +29,306 @@ func init() {
   "host": "localhost:8080",
   "basePath": "/",
   "paths": {
+    "/actions": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "gets filtered actions list",
+        "responses": {
+          "200": {
+            "description": "returns filtered actions",
+            "schema": {
+              "$ref": "#/definitions/GetActionsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "create action",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "date",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно создан",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "update action",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "id",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "date",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "photo",
+            "in": "formData"
+          },
+          {
+            "type": "string",
+            "name": "preview",
+            "in": "formData"
+          },
+          {
+            "type": "integer",
+            "name": "order",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно обновлен",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/actions/orders": {
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "updates actions oders",
+        "parameters": [
+          {
+            "description": "swap item orders",
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SwapStruct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "положения успешно обновленны",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/actions/{actionID}": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "get action by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the action to get",
+            "name": "actionID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested action",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "delete action by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the action to get",
+            "name": "actionID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested action",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/advantage_photo": {
       "put": {
         "security": [
@@ -2699,6 +2999,43 @@ func init() {
     }
   },
   "definitions": {
+    "Action": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "date": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "preview": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "Advantage": {
       "type": "object",
       "properties": {
@@ -2909,6 +3246,12 @@ func init() {
         "width": {
           "type": "integer"
         }
+      }
+    },
+    "GetActionsResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Action"
       }
     },
     "GetPostersRequest": {
@@ -3308,6 +3651,306 @@ func init() {
   "host": "localhost:8080",
   "basePath": "/",
   "paths": {
+    "/actions": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "gets filtered actions list",
+        "responses": {
+          "200": {
+            "description": "returns filtered actions",
+            "schema": {
+              "$ref": "#/definitions/GetActionsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "create action",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "date",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно создан",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "update action",
+        "parameters": [
+          {
+            "type": "file",
+            "description": "The file to upload",
+            "name": "file",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "id",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "date",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "photo",
+            "in": "formData"
+          },
+          {
+            "type": "string",
+            "name": "preview",
+            "in": "formData"
+          },
+          {
+            "type": "integer",
+            "name": "order",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "постер успешно обновлен",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/actions/orders": {
+      "post": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "updates actions oders",
+        "parameters": [
+          {
+            "description": "swap item orders",
+            "name": "params",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SwapStruct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "положения успешно обновленны",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/actions/{actionID}": {
+      "get": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "get action by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the action to get",
+            "name": "actionID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested action",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "actions"
+        ],
+        "summary": "delete action by id",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "String ID of the action to get",
+            "name": "actionID",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns requested action",
+            "schema": {
+              "$ref": "#/definitions/ResultResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/advantage_photo": {
       "put": {
         "security": [
@@ -5978,6 +6621,43 @@ func init() {
     }
   },
   "definitions": {
+    "Action": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "date": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "preview": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "Advantage": {
       "type": "object",
       "properties": {
@@ -6188,6 +6868,12 @@ func init() {
         "width": {
           "type": "integer"
         }
+      }
+    },
+    "GetActionsResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Action"
       }
     },
     "GetPostersRequest": {

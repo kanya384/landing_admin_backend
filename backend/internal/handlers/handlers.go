@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"landing_admin_backend/internal/config"
+	"landing_admin_backend/internal/handlers/actions"
 	"landing_admin_backend/internal/handlers/advantage_photo"
 	"landing_admin_backend/internal/handlers/advantages"
 	"landing_admin_backend/internal/handlers/auths"
@@ -39,6 +40,7 @@ type Handlers struct {
 	Content         content.Handlers
 	ProjectInfo     project_info.Handlers
 	Titles          titles.Handlers
+	Actions         actions.Handlers
 	Settings        settings.Handlers
 }
 
@@ -61,5 +63,6 @@ func NewHandlers(services *services.Services, cfg *config.Config) *Handlers {
 		ProjectInfo:     project_info.NewHandlers(services),
 		Titles:          titles.NewHandlers(services),
 		Settings:        settings.NewHandlers(services),
+		Actions:         actions.NewHandlers(services),
 	}
 }

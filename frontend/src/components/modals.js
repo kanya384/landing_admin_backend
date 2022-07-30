@@ -3,7 +3,7 @@ import { FloorsModal } from "../feature/floors-modal";
 import { Form } from "./form"
 const parse = require('html-react-parser');
 
-export const Modal = ({title, subtitle, classes, liter, success, description, fields, content, celtype, btnTitle, image, imageMobile, opened, close}) => {
+export const Modal = ({title, subtitle, classes, liter, success, description, fields, content, celtype, btnTitle, image, imageMobile, opened, close, date}) => {
   const [showSuccess, setShowSuccess] = useState(false)
   useEffect(()=>{
     setShowSuccess(false)
@@ -46,6 +46,7 @@ export const Modal = ({title, subtitle, classes, liter, success, description, fi
           <div className={image?"modal-centered modal-centered--form modal-centered--bg":"modal-centered modal-centered--form"}>
             <div className="modal-centered-wrapper">
               <div className="modal-header">
+                {date?<div class="modal-header__date">{date}</div>:""}
                 <div className="modal-header__title h1">{title}</div>
                 {subtitle?<div className="modal-text-right">{parse(subtitle)}</div>:""}
                 {imageMobile?<div className="modal-image"><img src={imageMobile} alt="" /></div>:""}

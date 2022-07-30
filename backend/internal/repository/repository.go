@@ -16,4 +16,5 @@ type Repository struct {
 	Editable
 	Title
 	Settings
+	Action
 }

@@ -19,6 +19,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
+	"landing_admin_backend/internal/generated/operations/actions"
 	"landing_admin_backend/internal/generated/operations/advantages"
 	"landing_admin_backend/internal/generated/operations/content"
 	"landing_admin_backend/internal/generated/operations/docs"
@@ -56,6 +57,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 
 		JSONProducer: runtime.JSONProducer(),
 
+		ActionsDeleteActionsActionIDHandler: actions.DeleteActionsActionIDHandlerFunc(func(params actions.DeleteActionsActionIDParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation actions.DeleteActionsActionID has not yet been implemented")
+		}),
 		AdvantagesDeleteAdvantagePhotoIDHandler: advantages.DeleteAdvantagePhotoIDHandlerFunc(func(params advantages.DeleteAdvantagePhotoIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.DeleteAdvantagePhotoID has not yet been implemented")
 		}),
@@ -88,6 +92,12 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		HodDeleteYearsIDHandler: hod.DeleteYearsIDHandlerFunc(func(params hod.DeleteYearsIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.DeleteYearsID has not yet been implemented")
+		}),
+		ActionsGetActionsHandler: actions.GetActionsHandlerFunc(func(params actions.GetActionsParams) middleware.Responder {
+			return middleware.NotImplemented("operation actions.GetActions has not yet been implemented")
+		}),
+		ActionsGetActionsActionIDHandler: actions.GetActionsActionIDHandlerFunc(func(params actions.GetActionsActionIDParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation actions.GetActionsActionID has not yet been implemented")
 		}),
 		AdvantagesGetAdvantagePhotoIDHandler: advantages.GetAdvantagePhotoIDHandlerFunc(func(params advantages.GetAdvantagePhotoIDParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.GetAdvantagePhotoID has not yet been implemented")
@@ -146,6 +156,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		HodGetYearsHandler: hod.GetYearsHandlerFunc(func(params hod.GetYearsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.GetYears has not yet been implemented")
 		}),
+		ActionsPatchActionsHandler: actions.PatchActionsHandlerFunc(func(params actions.PatchActionsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation actions.PatchActions has not yet been implemented")
+		}),
 		AdvantagesPatchAdvantagesHandler: advantages.PatchAdvantagesHandlerFunc(func(params advantages.PatchAdvantagesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.PatchAdvantages has not yet been implemented")
 		}),
@@ -173,6 +186,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		HodPatchYearsHandler: hod.PatchYearsHandlerFunc(func(params hod.PatchYearsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation hod.PatchYears has not yet been implemented")
 		}),
+		ActionsPostActionsOrdersHandler: actions.PostActionsOrdersHandlerFunc(func(params actions.PostActionsOrdersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation actions.PostActionsOrders has not yet been implemented")
+		}),
 		AdvantagesPostAdvantagePhotoOrdersHandler: advantages.PostAdvantagePhotoOrdersHandlerFunc(func(params advantages.PostAdvantagePhotoOrdersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.PostAdvantagePhotoOrders has not yet been implemented")
 		}),
@@ -196,6 +212,9 @@ func NewBackendServiceAPI(spec *loads.Document) *BackendServiceAPI {
 		}),
 		ProjectInfoPostProjectInfoOrdersHandler: project_info.PostProjectInfoOrdersHandlerFunc(func(params project_info.PostProjectInfoOrdersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project_info.PostProjectInfoOrders has not yet been implemented")
+		}),
+		ActionsPutActionsHandler: actions.PutActionsHandlerFunc(func(params actions.PutActionsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation actions.PutActions has not yet been implemented")
 		}),
 		AdvantagesPutAdvantagePhotoHandler: advantages.PutAdvantagePhotoHandlerFunc(func(params advantages.PutAdvantagePhotoParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation advantages.PutAdvantagePhoto has not yet been implemented")
@@ -292,6 +311,8 @@ type BackendServiceAPI struct {
 	// APIAuthorizer provides access control (ACL/RBAC/ABAC) by providing access to the request and authenticated principal
 	APIAuthorizer runtime.Authorizer
 
+	// ActionsDeleteActionsActionIDHandler sets the operation handler for the delete actions action ID operation
+	ActionsDeleteActionsActionIDHandler actions.DeleteActionsActionIDHandler
 	// AdvantagesDeleteAdvantagePhotoIDHandler sets the operation handler for the delete advantage photo ID operation
 	AdvantagesDeleteAdvantagePhotoIDHandler advantages.DeleteAdvantagePhotoIDHandler
 	// AdvantagesDeleteAdvantagesIDHandler sets the operation handler for the delete advantages ID operation
@@ -314,6 +335,10 @@ type BackendServiceAPI struct {
 	VideoDeleteVideoIDHandler video.DeleteVideoIDHandler
 	// HodDeleteYearsIDHandler sets the operation handler for the delete years ID operation
 	HodDeleteYearsIDHandler hod.DeleteYearsIDHandler
+	// ActionsGetActionsHandler sets the operation handler for the get actions operation
+	ActionsGetActionsHandler actions.GetActionsHandler
+	// ActionsGetActionsActionIDHandler sets the operation handler for the get actions action ID operation
+	ActionsGetActionsActionIDHandler actions.GetActionsActionIDHandler
 	// AdvantagesGetAdvantagePhotoIDHandler sets the operation handler for the get advantage photo ID operation
 	AdvantagesGetAdvantagePhotoIDHandler advantages.GetAdvantagePhotoIDHandler
 	// AdvantagesGetAdvantagesHandler sets the operation handler for the get advantages operation
@@ -352,6 +377,8 @@ type BackendServiceAPI struct {
 	VideoGetVideoHandler video.GetVideoHandler
 	// HodGetYearsHandler sets the operation handler for the get years operation
 	HodGetYearsHandler hod.GetYearsHandler
+	// ActionsPatchActionsHandler sets the operation handler for the patch actions operation
+	ActionsPatchActionsHandler actions.PatchActionsHandler
 	// AdvantagesPatchAdvantagesHandler sets the operation handler for the patch advantages operation
 	AdvantagesPatchAdvantagesHandler advantages.PatchAdvantagesHandler
 	// DocsPatchDocHandler sets the operation handler for the patch doc operation
@@ -370,6 +397,8 @@ type BackendServiceAPI struct {
 	VideoPatchVideoHandler video.PatchVideoHandler
 	// HodPatchYearsHandler sets the operation handler for the patch years operation
 	HodPatchYearsHandler hod.PatchYearsHandler
+	// ActionsPostActionsOrdersHandler sets the operation handler for the post actions orders operation
+	ActionsPostActionsOrdersHandler actions.PostActionsOrdersHandler
 	// AdvantagesPostAdvantagePhotoOrdersHandler sets the operation handler for the post advantage photo orders operation
 	AdvantagesPostAdvantagePhotoOrdersHandler advantages.PostAdvantagePhotoOrdersHandler
 	// AdvantagesPostAdvantagesOrdersHandler sets the operation handler for the post advantages orders operation
@@ -386,6 +415,8 @@ type BackendServiceAPI struct {
 	PostersPostPostersOrdersHandler posters.PostPostersOrdersHandler
 	// ProjectInfoPostProjectInfoOrdersHandler sets the operation handler for the post project info orders operation
 	ProjectInfoPostProjectInfoOrdersHandler project_info.PostProjectInfoOrdersHandler
+	// ActionsPutActionsHandler sets the operation handler for the put actions operation
+	ActionsPutActionsHandler actions.PutActionsHandler
 	// AdvantagesPutAdvantagePhotoHandler sets the operation handler for the put advantage photo operation
 	AdvantagesPutAdvantagePhotoHandler advantages.PutAdvantagePhotoHandler
 	// AdvantagesPutAdvantagesHandler sets the operation handler for the put advantages operation
@@ -498,6 +529,9 @@ func (o *BackendServiceAPI) Validate() error {
 		unregistered = append(unregistered, "AuthorizationAuth")
 	}
 
+	if o.ActionsDeleteActionsActionIDHandler == nil {
+		unregistered = append(unregistered, "actions.DeleteActionsActionIDHandler")
+	}
 	if o.AdvantagesDeleteAdvantagePhotoIDHandler == nil {
 		unregistered = append(unregistered, "advantages.DeleteAdvantagePhotoIDHandler")
 	}
@@ -530,6 +564,12 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.HodDeleteYearsIDHandler == nil {
 		unregistered = append(unregistered, "hod.DeleteYearsIDHandler")
+	}
+	if o.ActionsGetActionsHandler == nil {
+		unregistered = append(unregistered, "actions.GetActionsHandler")
+	}
+	if o.ActionsGetActionsActionIDHandler == nil {
+		unregistered = append(unregistered, "actions.GetActionsActionIDHandler")
 	}
 	if o.AdvantagesGetAdvantagePhotoIDHandler == nil {
 		unregistered = append(unregistered, "advantages.GetAdvantagePhotoIDHandler")
@@ -588,6 +628,9 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.HodGetYearsHandler == nil {
 		unregistered = append(unregistered, "hod.GetYearsHandler")
 	}
+	if o.ActionsPatchActionsHandler == nil {
+		unregistered = append(unregistered, "actions.PatchActionsHandler")
+	}
 	if o.AdvantagesPatchAdvantagesHandler == nil {
 		unregistered = append(unregistered, "advantages.PatchAdvantagesHandler")
 	}
@@ -615,6 +658,9 @@ func (o *BackendServiceAPI) Validate() error {
 	if o.HodPatchYearsHandler == nil {
 		unregistered = append(unregistered, "hod.PatchYearsHandler")
 	}
+	if o.ActionsPostActionsOrdersHandler == nil {
+		unregistered = append(unregistered, "actions.PostActionsOrdersHandler")
+	}
 	if o.AdvantagesPostAdvantagePhotoOrdersHandler == nil {
 		unregistered = append(unregistered, "advantages.PostAdvantagePhotoOrdersHandler")
 	}
@@ -638,6 +684,9 @@ func (o *BackendServiceAPI) Validate() error {
 	}
 	if o.ProjectInfoPostProjectInfoOrdersHandler == nil {
 		unregistered = append(unregistered, "project_info.PostProjectInfoOrdersHandler")
+	}
+	if o.ActionsPutActionsHandler == nil {
+		unregistered = append(unregistered, "actions.PutActionsHandler")
 	}
 	if o.AdvantagesPutAdvantagePhotoHandler == nil {
 		unregistered = append(unregistered, "advantages.PutAdvantagePhotoHandler")
@@ -783,6 +832,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
+	o.handlers["DELETE"]["/actions/{actionID}"] = actions.NewDeleteActionsActionID(o.context, o.ActionsDeleteActionsActionIDHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
 	o.handlers["DELETE"]["/advantage_photo/{id}"] = advantages.NewDeleteAdvantagePhotoID(o.context, o.AdvantagesDeleteAdvantagePhotoIDHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
@@ -824,6 +877,14 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/years/{id}"] = hod.NewDeleteYearsID(o.context, o.HodDeleteYearsIDHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/actions"] = actions.NewGetActions(o.context, o.ActionsGetActionsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/actions/{actionID}"] = actions.NewGetActionsActionID(o.context, o.ActionsGetActionsActionIDHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -903,6 +964,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
 	}
+	o.handlers["PATCH"]["/actions"] = actions.NewPatchActions(o.context, o.ActionsPatchActionsHandler)
+	if o.handlers["PATCH"] == nil {
+		o.handlers["PATCH"] = make(map[string]http.Handler)
+	}
 	o.handlers["PATCH"]["/advantages"] = advantages.NewPatchAdvantages(o.context, o.AdvantagesPatchAdvantagesHandler)
 	if o.handlers["PATCH"] == nil {
 		o.handlers["PATCH"] = make(map[string]http.Handler)
@@ -939,6 +1004,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/actions/orders"] = actions.NewPostActionsOrders(o.context, o.ActionsPostActionsOrdersHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/advantage_photo/orders"] = advantages.NewPostAdvantagePhotoOrders(o.context, o.AdvantagesPostAdvantagePhotoOrdersHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -968,6 +1037,10 @@ func (o *BackendServiceAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/projectInfo/orders"] = project_info.NewPostProjectInfoOrders(o.context, o.ProjectInfoPostProjectInfoOrdersHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/actions"] = actions.NewPutActions(o.context, o.ActionsPutActionsHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

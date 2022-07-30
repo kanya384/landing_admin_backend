@@ -24,6 +24,73 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface Action
+ */
+export interface Action {
+    /**
+     * 
+     * @type {string}
+     * @memberof Action
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Action
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Action
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Action
+     */
+    'date'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Action
+     */
+    'preview'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Action
+     */
+    'photo'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Action
+     */
+    'order'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Action
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Action
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Action
+     */
+    'modifiedBy'?: string;
+}
+/**
+ * 
+ * @export
  * @interface Advantage
  */
 export interface Advantage {
@@ -988,6 +1055,564 @@ export interface Year {
      */
     'value'?: number;
 }
+
+/**
+ * ActionsApi - axios parameter creator
+ * @export
+ */
+export const ActionsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary delete action by id
+         * @param {string} actionID String ID of the action to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsActionIDDelete: async (actionID: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'actionID' is not null or undefined
+            assertParamExists('actionsActionIDDelete', 'actionID', actionID)
+            const localVarPath = `/actions/{actionID}`
+                .replace(`{${"actionID"}}`, encodeURIComponent(String(actionID)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get action by id
+         * @param {string} actionID String ID of the action to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsActionIDGet: async (actionID: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'actionID' is not null or undefined
+            assertParamExists('actionsActionIDGet', 'actionID', actionID)
+            const localVarPath = `/actions/{actionID}`
+                .replace(`{${"actionID"}}`, encodeURIComponent(String(actionID)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary gets filtered actions list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/actions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary updates actions oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsOrdersPost: async (params?: SwapStruct, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/actions/orders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(params, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary update action
+         * @param {any} file The file to upload
+         * @param {string} id 
+         * @param {string} title 
+         * @param {string} description 
+         * @param {string} date 
+         * @param {number} order 
+         * @param {string} [photo] 
+         * @param {string} [preview] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsPatch: async (file: any, id: string, title: string, description: string, date: string, order: number, photo?: string, preview?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('actionsPatch', 'file', file)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('actionsPatch', 'id', id)
+            // verify required parameter 'title' is not null or undefined
+            assertParamExists('actionsPatch', 'title', title)
+            // verify required parameter 'description' is not null or undefined
+            assertParamExists('actionsPatch', 'description', description)
+            // verify required parameter 'date' is not null or undefined
+            assertParamExists('actionsPatch', 'date', date)
+            // verify required parameter 'order' is not null or undefined
+            assertParamExists('actionsPatch', 'order', order)
+            const localVarPath = `/actions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (id !== undefined) { 
+                localVarFormParams.append('id', id as any);
+            }
+    
+            if (title !== undefined) { 
+                localVarFormParams.append('title', title as any);
+            }
+    
+            if (description !== undefined) { 
+                localVarFormParams.append('description', description as any);
+            }
+    
+            if (date !== undefined) { 
+                localVarFormParams.append('date', date as any);
+            }
+    
+            if (photo !== undefined) { 
+                localVarFormParams.append('photo', photo as any);
+            }
+    
+            if (preview !== undefined) { 
+                localVarFormParams.append('preview', preview as any);
+            }
+    
+            if (order !== undefined) { 
+                localVarFormParams.append('order', order as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary create action
+         * @param {any} file The file to upload
+         * @param {string} title 
+         * @param {string} description 
+         * @param {string} date 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsPut: async (file: any, title: string, description: string, date: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('actionsPut', 'file', file)
+            // verify required parameter 'title' is not null or undefined
+            assertParamExists('actionsPut', 'title', title)
+            // verify required parameter 'description' is not null or undefined
+            assertParamExists('actionsPut', 'description', description)
+            // verify required parameter 'date' is not null or undefined
+            assertParamExists('actionsPut', 'date', date)
+            const localVarPath = `/actions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Token required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (title !== undefined) { 
+                localVarFormParams.append('title', title as any);
+            }
+    
+            if (description !== undefined) { 
+                localVarFormParams.append('description', description as any);
+            }
+    
+            if (date !== undefined) { 
+                localVarFormParams.append('date', date as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ActionsApi - functional programming interface
+ * @export
+ */
+export const ActionsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ActionsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary delete action by id
+         * @param {string} actionID String ID of the action to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async actionsActionIDDelete(actionID: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.actionsActionIDDelete(actionID, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary get action by id
+         * @param {string} actionID String ID of the action to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async actionsActionIDGet(actionID: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Action>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.actionsActionIDGet(actionID, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary gets filtered actions list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async actionsGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Action>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.actionsGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary updates actions oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async actionsOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.actionsOrdersPost(params, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary update action
+         * @param {any} file The file to upload
+         * @param {string} id 
+         * @param {string} title 
+         * @param {string} description 
+         * @param {string} date 
+         * @param {number} order 
+         * @param {string} [photo] 
+         * @param {string} [preview] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async actionsPatch(file: any, id: string, title: string, description: string, date: string, order: number, photo?: string, preview?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Action>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.actionsPatch(file, id, title, description, date, order, photo, preview, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary create action
+         * @param {any} file The file to upload
+         * @param {string} title 
+         * @param {string} description 
+         * @param {string} date 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async actionsPut(file: any, title: string, description: string, date: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Action>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.actionsPut(file, title, description, date, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ActionsApi - factory interface
+ * @export
+ */
+export const ActionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ActionsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary delete action by id
+         * @param {string} actionID String ID of the action to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsActionIDDelete(actionID: string, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.actionsActionIDDelete(actionID, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get action by id
+         * @param {string} actionID String ID of the action to get
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsActionIDGet(actionID: string, options?: any): AxiosPromise<Action> {
+            return localVarFp.actionsActionIDGet(actionID, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary gets filtered actions list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsGet(options?: any): AxiosPromise<Array<Action>> {
+            return localVarFp.actionsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary updates actions oders
+         * @param {SwapStruct} [params] swap item orders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsOrdersPost(params?: SwapStruct, options?: any): AxiosPromise<ResultResponse> {
+            return localVarFp.actionsOrdersPost(params, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary update action
+         * @param {any} file The file to upload
+         * @param {string} id 
+         * @param {string} title 
+         * @param {string} description 
+         * @param {string} date 
+         * @param {number} order 
+         * @param {string} [photo] 
+         * @param {string} [preview] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsPatch(file: any, id: string, title: string, description: string, date: string, order: number, photo?: string, preview?: string, options?: any): AxiosPromise<Action> {
+            return localVarFp.actionsPatch(file, id, title, description, date, order, photo, preview, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary create action
+         * @param {any} file The file to upload
+         * @param {string} title 
+         * @param {string} description 
+         * @param {string} date 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        actionsPut(file: any, title: string, description: string, date: string, options?: any): AxiosPromise<Action> {
+            return localVarFp.actionsPut(file, title, description, date, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ActionsApi - object-oriented interface
+ * @export
+ * @class ActionsApi
+ * @extends {BaseAPI}
+ */
+export class ActionsApi extends BaseAPI {
+    /**
+     * 
+     * @summary delete action by id
+     * @param {string} actionID String ID of the action to get
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ActionsApi
+     */
+    public actionsActionIDDelete(actionID: string, options?: AxiosRequestConfig) {
+        return ActionsApiFp(this.configuration).actionsActionIDDelete(actionID, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get action by id
+     * @param {string} actionID String ID of the action to get
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ActionsApi
+     */
+    public actionsActionIDGet(actionID: string, options?: AxiosRequestConfig) {
+        return ActionsApiFp(this.configuration).actionsActionIDGet(actionID, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary gets filtered actions list
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ActionsApi
+     */
+    public actionsGet(options?: AxiosRequestConfig) {
+        return ActionsApiFp(this.configuration).actionsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary updates actions oders
+     * @param {SwapStruct} [params] swap item orders
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ActionsApi
+     */
+    public actionsOrdersPost(params?: SwapStruct, options?: AxiosRequestConfig) {
+        return ActionsApiFp(this.configuration).actionsOrdersPost(params, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update action
+     * @param {any} file The file to upload
+     * @param {string} id 
+     * @param {string} title 
+     * @param {string} description 
+     * @param {string} date 
+     * @param {number} order 
+     * @param {string} [photo] 
+     * @param {string} [preview] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ActionsApi
+     */
+    public actionsPatch(file: any, id: string, title: string, description: string, date: string, order: number, photo?: string, preview?: string, options?: AxiosRequestConfig) {
+        return ActionsApiFp(this.configuration).actionsPatch(file, id, title, description, date, order, photo, preview, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary create action
+     * @param {any} file The file to upload
+     * @param {string} title 
+     * @param {string} description 
+     * @param {string} date 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ActionsApi
+     */
+    public actionsPut(file: any, title: string, description: string, date: string, options?: AxiosRequestConfig) {
+        return ActionsApiFp(this.configuration).actionsPut(file, title, description, date, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
 
 /**
  * AdvantagesApi - axios parameter creator

@@ -1,4 +1,4 @@
-import { Layers, Tool, Layout, Youtube, Grid, BookOpen, Server, MessageCircle, RefreshCw, Settings, LogOut } from 'react-feather';
+import { Layers, Tool, Layout, Youtube, Grid, BookOpen, Server, MessageCircle, RefreshCw, Settings, LogOut, Percent } from 'react-feather';
 
 interface MenuItem {
   name: string;
@@ -38,6 +38,13 @@ const elements: MenuItem[] = [
     url: "/posters",
     children: [],
     divider: false
+  },
+  {
+    name: 'Акции',
+    icon:  <Percent size={ICON_SIZE} />,
+    url: "/actions",
+    children: [],
+    divider: false,
   },
   {
     name: 'О проекте',

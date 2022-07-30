@@ -1675,6 +1675,199 @@ paths:
             $ref: '#/definitions/ResultResponse'
         '500':
           description: 'Internal Server Error'
+  #actions
+  /actions:
+    get:
+      summary: "gets filtered actions list"
+      tags:
+        - actions
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'returns filtered actions'
+          schema:
+            $ref: '#/definitions/GetActionsResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    put:
+      summary: "create action"
+      security:
+        - Token: []
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      tags:
+        - actions
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload
+        - in: formData
+          name: title
+          type: string
+          required: true
+        - in: formData
+          name: description
+          type: string
+          required: true
+        - in: formData
+          name: date
+          type: string
+          required: true
+      responses:
+        '200':
+          description: 'постер успешно создан'
+          schema:
+            $ref: '#/definitions/Action'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+    patch:
+      summary: "update action"
+      security:
+        - Token: []
+      tags:
+        - actions
+      consumes:
+         - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload
+        - in: formData
+          name: id
+          type: string
+          required: true
+        - in: formData
+          name: title
+          type: string
+          required: true
+        - in: formData
+          name: description
+          type: string
+          required: true
+        - in: formData
+          name: date
+          type: string
+          required: true
+        - in: formData
+          name: photo
+          type: string
+          required: false
+        - in: formData
+          name: preview
+          type: string
+          required: false
+        - in: formData
+          name: order
+          type: integer
+          required: true
+        
+      responses:
+        '200':
+          description: 'постер успешно обновлен'
+          schema:
+            $ref: '#/definitions/Action'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /actions/orders:
+    post:
+      summary: "updates actions oders"
+      security:
+        - Token: []
+      tags:
+        - actions
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: params
+          schema:
+            $ref: '#/definitions/SwapStruct'
+          description: swap item orders
+      responses:
+        '200':
+          description: 'положения успешно обновленны'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '500':
+          description: 'Internal Server Error'
+  /actions/{actionID}: 
+    get:
+      summary: "get action by id"
+      security:
+        - Token: []
+      tags:
+        - actions
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: actionID
+          type: string
+          required: true
+          description: String ID of the action to get
+      responses:
+        '200':
+          description: 'returns requested action'
+          schema:
+            $ref: '#/definitions/Action'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
+    delete:
+      summary: "delete action by id"
+      security:
+        - Token: []
+      tags:
+        - actions
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: actionID
+          type: string
+          required: true
+          description: String ID of the action to get
+      responses:
+        '200':
+          description: 'returns requested action'
+          schema:
+            $ref: '#/definitions/ResultResponse'
+        '400':
+          description: 'Bad request'
+        '500':
+          description: 'Internal Server Error'
 definitions:
   AuthenticateRequest:
     type: object
@@ -2070,3 +2263,32 @@ definitions:
         type: string
       value:
         type: integer
+  GetActionsResponse:
+    type: array
+    items:
+      $ref: '#/definitions/Action'
+  Action:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      date:
+        type: string
+      preview:
+        type: string
+      photo:
+        type: string
+      order:
+        type: integer
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      modifiedBy:
+        type: string

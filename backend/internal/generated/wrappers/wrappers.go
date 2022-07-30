@@ -16,6 +16,7 @@ package wrappers
 //go:generate gowrap gen -p ../../services/years -i Years -t logrus -o ../../services/years/years_with_logger.go
 //go:generate gowrap gen -p ../../services/settings -i Settings -t logrus -o ../../services/settings/settings_with_logger.go
 //go:generate gowrap gen -p ../../services/titles -i Titles -t logrus -o ../../services/titles/titles_with_logger.go
+//go:generate gowrap gen -p ../../services/actions -i Actions -t logrus -o ../../services/actions/actions_with_logger.go
 
 //go:generate gowrap gen -p ../../services/advantages -i Advantages -t ./cache -o ../../services/advantages/advantages_with_cache.go
 //go:generate gowrap gen -p ../../services/docs -i Docs -t ./cache -o ../../services/docs/docs_with_cache.go
@@ -29,3 +30,4 @@ package wrappers
 //go:generate gowrap gen -p ../../services/hod_photos -i Photos -t ./cache -o ../../services/hod_photos/hod_photos_with_cache.go
 //go:generate gowrap gen -p ../../services/months -i Months -t ./cache -o ../../services/months/months_with_cache.go
 //go:generate gowrap gen -p ../../services/years -i Years -t ./cache -o ../../services/years/years_with_cache.go
+//go:generate gowrap gen -p ../../services/actions -i Actions -t ./cache -o ../../services/actions/actions_with_cache.go

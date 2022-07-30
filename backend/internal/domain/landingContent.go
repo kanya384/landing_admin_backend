@@ -14,4 +14,5 @@ type LandingContent struct {
 	Video           []*Video
 	Setting         []*Setting
 	Title           []*Title
+	Action          []*Action
 }

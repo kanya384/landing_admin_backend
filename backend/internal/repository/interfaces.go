@@ -122,3 +122,12 @@ type Title interface {
 	Update(ctx context.Context, title domain.Title) (err error)
 	Delete(ctx context.Context, titleID primitive.ObjectID) (err error)
 }
+
+type Action interface {
+	Get(ctx context.Context, filter map[string]interface{}) (action []*domain.Action, err error)
+	GetByID(ctx context.Context, id primitive.ObjectID) (poster domain.Action, err error)
+	Create(ctx context.Context, poster domain.Action) (err error)
+	Update(ctx context.Context, poster domain.Action) (err error)
+	UpdateOrder(ctx context.Context, id primitive.ObjectID, order int) (err error)
+	Delete(ctx context.Context, posterID primitive.ObjectID) (err error)
+}
